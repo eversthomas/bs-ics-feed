@@ -163,34 +163,8 @@ class BS_ICS_Admin {
 		// Defaults für Feld-Konfiguration normalisieren.
 		$field_config = $this->normalize_field_config( $field_config );
 
-		$display_defaults = [
-			'layout'               => 'grid',
-			'limit'                => 0,
-			'sort'                 => 'asc',
-			'only_future'          => true,
-			'date_format'          => '',
-			'read_more_mode'       => 'expand',
-			'read_more_text'       => __( 'Weiterlesen', 'bs-wp-ics-feed-reader' ),
-			'read_less_text'       => __( 'Weniger anzeigen', 'bs-wp-ics-feed-reader' ),
-			'back_text'            => __( '← Zurück zur Übersicht', 'bs-wp-ics-feed-reader' ),
-			'enable_search_filter' => true,
-			'enable_add_to_cal'    => true,
-		];
-		$display_settings = wp_parse_args( is_array( $display_settings ) ? $display_settings : [], $display_defaults );
-
-		$design_defaults = [
-			'columns'              => 3,
-			'accent_color'         => '#0073aa',
-			'bg_color'             => '#ffffff',
-			'border_radius'        => 8,
-			'card_style'           => 'card',
-			'inherit_theme_colors' => false,
-			'shadow_style'         => 'subtle',
-			'card_padding'         => 'normal',
-			'border_width'         => 1,
-			'border_color'         => '#e2e8f0',
-		];
-		$design_settings = wp_parse_args( is_array( $design_settings ) ? $design_settings : [], $design_defaults );
+		$display_settings = wp_parse_args( is_array( $display_settings ) ? $display_settings : [], BS_ICS_CPT::get_display_defaults() );
+		$design_settings  = wp_parse_args( is_array( $design_settings ) ? $design_settings : [], BS_ICS_CPT::get_design_defaults() );
 		?>
 		<div class="bs-ics-admin-wrapper">
 			<!-- Tab Navigation -->

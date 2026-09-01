@@ -95,20 +95,7 @@ class BS_ICS_Renderer {
 		$design_settings  = get_post_meta( $post_id, '_bs_ics_design_settings', true );
 
 		// Standardwerte & Attribute-Overrides zusammenführen.
-		$display_defaults = [
-			'layout'               => 'grid',
-			'limit'                => 0,
-			'sort'                 => 'asc',
-			'only_future'          => true,
-			'date_format'          => '',
-			'read_more_mode'       => 'expand',
-			'read_more_text'       => __( 'Weiterlesen', 'bs-wp-ics-feed-reader' ),
-			'read_less_text'       => __( 'Weniger anzeigen', 'bs-wp-ics-feed-reader' ),
-			'back_text'            => __( '← Zurück zur Übersicht', 'bs-wp-ics-feed-reader' ),
-			'enable_search_filter' => true,
-			'enable_add_to_cal'    => true,
-		];
-		$display = wp_parse_args( is_array( $display_settings ) ? $display_settings : [], $display_defaults );
+		$display = wp_parse_args( is_array( $display_settings ) ? $display_settings : [], BS_ICS_CPT::get_display_defaults() );
 
 		if ( in_array( $atts['layout'], [ 'grid', 'list' ], true ) ) {
 			$display['layout'] = $atts['layout'];
@@ -132,19 +119,7 @@ class BS_ICS_Renderer {
 			$display['enable_add_to_cal'] = filter_var( $atts['export'], FILTER_VALIDATE_BOOLEAN );
 		}
 
-		$design_defaults = [
-			'columns'              => 3,
-			'accent_color'         => '#0073aa',
-			'bg_color'             => '#ffffff',
-			'border_radius'        => 8,
-			'card_style'           => 'card',
-			'inherit_theme_colors' => false,
-			'shadow_style'         => 'subtle',
-			'card_padding'         => 'normal',
-			'border_width'         => 1,
-			'border_color'         => '#e2e8f0',
-		];
-		$design = wp_parse_args( is_array( $design_settings ) ? $design_settings : [], $design_defaults );
+		$design = wp_parse_args( is_array( $design_settings ) ? $design_settings : [], BS_ICS_CPT::get_design_defaults() );
 
 		if ( '' !== $atts['columns'] ) {
 			$cols = absint( $atts['columns'] );
@@ -398,7 +373,7 @@ class BS_ICS_Renderer {
 
 						<?php if ( ! empty( $field_config['DESCRIPTION']['teaser'] ) && ! empty( $event['description'] ) ) : ?>
 							<div class="bs-ics-description">
-								<?php echo nl2br( wp_kses_post( $event['description'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php echo nl2br( esc_html( $event['description'] ) ); ?>
 							</div>
 						<?php endif; ?>
 
@@ -429,7 +404,7 @@ class BS_ICS_Renderer {
 
 								<?php if ( ! empty( $field_config['DESCRIPTION']['detail'] ) && empty( $field_config['DESCRIPTION']['teaser'] ) && ! empty( $event['description'] ) ) : ?>
 									<div class="bs-ics-description">
-										<?php echo nl2br( wp_kses_post( $event['description'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+										<?php echo nl2br( esc_html( $event['description'] ) ); ?>
 									</div>
 								<?php endif; ?>
 
@@ -549,7 +524,7 @@ class BS_ICS_Renderer {
 
 				<?php if ( ( ! empty( $field_config['DESCRIPTION']['detail'] ) || ! empty( $field_config['DESCRIPTION']['teaser'] ) ) && ! empty( $event['description'] ) ) : ?>
 					<div class="bs-ics-description">
-						<?php echo nl2br( wp_kses_post( $event['description'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php echo nl2br( esc_html( $event['description'] ) ); ?>
 					</div>
 				<?php endif; ?>
 
@@ -630,9 +605,9 @@ class BS_ICS_Renderer {
 
 		$ics_payload = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//BS ICS Feed Reader//DE\r\nBEGIN:VEVENT\r\n"
 			. 'UID:' . ( ! empty( $event['uid'] ) ? $event['uid'] : uniqid() ) . "\r\n"
-			. 'SUMMARY:' . addcslashes( $title, ",;" ) . "\r\n"
-			. 'DESCRIPTION:' . addcslashes( $description, ",;" ) . "\r\n"
-			. 'LOCATION:' . addcslashes( $location, ",;" ) . "\r\n"
+			. 'SUMMARY:' . $this->escape_ics_value( $title ) . "\r\n"
+			. 'DESCRIPTION:' . $this->escape_ics_value( $description ) . "\r\n"
+			. 'LOCATION:' . $this->escape_ics_value( $location ) . "\r\n"
 			. 'DTSTART:' . $start_utc . "\r\n"
 			. 'DTEND:' . $end_utc . "\r\n"
 			. "END:VEVENT\r\nEND:VCALENDAR";
@@ -657,6 +632,24 @@ class BS_ICS_Renderer {
 		</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	/**
+	 * Escaped einen Textwert für die Verwendung in einer generierten .ics-Datei nach RFC 5545.
+	 *
+	 * Reihenfolge ist wichtig: zuerst Backslash escapen, danach Komma/Semikolon,
+	 * zuletzt echte Zeilenumbrüche zu literalem "\n" wandeln — sonst würde der bei
+	 * Schritt 3 eingefügte Backslash von Schritt 1 fälschlich mit-escaped.
+	 *
+	 * @param string $text Roh-Text (z. B. Titel, Beschreibung, Ort).
+	 * @return string Für ICS-TEXT-Werte sicherer String.
+	 */
+	private function escape_ics_value( $text ) {
+		$text = (string) $text;
+		$text = str_replace( '\\', '\\\\', $text );
+		$text = str_replace( [ ',', ';' ], [ '\\,', '\\;' ], $text );
+		$text = preg_replace( '/\r\n|\r|\n/', '\\n', $text );
+		return $text;
 	}
 
 	/**

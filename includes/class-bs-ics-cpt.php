@@ -20,6 +20,14 @@ class BS_ICS_CPT {
 	const POST_TYPE = 'bs_ics_feed';
 
 	/**
+	 * Eigene Capability für die Verwaltung von ICS-Feeds.
+	 *
+	 * Wird bei Aktivierung nur an Administrator- und Redakteur-Rollen vergeben,
+	 * damit Feed-Konfiguration (inkl. externem URL-Abruf) kein Autoren-Recht ist.
+	 */
+	const CAPABILITY = 'manage_ics_feeds';
+
+	/**
 	 * Konstruktor.
 	 */
 	public function __construct() {
@@ -70,11 +78,72 @@ class BS_ICS_CPT {
 			'exclude_from_search'   => true,
 			'publicly_queryable'    => false,
 			'rewrite'               => false,
-			'capability_type'       => 'post',
+			'capabilities'          => [
+				'edit_post'               => self::CAPABILITY,
+				'read_post'               => self::CAPABILITY,
+				'delete_post'             => self::CAPABILITY,
+				'edit_posts'              => self::CAPABILITY,
+				'edit_others_posts'       => self::CAPABILITY,
+				'publish_posts'           => self::CAPABILITY,
+				'read_private_posts'      => self::CAPABILITY,
+				'delete_posts'            => self::CAPABILITY,
+				'delete_private_posts'    => self::CAPABILITY,
+				'delete_published_posts'  => self::CAPABILITY,
+				'delete_others_posts'     => self::CAPABILITY,
+				'edit_private_posts'      => self::CAPABILITY,
+				'edit_published_posts'    => self::CAPABILITY,
+				'create_posts'            => self::CAPABILITY,
+			],
+			'map_meta_cap'          => true,
 			'show_in_rest'          => false,
 		];
 
 		register_post_type( self::POST_TYPE, $args );
+	}
+
+	/**
+	 * Zentrale Standardwerte für Darstellungs-Einstellungen (Layout, Sortierung, Weiterlesen …).
+	 *
+	 * Einzige Quelle für Admin-Formular (BS_ICS_Admin) und Frontend-Renderer
+	 * (BS_ICS_Renderer), damit ein geänderter Default nicht an mehreren Stellen
+	 * synchron gehalten werden muss.
+	 *
+	 * @return array
+	 */
+	public static function get_display_defaults() {
+		return [
+			'layout'               => 'grid',
+			'limit'                => 0,
+			'sort'                 => 'asc',
+			'only_future'          => true,
+			'date_format'          => '',
+			'read_more_mode'       => 'expand',
+			'read_more_text'       => __( 'Weiterlesen', 'bs-wp-ics-feed-reader' ),
+			'read_less_text'       => __( 'Weniger anzeigen', 'bs-wp-ics-feed-reader' ),
+			'back_text'            => __( '← Zurück zur Übersicht', 'bs-wp-ics-feed-reader' ),
+			'enable_search_filter' => true,
+			'enable_add_to_cal'    => true,
+		];
+	}
+
+	/**
+	 * Zentrale Standardwerte für Kachel-Design-Einstellungen (Farben, Radius, Schatten …).
+	 *
+	 * @return array
+	 */
+	public static function get_design_defaults() {
+		return [
+			'columns'              => 3,
+			'accent_color'         => '#0073aa',
+			'bg_color'             => '#ffffff',
+			'border_radius'        => 8,
+			'card_style'           => 'card',
+			'inherit_theme_colors' => false,
+			'shadow_style'         => 'subtle',
+			'card_padding'         => 'normal',
+			'border_width'         => 1,
+			'border_color'         => '#e2e8f0',
+		];
 	}
 
 	/**

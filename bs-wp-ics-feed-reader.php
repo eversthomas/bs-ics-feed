@@ -225,12 +225,29 @@ final class BS_ICS_Feed_Reader {
 		$cpt = new BS_ICS_CPT();
 		$cpt->register_cpt();
 
+		self::grant_capability_to_roles();
+
 		// WP-Cron Intervall registrieren falls nicht vorhanden
 		if ( ! wp_next_scheduled( 'bs_ics_cron_sync_event' ) ) {
 			wp_schedule_event( time(), 'hourly', 'bs_ics_cron_sync_event' );
 		}
 
 		flush_rewrite_rules();
+	}
+
+	/**
+	 * Vergibt die Feed-Verwaltungs-Capability an Administrator- und Redakteur-Rollen.
+	 *
+	 * Ohne diesen Schritt hätte niemand die Capability und der Post-Type wäre
+	 * für alle Rollen unsichtbar, da 'manage_ics_feeds' kein WordPress-Standardrecht ist.
+	 */
+	private static function grant_capability_to_roles() {
+		foreach ( [ 'administrator', 'editor' ] as $role_name ) {
+			$role = get_role( $role_name );
+			if ( $role && ! $role->has_cap( BS_ICS_CPT::CAPABILITY ) ) {
+				$role->add_cap( BS_ICS_CPT::CAPABILITY );
+			}
+		}
 	}
 
 	/**
