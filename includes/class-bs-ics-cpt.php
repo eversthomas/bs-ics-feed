@@ -2,7 +2,7 @@
 /**
  * Custom Post Type Registrierung und Spalten-Verwaltung.
  *
- * @package BS_WP_ICS_Feed_Reader
+ * @package BS_ICS_Feed
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -56,28 +56,28 @@ class BS_ICS_CPT {
 	 */
 	public function register_cpt() {
 		$labels = [
-			'name'                  => _x( 'ICS Feeds', 'Post Type General Name', 'bs-wp-ics-feed-reader' ),
-			'singular_name'         => _x( 'ICS Feed', 'Post Type Singular Name', 'bs-wp-ics-feed-reader' ),
-			'menu_name'             => __( 'ICS Feeds', 'bs-wp-ics-feed-reader' ),
-			'name_admin_bar'        => __( 'ICS Feed', 'bs-wp-ics-feed-reader' ),
-			'archives'              => __( 'Feed-Archive', 'bs-wp-ics-feed-reader' ),
-			'attributes'            => __( 'Feed-Attribute', 'bs-wp-ics-feed-reader' ),
-			'all_items'             => __( 'Alle Feeds', 'bs-wp-ics-feed-reader' ),
-			'add_new_item'          => __( 'Neuen Feed anlegen', 'bs-wp-ics-feed-reader' ),
-			'add_new'               => __( 'Neu hinzufügen', 'bs-wp-ics-feed-reader' ),
-			'new_item'              => __( 'Neuer Feed', 'bs-wp-ics-feed-reader' ),
-			'edit_item'             => __( 'Feed bearbeiten', 'bs-wp-ics-feed-reader' ),
-			'update_item'           => __( 'Feed aktualisieren', 'bs-wp-ics-feed-reader' ),
-			'view_item'             => __( 'Feed ansehen', 'bs-wp-ics-feed-reader' ),
-			'view_items'            => __( 'Feeds ansehen', 'bs-wp-ics-feed-reader' ),
-			'search_items'          => __( 'Feed suchen', 'bs-wp-ics-feed-reader' ),
-			'not_found'             => __( 'Keine Feeds gefunden', 'bs-wp-ics-feed-reader' ),
-			'not_found_in_trash'    => __( 'Keine Feeds im Papierkorb', 'bs-wp-ics-feed-reader' ),
+			'name'                  => _x( 'ICS Feeds', 'Post Type General Name', 'bs-ics-feed' ),
+			'singular_name'         => _x( 'ICS Feed', 'Post Type Singular Name', 'bs-ics-feed' ),
+			'menu_name'             => __( 'ICS Feeds', 'bs-ics-feed' ),
+			'name_admin_bar'        => __( 'ICS Feed', 'bs-ics-feed' ),
+			'archives'              => __( 'Feed-Archive', 'bs-ics-feed' ),
+			'attributes'            => __( 'Feed-Attribute', 'bs-ics-feed' ),
+			'all_items'             => __( 'Alle Feeds', 'bs-ics-feed' ),
+			'add_new_item'          => __( 'Neuen Feed anlegen', 'bs-ics-feed' ),
+			'add_new'               => __( 'Neu hinzufügen', 'bs-ics-feed' ),
+			'new_item'              => __( 'Neuer Feed', 'bs-ics-feed' ),
+			'edit_item'             => __( 'Feed bearbeiten', 'bs-ics-feed' ),
+			'update_item'           => __( 'Feed aktualisieren', 'bs-ics-feed' ),
+			'view_item'             => __( 'Feed ansehen', 'bs-ics-feed' ),
+			'view_items'            => __( 'Feeds ansehen', 'bs-ics-feed' ),
+			'search_items'          => __( 'Feed suchen', 'bs-ics-feed' ),
+			'not_found'             => __( 'Keine Feeds gefunden', 'bs-ics-feed' ),
+			'not_found_in_trash'    => __( 'Keine Feeds im Papierkorb', 'bs-ics-feed' ),
 		];
 
 		$args = [
-			'label'                 => __( 'ICS Feed', 'bs-wp-ics-feed-reader' ),
-			'description'           => __( 'ICS Kalender-Feed Konfigurationen', 'bs-wp-ics-feed-reader' ),
+			'label'                 => __( 'ICS Feed', 'bs-ics-feed' ),
+			'description'           => __( 'ICS Kalender-Feed Konfigurationen', 'bs-ics-feed' ),
 			'labels'                => $labels,
 			'supports'              => [ 'title' ],
 			'hierarchical'          => false,
@@ -146,9 +146,9 @@ class BS_ICS_CPT {
 			'only_future'          => true,
 			'date_format'          => '',
 			'read_more_mode'       => 'expand',
-			'read_more_text'       => __( 'Weiterlesen', 'bs-wp-ics-feed-reader' ),
-			'read_less_text'       => __( 'Weniger anzeigen', 'bs-wp-ics-feed-reader' ),
-			'back_text'            => __( '← Zurück zur Übersicht', 'bs-wp-ics-feed-reader' ),
+			'read_more_text'       => __( 'Weiterlesen', 'bs-ics-feed' ),
+			'read_less_text'       => __( 'Weniger anzeigen', 'bs-ics-feed' ),
+			'back_text'            => __( '← Zurück zur Übersicht', 'bs-ics-feed' ),
 			'enable_search_filter' => true,
 			'enable_add_to_cal'    => true,
 			'enable_csv_export'    => true,
@@ -187,9 +187,9 @@ class BS_ICS_CPT {
 		foreach ( $columns as $key => $value ) {
 			$new_columns[ $key ] = $value;
 			if ( 'title' === $key ) {
-				$new_columns['bs_ics_shortcode']   = __( 'Shortcode', 'bs-wp-ics-feed-reader' );
-				$new_columns['bs_ics_feed_url']    = __( 'Quell-URL', 'bs-wp-ics-feed-reader' );
-				$new_columns['bs_ics_last_synced'] = __( 'Letzter Sync', 'bs-wp-ics-feed-reader' );
+				$new_columns['bs_ics_shortcode']   = __( 'Shortcode', 'bs-ics-feed' );
+				$new_columns['bs_ics_feed_url']    = __( 'Quell-URL', 'bs-ics-feed' );
+				$new_columns['bs_ics_last_synced'] = __( 'Letzter Sync', 'bs-ics-feed' );
 			}
 		}
 
@@ -213,7 +213,7 @@ class BS_ICS_CPT {
 				if ( ! empty( $url ) ) {
 					echo '<a href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( wp_trim_words( $url, 6, '...' ) ) . '</a>';
 				} else {
-					echo '<span class="description">' . esc_html__( 'Keine URL hinterlegt', 'bs-wp-ics-feed-reader' ) . '</span>';
+					echo '<span class="description">' . esc_html__( 'Keine URL hinterlegt', 'bs-ics-feed' ) . '</span>';
 				}
 				break;
 
@@ -223,7 +223,7 @@ class BS_ICS_CPT {
 					$formatted = wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), (int) $last_synced );
 					echo esc_html( $formatted );
 				} else {
-					echo '<span class="description">' . esc_html__( 'Noch nicht synchronisiert', 'bs-wp-ics-feed-reader' ) . '</span>';
+					echo '<span class="description">' . esc_html__( 'Noch nicht synchronisiert', 'bs-ics-feed' ) . '</span>';
 				}
 				break;
 		}

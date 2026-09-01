@@ -7,7 +7,7 @@
  * lieber über die klassische Appearance-&-Widgets-Oberfläche arbeiten als per Shortcode.
  * Nutzt intern denselben BS_ICS_Renderer wie Shortcode und Block (keine Logik-Duplikation).
  *
- * @package BS_WP_ICS_Feed_Reader
+ * @package BS_ICS_Feed
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,9 +25,9 @@ class BS_ICS_Widget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'bs_ics_widget',
-			__( 'ICS Kalender-Feed', 'bs-wp-ics-feed-reader' ),
+			__( 'ICS Kalender-Feed', 'bs-ics-feed' ),
 			[
-				'description'                 => __( 'Zeigt Termine aus einem konfigurierten ICS-Kalender-Feed in einer Sidebar/einem Widget-Bereich an.', 'bs-wp-ics-feed-reader' ),
+				'description'                 => __( 'Zeigt Termine aus einem konfigurierten ICS-Kalender-Feed in einer Sidebar/einem Widget-Bereich an.', 'bs-ics-feed' ),
 				'customize_selective_refresh' => true,
 			]
 		);
@@ -98,45 +98,45 @@ class BS_ICS_Widget extends WP_Widget {
 		);
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Titel:', 'bs-wp-ics-feed-reader' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Titel:', 'bs-ics-feed' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'feed_id' ) ); ?>"><?php esc_html_e( 'Kalender-Feed:', 'bs-wp-ics-feed-reader' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'feed_id' ) ); ?>"><?php esc_html_e( 'Kalender-Feed:', 'bs-ics-feed' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'feed_id' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'feed_id' ) ); ?>">
-				<option value="0"><?php esc_html_e( '– Kalender-Feed auswählen –', 'bs-wp-ics-feed-reader' ); ?></option>
+				<option value="0"><?php esc_html_e( '– Kalender-Feed auswählen –', 'bs-ics-feed' ); ?></option>
 				<?php foreach ( $feeds as $feed ) : ?>
-					<option value="<?php echo esc_attr( $feed->ID ); ?>" <?php selected( $feed_id, $feed->ID ); ?>><?php echo esc_html( $feed->post_title ? $feed->post_title : sprintf( __( 'Feed #%d', 'bs-wp-ics-feed-reader' ), $feed->ID ) ); ?></option>
+					<option value="<?php echo esc_attr( $feed->ID ); ?>" <?php selected( $feed_id, $feed->ID ); ?>><?php echo esc_html( $feed->post_title ? $feed->post_title : sprintf( /* translators: %d: Feed post ID, used as a fallback label when the feed has no title. */ __( 'Feed #%d', 'bs-ics-feed' ), $feed->ID ) ); ?></option>
 				<?php endforeach; ?>
 			</select>
 			<?php if ( empty( $feeds ) ) : ?>
-				<em class="description"><?php esc_html_e( 'Noch keine Feeds angelegt. Lege zuerst unter „ICS Feeds“ einen Kalender-Feed an.', 'bs-wp-ics-feed-reader' ); ?></em>
+				<em class="description"><?php esc_html_e( 'Noch keine Feeds angelegt. Lege zuerst unter „ICS Feeds“ einen Kalender-Feed an.', 'bs-ics-feed' ); ?></em>
 			<?php endif; ?>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'layout' ) ); ?>"><?php esc_html_e( 'Layout:', 'bs-wp-ics-feed-reader' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'layout' ) ); ?>"><?php esc_html_e( 'Layout:', 'bs-ics-feed' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'layout' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'layout' ) ); ?>">
-				<option value="list" <?php selected( $layout, 'list' ); ?>><?php esc_html_e( 'Liste (empfohlen für Sidebars)', 'bs-wp-ics-feed-reader' ); ?></option>
-				<option value="grid" <?php selected( $layout, 'grid' ); ?>><?php esc_html_e( 'Kachel-Raster', 'bs-wp-ics-feed-reader' ); ?></option>
+				<option value="list" <?php selected( $layout, 'list' ); ?>><?php esc_html_e( 'Liste (empfohlen für Sidebars)', 'bs-ics-feed' ); ?></option>
+				<option value="grid" <?php selected( $layout, 'grid' ); ?>><?php esc_html_e( 'Kachel-Raster', 'bs-ics-feed' ); ?></option>
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'limit' ) ); ?>"><?php esc_html_e( 'Anzahl Termine:', 'bs-wp-ics-feed-reader' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'limit' ) ); ?>"><?php esc_html_e( 'Anzahl Termine:', 'bs-ics-feed' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'limit' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'limit' ) ); ?>" type="number" min="1" max="50" value="<?php echo esc_attr( $limit ); ?>" />
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'only_future' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'only_future' ) ); ?>" <?php checked( $only_future ); ?> />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'only_future' ) ); ?>"><?php esc_html_e( 'Nur anstehende Termine anzeigen', 'bs-wp-ics-feed-reader' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'only_future' ) ); ?>"><?php esc_html_e( 'Nur anstehende Termine anzeigen', 'bs-ics-feed' ); ?></label>
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'show_filter' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_filter' ) ); ?>" <?php checked( $show_filter ); ?> />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_filter' ) ); ?>"><?php esc_html_e( 'Such-/Filterleiste anzeigen', 'bs-wp-ics-feed-reader' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_filter' ) ); ?>"><?php esc_html_e( 'Such-/Filterleiste anzeigen', 'bs-ics-feed' ); ?></label>
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'show_export' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_export' ) ); ?>" <?php checked( $show_export ); ?> />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_export' ) ); ?>"><?php esc_html_e( '„In Kalender eintragen“-Buttons anzeigen', 'bs-wp-ics-feed-reader' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_export' ) ); ?>"><?php esc_html_e( '„In Kalender eintragen“-Buttons anzeigen', 'bs-ics-feed' ); ?></label>
 		</p>
-		<p class="description"><?php esc_html_e( 'Weitere Darstellungs- und Design-Optionen (Farben, Kachel-Stil …) werden aus den Feed-Einstellungen übernommen.', 'bs-wp-ics-feed-reader' ); ?></p>
+		<p class="description"><?php esc_html_e( 'Weitere Darstellungs- und Design-Optionen (Farben, Kachel-Stil …) werden aus den Feed-Einstellungen übernommen.', 'bs-ics-feed' ); ?></p>
 		<?php
 	}
 

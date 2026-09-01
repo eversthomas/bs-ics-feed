@@ -1,6 +1,6 @@
 /**
  * Gutenberg Block Script für BS WP ICS Feed Reader.
- * Registriert den Block 'bs-wp-ics/calendar' in der Kategorie 'bs-plugins'
+ * Registriert den Block 'bs-ics/calendar' in der Kategorie 'bs-plugins'
  * mit useBlockProps für zuverlässige Selektion und vollständigen InspectorControls.
  */
 (function (wp) {
@@ -47,7 +47,7 @@
 		return ids.join(',');
 	}
 
-	registerBlockType('bs-wp-ics/calendar', {
+	registerBlockType('bs-ics/calendar', {
 		apiVersion: 2,
 		title: i18n.title || 'ICS Kalender-Feed',
 		description: i18n.description || 'Zeigt Termine aus einem konfigurierten ICS-Kalender-Feed an.',
@@ -150,8 +150,8 @@
 			// useBlockProps stellt sicher, dass der Block in Gutenberg sauber ausgewählt, fokussiert
 			// und in der rechten Seitenleiste (Inspector) angezeigt werden kann.
 			var blockProps = useBlockProps ? useBlockProps({
-				className: 'bs-wp-ics-gutenberg-block'
-			}) : { className: 'bs-wp-ics-gutenberg-block' };
+				className: 'bs-ics-gutenberg-block'
+			}) : { className: 'bs-ics-gutenberg-block' };
 
 			// Sidebar Inspector Controls
 			var inspector = el(
@@ -353,7 +353,7 @@
 					'div',
 					{ className: 'bs-ics-block-preview' },
 					el(ServerSideRender, {
-						block: 'bs-wp-ics/calendar',
+						block: 'bs-ics/calendar',
 						attributes: attributes
 					})
 				);

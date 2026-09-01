@@ -1,8 +1,8 @@
-# BS WP ICS Feed Reader
+# BS ICS Feed
 
 > **Modulares, performantes und barrierefreies WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von iCalendar/ICS-Kalender-Feeds mit Shortcode & Gutenberg-Block.**
 
-[![Version](https://img.shields.io/badge/Version-1.6.0-blue.svg)](https://wordpress.org/)
+[![Version](https://img.shields.io/badge/Version-1.6.1-blue.svg)](https://wordpress.org/)
 [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -14,7 +14,7 @@
 
 ## 📖 Übersicht
 
-**BS WP ICS Feed Reader** ermöglicht das einfache Einbinden und stilvolle Ausgeben externer Kalender-Feeds (z. B. aus Google Calendar, Apple iCloud, Outlook, REDAXO forCal, Nextcloud oder Vereinssoftware) in WordPress-Websites. 
+**BS ICS Feed** ermöglicht das einfache Einbinden und stilvolle Ausgeben externer Kalender-Feeds (z. B. aus Google Calendar, Apple iCloud, Outlook, REDAXO forCal, Nextcloud oder Vereinssoftware) in WordPress-Websites. 
 
 Feeds werden als eigener Inhaltstyp verwaltet, per Klick synchronisiert, im lokalen Cache gespeichert und wahlweise über den **Gutenberg-Block (`ICS Kalender-Feed`)**, den flexiblen Shortcode `[bs_ics_calendar id="..."]` oder ein klassisches **Sidebar-Widget** im Frontend angezeigt.
 
@@ -22,7 +22,7 @@ Feeds werden als eigener Inhaltstyp verwaltet, per Klick synchronisiert, im loka
 
 ## ✨ Hauptfunktionen
 
-### 🧱 Nativer Gutenberg-Block (`bs-wp-ics/calendar`)
+### 🧱 Nativer Gutenberg-Block (`bs-ics/calendar`)
 * **Echte Live-Vorschau im Editor:** Dank Server-Side-Rendering (`<ServerSideRender />`) sehen Redakteure direkt im Block-Editor die echten Termine und das reale Kacheldesign.
 * **Bequeme Sidebar-Einstellungen (InspectorControls):** Feed-Auswahl per Dropdown, Spalten-Schieberegler (1–4), Layout-Umschaltung, Design-Presets und Filter direkt im Gutenberg-Panel.
 
@@ -66,7 +66,7 @@ Feeds werden als eigener Inhaltstyp verwaltet, per Klick synchronisiert, im loka
 
 ## 📥 Installation
 
-1. Lade das Plugin-Verzeichnis `bs-wp-ics-feed-reader` in den Ordner `/wp-content/plugins/` hoch (oder lade die ZIP-Datei unter **Plugins $\rightarrow$ Installieren $\rightarrow$ Plugin hochladen** hoch).
+1. Lade das Plugin-Verzeichnis `bs-ics-feed` in den Ordner `/wp-content/plugins/` hoch (oder lade die ZIP-Datei unter **Plugins $\rightarrow$ Installieren $\rightarrow$ Plugin hochladen** hoch).
 2. Aktiviere das Plugin im WordPress-Menü **Plugins**.
 3. Navigiere zum neuen Menüpunkt **ICS Feeds $\rightarrow$ Neu hinzufügen**.
 
@@ -143,8 +143,8 @@ Für Themes/Widget-Bereiche ohne Block-Widgets-Unterstützung oder für Redakteu
 ## 📂 Architektur
 
 ```text
-bs-wp-ics-feed-reader/
-├── bs-wp-ics-feed-reader.php         # Plugin-Bootstrap, Lifecycle, Autoloading & WP-Cron
+bs-ics-feed/
+├── bs-ics-feed.php                    # Plugin-Bootstrap, Lifecycle, Autoloading & WP-Cron
 ├── uninstall.php                     # Vollständige Bereinigung bei Plugin-Löschung
 ├── README.md                         # Diese Dokumentation
 ├── BS-PluginDesignSystem.md          # Designsystem für BS-Plugin-Backends
@@ -152,13 +152,13 @@ bs-wp-ics-feed-reader/
 ├── ROADMAP.md                        # Projektplan & Phasen
 ├── PROMPTS.md                        # Entwicklungs-Prompts
 ├── languages/
-│   └── bs-wp-ics-feed-reader.pot     # GNU gettext Übersetzungsvorlage
+│   └── bs-ics-feed.pot                # GNU gettext Übersetzungsvorlage
 ├── includes/
 │   ├── class-bs-ics-cpt.php          # CPT 'bs_ics_feed' & Spaltenverwaltung
 │   ├── class-bs-ics-parser.php       # RFC 5545 Parser (Zeitzonen, Unfolding, ReDoS-Schutz)
 │   ├── class-bs-ics-admin.php        # Tabbed Meta-Boxes, Pill-Switches, Dreier-Schema, AJAX-Sync
 │   ├── class-bs-ics-renderer.php     # Shortcode-Renderer, Schema.org JSON-LD, Filter, Export
-│   ├── class-bs-ics-block.php        # Server-Side Rendered Gutenberg-Block (bs-wp-ics/calendar)
+│   ├── class-bs-ics-block.php        # Server-Side Rendered Gutenberg-Block (bs-ics/calendar)
 │   └── class-bs-ics-widget.php       # Klassisches WP_Widget für Sidebar-/Widget-Bereiche
 └── assets/
     ├── css/
@@ -175,6 +175,15 @@ bs-wp-ics-feed-reader/
 ---
 
 ## 📝 Changelog
+
+### Version 1.6.1 (2026-09-01)
+
+**Vorbereitung für die Listung im WordPress-Plugin-Verzeichnis**
+* **Umbenannt:** „BS WP ICS Feed Reader" → **„BS ICS Feed"** (Name, Slug, Ordner, Text-Domain, Hauptdatei, Sprachdatei, Gutenberg-Block-Namespace) – der bisherige Name/Slug enthielt den markenrechtlich geschützten Begriff „WP", was von WordPress.org grundsätzlich abgelehnt wird.
+* **Neu:** Lizenz-Header (`License:`/`License URI:`) sowie `LICENSE.txt` mit dem offiziellen GPLv2-Text ergänzt.
+* **Neu:** `readme.txt` im offiziellen WordPress.org-Format (Englisch, wie seit Juli 2025 vorgeschrieben) hinzugefügt.
+* **Aufgeräumt:** `translators:`-Kommentare bei allen `__()`-Aufrufen mit Platzhaltern ergänzt, überflüssiges `load_plugin_textdomain()` entfernt, `suppress_filters` aus `uninstall.php` entfernt.
+* Verifiziert mit dem offiziellen WordPress.org **Plugin Check**-Tool: keine Marken-, Lizenz- oder Sicherheits-Fehler mehr; alle verbliebenen Hinweise sind rein manuelle Restpunkte (WP.org-Benutzername in `readme.txt` eintragen, interne Doku-Dateien beim Packen weglassen).
 
 ### Version 1.6.0 (2026-09-01)
 

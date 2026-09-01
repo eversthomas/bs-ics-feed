@@ -1,20 +1,22 @@
 <?php
 /**
- * Plugin Name:       BS WP ICS Feed Reader
+ * Plugin Name:       BS ICS Feed
  * Plugin URI:        https://bezugssysteme.de
  * Description:       Modulares, performantes und sicheres WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von ICS-Kalender-Feeds.
- * Version:           1.6.0
+ * Version:           1.6.1
  * Author:            Tom Evers
  * Author URI:        https://bezugssysteme.de
- * Text Domain:       bs-wp-ics-feed-reader
+ * Text Domain:       bs-ics-feed
  * Domain Path:       /languages
  * Requires at least: 5.8
  * Requires PHP:      7.4
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  *
  * Entstanden in Zusammenarbeit mit Google Antigravity (Erstversion) und
  * Claude Code (Sicherheits-, Qualitäts- und UX-Überarbeitung).
  *
- * @package BS_WP_ICS_Feed_Reader
+ * @package BS_ICS_Feed
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,10 +24,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin-Konstanten definieren.
-define( 'BS_ICS_VERSION', '1.6.0' );
+define( 'BS_ICS_VERSION', '1.6.1' );
 define( 'BS_ICS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BS_ICS_URL', plugin_dir_url( __FILE__ ) );
-define( 'BS_ICS_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
  * Hauptklasse des Plugins (Bootstrap).
@@ -112,7 +113,6 @@ final class BS_ICS_Feed_Reader {
 	 * Initialisiert die Hooks und Komponenten.
 	 */
 	private function init_hooks() {
-		add_action( 'init', [ $this, 'load_textdomain' ] );
 		add_action( 'admin_init', [ $this, 'maybe_upgrade' ] );
 		add_action( 'bs_ics_cron_sync_event', [ $this, 'cron_sync_all_feeds' ] );
 		add_action( 'widgets_init', [ $this, 'register_widget' ] );
@@ -152,17 +152,6 @@ final class BS_ICS_Feed_Reader {
 
 		self::grant_capability_to_roles();
 		update_option( 'bs_ics_version', BS_ICS_VERSION );
-	}
-
-	/**
-	 * Lädt die Textdomain für Übersetzungen.
-	 */
-	public function load_textdomain() {
-		load_plugin_textdomain(
-			'bs-wp-ics-feed-reader',
-			false,
-			dirname( BS_ICS_BASENAME ) . '/languages'
-		);
 	}
 
 	/**

@@ -2,7 +2,7 @@
 /**
  * RFC 5545 ICS Feed Parser für BS WP ICS Feed Reader.
  *
- * @package BS_WP_ICS_Feed_Reader
+ * @package BS_ICS_Feed
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

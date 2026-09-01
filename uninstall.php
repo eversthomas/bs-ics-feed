@@ -4,7 +4,7 @@
  *
  * Löscht alle Daten, Custom Post Types und Post-Metas restlos bei Plugin-Löschung.
  *
- * @package BS_WP_ICS_Feed_Reader
+ * @package BS_ICS_Feed
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
@@ -14,11 +14,10 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 // Alle Feed-Posts abrufen (auch Entwürfe, Papierkorb etc.).
 $bs_ics_posts = get_posts(
 	[
-		'post_type'      => 'bs_ics_feed',
-		'post_status'    => 'any',
-		'numberposts'    => -1,
-		'fields'         => 'ids',
-		'suppress_filters' => true,
+		'post_type'   => 'bs_ics_feed',
+		'post_status' => 'any',
+		'numberposts' => -1,
+		'fields'      => 'ids',
 	]
 );
 

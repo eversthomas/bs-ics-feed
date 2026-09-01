@@ -3,7 +3,7 @@
  * Admin-Verwaltung, Tabbed Meta-Boxes, Asset-Enqueueing und AJAX-Synchronisation.
  * Basiert auf dem BS-PluginDesignSystem (BS-PluginDesignSystem.md).
  *
- * @package BS_WP_ICS_Feed_Reader
+ * @package BS_ICS_Feed
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -32,7 +32,7 @@ class BS_ICS_Admin {
 	public function register_meta_boxes() {
 		add_meta_box(
 			'bs_ics_main_settings',
-			__( 'ICS Feed Einstellungen', 'bs-wp-ics-feed-reader' ),
+			__( 'ICS Feed Einstellungen', 'bs-ics-feed' ),
 			[ $this, 'render_main_meta_box' ],
 			BS_ICS_CPT::POST_TYPE,
 			'normal',
@@ -41,7 +41,7 @@ class BS_ICS_Admin {
 
 		add_meta_box(
 			'bs_ics_sidebar_shortcode',
-			__( 'Shortcode-Integration', 'bs-wp-ics-feed-reader' ),
+			__( 'Shortcode-Integration', 'bs-ics-feed' ),
 			[ $this, 'render_sidebar_meta_box' ],
 			BS_ICS_CPT::POST_TYPE,
 			'side',
@@ -90,8 +90,8 @@ class BS_ICS_Admin {
 			'bs-ics-admin-copy-js',
 			'bsIcsAdminCopy',
 			[
-				'copiedText' => __( 'Kopiert!', 'bs-wp-ics-feed-reader' ),
-				'copyText'   => __( 'Shortcode kopieren', 'bs-wp-ics-feed-reader' ),
+				'copiedText' => __( 'Kopiert!', 'bs-ics-feed' ),
+				'copyText'   => __( 'Shortcode kopieren', 'bs-ics-feed' ),
 			]
 		);
 
@@ -111,13 +111,13 @@ class BS_ICS_Admin {
 				'nonce'   => wp_create_nonce( 'bs_ics_admin_nonce' ),
 				'postId'  => $post_id,
 				'i18n'    => [
-					'syncing'      => __( 'Synchronisiere Feed...', 'bs-wp-ics-feed-reader' ),
-					'syncSuccess'  => __( 'Feed erfolgreich synchronisiert!', 'bs-wp-ics-feed-reader' ),
-					'syncError'    => __( 'Fehler bei der Synchronisation:', 'bs-wp-ics-feed-reader' ),
-					'networkError' => __( 'Verbindungsfehler. Bitte Feed-URL und Internetverbindung prüfen.', 'bs-wp-ics-feed-reader' ),
-					'enterUrl'     => __( 'Bitte gib zuerst eine gültige Feed-URL ein.', 'bs-wp-ics-feed-reader' ),
-					'active'       => __( 'Aktiv', 'bs-wp-ics-feed-reader' ),
-					'inactive'     => __( 'Inaktiv', 'bs-wp-ics-feed-reader' ),
+					'syncing'      => __( 'Synchronisiere Feed...', 'bs-ics-feed' ),
+					'syncSuccess'  => __( 'Feed erfolgreich synchronisiert!', 'bs-ics-feed' ),
+					'syncError'    => __( 'Fehler bei der Synchronisation:', 'bs-ics-feed' ),
+					'networkError' => __( 'Verbindungsfehler. Bitte Feed-URL und Internetverbindung prüfen.', 'bs-ics-feed' ),
+					'enterUrl'     => __( 'Bitte gib zuerst eine gültige Feed-URL ein.', 'bs-ics-feed' ),
+					'active'       => __( 'Aktiv', 'bs-ics-feed' ),
+					'inactive'     => __( 'Inaktiv', 'bs-ics-feed' ),
 				],
 			]
 		);
@@ -140,7 +140,7 @@ class BS_ICS_Admin {
 
 		return sprintf(
 			/* translators: 1: Plugin-Name inkl. Version, 2: verlinkter Autoren-Name, 3: Namen der KI-Werkzeuge */
-			__( '%1$s &middot; entwickelt von %2$s &middot; entstanden in Zusammenarbeit mit %3$s', 'bs-wp-ics-feed-reader' ),
+			__( '%1$s &middot; entwickelt von %2$s &middot; entstanden in Zusammenarbeit mit %3$s', 'bs-ics-feed' ),
 			'BS WP ICS Feed Reader v' . esc_html( BS_ICS_VERSION ),
 			'<a href="' . esc_url( 'https://bezugssysteme.de' ) . '" target="_blank" rel="noopener noreferrer">Tom Evers</a>',
 			'Google Antigravity &amp; Claude Code'
@@ -157,13 +157,13 @@ class BS_ICS_Admin {
 		?>
 		<div class="bs-ics-sidebar-box">
 			<p class="description">
-				<?php esc_html_e( 'Binde diesen Kalender-Feed an beliebiger Stelle im Frontend über folgenden Shortcode ein:', 'bs-wp-ics-feed-reader' ); ?>
+				<?php esc_html_e( 'Binde diesen Kalender-Feed an beliebiger Stelle im Frontend über folgenden Shortcode ein:', 'bs-ics-feed' ); ?>
 			</p>
 			<div class="bs-ics-shortcode-wrapper">
 				<input type="text" id="bs-ics-shortcode-input" class="widefat" value="<?php echo esc_attr( $shortcode ); ?>" readonly />
 				<button type="button" class="button button-secondary" id="bs-ics-copy-shortcode-btn">
 					<span class="dashicons dashicons-clipboard" style="vertical-align: middle; margin-right: 4px;"></span>
-					<span class="btn-text"><?php esc_html_e( 'Shortcode kopieren', 'bs-wp-ics-feed-reader' ); ?></span>
+					<span class="btn-text"><?php esc_html_e( 'Shortcode kopieren', 'bs-ics-feed' ); ?></span>
 				</button>
 			</div>
 		</div>
@@ -200,18 +200,18 @@ class BS_ICS_Admin {
 		?>
 		<div class="bs-ics-admin-wrapper">
 			<!-- Tab Navigation -->
-			<nav class="nav-tab-wrapper bs-ics-nav-tab-wrapper" role="tablist" aria-label="<?php esc_attr_e( 'ICS Feed Einstellungsbereiche', 'bs-wp-ics-feed-reader' ); ?>">
+			<nav class="nav-tab-wrapper bs-ics-nav-tab-wrapper" role="tablist" aria-label="<?php esc_attr_e( 'ICS Feed Einstellungsbereiche', 'bs-ics-feed' ); ?>">
 				<a href="#bs-ics-tab-source" id="bs-ics-tabbtn-source" class="nav-tab nav-tab-active" data-tab="source" role="tab" aria-selected="true" aria-controls="bs-ics-tab-source" tabindex="0">
-					<span class="dashicons dashicons-admin-links"></span> <?php esc_html_e( 'Quelle & Synchronisation', 'bs-wp-ics-feed-reader' ); ?>
+					<span class="dashicons dashicons-admin-links"></span> <?php esc_html_e( 'Quelle & Synchronisation', 'bs-ics-feed' ); ?>
 				</a>
 				<a href="#bs-ics-tab-fields" id="bs-ics-tabbtn-fields" class="nav-tab" data-tab="fields" role="tab" aria-selected="false" aria-controls="bs-ics-tab-fields" tabindex="-1">
-					<span class="dashicons dashicons-list-view"></span> <?php esc_html_e( 'Felder & Inhalt', 'bs-wp-ics-feed-reader' ); ?>
+					<span class="dashicons dashicons-list-view"></span> <?php esc_html_e( 'Felder & Inhalt', 'bs-ics-feed' ); ?>
 				</a>
 				<a href="#bs-ics-tab-display" id="bs-ics-tabbtn-display" class="nav-tab" data-tab="display" role="tab" aria-selected="false" aria-controls="bs-ics-tab-display" tabindex="-1">
-					<span class="dashicons dashicons-visibility"></span> <?php esc_html_e( 'Darstellung & Weiterlesen', 'bs-wp-ics-feed-reader' ); ?>
+					<span class="dashicons dashicons-visibility"></span> <?php esc_html_e( 'Darstellung & Weiterlesen', 'bs-ics-feed' ); ?>
 				</a>
 				<a href="#bs-ics-tab-design" id="bs-ics-tabbtn-design" class="nav-tab" data-tab="design" role="tab" aria-selected="false" aria-controls="bs-ics-tab-design" tabindex="-1">
-					<span class="dashicons dashicons-art"></span> <?php esc_html_e( 'Kachel-Design', 'bs-wp-ics-feed-reader' ); ?>
+					<span class="dashicons dashicons-art"></span> <?php esc_html_e( 'Kachel-Design', 'bs-ics-feed' ); ?>
 				</a>
 			</nav>
 
@@ -221,58 +221,58 @@ class BS_ICS_Admin {
 					<tbody>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_feed_url"><?php esc_html_e( 'ICS Feed URL', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_feed_url"><?php esc_html_e( 'ICS Feed URL', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<input type="url" name="bs_ics_feed_url" id="bs_ics_feed_url" class="large-text code" value="<?php echo esc_attr( $feed_url ); ?>" placeholder="https://example.com/calendar.ics oder webcal://..." />
 								<p class="description">
-									<?php esc_html_e( 'Gib die öffentliche ICS/iCal-Feed-URL ein. webcal:// wird automatisch zu https:// gewandelt.', 'bs-wp-ics-feed-reader' ); ?>
+									<?php esc_html_e( 'Gib die öffentliche ICS/iCal-Feed-URL ein. webcal:// wird automatisch zu https:// gewandelt.', 'bs-ics-feed' ); ?>
 								</p>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_sync_interval"><?php esc_html_e( 'Automatischer Hintergrund-Sync', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_sync_interval"><?php esc_html_e( 'Automatischer Hintergrund-Sync', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<select name="bs_ics_sync_interval" id="bs_ics_sync_interval">
-									<option value="manual" <?php selected( $sync_interval, 'manual' ); ?>><?php esc_html_e( 'Nur manuell (Kein automatischer Sync)', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="hourly" <?php selected( $sync_interval, 'hourly' ); ?>><?php esc_html_e( 'Stündlich (WP-Cron)', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="twicedaily" <?php selected( $sync_interval, 'twicedaily' ); ?>><?php esc_html_e( 'Zweimal täglich', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="daily" <?php selected( $sync_interval, 'daily' ); ?>><?php esc_html_e( 'Einmal täglich', 'bs-wp-ics-feed-reader' ); ?></option>
+									<option value="manual" <?php selected( $sync_interval, 'manual' ); ?>><?php esc_html_e( 'Nur manuell (Kein automatischer Sync)', 'bs-ics-feed' ); ?></option>
+									<option value="hourly" <?php selected( $sync_interval, 'hourly' ); ?>><?php esc_html_e( 'Stündlich (WP-Cron)', 'bs-ics-feed' ); ?></option>
+									<option value="twicedaily" <?php selected( $sync_interval, 'twicedaily' ); ?>><?php esc_html_e( 'Zweimal täglich', 'bs-ics-feed' ); ?></option>
+									<option value="daily" <?php selected( $sync_interval, 'daily' ); ?>><?php esc_html_e( 'Einmal täglich', 'bs-ics-feed' ); ?></option>
 								</select>
-								<p class="description"><?php esc_html_e( 'Hält die Termine im Hintergrund aktuell, ohne dass manuell synchronisiert werden muss.', 'bs-wp-ics-feed-reader' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Hält die Termine im Hintergrund aktuell, ohne dass manuell synchronisiert werden muss.', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php esc_html_e( 'Manuelle Synchronisation', 'bs-wp-ics-feed-reader' ); ?></th>
+							<th scope="row"><?php esc_html_e( 'Manuelle Synchronisation', 'bs-ics-feed' ); ?></th>
 							<td>
 								<button type="button" class="button button-primary bs-ics-btn-primary" id="bs-ics-sync-btn">
 									<span class="dashicons dashicons-update" style="vertical-align: middle; margin-right: 4px;"></span>
-									<span class="sync-btn-text"><?php esc_html_e( 'Feed analysieren & synchronisieren', 'bs-wp-ics-feed-reader' ); ?></span>
+									<span class="sync-btn-text"><?php esc_html_e( 'Feed analysieren & synchronisieren', 'bs-ics-feed' ); ?></span>
 								</button>
 								<span class="spinner" id="bs-ics-sync-spinner" style="float: none; margin: 0 8px;"></span>
 								<div id="bs-ics-sync-message" style="margin-top: 10px;"></div>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php esc_html_e( 'Status & Cache', 'bs-wp-ics-feed-reader' ); ?></th>
+							<th scope="row"><?php esc_html_e( 'Status & Cache', 'bs-ics-feed' ); ?></th>
 							<td>
 								<div class="bs-ics-status-info">
 									<p>
-										<strong><?php esc_html_e( 'Letzter Sync:', 'bs-wp-ics-feed-reader' ); ?></strong>
+										<strong><?php esc_html_e( 'Letzter Sync:', 'bs-ics-feed' ); ?></strong>
 										<span id="bs-ics-last-synced-label">
 											<?php
 											if ( ! empty( $last_synced ) ) {
 												echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), (int) $last_synced ) );
 											} else {
-												esc_html_e( 'Noch nicht synchronisiert', 'bs-wp-ics-feed-reader' );
+												esc_html_e( 'Noch nicht synchronisiert', 'bs-ics-feed' );
 											}
 											?>
 										</span>
 									</p>
 									<p>
-										<strong><?php esc_html_e( 'Gecachte Termine:', 'bs-wp-ics-feed-reader' ); ?></strong>
+										<strong><?php esc_html_e( 'Gecachte Termine:', 'bs-ics-feed' ); ?></strong>
 										<span id="bs-ics-cached-count">
 											<?php echo is_array( $cached_events ) ? (int) count( $cached_events ) : 0; ?>
 										</span>
@@ -282,25 +282,25 @@ class BS_ICS_Admin {
 								<!-- Dreier-Schema Erläuterungs-Block (BS Design System) -->
 								<div class="bs-explain-box">
 									<div class="bs-explain-item">
-										<div class="bs-explain-label"><?php esc_html_e( 'Was macht\'s', 'bs-wp-ics-feed-reader' ); ?></div>
-										<div class="bs-explain-content"><?php esc_html_e( 'Lädt die Termindaten aus der ICS-Datei und speichert sie optimiert in der lokalen WordPress-Datenbank.', 'bs-wp-ics-feed-reader' ); ?></div>
+										<div class="bs-explain-label"><?php esc_html_e( 'Was macht\'s', 'bs-ics-feed' ); ?></div>
+										<div class="bs-explain-content"><?php esc_html_e( 'Lädt die Termindaten aus der ICS-Datei und speichert sie optimiert in der lokalen WordPress-Datenbank.', 'bs-ics-feed' ); ?></div>
 									</div>
 									<div class="bs-explain-item">
-										<div class="bs-explain-label"><?php esc_html_e( 'Nutzen', 'bs-wp-ics-feed-reader' ); ?></div>
-										<div class="bs-explain-content"><?php esc_html_e( 'Keine Ladezeitverzögerung im Frontend und garantierte Ausfallsicherheit auch bei Serverproblemen des Kalenderanbieters.', 'bs-wp-ics-feed-reader' ); ?></div>
+										<div class="bs-explain-label"><?php esc_html_e( 'Nutzen', 'bs-ics-feed' ); ?></div>
+										<div class="bs-explain-content"><?php esc_html_e( 'Keine Ladezeitverzögerung im Frontend und garantierte Ausfallsicherheit auch bei Serverproblemen des Kalenderanbieters.', 'bs-ics-feed' ); ?></div>
 									</div>
 									<div class="bs-explain-warning">
 										<div class="bs-explain-label">
 											<span class="dashicons dashicons-warning" style="font-size: 16px; width: 16px; height: 16px;"></span>
-											<?php esc_html_e( 'Bricht es was', 'bs-wp-ics-feed-reader' ); ?>
+											<?php esc_html_e( 'Bricht es was', 'bs-ics-feed' ); ?>
 										</div>
-										<div class="bs-explain-content"><?php esc_html_e( 'Nein. Sollte der externe Server einmal nicht erreichbar sein, greift automatisch der Stale-Cache-Fallback und bestehende Termine bleiben erhalten.', 'bs-wp-ics-feed-reader' ); ?></div>
+										<div class="bs-explain-content"><?php esc_html_e( 'Nein. Sollte der externe Server einmal nicht erreichbar sein, greift automatisch der Stale-Cache-Fallback und bestehende Termine bleiben erhalten.', 'bs-ics-feed' ); ?></div>
 									</div>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php esc_html_e( 'Automatischer Sync (WP-Cron)', 'bs-wp-ics-feed-reader' ); ?></th>
+							<th scope="row"><?php esc_html_e( 'Automatischer Sync (WP-Cron)', 'bs-ics-feed' ); ?></th>
 							<td>
 								<?php echo $this->render_cron_status_box(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</td>
@@ -312,18 +312,18 @@ class BS_ICS_Admin {
 			<!-- Tab 2: Felder & Inhalt -->
 			<div id="bs-ics-tab-fields" class="bs-ics-tab-content" style="display: none;" role="tabpanel" aria-labelledby="bs-ics-tabbtn-fields" tabindex="0">
 				<div class="bs-ics-panel-card">
-					<h4 class="bs-ics-panel-title"><?php esc_html_e( 'Feld-Zuweisung: Übersicht vs. Detailansicht', 'bs-wp-ics-feed-reader' ); ?></h4>
+					<h4 class="bs-ics-panel-title"><?php esc_html_e( 'Feld-Zuweisung: Übersicht vs. Detailansicht', 'bs-ics-feed' ); ?></h4>
 					<p class="bs-ics-panel-desc">
-						<?php esc_html_e( 'Steuere granular, welche Informationen sofort in der Termin-Kachel (Teaser) angezeigt werden und welche erst beim Klick auf „Weiterlesen“ sichtbar sind.', 'bs-wp-ics-feed-reader' ); ?>
+						<?php esc_html_e( 'Steuere granular, welche Informationen sofort in der Termin-Kachel (Teaser) angezeigt werden und welche erst beim Klick auf „Weiterlesen“ sichtbar sind.', 'bs-ics-feed' ); ?>
 					</p>
 					<div class="bs-ics-table-scroll">
 						<table class="widefat bs-ics-fields-table">
 							<thead>
 								<tr>
-									<th style="width: 170px; text-align: center;"><?php esc_html_e( 'In Übersicht (Teaser)', 'bs-wp-ics-feed-reader' ); ?></th>
-									<th style="width: 170px; text-align: center;"><?php esc_html_e( 'In Detailansicht', 'bs-wp-ics-feed-reader' ); ?></th>
-									<th style="width: 160px;"><?php esc_html_e( 'RFC 5545 Feld', 'bs-wp-ics-feed-reader' ); ?></th>
-									<th><?php esc_html_e( 'Frontend Label / Beschriftung', 'bs-wp-ics-feed-reader' ); ?></th>
+									<th style="width: 170px; text-align: center;"><?php esc_html_e( 'In Übersicht (Teaser)', 'bs-ics-feed' ); ?></th>
+									<th style="width: 170px; text-align: center;"><?php esc_html_e( 'In Detailansicht', 'bs-ics-feed' ); ?></th>
+									<th style="width: 160px;"><?php esc_html_e( 'RFC 5545 Feld', 'bs-ics-feed' ); ?></th>
+									<th><?php esc_html_e( 'Frontend Label / Beschriftung', 'bs-ics-feed' ); ?></th>
 								</tr>
 							</thead>
 							<tbody id="bs-ics-fields-tbody">
@@ -339,44 +339,44 @@ class BS_ICS_Admin {
 				<table class="form-table" role="presentation">
 					<tbody>
 						<tr>
-							<th scope="row"><?php esc_html_e( 'Layout-Modus', 'bs-wp-ics-feed-reader' ); ?></th>
+							<th scope="row"><?php esc_html_e( 'Layout-Modus', 'bs-ics-feed' ); ?></th>
 							<td>
 								<fieldset>
 									<label style="margin-right: 20px;">
 										<input type="radio" name="bs_ics_display_settings[layout]" value="grid" <?php checked( $display_settings['layout'], 'grid' ); ?> />
-										<?php esc_html_e( 'Kachel-Raster (Grid)', 'bs-wp-ics-feed-reader' ); ?>
+										<?php esc_html_e( 'Kachel-Raster (Grid)', 'bs-ics-feed' ); ?>
 									</label>
 									<label>
 										<input type="radio" name="bs_ics_display_settings[layout]" value="list" <?php checked( $display_settings['layout'], 'list' ); ?> />
-										<?php esc_html_e( 'Listenansicht (List)', 'bs-wp-ics-feed-reader' ); ?>
+										<?php esc_html_e( 'Listenansicht (List)', 'bs-ics-feed' ); ?>
 									</label>
 								</fieldset>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_read_more_mode"><?php esc_html_e( 'Weiterlesen-Verhalten', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_read_more_mode"><?php esc_html_e( 'Weiterlesen-Verhalten', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<select name="bs_ics_display_settings[read_more_mode]" id="bs_ics_read_more_mode">
 									<option value="expand" <?php selected( $display_settings['read_more_mode'], 'expand' ); ?>>
-										<?php esc_html_e( 'Aufklappen (Accordion / Details direkt in Kachel einblenden)', 'bs-wp-ics-feed-reader' ); ?>
+										<?php esc_html_e( 'Aufklappen (Accordion / Details direkt in Kachel einblenden)', 'bs-ics-feed' ); ?>
 									</option>
 									<option value="single" <?php selected( $display_settings['read_more_mode'], 'single' ); ?>>
-										<?php esc_html_e( 'Einzelansicht (Detail-Seite mit URL-Parameter öffnen)', 'bs-wp-ics-feed-reader' ); ?>
+										<?php esc_html_e( 'Einzelansicht (Detail-Seite mit URL-Parameter öffnen)', 'bs-ics-feed' ); ?>
 									</option>
 									<option value="none" <?php selected( $display_settings['read_more_mode'], 'none' ); ?>>
-										<?php esc_html_e( 'Kein Weiterlesen-Button (Alles direkt in Kachel)', 'bs-wp-ics-feed-reader' ); ?>
+										<?php esc_html_e( 'Kein Weiterlesen-Button (Alles direkt in Kachel)', 'bs-ics-feed' ); ?>
 									</option>
 								</select>
 								<p class="description">
-									<?php esc_html_e( 'Definiert, wie zusätzliche Detailfelder beim Klick auf den Weiterlesen-Button geöffnet werden.', 'bs-wp-ics-feed-reader' ); ?>
+									<?php esc_html_e( 'Definiert, wie zusätzliche Detailfelder beim Klick auf den Weiterlesen-Button geöffnet werden.', 'bs-ics-feed' ); ?>
 								</p>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_read_more_text"><?php esc_html_e( 'Button-Text „Weiterlesen“', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_read_more_text"><?php esc_html_e( 'Button-Text „Weiterlesen“', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<input type="text" name="bs_ics_display_settings[read_more_text]" id="bs_ics_read_more_text" value="<?php echo esc_attr( $display_settings['read_more_text'] ); ?>" class="regular-text" placeholder="Weiterlesen" />
@@ -384,94 +384,94 @@ class BS_ICS_Admin {
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_read_less_text"><?php esc_html_e( 'Button-Text „Einklappen“', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_read_less_text"><?php esc_html_e( 'Button-Text „Einklappen“', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<input type="text" name="bs_ics_display_settings[read_less_text]" id="bs_ics_read_less_text" value="<?php echo esc_attr( $display_settings['read_less_text'] ); ?>" class="regular-text" placeholder="Weniger anzeigen" />
-								<p class="description"><?php esc_html_e( 'Wird verwendet, wenn der Modus „Aufklappen“ aktiv ist.', 'bs-wp-ics-feed-reader' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Wird verwendet, wenn der Modus „Aufklappen“ aktiv ist.', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_back_text"><?php esc_html_e( 'Button-Text „Zurück“', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_back_text"><?php esc_html_e( 'Button-Text „Zurück“', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<input type="text" name="bs_ics_display_settings[back_text]" id="bs_ics_back_text" value="<?php echo esc_attr( $display_settings['back_text'] ); ?>" class="regular-text" placeholder="← Zurück zur Übersicht" />
-								<p class="description"><?php esc_html_e( 'Wird verwendet, wenn der Modus „Einzelansicht“ aktiv ist.', 'bs-wp-ics-feed-reader' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Wird verwendet, wenn der Modus „Einzelansicht“ aktiv ist.', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php esc_html_e( 'Frontend-Suchleiste & Filter', 'bs-wp-ics-feed-reader' ); ?></th>
+							<th scope="row"><?php esc_html_e( 'Frontend-Suchleiste & Filter', 'bs-ics-feed' ); ?></th>
 							<td>
 								<label class="bs-toggle-switch">
 									<input type="checkbox" name="bs_ics_display_settings[enable_search_filter]" value="1" <?php checked( ! empty( $display_settings['enable_search_filter'] ) ); ?> />
 									<span class="bs-toggle-slider"></span>
-									<span class="bs-toggle-status"><?php echo ! empty( $display_settings['enable_search_filter'] ) ? esc_html__( 'Aktiv', 'bs-wp-ics-feed-reader' ) : esc_html__( 'Inaktiv', 'bs-wp-ics-feed-reader' ); ?></span>
+									<span class="bs-toggle-status"><?php echo ! empty( $display_settings['enable_search_filter'] ) ? esc_html__( 'Aktiv', 'bs-ics-feed' ) : esc_html__( 'Inaktiv', 'bs-ics-feed' ); ?></span>
 								</label>
-								<p class="description"><?php esc_html_e( 'Ermöglicht Besuchern das sekundenschnelle clientseitige Durchsuchen und Filtern nach Kategorien.', 'bs-wp-ics-feed-reader' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Ermöglicht Besuchern das sekundenschnelle clientseitige Durchsuchen und Filtern nach Kategorien.', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php esc_html_e( '„In Kalender eintragen“-Buttons', 'bs-wp-ics-feed-reader' ); ?></th>
+							<th scope="row"><?php esc_html_e( '„In Kalender eintragen“-Buttons', 'bs-ics-feed' ); ?></th>
 							<td>
 								<label class="bs-toggle-switch">
 									<input type="checkbox" name="bs_ics_display_settings[enable_add_to_cal]" value="1" <?php checked( ! empty( $display_settings['enable_add_to_cal'] ) ); ?> />
 									<span class="bs-toggle-slider"></span>
-									<span class="bs-toggle-status"><?php echo ! empty( $display_settings['enable_add_to_cal'] ) ? esc_html__( 'Aktiv', 'bs-wp-ics-feed-reader' ) : esc_html__( 'Inaktiv', 'bs-wp-ics-feed-reader' ); ?></span>
+									<span class="bs-toggle-status"><?php echo ! empty( $display_settings['enable_add_to_cal'] ) ? esc_html__( 'Aktiv', 'bs-ics-feed' ) : esc_html__( 'Inaktiv', 'bs-ics-feed' ); ?></span>
 								</label>
-								<p class="description"><?php esc_html_e( 'Fügt jeder Terminkarte einen One-Click-Export zu Google Calendar, Outlook und Apple iCal hinzu.', 'bs-wp-ics-feed-reader' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Fügt jeder Terminkarte einen One-Click-Export zu Google Calendar, Outlook und Apple iCal hinzu.', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php esc_html_e( 'CSV-Export-Button', 'bs-wp-ics-feed-reader' ); ?></th>
+							<th scope="row"><?php esc_html_e( 'CSV-Export-Button', 'bs-ics-feed' ); ?></th>
 							<td>
 								<label class="bs-toggle-switch">
 									<input type="checkbox" name="bs_ics_display_settings[enable_csv_export]" value="1" <?php checked( ! empty( $display_settings['enable_csv_export'] ) ); ?> />
 									<span class="bs-toggle-slider"></span>
-									<span class="bs-toggle-status"><?php echo ! empty( $display_settings['enable_csv_export'] ) ? esc_html__( 'Aktiv', 'bs-wp-ics-feed-reader' ) : esc_html__( 'Inaktiv', 'bs-wp-ics-feed-reader' ); ?></span>
+									<span class="bs-toggle-status"><?php echo ! empty( $display_settings['enable_csv_export'] ) ? esc_html__( 'Aktiv', 'bs-ics-feed' ) : esc_html__( 'Inaktiv', 'bs-ics-feed' ); ?></span>
 								</label>
-								<p class="description"><?php esc_html_e( 'Zeigt in der Filterleiste einen Button, mit dem Besucher die angezeigten Termine als CSV-Datei (Excel-kompatibel) herunterladen können.', 'bs-wp-ics-feed-reader' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Zeigt in der Filterleiste einen Button, mit dem Besucher die angezeigten Termine als CSV-Datei (Excel-kompatibel) herunterladen können.', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_limit"><?php esc_html_e( 'Maximale Anzahl Termine', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_limit"><?php esc_html_e( 'Maximale Anzahl Termine', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<input type="number" name="bs_ics_display_settings[limit]" id="bs_ics_limit" min="0" max="500" value="<?php echo esc_attr( $display_settings['limit'] ); ?>" class="small-text" />
-								<p class="description"><?php esc_html_e( '0 eingeben für keine Begrenzung.', 'bs-wp-ics-feed-reader' ); ?></p>
+								<p class="description"><?php esc_html_e( '0 eingeben für keine Begrenzung.', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_sort"><?php esc_html_e( 'Sortierung', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_sort"><?php esc_html_e( 'Sortierung', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<select name="bs_ics_display_settings[sort]" id="bs_ics_sort">
-									<option value="asc" <?php selected( $display_settings['sort'], 'asc' ); ?>><?php esc_html_e( 'Chronologisch aufsteigend (nächste zuerst)', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="desc" <?php selected( $display_settings['sort'], 'desc' ); ?>><?php esc_html_e( 'Absteigend (späteste zuerst)', 'bs-wp-ics-feed-reader' ); ?></option>
+									<option value="asc" <?php selected( $display_settings['sort'], 'asc' ); ?>><?php esc_html_e( 'Chronologisch aufsteigend (nächste zuerst)', 'bs-ics-feed' ); ?></option>
+									<option value="desc" <?php selected( $display_settings['sort'], 'desc' ); ?>><?php esc_html_e( 'Absteigend (späteste zuerst)', 'bs-ics-feed' ); ?></option>
 								</select>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php esc_html_e( 'Filter', 'bs-wp-ics-feed-reader' ); ?></th>
+							<th scope="row"><?php esc_html_e( 'Filter', 'bs-ics-feed' ); ?></th>
 							<td>
 								<label class="bs-toggle-switch">
 									<input type="checkbox" name="bs_ics_display_settings[only_future]" value="1" <?php checked( ! empty( $display_settings['only_future'] ) ); ?> />
 									<span class="bs-toggle-slider"></span>
-									<span class="bs-toggle-status"><?php echo ! empty( $display_settings['only_future'] ) ? esc_html__( 'Aktiv', 'bs-wp-ics-feed-reader' ) : esc_html__( 'Inaktiv', 'bs-wp-ics-feed-reader' ); ?></span>
+									<span class="bs-toggle-status"><?php echo ! empty( $display_settings['only_future'] ) ? esc_html__( 'Aktiv', 'bs-ics-feed' ) : esc_html__( 'Inaktiv', 'bs-ics-feed' ); ?></span>
 								</label>
-								<p class="description"><?php esc_html_e( 'Nur zukünftige / anstehende Termine anzeigen (vergangene ausblenden)', 'bs-wp-ics-feed-reader' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Nur zukünftige / anstehende Termine anzeigen (vergangene ausblenden)', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_date_format"><?php esc_html_e( 'Benutzerdefiniertes Datumsformat', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_date_format"><?php esc_html_e( 'Benutzerdefiniertes Datumsformat', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<input type="text" name="bs_ics_display_settings[date_format]" id="bs_ics_date_format" value="<?php echo esc_attr( $display_settings['date_format'] ); ?>" class="regular-text" placeholder="<?php echo esc_attr( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ); ?>" />
 								<p class="description">
-									<?php esc_html_e( 'Leer lassen, um das WordPress-Standard-Datumsformat zu verwenden (z. B. "d.m.Y H:i").', 'bs-wp-ics-feed-reader' ); ?>
+									<?php esc_html_e( 'Leer lassen, um das WordPress-Standard-Datumsformat zu verwenden (z. B. "d.m.Y H:i").', 'bs-ics-feed' ); ?>
 								</p>
 							</td>
 						</tr>
@@ -482,8 +482,8 @@ class BS_ICS_Admin {
 			<!-- Tab 4: Kachel-Design -->
 			<div id="bs-ics-tab-design" class="bs-ics-tab-content" style="display: none;" role="tabpanel" aria-labelledby="bs-ics-tabbtn-design" tabindex="0">
 				<div class="bs-ics-panel-card bs-ics-design-preview-panel">
-					<h4 class="bs-ics-panel-title"><?php esc_html_e( 'Live-Vorschau', 'bs-wp-ics-feed-reader' ); ?></h4>
-					<p class="bs-ics-panel-desc"><?php esc_html_e( 'Zeigt sofort, wie eine Terminkachel mit den aktuell gewählten (noch ungespeicherten) Einstellungen aussieht.', 'bs-wp-ics-feed-reader' ); ?></p>
+					<h4 class="bs-ics-panel-title"><?php esc_html_e( 'Live-Vorschau', 'bs-ics-feed' ); ?></h4>
+					<p class="bs-ics-panel-desc"><?php esc_html_e( 'Zeigt sofort, wie eine Terminkachel mit den aktuell gewählten (noch ungespeicherten) Einstellungen aussieht.', 'bs-ics-feed' ); ?></p>
 					<div id="bs-ics-design-preview-wrapper" class="bs-ics-wrapper bs-ics-style-card bs-ics-shadow-subtle bs-ics-pad-normal" style="margin: 0; max-width: 340px;">
 						<div class="bs-ics-container">
 							<article class="bs-ics-card">
@@ -493,13 +493,13 @@ class BS_ICS_Admin {
 										<span class="bs-ics-date-text"><?php echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ) ); ?></span>
 									</time>
 								</div>
-								<h3 class="bs-ics-title"><?php esc_html_e( 'Beispiel-Termin', 'bs-wp-ics-feed-reader' ); ?></h3>
+								<h3 class="bs-ics-title"><?php esc_html_e( 'Beispiel-Termin', 'bs-ics-feed' ); ?></h3>
 								<div class="bs-ics-meta bs-ics-location">
 									<span class="bs-ics-meta-icon" aria-hidden="true">&#128205;</span>
-									<span class="bs-ics-meta-text"><?php esc_html_e( 'Musterstraße 1, Musterstadt', 'bs-wp-ics-feed-reader' ); ?></span>
+									<span class="bs-ics-meta-text"><?php esc_html_e( 'Musterstraße 1, Musterstadt', 'bs-ics-feed' ); ?></span>
 								</div>
 								<div class="bs-ics-card-footer">
-									<button type="button" class="bs-ics-toggle-btn" aria-expanded="false" tabindex="-1"><span class="bs-ics-btn-text"><?php esc_html_e( 'Weiterlesen', 'bs-wp-ics-feed-reader' ); ?></span></button>
+									<button type="button" class="bs-ics-toggle-btn" aria-expanded="false" tabindex="-1"><span class="bs-ics-btn-text"><?php esc_html_e( 'Weiterlesen', 'bs-ics-feed' ); ?></span></button>
 								</div>
 							</article>
 						</div>
@@ -509,54 +509,54 @@ class BS_ICS_Admin {
 					<tbody>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_card_style"><?php esc_html_e( 'Design-Stil / Preset', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_card_style"><?php esc_html_e( 'Design-Stil / Preset', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<select name="bs_ics_design_settings[card_style]" id="bs_ics_card_style">
-									<option value="card" <?php selected( $design_settings['card_style'], 'card' ); ?>><?php esc_html_e( 'Klassisch (Karte mit dezentem Schatten & Akzentlinie)', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="flat" <?php selected( $design_settings['card_style'], 'flat' ); ?>><?php esc_html_e( 'Minimal / Flat (Flach, rahmenbetont, ideal für Block-Themes)', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="accent_header" <?php selected( $design_settings['card_style'], 'accent_header' ); ?>><?php esc_html_e( 'Accent Header (Farbige Kopfzeile für Datum & Titel)', 'bs-wp-ics-feed-reader' ); ?></option>
+									<option value="card" <?php selected( $design_settings['card_style'], 'card' ); ?>><?php esc_html_e( 'Klassisch (Karte mit dezentem Schatten & Akzentlinie)', 'bs-ics-feed' ); ?></option>
+									<option value="flat" <?php selected( $design_settings['card_style'], 'flat' ); ?>><?php esc_html_e( 'Minimal / Flat (Flach, rahmenbetont, ideal für Block-Themes)', 'bs-ics-feed' ); ?></option>
+									<option value="accent_header" <?php selected( $design_settings['card_style'], 'accent_header' ); ?>><?php esc_html_e( 'Accent Header (Farbige Kopfzeile für Datum & Titel)', 'bs-ics-feed' ); ?></option>
 								</select>
-								<p class="description"><?php esc_html_e( 'Wähle einen Grundstil, der sich ideal in dein Website-Design einfügt.', 'bs-wp-ics-feed-reader' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Wähle einen Grundstil, der sich ideal in dein Website-Design einfügt.', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
-							<th scope="row"><?php esc_html_e( 'Theme-Farbvererbung', 'bs-wp-ics-feed-reader' ); ?></th>
+							<th scope="row"><?php esc_html_e( 'Theme-Farbvererbung', 'bs-ics-feed' ); ?></th>
 							<td>
 								<label class="bs-toggle-switch">
 									<input type="checkbox" name="bs_ics_design_settings[inherit_theme_colors]" value="1" <?php checked( ! empty( $design_settings['inherit_theme_colors'] ) ); ?> />
 									<span class="bs-toggle-slider"></span>
-									<span class="bs-toggle-status"><?php echo ! empty( $design_settings['inherit_theme_colors'] ) ? esc_html__( 'Aktiv', 'bs-wp-ics-feed-reader' ) : esc_html__( 'Inaktiv', 'bs-wp-ics-feed-reader' ); ?></span>
+									<span class="bs-toggle-status"><?php echo ! empty( $design_settings['inherit_theme_colors'] ) ? esc_html__( 'Aktiv', 'bs-ics-feed' ) : esc_html__( 'Inaktiv', 'bs-ics-feed' ); ?></span>
 								</label>
-								<p class="description"><?php esc_html_e( 'Text- und Linkfarben erben automatisch die globalen Theme-Farben (ideal für Dark-Mode oder farbige Abschnitte).', 'bs-wp-ics-feed-reader' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Text- und Linkfarben erben automatisch die globalen Theme-Farben (ideal für Dark-Mode oder farbige Abschnitte).', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_columns"><?php esc_html_e( 'Grid-Spalten (Desktop)', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_columns"><?php esc_html_e( 'Grid-Spalten (Desktop)', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<select name="bs_ics_design_settings[columns]" id="bs_ics_columns">
-									<option value="1" <?php selected( $design_settings['columns'], 1 ); ?>>1 <?php esc_html_e( 'Spalte', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="2" <?php selected( $design_settings['columns'], 2 ); ?>>2 <?php esc_html_e( 'Spalten', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="3" <?php selected( $design_settings['columns'], 3 ); ?>>3 <?php esc_html_e( 'Spalten', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="4" <?php selected( $design_settings['columns'], 4 ); ?>>4 <?php esc_html_e( 'Spalten', 'bs-wp-ics-feed-reader' ); ?></option>
+									<option value="1" <?php selected( $design_settings['columns'], 1 ); ?>>1 <?php esc_html_e( 'Spalte', 'bs-ics-feed' ); ?></option>
+									<option value="2" <?php selected( $design_settings['columns'], 2 ); ?>>2 <?php esc_html_e( 'Spalten', 'bs-ics-feed' ); ?></option>
+									<option value="3" <?php selected( $design_settings['columns'], 3 ); ?>>3 <?php esc_html_e( 'Spalten', 'bs-ics-feed' ); ?></option>
+									<option value="4" <?php selected( $design_settings['columns'], 4 ); ?>>4 <?php esc_html_e( 'Spalten', 'bs-ics-feed' ); ?></option>
 								</select>
-								<p class="description"><?php esc_html_e( 'Auf Mobilgeräten passt sich das Raster automatisch 1-spaltig an.', 'bs-wp-ics-feed-reader' ); ?></p>
+								<p class="description"><?php esc_html_e( 'Auf Mobilgeräten passt sich das Raster automatisch 1-spaltig an.', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_accent_color"><?php esc_html_e( 'Akzentfarbe', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_accent_color"><?php esc_html_e( 'Akzentfarbe', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<input type="color" name="bs_ics_design_settings[accent_color]" id="bs_ics_accent_color" value="<?php echo esc_attr( $design_settings['accent_color'] ); ?>" />
-								<span class="description"><?php esc_html_e( 'Wird für Header, Badges, Links und Buttons verwendet.', 'bs-wp-ics-feed-reader' ); ?></span>
+								<span class="description"><?php esc_html_e( 'Wird für Header, Badges, Links und Buttons verwendet.', 'bs-ics-feed' ); ?></span>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_bg_color"><?php esc_html_e( 'Kachel-Hintergrundfarbe', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_bg_color"><?php esc_html_e( 'Kachel-Hintergrundfarbe', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<input type="color" name="bs_ics_design_settings[bg_color]" id="bs_ics_bg_color" value="<?php echo esc_attr( $design_settings['bg_color'] ); ?>" />
@@ -564,31 +564,31 @@ class BS_ICS_Admin {
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_shadow_style"><?php esc_html_e( 'Schatten-Stärke', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_shadow_style"><?php esc_html_e( 'Schatten-Stärke', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<select name="bs_ics_design_settings[shadow_style]" id="bs_ics_shadow_style">
-									<option value="none" <?php selected( $design_settings['shadow_style'], 'none' ); ?>><?php esc_html_e( 'Kein Schatten', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="subtle" <?php selected( $design_settings['shadow_style'], 'subtle' ); ?>><?php esc_html_e( 'Dezent (Standard)', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="prominent" <?php selected( $design_settings['shadow_style'], 'prominent' ); ?>><?php esc_html_e( 'Ausgeprägt', 'bs-wp-ics-feed-reader' ); ?></option>
+									<option value="none" <?php selected( $design_settings['shadow_style'], 'none' ); ?>><?php esc_html_e( 'Kein Schatten', 'bs-ics-feed' ); ?></option>
+									<option value="subtle" <?php selected( $design_settings['shadow_style'], 'subtle' ); ?>><?php esc_html_e( 'Dezent (Standard)', 'bs-ics-feed' ); ?></option>
+									<option value="prominent" <?php selected( $design_settings['shadow_style'], 'prominent' ); ?>><?php esc_html_e( 'Ausgeprägt', 'bs-ics-feed' ); ?></option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_card_padding"><?php esc_html_e( 'Kachel-Innenabstand', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_card_padding"><?php esc_html_e( 'Kachel-Innenabstand', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<select name="bs_ics_design_settings[card_padding]" id="bs_ics_card_padding">
-									<option value="compact" <?php selected( $design_settings['card_padding'], 'compact' ); ?>><?php esc_html_e( 'Kompakt (12px)', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="normal" <?php selected( $design_settings['card_padding'], 'normal' ); ?>><?php esc_html_e( 'Standard (20px)', 'bs-wp-ics-feed-reader' ); ?></option>
-									<option value="spacious" <?php selected( $design_settings['card_padding'], 'spacious' ); ?>><?php esc_html_e( 'Großzügig (28px)', 'bs-wp-ics-feed-reader' ); ?></option>
+									<option value="compact" <?php selected( $design_settings['card_padding'], 'compact' ); ?>><?php esc_html_e( 'Kompakt (12px)', 'bs-ics-feed' ); ?></option>
+									<option value="normal" <?php selected( $design_settings['card_padding'], 'normal' ); ?>><?php esc_html_e( 'Standard (20px)', 'bs-ics-feed' ); ?></option>
+									<option value="spacious" <?php selected( $design_settings['card_padding'], 'spacious' ); ?>><?php esc_html_e( 'Großzügig (28px)', 'bs-ics-feed' ); ?></option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_border_radius"><?php esc_html_e( 'Rahmenradius (px)', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_border_radius"><?php esc_html_e( 'Rahmenradius (px)', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<input type="number" name="bs_ics_design_settings[border_radius]" id="bs_ics_border_radius" min="0" max="50" value="<?php echo esc_attr( $design_settings['border_radius'] ); ?>" class="small-text" /> px
@@ -596,7 +596,7 @@ class BS_ICS_Admin {
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_border_width"><?php esc_html_e( 'Rahmenbreite (px)', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_border_width"><?php esc_html_e( 'Rahmenbreite (px)', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<input type="number" name="bs_ics_design_settings[border_width]" id="bs_ics_border_width" min="0" max="10" value="<?php echo esc_attr( $design_settings['border_width'] ); ?>" class="small-text" /> px
@@ -604,7 +604,7 @@ class BS_ICS_Admin {
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_border_color"><?php esc_html_e( 'Rahmenfarbe', 'bs-wp-ics-feed-reader' ); ?></label>
+								<label for="bs_ics_border_color"><?php esc_html_e( 'Rahmenfarbe', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
 								<input type="color" name="bs_ics_design_settings[border_color]" id="bs_ics_border_color" value="<?php echo esc_attr( $design_settings['border_color'] ); ?>" />
@@ -635,56 +635,56 @@ class BS_ICS_Admin {
 		?>
 		<div class="bs-ics-status-info" style="max-width: none;">
 			<p>
-				<strong><?php esc_html_e( 'WP-Cron Status:', 'bs-wp-ics-feed-reader' ); ?></strong>
+				<strong><?php esc_html_e( 'WP-Cron Status:', 'bs-ics-feed' ); ?></strong>
 				<?php if ( $cron_disabled ) : ?>
-					<span class="bs-ics-cron-pill is-disabled"><span class="dot"></span><?php esc_html_e( 'Deaktiviert (DISABLE_WP_CRON)', 'bs-wp-ics-feed-reader' ); ?></span>
+					<span class="bs-ics-cron-pill is-disabled"><span class="dot"></span><?php esc_html_e( 'Deaktiviert (DISABLE_WP_CRON)', 'bs-ics-feed' ); ?></span>
 				<?php else : ?>
-					<span class="bs-ics-cron-pill is-active"><span class="dot"></span><?php esc_html_e( 'Aktiv', 'bs-wp-ics-feed-reader' ); ?></span>
+					<span class="bs-ics-cron-pill is-active"><span class="dot"></span><?php esc_html_e( 'Aktiv', 'bs-ics-feed' ); ?></span>
 				<?php endif; ?>
 			</p>
 			<p>
-				<strong><?php esc_html_e( 'Nächster geplanter Lauf:', 'bs-wp-ics-feed-reader' ); ?></strong>
+				<strong><?php esc_html_e( 'Nächster geplanter Lauf:', 'bs-ics-feed' ); ?></strong>
 				<?php
 				if ( $next_run ) {
 					echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $next_run ) );
 				} else {
-					esc_html_e( 'Nicht geplant', 'bs-wp-ics-feed-reader' );
+					esc_html_e( 'Nicht geplant', 'bs-ics-feed' );
 				}
 				?>
 			</p>
 			<p class="description">
-				<?php esc_html_e( 'Feeds mit automatischem Sync werden im Hintergrund aktualisiert, sobald ihr gewähltes Intervall (stündlich / zweimal täglich / täglich) seit dem letzten Sync erreicht ist. WP-Cron wird dabei durch Aufrufe deiner Website ausgelöst, nicht durch einen festen Server-Zeitplan — auf sehr besucherarmen Seiten kann sich der tatsächliche Sync-Zeitpunkt daher etwas verschieben.', 'bs-wp-ics-feed-reader' ); ?>
+				<?php esc_html_e( 'Feeds mit automatischem Sync werden im Hintergrund aktualisiert, sobald ihr gewähltes Intervall (stündlich / zweimal täglich / täglich) seit dem letzten Sync erreicht ist. WP-Cron wird dabei durch Aufrufe deiner Website ausgelöst, nicht durch einen festen Server-Zeitplan — auf sehr besucherarmen Seiten kann sich der tatsächliche Sync-Zeitpunkt daher etwas verschieben.', 'bs-ics-feed' ); ?>
 			</p>
 
 			<?php if ( $cron_disabled ) : ?>
 				<div class="bs-explain-warning">
 					<div class="bs-explain-label">
 						<span class="dashicons dashicons-warning" style="font-size: 16px; width: 16px; height: 16px;"></span>
-						<?php esc_html_e( 'WP-Cron ist deaktiviert', 'bs-wp-ics-feed-reader' ); ?>
+						<?php esc_html_e( 'WP-Cron ist deaktiviert', 'bs-ics-feed' ); ?>
 					</div>
 					<div class="bs-explain-content">
-						<?php esc_html_e( 'DISABLE_WP_CRON ist in der wp-config.php gesetzt. Der automatische Sync läuft dadurch nur noch, wenn ein echter Server-Cronjob wp-cron.php aufruft (siehe „Für Entwickler" unten).', 'bs-wp-ics-feed-reader' ); ?>
+						<?php esc_html_e( 'DISABLE_WP_CRON ist in der wp-config.php gesetzt. Der automatische Sync läuft dadurch nur noch, wenn ein echter Server-Cronjob wp-cron.php aufruft (siehe „Für Entwickler" unten).', 'bs-ics-feed' ); ?>
 					</div>
 				</div>
 			<?php endif; ?>
 
 			<details class="bs-ics-dev-details">
-				<summary><?php esc_html_e( 'Für Entwickler: eigenen Server-Cronjob einrichten', 'bs-wp-ics-feed-reader' ); ?></summary>
+				<summary><?php esc_html_e( 'Für Entwickler: eigenen Server-Cronjob einrichten', 'bs-ics-feed' ); ?></summary>
 				<div class="bs-ics-dev-body">
 					<p>
-						<?php esc_html_e( 'WordPress löst WP-Cron standardmäßig als Pseudo-Cron bei Seitenaufrufen aus (wp-cron.php wird per Request im Hintergrund mitgestartet). Auf Seiten mit wenig Traffic führt das zu unregelmäßigem Timing. Für zuverlässiges, exaktes Timing empfiehlt sich ein echter Server-Cronjob:', 'bs-wp-ics-feed-reader' ); ?>
+						<?php esc_html_e( 'WordPress löst WP-Cron standardmäßig als Pseudo-Cron bei Seitenaufrufen aus (wp-cron.php wird per Request im Hintergrund mitgestartet). Auf Seiten mit wenig Traffic führt das zu unregelmäßigem Timing. Für zuverlässiges, exaktes Timing empfiehlt sich ein echter Server-Cronjob:', 'bs-ics-feed' ); ?>
 					</p>
-					<p><strong>1. <?php esc_html_e( 'Pseudo-Cron in der wp-config.php deaktivieren:', 'bs-wp-ics-feed-reader' ); ?></strong></p>
+					<p><strong>1. <?php esc_html_e( 'Pseudo-Cron in der wp-config.php deaktivieren:', 'bs-ics-feed' ); ?></strong></p>
 					<pre><code>define( 'DISABLE_WP_CRON', true );</code></pre>
-					<p><strong>2. <?php esc_html_e( 'Echten Cronjob auf Server-/Hosting-Ebene anlegen (Beispiel: alle 15 Minuten):', 'bs-wp-ics-feed-reader' ); ?></strong></p>
+					<p><strong>2. <?php esc_html_e( 'Echten Cronjob auf Server-/Hosting-Ebene anlegen (Beispiel: alle 15 Minuten):', 'bs-ics-feed' ); ?></strong></p>
 					<pre><code>*/15 * * * * curl -s "<?php echo esc_html( $cron_url ); ?>" >/dev/null 2>&1</code></pre>
-					<p><?php esc_html_e( 'Alternativ per WP-CLI (falls auf dem Server verfügbar):', 'bs-wp-ics-feed-reader' ); ?></p>
+					<p><?php esc_html_e( 'Alternativ per WP-CLI (falls auf dem Server verfügbar):', 'bs-ics-feed' ); ?></p>
 					<pre><code>*/15 * * * * cd /pfad/zur/wordpress-installation && wp cron event run --due-now >/dev/null 2>&1</code></pre>
 					<p>
 						<?php
 						printf(
 							/* translators: %s: Cron-Event-Name in <code> */
-							esc_html__( 'Das von diesem Plugin genutzte Event heißt %s — damit lässt es sich gezielt manuell auslösen oder debuggen:', 'bs-wp-ics-feed-reader' ),
+							esc_html__( 'Das von diesem Plugin genutzte Event heißt %s — damit lässt es sich gezielt manuell auslösen oder debuggen:', 'bs-ics-feed' ),
 							'<code>bs_ics_cron_sync_event</code>'
 						);
 						?>
@@ -706,11 +706,11 @@ class BS_ICS_Admin {
 	public function normalize_field_config( $raw_config ) {
 		if ( ! is_array( $raw_config ) || empty( $raw_config ) ) {
 			return [
-				'SUMMARY'     => [ 'teaser' => true, 'detail' => true, 'label' => __( 'Titel', 'bs-wp-ics-feed-reader' ) ],
-				'DTSTART'     => [ 'teaser' => true, 'detail' => true, 'label' => __( 'Datum & Uhrzeit', 'bs-wp-ics-feed-reader' ) ],
-				'LOCATION'    => [ 'teaser' => true, 'detail' => true, 'label' => __( 'Ort', 'bs-wp-ics-feed-reader' ) ],
-				'DESCRIPTION' => [ 'teaser' => false, 'detail' => true, 'label' => __( 'Beschreibung', 'bs-wp-ics-feed-reader' ) ],
-				'CATEGORIES'  => [ 'teaser' => true, 'detail' => true, 'label' => __( 'Kategorie', 'bs-wp-ics-feed-reader' ) ],
+				'SUMMARY'     => [ 'teaser' => true, 'detail' => true, 'label' => __( 'Titel', 'bs-ics-feed' ) ],
+				'DTSTART'     => [ 'teaser' => true, 'detail' => true, 'label' => __( 'Datum & Uhrzeit', 'bs-ics-feed' ) ],
+				'LOCATION'    => [ 'teaser' => true, 'detail' => true, 'label' => __( 'Ort', 'bs-ics-feed' ) ],
+				'DESCRIPTION' => [ 'teaser' => false, 'detail' => true, 'label' => __( 'Beschreibung', 'bs-ics-feed' ) ],
+				'CATEGORIES'  => [ 'teaser' => true, 'detail' => true, 'label' => __( 'Kategorie', 'bs-ics-feed' ) ],
 			];
 		}
 
@@ -750,13 +750,13 @@ class BS_ICS_Admin {
 		$field_config = $this->normalize_field_config( $field_config );
 
 		$standard_fields = [
-			'SUMMARY'     => __( 'Titel', 'bs-wp-ics-feed-reader' ),
-			'DTSTART'     => __( 'Datum & Uhrzeit', 'bs-wp-ics-feed-reader' ),
-			'LOCATION'    => __( 'Ort', 'bs-wp-ics-feed-reader' ),
-			'CATEGORIES'  => __( 'Kategorie / Schlagwort', 'bs-wp-ics-feed-reader' ),
-			'DESCRIPTION' => __( 'Beschreibung', 'bs-wp-ics-feed-reader' ),
-			'URL'         => __( 'Link / URL', 'bs-wp-ics-feed-reader' ),
-			'STATUS'      => __( 'Status', 'bs-wp-ics-feed-reader' ),
+			'SUMMARY'     => __( 'Titel', 'bs-ics-feed' ),
+			'DTSTART'     => __( 'Datum & Uhrzeit', 'bs-ics-feed' ),
+			'LOCATION'    => __( 'Ort', 'bs-ics-feed' ),
+			'CATEGORIES'  => __( 'Kategorie / Schlagwort', 'bs-ics-feed' ),
+			'DESCRIPTION' => __( 'Beschreibung', 'bs-ics-feed' ),
+			'URL'         => __( 'Link / URL', 'bs-ics-feed' ),
+			'STATUS'      => __( 'Status', 'bs-ics-feed' ),
 		];
 
 		$all_fields = $standard_fields;
@@ -779,14 +779,14 @@ class BS_ICS_Admin {
 					<label class="bs-toggle-switch">
 						<input type="checkbox" name="bs_ics_field_config[<?php echo esc_attr( $field_key ); ?>][teaser]" value="1" <?php checked( $teaser_active, true ); ?> />
 						<span class="bs-toggle-slider"></span>
-						<span class="bs-toggle-status"><?php echo $teaser_active ? esc_html__( 'Aktiv', 'bs-wp-ics-feed-reader' ) : esc_html__( 'Inaktiv', 'bs-wp-ics-feed-reader' ); ?></span>
+						<span class="bs-toggle-status"><?php echo $teaser_active ? esc_html__( 'Aktiv', 'bs-ics-feed' ) : esc_html__( 'Inaktiv', 'bs-ics-feed' ); ?></span>
 					</label>
 				</td>
 				<td style="text-align: center;">
 					<label class="bs-toggle-switch">
 						<input type="checkbox" name="bs_ics_field_config[<?php echo esc_attr( $field_key ); ?>][detail]" value="1" <?php checked( $detail_active, true ); ?> />
 						<span class="bs-toggle-slider"></span>
-						<span class="bs-toggle-status"><?php echo $detail_active ? esc_html__( 'Aktiv', 'bs-wp-ics-feed-reader' ) : esc_html__( 'Inaktiv', 'bs-wp-ics-feed-reader' ); ?></span>
+						<span class="bs-toggle-status"><?php echo $detail_active ? esc_html__( 'Aktiv', 'bs-ics-feed' ) : esc_html__( 'Inaktiv', 'bs-ics-feed' ); ?></span>
 					</label>
 				</td>
 				<td>
@@ -811,7 +811,7 @@ class BS_ICS_Admin {
 		$feed_url = isset( $_POST['feed_url'] ) ? sanitize_text_field( wp_unslash( $_POST['feed_url'] ) ) : '';
 
 		if ( ! $post_id || ! current_user_can( 'edit_post', $post_id ) ) {
-			wp_send_json_error( [ 'message' => __( 'Keine ausreichenden Berechtigungen.', 'bs-wp-ics-feed-reader' ) ], 403 );
+			wp_send_json_error( [ 'message' => __( 'Keine ausreichenden Berechtigungen.', 'bs-ics-feed' ) ], 403 );
 		}
 
 		if ( empty( $feed_url ) ) {
@@ -819,14 +819,14 @@ class BS_ICS_Admin {
 		}
 
 		if ( empty( $feed_url ) ) {
-			wp_send_json_error( [ 'message' => __( 'Bitte gib eine gültige Feed-URL ein.', 'bs-wp-ics-feed-reader' ) ], 400 );
+			wp_send_json_error( [ 'message' => __( 'Bitte gib eine gültige Feed-URL ein.', 'bs-ics-feed' ) ], 400 );
 		}
 
 		$feed_url = preg_replace( '/^webcal:\/\//i', 'https://', $feed_url );
 		$feed_url = esc_url_raw( $feed_url );
 
 		if ( ! wp_http_validate_url( $feed_url ) ) {
-			wp_send_json_error( [ 'message' => __( 'Die angegebene URL ist ungültig oder wird nicht unterstützt.', 'bs-wp-ics-feed-reader' ) ], 400 );
+			wp_send_json_error( [ 'message' => __( 'Die angegebene URL ist ungültig oder wird nicht unterstützt.', 'bs-ics-feed' ) ], 400 );
 		}
 
 		$response = wp_safe_remote_get(
@@ -846,7 +846,7 @@ class BS_ICS_Admin {
 				[
 					'message' => sprintf(
 						/* translators: %s: Fehlermeldung */
-						__( 'Verbindungsfehler beim Abruf des Feeds: %s (Bestehender Cache bleibt erhalten)', 'bs-wp-ics-feed-reader' ),
+						__( 'Verbindungsfehler beim Abruf des Feeds: %s (Bestehender Cache bleibt erhalten)', 'bs-ics-feed' ),
 						$response->get_error_message()
 					),
 				],
@@ -858,21 +858,21 @@ class BS_ICS_Admin {
 		if ( 200 !== $response_code ) {
 			$error_details = sprintf(
 				/* translators: %d: HTTP Status Code */
-				__( 'Der Kalender-Server antwortete mit HTTP-Status %d.', 'bs-wp-ics-feed-reader' ),
+				__( 'Der Kalender-Server antwortete mit HTTP-Status %d.', 'bs-ics-feed' ),
 				$response_code
 			);
 
 			if ( 401 === $response_code || 403 === $response_code ) {
-				$error_details .= ' ' . __( 'Zugriff verweigert (Authentifizierung erforderlich).', 'bs-wp-ics-feed-reader' );
+				$error_details .= ' ' . __( 'Zugriff verweigert (Authentifizierung erforderlich).', 'bs-ics-feed' );
 			} elseif ( 404 === $response_code ) {
-				$error_details .= ' ' . __( 'Feed-URL wurde nicht gefunden.', 'bs-wp-ics-feed-reader' );
+				$error_details .= ' ' . __( 'Feed-URL wurde nicht gefunden.', 'bs-ics-feed' );
 			} elseif ( 500 <= $response_code ) {
-				$error_details .= ' ' . __( 'Externer Serverfehler beim Anbieter.', 'bs-wp-ics-feed-reader' );
+				$error_details .= ' ' . __( 'Externer Serverfehler beim Anbieter.', 'bs-ics-feed' );
 			}
 
 			wp_send_json_error(
 				[
-					'message' => $error_details . ' ' . __( '(Bestehender Cache bleibt erhalten)', 'bs-wp-ics-feed-reader' ),
+					'message' => $error_details . ' ' . __( '(Bestehender Cache bleibt erhalten)', 'bs-ics-feed' ),
 				],
 				502
 			);
@@ -880,7 +880,7 @@ class BS_ICS_Admin {
 
 		$body = wp_remote_retrieve_body( $response );
 		if ( empty( $body ) || ( false === stripos( $body, 'BEGIN:VCALENDAR' ) && false === stripos( $body, 'BEGIN:VEVENT' ) ) ) {
-			wp_send_json_error( [ 'message' => __( 'Die Antwort enthält keine gültigen iCalendar/ICS-Daten.', 'bs-wp-ics-feed-reader' ) ], 422 );
+			wp_send_json_error( [ 'message' => __( 'Die Antwort enthält keine gültigen iCalendar/ICS-Daten.', 'bs-ics-feed' ) ], 422 );
 		}
 
 		if ( ! class_exists( 'BS_ICS_Parser' ) ) {
@@ -921,7 +921,7 @@ class BS_ICS_Admin {
 			[
 				'message'               => sprintf(
 					/* translators: %d: Anzahl gefundener Termine */
-					__( 'Synchronisation erfolgreich! %d Termine gefunden und aktualisiert.', 'bs-wp-ics-feed-reader' ),
+					__( 'Synchronisation erfolgreich! %d Termine gefunden und aktualisiert.', 'bs-ics-feed' ),
 					count( $events )
 				),
 				'count'                 => count( $events ),
@@ -967,7 +967,7 @@ class BS_ICS_Admin {
 
 		// 2. Feld-Konfiguration speichern.
 		if ( isset( $_POST['bs_ics_field_config'] ) && is_array( $_POST['bs_ics_field_config'] ) ) {
-			$raw_config   = wp_unslash( $_POST['bs_ics_field_config'] );
+			$raw_config = wp_unslash( $_POST['bs_ics_field_config'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- jeder Schlüssel/Wert wird in der Schleife unten einzeln sanitized.
 			$clean_config = [];
 
 			foreach ( $raw_config as $key => $field_data ) {
@@ -983,7 +983,7 @@ class BS_ICS_Admin {
 
 		// 3. Darstellungs-Einstellungen speichern.
 		if ( isset( $_POST['bs_ics_display_settings'] ) && is_array( $_POST['bs_ics_display_settings'] ) ) {
-			$raw_display    = wp_unslash( $_POST['bs_ics_display_settings'] );
+			$raw_display = wp_unslash( $_POST['bs_ics_display_settings'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- jeder Wert wird unten einzeln sanitized/validiert.
 			$read_more_mode = isset( $raw_display['read_more_mode'] ) && in_array( $raw_display['read_more_mode'], [ 'expand', 'single', 'none' ], true )
 				? $raw_display['read_more_mode']
 				: 'expand';
@@ -995,9 +995,9 @@ class BS_ICS_Admin {
 				'only_future'          => ! empty( $raw_display['only_future'] ),
 				'date_format'          => isset( $raw_display['date_format'] ) ? sanitize_text_field( $raw_display['date_format'] ) : '',
 				'read_more_mode'       => $read_more_mode,
-				'read_more_text'       => isset( $raw_display['read_more_text'] ) && '' !== trim( $raw_display['read_more_text'] ) ? sanitize_text_field( $raw_display['read_more_text'] ) : __( 'Weiterlesen', 'bs-wp-ics-feed-reader' ),
-				'read_less_text'       => isset( $raw_display['read_less_text'] ) && '' !== trim( $raw_display['read_less_text'] ) ? sanitize_text_field( $raw_display['read_less_text'] ) : __( 'Weniger anzeigen', 'bs-wp-ics-feed-reader' ),
-				'back_text'            => isset( $raw_display['back_text'] ) && '' !== trim( $raw_display['back_text'] ) ? sanitize_text_field( $raw_display['back_text'] ) : __( '← Zurück zur Übersicht', 'bs-wp-ics-feed-reader' ),
+				'read_more_text'       => isset( $raw_display['read_more_text'] ) && '' !== trim( $raw_display['read_more_text'] ) ? sanitize_text_field( $raw_display['read_more_text'] ) : __( 'Weiterlesen', 'bs-ics-feed' ),
+				'read_less_text'       => isset( $raw_display['read_less_text'] ) && '' !== trim( $raw_display['read_less_text'] ) ? sanitize_text_field( $raw_display['read_less_text'] ) : __( 'Weniger anzeigen', 'bs-ics-feed' ),
+				'back_text'            => isset( $raw_display['back_text'] ) && '' !== trim( $raw_display['back_text'] ) ? sanitize_text_field( $raw_display['back_text'] ) : __( '← Zurück zur Übersicht', 'bs-ics-feed' ),
 				'enable_search_filter' => ! empty( $raw_display['enable_search_filter'] ),
 				'enable_add_to_cal'    => ! empty( $raw_display['enable_add_to_cal'] ),
 				'enable_csv_export'    => ! empty( $raw_display['enable_csv_export'] ),
@@ -1007,7 +1007,7 @@ class BS_ICS_Admin {
 
 		// 4. Design-Einstellungen speichern.
 		if ( isset( $_POST['bs_ics_design_settings'] ) && is_array( $_POST['bs_ics_design_settings'] ) ) {
-			$raw_design = wp_unslash( $_POST['bs_ics_design_settings'] );
+			$raw_design = wp_unslash( $_POST['bs_ics_design_settings'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- jeder Wert wird unten einzeln sanitized/validiert.
 			$columns    = isset( $raw_design['columns'] ) ? absint( $raw_design['columns'] ) : 3;
 			if ( $columns < 1 || $columns > 4 ) {
 				$columns = 3;

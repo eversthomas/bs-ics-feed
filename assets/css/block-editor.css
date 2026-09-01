@@ -2,7 +2,7 @@
  * Gutenberg Editor Stylesheet für BS WP ICS Feed Reader.
  */
 
-.bs-wp-ics-gutenberg-block {
+.bs-ics-gutenberg-block {
 	position: relative;
 	width: 100%;
 	cursor: pointer;
@@ -25,8 +25,8 @@
 }
 
 /* Platzhalter Styling */
-.wp-block[data-type="bs-wp-ics/calendar"] .components-placeholder,
-.bs-wp-ics-gutenberg-block .components-placeholder {
+.wp-block[data-type="bs-ics/calendar"] .components-placeholder,
+.bs-ics-gutenberg-block .components-placeholder {
 	min-height: 180px;
 	border: 1px dashed #cbd5e1;
 	background-color: #f8fafc;

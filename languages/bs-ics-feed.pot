@@ -1,9 +1,9 @@
-# Copyright (C) 2026 BS
-# This file is distributed under the same license as the BS WP ICS Feed Reader plugin.
+# Copyright (C) 2026 Tom Evers
+# This file is distributed under the same license as the BS ICS Feed plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: BS WP ICS Feed Reader 1.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bs-wp-ics-feed-reader\n"
+"Project-Id-Version: BS ICS Feed 1.6.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bs-ics-feed\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -12,10 +12,10 @@ msgstr ""
 "POT-Creation-Date: 2026-09-01T12:12:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: Antigravity\n"
-"X-Domain: bs-wp-ics-feed-reader\n"
+"X-Domain: bs-ics-feed\n"
 
 #. Plugin Name of the plugin
-msgid "BS WP ICS Feed Reader"
+msgid "BS ICS Feed"
 msgstr ""
 
 #. Plugin URI of the plugin
