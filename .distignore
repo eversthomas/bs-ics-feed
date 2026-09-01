@@ -1,0 +1,29 @@
+# Dateien, die NICHT ins ausgelieferte Plugin-Paket (WordPress.org SVN /trunk bzw. Release-ZIP)
+# sollen — bleiben im Git-Repo für die Entwicklung erhalten, werden aber beim Build des
+# Release-Pakets ausgeschlossen. Andere Zweckbestimmung als .gitignore: diese Dateien SOLLEN
+# versioniert werden, nur eben nicht an Endnutzer ausgeliefert.
+
+.git
+.gitignore
+.gitattributes
+.distignore
+
+# Test-/Tooling-Infrastruktur (nicht Teil der Laufzeit-Funktionalität des Plugins).
+tests
+bin
+phpunit.xml
+phpunit.xml.dist
+.phpunit.result.cache
+.phpcs.xml.dist
+composer.json
+composer.lock
+vendor
+
+# Interne Entwicklungsdokumentation (kein Nutzer-Feature, nicht Teil des Plugins).
+ROADMAP.md
+SPEC.md
+PROMPTS.md
+BS-PluginDesignSystem.md
+
+# Lokale Backups/Exporte.
+*.zip

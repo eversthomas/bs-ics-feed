@@ -1,0 +1,18 @@
+# OS-Artefakte
+.DS_Store
+Thumbs.db
+__MACOSX/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Composer / PHPUnit (Testsuite, siehe tests/)
+/vendor/
+/tests/bin/
+.phpunit.result.cache
+
+# Lokale Backups/Exporte (z. B. manuelle ZIP-Exports für Reviews)
+*.zip

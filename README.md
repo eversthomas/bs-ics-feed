@@ -39,7 +39,7 @@ Feeds werden als eigener Inhaltstyp verwaltet, per Klick synchronisiert, im loka
 * **Stale-Cache-Fallback:** Bei Netzwerkstörungen, Server-Timeouts oder HTTP-Fehlern der Feed-Quelle bleibt der bestehende Termin-Cache geschützt und intakt.
 * **Zero External Dependencies:** Kein jQuery im Frontend, kein Bootstrap, kein Tailwind – reines Vanilla CSS Grid und modernes Vanilla JS.
 
-### 📅 RFC-5545 Parser & Zeitzonen
+### 📅 iCalendar/ICS-Parser mit RFC-5545-Unterstützung
 * **Line-Unfolding:** Zuverlässiges Zusammenführen mehrzeiliger Kalendereinträge nach RFC 5545.
 * **Ganztagstermine (`VALUE=DATE`):** Werden automatisch erkannt und ohne Zeitzonen-Offsets dargestellt (verhindert das Verschieben auf 23:00 Uhr des Vortags).
 * **Zeitzonen-Normalisierung:** Automatische Umrechnung von UTC-Zeiten (`Z`) und Zeitzonen-Kennungen (`TZID`) in die WordPress-Zeitzone (`wp_timezone()`).
@@ -270,6 +270,29 @@ Dieses Plugin wurde mit KI-gestützten Entwicklungswerkzeugen erstellt: Die erst
 ## 👤 Autor
 
 Entwickelt von **Tom Evers** — [bezugssysteme.de](https://bezugssysteme.de)
+
+---
+
+## 🧪 Tests
+
+Der Parser (inkl. der RRULE-/EXDATE-Auflösung wiederkehrender Termine) hat eine PHPUnit-Testsuite unter `tests/`. Diese läuft gegen eine echte, isolierte WordPress-Testumgebung (nicht gegen die produktive Datenbank) und ist **kein Bestandteil der Plugin-Laufzeit** — Composer-Abhängigkeiten und `tests/` werden beim Release-Build über `.distignore` ausgeschlossen.
+
+**Einmalig einrichten:**
+
+```bash
+composer install
+bin/install-wp-tests.sh <test-db-name> <db-user> <db-pass> 127.0.0.1 latest
+```
+
+**Ausführen:**
+
+```bash
+WP_TESTS_DIR="$(getconf DARWIN_USER_TEMP_DIR 2>/dev/null || echo /tmp)wordpress-tests-lib" \
+WP_TESTS_PHPUNIT_POLYFILLS_PATH="$(pwd)/vendor/yoast/phpunit-polyfills" \
+vendor/bin/phpunit
+```
+
+`WP_TESTS_DIR` muss auf das Verzeichnis zeigen, in das `install-wp-tests.sh` die WordPress-Core-Testbibliothek installiert hat (Standard: `<system-temp-dir>/wordpress-tests-lib`).
 
 ---
 

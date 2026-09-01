@@ -79,6 +79,14 @@ Yes. The frontend markup uses semantic HTML, WAI-ARIA roles/states, visible focu
 
 Please use the plugin's support forum on WordPress.org, or reach out via [bezugssysteme.de](https://bezugssysteme.de).
 
+== Privacy ==
+
+This plugin does not send any data to the plugin author or to any third-party service operated by the author. It does not use tracking, analytics, or telemetry of any kind.
+
+The only outbound network request the plugin makes is to the calendar feed URL that you, the site administrator, configure for each feed — this request is made directly from your own WordPress server to that URL, exactly once per manual sync and, if enabled, on the schedule you choose (hourly, twice daily, or daily). Which data is transmitted or received depends entirely on that feed URL and the service hosting it (e.g., Google Calendar, Apple iCloud, Outlook), not on this plugin.
+
+Calendar data returned by that feed (event titles, dates, locations, descriptions, etc.) is cached in your own WordPress database and displayed on your site; it is never transmitted anywhere else by this plugin. The optional CSV export feature generates a file on the fly from that same cached data and sends it directly to the visitor's browser — it is not stored anywhere or transmitted to a third party.
+
 == Screenshots ==
 
 1. Feed configuration screen with tabbed settings (source, fields, display, design).
