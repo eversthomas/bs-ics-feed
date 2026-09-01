@@ -70,6 +70,13 @@ class BS_ICS_Admin {
 			BS_ICS_VERSION
 		);
 
+		// Frontend-Styles nachladen, damit die Live-Vorschau im Tab „Kachel-Design“
+		// exakt dieselben Klassen/Regeln nutzt wie die echte Frontend-Ausgabe.
+		if ( ! wp_style_is( 'bs-ics-frontend-css', 'registered' ) ) {
+			wp_register_style( 'bs-ics-frontend-css', BS_ICS_URL . 'assets/css/frontend.css', [], BS_ICS_VERSION );
+		}
+		wp_enqueue_style( 'bs-ics-frontend-css' );
+
 		wp_enqueue_script(
 			'bs-ics-admin-copy-js',
 			BS_ICS_URL . 'assets/js/admin-copy.js',
@@ -168,23 +175,23 @@ class BS_ICS_Admin {
 		?>
 		<div class="bs-ics-admin-wrapper">
 			<!-- Tab Navigation -->
-			<nav class="nav-tab-wrapper bs-ics-nav-tab-wrapper">
-				<a href="#bs-ics-tab-source" class="nav-tab nav-tab-active" data-tab="source">
+			<nav class="nav-tab-wrapper bs-ics-nav-tab-wrapper" role="tablist" aria-label="<?php esc_attr_e( 'ICS Feed Einstellungsbereiche', 'bs-wp-ics-feed-reader' ); ?>">
+				<a href="#bs-ics-tab-source" id="bs-ics-tabbtn-source" class="nav-tab nav-tab-active" data-tab="source" role="tab" aria-selected="true" aria-controls="bs-ics-tab-source" tabindex="0">
 					<span class="dashicons dashicons-admin-links"></span> <?php esc_html_e( 'Quelle & Synchronisation', 'bs-wp-ics-feed-reader' ); ?>
 				</a>
-				<a href="#bs-ics-tab-fields" class="nav-tab" data-tab="fields">
+				<a href="#bs-ics-tab-fields" id="bs-ics-tabbtn-fields" class="nav-tab" data-tab="fields" role="tab" aria-selected="false" aria-controls="bs-ics-tab-fields" tabindex="-1">
 					<span class="dashicons dashicons-list-view"></span> <?php esc_html_e( 'Felder & Inhalt', 'bs-wp-ics-feed-reader' ); ?>
 				</a>
-				<a href="#bs-ics-tab-display" class="nav-tab" data-tab="display">
+				<a href="#bs-ics-tab-display" id="bs-ics-tabbtn-display" class="nav-tab" data-tab="display" role="tab" aria-selected="false" aria-controls="bs-ics-tab-display" tabindex="-1">
 					<span class="dashicons dashicons-visibility"></span> <?php esc_html_e( 'Darstellung & Weiterlesen', 'bs-wp-ics-feed-reader' ); ?>
 				</a>
-				<a href="#bs-ics-tab-design" class="nav-tab" data-tab="design">
+				<a href="#bs-ics-tab-design" id="bs-ics-tabbtn-design" class="nav-tab" data-tab="design" role="tab" aria-selected="false" aria-controls="bs-ics-tab-design" tabindex="-1">
 					<span class="dashicons dashicons-art"></span> <?php esc_html_e( 'Kachel-Design', 'bs-wp-ics-feed-reader' ); ?>
 				</a>
 			</nav>
 
 			<!-- Tab 1: Quelle -->
-			<div id="bs-ics-tab-source" class="bs-ics-tab-content bs-ics-tab-active">
+			<div id="bs-ics-tab-source" class="bs-ics-tab-content bs-ics-tab-active" role="tabpanel" aria-labelledby="bs-ics-tabbtn-source" tabindex="0">
 				<table class="form-table" role="presentation">
 					<tbody>
 						<tr>
@@ -278,7 +285,7 @@ class BS_ICS_Admin {
 			</div>
 
 			<!-- Tab 2: Felder & Inhalt -->
-			<div id="bs-ics-tab-fields" class="bs-ics-tab-content" style="display: none;">
+			<div id="bs-ics-tab-fields" class="bs-ics-tab-content" style="display: none;" role="tabpanel" aria-labelledby="bs-ics-tabbtn-fields" tabindex="0">
 				<div class="bs-ics-panel-card">
 					<h4 class="bs-ics-panel-title"><?php esc_html_e( 'Feld-Zuweisung: Übersicht vs. Detailansicht', 'bs-wp-ics-feed-reader' ); ?></h4>
 					<p class="bs-ics-panel-desc">
@@ -301,7 +308,7 @@ class BS_ICS_Admin {
 			</div>
 
 			<!-- Tab 3: Darstellung -->
-			<div id="bs-ics-tab-display" class="bs-ics-tab-content" style="display: none;">
+			<div id="bs-ics-tab-display" class="bs-ics-tab-content" style="display: none;" role="tabpanel" aria-labelledby="bs-ics-tabbtn-display" tabindex="0">
 				<table class="form-table" role="presentation">
 					<tbody>
 						<tr>
@@ -435,7 +442,31 @@ class BS_ICS_Admin {
 			</div>
 
 			<!-- Tab 4: Kachel-Design -->
-			<div id="bs-ics-tab-design" class="bs-ics-tab-content" style="display: none;">
+			<div id="bs-ics-tab-design" class="bs-ics-tab-content" style="display: none;" role="tabpanel" aria-labelledby="bs-ics-tabbtn-design" tabindex="0">
+				<div class="bs-ics-panel-card bs-ics-design-preview-panel">
+					<h4 class="bs-ics-panel-title"><?php esc_html_e( 'Live-Vorschau', 'bs-wp-ics-feed-reader' ); ?></h4>
+					<p class="bs-ics-panel-desc"><?php esc_html_e( 'Zeigt sofort, wie eine Terminkachel mit den aktuell gewählten (noch ungespeicherten) Einstellungen aussieht.', 'bs-wp-ics-feed-reader' ); ?></p>
+					<div id="bs-ics-design-preview-wrapper" class="bs-ics-wrapper bs-ics-style-card bs-ics-shadow-subtle bs-ics-pad-normal" style="margin: 0; max-width: 340px;">
+						<div class="bs-ics-container">
+							<article class="bs-ics-card">
+								<div class="bs-ics-card-header">
+									<time class="bs-ics-date">
+										<span class="bs-ics-date-icon" aria-hidden="true">&#128197;</span>
+										<span class="bs-ics-date-text"><?php echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ) ); ?></span>
+									</time>
+								</div>
+								<h3 class="bs-ics-title"><?php esc_html_e( 'Beispiel-Termin', 'bs-wp-ics-feed-reader' ); ?></h3>
+								<div class="bs-ics-meta bs-ics-location">
+									<span class="bs-ics-meta-icon" aria-hidden="true">&#128205;</span>
+									<span class="bs-ics-meta-text"><?php esc_html_e( 'Musterstraße 1, Musterstadt', 'bs-wp-ics-feed-reader' ); ?></span>
+								</div>
+								<div class="bs-ics-card-footer">
+									<button type="button" class="bs-ics-toggle-btn" aria-expanded="false" tabindex="-1"><span class="bs-ics-btn-text"><?php esc_html_e( 'Weiterlesen', 'bs-wp-ics-feed-reader' ); ?></span></button>
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
 				<table class="form-table" role="presentation">
 					<tbody>
 						<tr>

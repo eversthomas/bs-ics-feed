@@ -10,6 +10,35 @@
 	--bs-ics-bg: #ffffff;
 	--bs-ics-border-w: 1px;
 	--bs-ics-border-c: #e2e8f0;
+
+	/*
+	 * UI-Chrome-Farben (Filterleiste, Kategorie-Chips, Kalender-Export-Menü, Leerzustand).
+	 * Bewusst getrennt von --bs-ics-bg: diese Elemente haben eine eigene, nicht pro Feed
+	 * konfigurierbare Hintergrundfarbe und dürfen daher auf ein dunkles Farbschema reagieren
+	 * — anders als die Kachel selbst, deren Hintergrund/Text explizit vom Website-Betreiber
+	 * gewählt wird und nicht automatisch "umkippen" darf.
+	 */
+	--bs-ics-chrome-bg: #f8fafc;
+	--bs-ics-chrome-surface: #ffffff;
+	--bs-ics-chrome-border: #e2e8f0;
+	--bs-ics-chrome-border-strong: #cbd5e1;
+	--bs-ics-chrome-text: #1e293b;
+	--bs-ics-chrome-text-muted: #64748b;
+	--bs-ics-chrome-text-subtle: #475569;
+	--bs-ics-chrome-shadow: rgba(0, 0, 0, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bs-ics-chrome-bg: #1e2530;
+		--bs-ics-chrome-surface: #262f3d;
+		--bs-ics-chrome-border: #3a4657;
+		--bs-ics-chrome-border-strong: #4a5568;
+		--bs-ics-chrome-text: #e7ecf2;
+		--bs-ics-chrome-text-muted: #9aa7b5;
+		--bs-ics-chrome-text-subtle: #cbd5e1;
+		--bs-ics-chrome-shadow: rgba(0, 0, 0, 0.4);
+	}
 }
 
 /* Screenreader Utility (a11y) */
@@ -48,8 +77,8 @@
 	gap: 12px;
 	margin-bottom: 20px;
 	padding: 12px 16px;
-	background-color: #f8fafc;
-	border: 1px solid #e2e8f0;
+	background-color: var(--bs-ics-chrome-bg);
+	border: 1px solid var(--bs-ics-chrome-border);
 	border-radius: var(--bs-ics-radius, 8px);
 }
 
@@ -66,7 +95,7 @@
 	position: absolute;
 	left: 10px;
 	font-size: 0.9em;
-	color: #64748b;
+	color: var(--bs-ics-chrome-text-muted);
 	pointer-events: none;
 }
 
@@ -75,10 +104,10 @@
 	padding: 7px 10px 7px 32px;
 	font-size: 0.88em;
 	font-family: inherit;
-	border: 1px solid #cbd5e1;
+	border: 1px solid var(--bs-ics-chrome-border-strong);
 	border-radius: 6px;
-	background: #ffffff;
-	color: #1e293b;
+	background: var(--bs-ics-chrome-surface);
+	color: var(--bs-ics-chrome-text);
 	outline: none;
 	transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
 }
@@ -96,13 +125,13 @@
 }
 
 .bs-ics-cat-btn {
-	background: #ffffff;
-	border: 1px solid #cbd5e1;
+	background: var(--bs-ics-chrome-surface);
+	border: 1px solid var(--bs-ics-chrome-border-strong);
 	border-radius: 9999px;
 	padding: 4px 12px;
 	font-size: 0.8em;
 	font-weight: 500;
-	color: #475569;
+	color: var(--bs-ics-chrome-text-subtle);
 	cursor: pointer;
 	transition: all 0.15s ease-out;
 }
@@ -459,13 +488,13 @@
 }
 
 .bs-ics-cal-btn {
-	background: #f8fafc;
-	border: 1px solid #cbd5e1;
+	background: var(--bs-ics-chrome-bg);
+	border: 1px solid var(--bs-ics-chrome-border-strong);
 	border-radius: 6px;
 	padding: 5px 10px;
 	font-size: 0.8em;
 	font-weight: 600;
-	color: #475569;
+	color: var(--bs-ics-chrome-text-subtle);
 	cursor: pointer;
 	display: inline-flex;
 	align-items: center;
@@ -474,7 +503,7 @@
 }
 
 .bs-ics-cal-btn:hover {
-	background: #ffffff;
+	background: var(--bs-ics-chrome-surface);
 	border-color: var(--bs-ics-accent, #0073aa);
 	color: var(--bs-ics-accent, #0073aa);
 }
@@ -489,16 +518,24 @@
 	bottom: 100%;
 	right: 0;
 	margin-bottom: 6px;
-	background: #ffffff;
-	border: 1px solid #cbd5e1;
+	background: var(--bs-ics-chrome-surface);
+	border: 1px solid var(--bs-ics-chrome-border-strong);
 	border-radius: 6px;
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 4px 16px var(--bs-ics-chrome-shadow);
 	display: flex;
 	flex-direction: column;
 	min-width: 170px;
 	z-index: 100;
 	overflow: hidden;
 	padding: 4px 0;
+}
+
+/* Öffnet nach unten statt oben, wenn oberhalb nicht genug Platz ist (siehe frontend.js) */
+.bs-ics-cal-menu.is-below {
+	bottom: auto;
+	top: 100%;
+	margin-bottom: 0;
+	margin-top: 6px;
 }
 
 .bs-ics-cal-menu[hidden] {
@@ -512,7 +549,7 @@
 	padding: 8px 12px;
 	text-align: left;
 	font-size: 0.82em;
-	color: #334155;
+	color: var(--bs-ics-chrome-text);
 	text-decoration: none;
 	background: transparent;
 	border: none;
@@ -525,7 +562,7 @@
 .bs-ics-cal-menu button:hover,
 .bs-ics-cal-menu a:focus-visible,
 .bs-ics-cal-menu button:focus-visible {
-	background-color: #f1f5f9;
+	background-color: var(--bs-ics-chrome-bg);
 	color: var(--bs-ics-accent, #0073aa);
 	outline: none;
 }
@@ -579,14 +616,14 @@
 .bs-ics-empty-container {
 	padding: 30px;
 	text-align: center;
-	background-color: #f8fafc;
-	border: 1px dashed #cbd5e1;
+	background-color: var(--bs-ics-chrome-bg);
+	border: 1px dashed var(--bs-ics-chrome-border-strong);
 	border-radius: var(--bs-ics-radius, 8px);
 }
 
 .bs-ics-empty-state p {
 	margin: 0;
-	color: #64748b;
+	color: var(--bs-ics-chrome-text-muted);
 	font-size: 0.95em;
 }
 

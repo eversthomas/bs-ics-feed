@@ -42,6 +42,16 @@ class BS_ICS_Renderer {
 			BS_ICS_VERSION,
 			true
 		);
+
+		wp_localize_script(
+			'bs-ics-frontend-js',
+			'bsIcsFrontend',
+			[
+				'i18n' => [
+					'noResults' => __( 'Keine Termine für diesen Filter gefunden.', 'bs-wp-ics-feed-reader' ),
+				],
+			]
+		);
 	}
 
 	/**

@@ -11,6 +11,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 	'use strict';
 
+	var i18n = (typeof bsIcsFrontend !== 'undefined' && bsIcsFrontend.i18n) ? bsIcsFrontend.i18n : {};
+
 	// 1. ACCORDION-AUFKLAPPEN (Teaser vs. Details)
 	document.addEventListener('click', function (e) {
 		var toggleBtn = e.target.closest('.bs-ics-toggle-btn');
@@ -66,8 +68,21 @@ document.addEventListener('DOMContentLoaded', function () {
 			var menu = calBtn.nextElementSibling;
 			if (menu && menu.classList.contains('bs-ics-cal-menu')) {
 				var isOpen = !menu.hidden;
-				menu.hidden = isOpen;
-				calBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+
+				if (isOpen) {
+					menu.hidden = true;
+					calBtn.setAttribute('aria-expanded', 'false');
+				} else {
+					menu.hidden = false;
+
+					// Kollisionserkennung: reicht der Platz oberhalb des Buttons nicht aus
+					// (z. B. bei Karten in der obersten Grid-Reihe), öffnet das Menü nach unten.
+					var btnRect = calBtn.getBoundingClientRect();
+					var menuHeight = menu.offsetHeight;
+					menu.classList.toggle('is-below', btnRect.top < menuHeight + 12);
+
+					calBtn.setAttribute('aria-expanded', 'true');
+				}
 			}
 		}
 	});
@@ -136,10 +151,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			cards.forEach(function (card) {
 				var cardText = card.textContent.toLowerCase();
-				var cardCat = (card.getAttribute('data-category') || '').toLowerCase();
+				var cardCatTokens = (card.getAttribute('data-category') || '')
+					.split(',')
+					.map(function (token) { return token.trim().toLowerCase(); });
 
 				var matchesSearch = !searchTerm || cardText.indexOf(searchTerm) !== -1;
-				var matchesCat = (activeCategory === 'all') || (cardCat.indexOf(activeCategory.toLowerCase()) !== -1);
+				var matchesCat = (activeCategory === 'all') || (cardCatTokens.indexOf(activeCategory.toLowerCase()) !== -1);
 
 				if (matchesSearch && matchesCat) {
 					card.style.display = '';
@@ -155,7 +172,9 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (!emptyNote) {
 					emptyNote = document.createElement('div');
 					emptyNote.className = 'bs-ics-empty-state bs-ics-filter-empty';
-					emptyNote.innerHTML = '<p>Keine Termine für diesen Filter gefunden.</p>';
+					var emptyNoteText = document.createElement('p');
+					emptyNoteText.textContent = i18n.noResults || 'Keine Termine für diesen Filter gefunden.';
+					emptyNote.appendChild(emptyNoteText);
 					var container = wrapper.querySelector('.bs-ics-container');
 					if (container) {
 						container.parentNode.insertBefore(emptyNote, container.nextSibling);
