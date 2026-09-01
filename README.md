@@ -2,7 +2,7 @@
 
 > **Modulares, performantes und barrierefreies WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von iCalendar/ICS-Kalender-Feeds mit Shortcode & Gutenberg-Block.**
 
-[![Version](https://img.shields.io/badge/Version-1.3.0-blue.svg)](https://wordpress.org/)
+[![Version](https://img.shields.io/badge/Version-1.4.0-blue.svg)](https://wordpress.org/)
 [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -96,11 +96,19 @@ Kopiere den Shortcode aus der Sidebar der Feed-Bearbeitung:
 [bs_ics_calendar id="123"]
 ```
 
+**Mehrere Kalender zusammenführen:** `id` akzeptiert auch eine kommagetrennte Liste, um Termine aus mehreren Feeds in einer Ansicht zu kombinieren – farblich unterschieden (Badge + eigener Quellen-Filter in der Filterleiste) mit der jeweils eigenen Akzentfarbe jedes Feeds:
+
+```text
+[bs_ics_calendar id="12,34,56"]
+```
+
+Layout, Design und Feldkonfiguration der zusammengeführten Ansicht richten sich dabei nach dem **ersten** angegebenen Feed. Im Gutenberg-Block steht dafür das Feld „Weitere Kalender kombinieren“ in der Seitenleiste zur Verfügung.
+
 #### Shortcode-Attribute (Optionale Overrides):
 
 | Parameter | Werte | Standard | Beschreibung |
 | :--- | :--- | :--- | :--- |
-| `id` | Zahl | `0` | **Pflichtfeld:** Die ID des `bs_ics_feed`-Posts |
+| `id` | Zahl oder kommagetrennte Liste | `0` | **Pflichtfeld:** ID des `bs_ics_feed`-Posts, z. B. `id="12"` oder `id="12,34,56"` zum Zusammenführen |
 | `layout` | `grid`, `list` | *aus Feed* | Kachel-Raster (`grid`) oder Listenansicht (`list`) |
 | `columns` | `1`, `2`, `3`, `4` | *aus Feed* | Anzahl der Spalten im Desktop-Grid |
 | `limit` | Zahl (z. B. `5`) | `0` (alle) | Maximale Anzahl angezeigter Termine |
@@ -158,6 +166,17 @@ bs-wp-ics-feed-reader/
 ---
 
 ## 📝 Changelog
+
+### Version 1.4.0 (2026-09-01)
+
+**Neu: Mehrere Kalender zusammenführen**
+* Der Shortcode-Parameter `id` akzeptiert jetzt auch eine kommagetrennte Liste von Feed-IDs (`id="12,34,56"`), um Termine mehrerer Kalender in einer einzigen Ansicht zu kombinieren.
+* Jeder zusammengeführte Termin erhält eine Quellen-Badge mit dem Titel und der individuellen Akzentfarbe seines Ursprungs-Feeds.
+* Neuer, unabhängig von der Kategorie-Suche funktionierender Quellen-Filter in der Filterleiste, um nach einzelnen Kalendern zu filtern.
+* Layout, Design und Feldkonfiguration der zusammengeführten Ansicht richten sich einheitlich nach dem ersten angegebenen Feed.
+* Der Gutenberg-Block bekommt dafür ein neues Feld „Weitere Kalender kombinieren“ (Mehrfachauswahl) in der Seitenleiste.
+* Einzelansicht (`?bs_event=uid`) funktioniert transparent auch innerhalb einer zusammengeführten Ansicht.
+* Bei Angabe einer einzelnen Feed-ID (der bisherige Normalfall) ändert sich am Verhalten und an der Ausgabe nichts.
 
 ### Version 1.3.0 (2026-09-01)
 

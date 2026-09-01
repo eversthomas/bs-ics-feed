@@ -86,23 +86,62 @@ class BS_ICS_Renderer {
 			'bs_ics_calendar'
 		);
 
-		$post_id = absint( $atts['id'] );
-		if ( ! $post_id || get_post_type( $post_id ) !== BS_ICS_CPT::POST_TYPE ) {
+		// ID(s) einlesen: unterstützt sowohl eine einzelne Feed-ID als auch eine kommagetrennte
+		// Liste ("12,34,56"), um mehrere Kalender in einer Ansicht zusammenzuführen.
+		$requested_ids  = array_filter( array_map( 'absint', explode( ',', (string) $atts['id'] ) ) );
+		$valid_feed_ids = [];
+		foreach ( $requested_ids as $requested_id ) {
+			if ( BS_ICS_CPT::POST_TYPE === get_post_type( $requested_id ) && ! in_array( $requested_id, $valid_feed_ids, true ) ) {
+				$valid_feed_ids[] = $requested_id;
+			}
+		}
+
+		if ( empty( $valid_feed_ids ) ) {
 			if ( current_user_can( 'edit_posts' ) ) {
 				return '<div class="bs-ics-empty-state"><p>' . esc_html__( '[BS ICS Calendar] Bitte gib eine gültige Feed-ID an.', 'bs-wp-ics-feed-reader' ) . '</p></div>';
 			}
 			return '';
 		}
 
+		$post_id   = $valid_feed_ids[0]; // Primärer Feed: liefert Basis-Layout/Design/Feld-Konfiguration.
+		$is_merged = count( $valid_feed_ids ) > 1;
+
 		// Frontend-Assets laden.
 		wp_enqueue_style( 'bs-ics-frontend-css' );
 		wp_enqueue_script( 'bs-ics-frontend-js' );
 
-		// Metadaten aus dem Post laden.
-		$cached_events    = get_post_meta( $post_id, '_bs_ics_cached_events', true );
+		// Layout/Design/Feld-Konfiguration des primären Feeds gelten einheitlich für die
+		// gesamte (ggf. zusammengeführte) Ansicht.
 		$field_config     = get_post_meta( $post_id, '_bs_ics_field_config', true );
 		$display_settings = get_post_meta( $post_id, '_bs_ics_display_settings', true );
 		$design_settings  = get_post_meta( $post_id, '_bs_ics_design_settings', true );
+
+		// Termine aller angegebenen Feeds laden und zusammenführen. Bei mehr als einem Feed
+		// wird jedes Event mit seiner Quelle (Titel + eigener Akzentfarbe) markiert, um es im
+		// Frontend farblich zuordenbar zu machen (Quellen-Badge + Quellen-Filter).
+		$cached_events = [];
+		foreach ( $valid_feed_ids as $feed_id ) {
+			$feed_events = get_post_meta( $feed_id, '_bs_ics_cached_events', true );
+			if ( ! is_array( $feed_events ) || empty( $feed_events ) ) {
+				continue;
+			}
+
+			if ( ! $is_merged ) {
+				$cached_events = $feed_events;
+				break;
+			}
+
+			$feed_design_settings = get_post_meta( $feed_id, '_bs_ics_design_settings', true );
+			$feed_design_settings = wp_parse_args( is_array( $feed_design_settings ) ? $feed_design_settings : [], BS_ICS_CPT::get_design_defaults() );
+			$feed_title            = get_the_title( $feed_id );
+
+			foreach ( $feed_events as $feed_event ) {
+				$feed_event['_feed_id']     = $feed_id;
+				$feed_event['_feed_title']  = $feed_title ? $feed_title : sprintf( __( 'Feed #%d', 'bs-wp-ics-feed-reader' ), $feed_id );
+				$feed_event['_feed_accent'] = $feed_design_settings['accent_color'];
+				$cached_events[]            = $feed_event;
+			}
+		}
 
 		// Standardwerte & Attribute-Overrides zusammenführen.
 		$display = wp_parse_args( is_array( $display_settings ) ? $display_settings : [], BS_ICS_CPT::get_display_defaults() );
@@ -275,6 +314,19 @@ class BS_ICS_Renderer {
 			}
 		}
 
+		// Feed-Quellen für den Schnellfilter sammeln (nur bei zusammengeführter Ansicht).
+		$feed_sources = [];
+		if ( $is_merged ) {
+			foreach ( $events as $ev ) {
+				if ( ! empty( $ev['_feed_id'] ) && ! isset( $feed_sources[ $ev['_feed_id'] ] ) ) {
+					$feed_sources[ $ev['_feed_id'] ] = [
+						'title'  => $ev['_feed_title'],
+						'accent' => $ev['_feed_accent'],
+					];
+				}
+			}
+		}
+
 		$layout_class = 'grid' === $display['layout'] ? 'bs-ics-layout-grid' : 'bs-ics-layout-list';
 		$date_format  = ! empty( $display['date_format'] ) ? $display['date_format'] : ( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) );
 
@@ -303,6 +355,17 @@ class BS_ICS_Renderer {
 							<?php endforeach; ?>
 						</div>
 					<?php endif; ?>
+					<?php if ( ! empty( $feed_sources ) ) : ?>
+						<div class="bs-ics-category-filters bs-ics-source-filters" role="group" aria-label="<?php esc_attr_e( 'Nach Kalender filtern', 'bs-wp-ics-feed-reader' ); ?>">
+							<button type="button" class="bs-ics-cat-btn is-active" data-feed="all"><?php esc_html_e( 'Alle Kalender', 'bs-wp-ics-feed-reader' ); ?></button>
+							<?php foreach ( $feed_sources as $source_feed_id => $source ) : ?>
+								<button type="button" class="bs-ics-cat-btn bs-ics-source-btn" data-feed="<?php echo esc_attr( $source_feed_id ); ?>" style="--bs-ics-source-color: <?php echo esc_attr( $source['accent'] ); ?>;">
+									<span class="bs-ics-source-dot" aria-hidden="true"></span>
+									<?php echo esc_html( $source['title'] ); ?>
+								</button>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
 				</div>
 			<?php endif; ?>
 
@@ -313,7 +376,7 @@ class BS_ICS_Renderer {
 					$is_all_day   = ! empty( $event['all_day'] );
 					$timestamp    = (int) $event['start_timestamp'];
 					$datetime_iso = ! empty( $event['start_iso'] ) ? $event['start_iso'] : wp_date( 'c', $timestamp );
-					$details_id   = 'bs-ics-details-' . absint( $post_id ) . '-' . absint( $event_index );
+					$details_id   = 'bs-ics-details-' . absint( isset( $event['_feed_id'] ) ? $event['_feed_id'] : $post_id ) . '-' . absint( $event_index );
 
 					// Datums- und Uhrzeitspanne formatieren
 					$formatted_date = $this->format_event_time_range( $event, $date_format );
@@ -347,7 +410,13 @@ class BS_ICS_Renderer {
 						}
 					}
 					?>
-					<article class="bs-ics-card" data-uid="<?php echo esc_attr( isset( $event['uid'] ) ? $event['uid'] : '' ); ?>" data-category="<?php echo esc_attr( isset( $event['categories'] ) ? $event['categories'] : '' ); ?>">
+					<article class="bs-ics-card" data-uid="<?php echo esc_attr( isset( $event['uid'] ) ? $event['uid'] : '' ); ?>" data-category="<?php echo esc_attr( isset( $event['categories'] ) ? $event['categories'] : '' ); ?>" data-feed-id="<?php echo esc_attr( isset( $event['_feed_id'] ) ? $event['_feed_id'] : '' ); ?>">
+						<?php if ( ! empty( $event['_feed_title'] ) ) : ?>
+							<div class="bs-ics-source-badge" style="--bs-ics-source-color: <?php echo esc_attr( $event['_feed_accent'] ); ?>;">
+								<span class="bs-ics-source-dot" aria-hidden="true"></span>
+								<?php echo esc_html( $event['_feed_title'] ); ?>
+							</div>
+						<?php endif; ?>
 						<!-- TEASER-BEREICH -->
 						<?php if ( ! empty( $field_config['DTSTART']['teaser'] ) ) : ?>
 							<div class="bs-ics-card-header">
@@ -505,6 +574,12 @@ class BS_ICS_Renderer {
 			</a>
 
 			<article class="bs-ics-card bs-ics-single-card" data-uid="<?php echo esc_attr( isset( $event['uid'] ) ? $event['uid'] : '' ); ?>">
+				<?php if ( ! empty( $event['_feed_title'] ) ) : ?>
+					<div class="bs-ics-source-badge" style="--bs-ics-source-color: <?php echo esc_attr( $event['_feed_accent'] ); ?>;">
+						<span class="bs-ics-source-dot" aria-hidden="true"></span>
+						<?php echo esc_html( $event['_feed_title'] ); ?>
+					</div>
+				<?php endif; ?>
 				<div class="bs-ics-card-header">
 					<time class="bs-ics-date" datetime="<?php echo esc_attr( $datetime_iso ); ?>">
 						<span class="bs-ics-date-icon" aria-hidden="true">&#128197;</span>

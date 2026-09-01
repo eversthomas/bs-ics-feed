@@ -342,6 +342,38 @@
 	color: #6d28d9;
 }
 
+/* Quellen-Badge auf der Kachel (nur bei zusammengeführten Kalendern sichtbar) */
+.bs-ics-source-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 0.75em;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.4px;
+	color: #64748b;
+}
+
+.bs-ics-source-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--bs-ics-source-color, currentColor);
+	flex-shrink: 0;
+}
+
+/* Quellen-Filter-Buttons (gleiches Grundstyling wie Kategorie-Chips) */
+.bs-ics-source-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.bs-ics-source-btn .bs-ics-source-dot {
+	width: 7px;
+	height: 7px;
+}
+
 /* Titel */
 .bs-ics-title {
 	margin: 0;

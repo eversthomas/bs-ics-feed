@@ -16,11 +16,36 @@
 	var RangeControl      = wp.components.RangeControl;
 	var TextControl       = wp.components.TextControl;
 	var ToggleControl     = wp.components.ToggleControl;
+	var FormTokenField    = wp.components.FormTokenField;
 	var Placeholder       = wp.components.Placeholder;
 
 	var blockData = (typeof bsIcsBlockData !== 'undefined') ? bsIcsBlockData : { feeds: [], i18n: {} };
 	var i18n      = blockData.i18n || {};
 	var feedsList = blockData.feeds || [];
+
+	// Hilfsfunktionen für das "Weitere Kalender kombinieren"-Feld: FormTokenField
+	// arbeitet mit sichtbaren Feed-Titeln (Tokens), das Attribut speichert dagegen eine
+	// kommagetrennte Liste von Feed-IDs (wie vom Renderer beim Zusammenführen erwartet).
+	function feedIdsToTitleTokens(csv) {
+		if (!csv) {
+			return [];
+		}
+		var titleById = {};
+		feedsList.forEach(function (f) { if (f.value) { titleById[f.value] = f.label; } });
+		return csv.split(',')
+			.map(function (s) { return parseInt(s, 10); })
+			.filter(function (id) { return !!id; })
+			.map(function (id) { return titleById[id] || ('#' + id); });
+	}
+
+	function titleTokensToIdsCsv(tokens, excludeId) {
+		var idByTitle = {};
+		feedsList.forEach(function (f) { if (f.value) { idByTitle[f.label] = f.value; } });
+		var ids = tokens
+			.map(function (t) { return idByTitle[t]; })
+			.filter(function (id) { return id && id !== excludeId; });
+		return ids.join(',');
+	}
 
 	registerBlockType('bs-wp-ics/calendar', {
 		apiVersion: 2,
@@ -37,6 +62,10 @@
 			id: {
 				type: 'number',
 				default: 0
+			},
+			ids: {
+				type: 'string',
+				default: ''
 			},
 			layout: {
 				type: 'string',
@@ -133,9 +162,31 @@
 						value: attributes.id,
 						options: feedsList,
 						onChange: function (val) {
-							setAttributes({ id: parseInt(val, 10) || 0 });
+							var newId = parseInt(val, 10) || 0;
+							// Falls der neu gewählte primäre Feed bereits in der Zusatzliste steckt, dort entfernen.
+							setAttributes({
+								id: newId,
+								ids: titleTokensToIdsCsv(feedIdsToTitleTokens(attributes.ids), newId)
+							});
 						}
-					})
+					}),
+					hasFeedSelected ? el(FormTokenField, {
+						label: i18n.additionalFeeds || 'Weitere Kalender kombinieren (optional)',
+						value: feedIdsToTitleTokens(attributes.ids),
+						suggestions: feedsList
+							.filter(function (f) { return f.value && f.value !== attributes.id; })
+							.map(function (f) { return f.label; }),
+						onChange: function (tokens) {
+							setAttributes({ ids: titleTokensToIdsCsv(tokens, attributes.id) });
+						},
+						__experimentalExpandOnFocus: true,
+						__next40pxDefaultSize: true
+					}) : null,
+					hasFeedSelected ? el(
+						'p',
+						{ className: 'components-base-control__help', style: { marginTop: '-8px' } },
+						i18n.additionalFeedsDesc || 'Termine aus zusätzlich ausgewählten Kalendern werden mit dem oben gewählten Kalender zusammengeführt und farblich unterschieden angezeigt.'
+					) : null
 				),
 				// Panel 2: Darstellung & Sortierung
 				el(

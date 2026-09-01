@@ -88,6 +88,10 @@ class BS_ICS_Block {
 						'type'    => 'number',
 						'default' => 0,
 					],
+					'ids'                  => [
+						'type'    => 'string',
+						'default' => '',
+					],
 					'layout'               => [
 						'type'    => 'string',
 						'default' => '',
@@ -205,6 +209,8 @@ class BS_ICS_Block {
 					'description'         => __( 'Zeigt Termine aus einem konfigurierten ICS-Feed an.', 'bs-wp-ics-feed-reader' ),
 					'feedSelect'          => __( 'Kalender-Feed', 'bs-wp-ics-feed-reader' ),
 					'feedSelectDesc'      => __( 'Wähle den anzuzeigenden Feed aus.', 'bs-wp-ics-feed-reader' ),
+					'additionalFeeds'     => __( 'Weitere Kalender kombinieren (optional)', 'bs-wp-ics-feed-reader' ),
+					'additionalFeedsDesc' => __( 'Termine aus zusätzlich ausgewählten Kalendern werden mit dem oben gewählten Kalender zusammengeführt und farblich unterschieden angezeigt.', 'bs-wp-ics-feed-reader' ),
 					'displaySettings'     => __( 'Darstellungs-Optionen', 'bs-wp-ics-feed-reader' ),
 					'designSettings'      => __( 'Kachel-Design & Farben', 'bs-wp-ics-feed-reader' ),
 					'layout'              => __( 'Layout', 'bs-wp-ics-feed-reader' ),
@@ -255,6 +261,14 @@ class BS_ICS_Block {
 		if ( empty( $attributes['id'] ) ) {
 			return '<div class="bs-ics-empty-state"><p>' . esc_html__( 'Bitte wähle in den Block-Einstellungen einen Kalender-Feed aus.', 'bs-wp-ics-feed-reader' ) . '</p></div>';
 		}
+
+		// Primäre Feed-ID mit optional zusätzlich ausgewählten Feeds ("ids") zu einer
+		// kommagetrennten Liste kombinieren, die der Renderer für die Zusammenführung erwartet.
+		$combined_id = (string) absint( $attributes['id'] );
+		if ( ! empty( $attributes['ids'] ) ) {
+			$combined_id .= ',' . $attributes['ids'];
+		}
+		$attributes['id'] = $combined_id;
 
 		$renderer = BS_ICS_Feed_Reader::get_instance()->renderer;
 		return $renderer->render_shortcode( $attributes );

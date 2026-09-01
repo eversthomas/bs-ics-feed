@@ -132,11 +132,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 
-	// 4. ECHTZEIT-SUCHE & KATEGORIE-FILTER
+	// 4. ECHTZEIT-SUCHE, KATEGORIE- & QUELLEN-FILTER
 	var wrappers = document.querySelectorAll('.bs-ics-wrapper');
 	wrappers.forEach(function (wrapper) {
 		var searchInput = wrapper.querySelector('.bs-ics-search-input');
-		var catButtons = wrapper.querySelectorAll('.bs-ics-cat-btn');
+		// Kategorie- und Quellen-Buttons sind zwei unabhängige Filter-Gruppen (teilen sich
+		// nur das visuelle .bs-ics-cat-btn-Grundstyling), daher getrennt selektiert und
+		// getrennt per data-cat / data-feed unterschieden.
+		var catButtons = wrapper.querySelectorAll('.bs-ics-cat-btn[data-cat]');
+		var sourceButtons = wrapper.querySelectorAll('.bs-ics-cat-btn[data-feed]');
 		var cards = wrapper.querySelectorAll('.bs-ics-card');
 
 		if (!cards.length) {
@@ -144,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		var activeCategory = 'all';
+		var activeFeed = 'all';
 		var searchTerm = '';
 
 		function applyFilters() {
@@ -154,11 +159,13 @@ document.addEventListener('DOMContentLoaded', function () {
 				var cardCatTokens = (card.getAttribute('data-category') || '')
 					.split(',')
 					.map(function (token) { return token.trim().toLowerCase(); });
+				var cardFeedId = card.getAttribute('data-feed-id') || '';
 
 				var matchesSearch = !searchTerm || cardText.indexOf(searchTerm) !== -1;
 				var matchesCat = (activeCategory === 'all') || (cardCatTokens.indexOf(activeCategory.toLowerCase()) !== -1);
+				var matchesFeed = (activeFeed === 'all') || (cardFeedId === activeFeed);
 
-				if (matchesSearch && matchesCat) {
+				if (matchesSearch && matchesCat && matchesFeed) {
 					card.style.display = '';
 					visibleCount++;
 				} else {
@@ -198,6 +205,15 @@ document.addEventListener('DOMContentLoaded', function () {
 				catButtons.forEach(function (b) { b.classList.remove('is-active'); });
 				this.classList.add('is-active');
 				activeCategory = this.getAttribute('data-cat') || 'all';
+				applyFilters();
+			});
+		});
+
+		sourceButtons.forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				sourceButtons.forEach(function (b) { b.classList.remove('is-active'); });
+				this.classList.add('is-active');
+				activeFeed = this.getAttribute('data-feed') || 'all';
 				applyFilters();
 			});
 		});
