@@ -1,0 +1,35 @@
+/**
+ * Gutenberg Editor Stylesheet für BS WP ICS Feed Reader.
+ */
+
+.bs-wp-ics-gutenberg-block {
+	position: relative;
+	width: 100%;
+	cursor: pointer;
+}
+
+.bs-ics-block-preview {
+	position: relative;
+	width: 100%;
+	margin: 10px 0;
+	pointer-events: none; /* Klicks gehen direkt an den Gutenberg-Block-Wrapper zur zuverlässigen Selektion */
+	user-select: none;
+}
+
+.bs-ics-block-preview .bs-ics-wrapper {
+	margin: 0;
+}
+
+.bs-ics-block-preview .bs-ics-cal-menu {
+	display: none !important;
+}
+
+/* Platzhalter Styling */
+.wp-block[data-type="bs-wp-ics/calendar"] .components-placeholder,
+.bs-wp-ics-gutenberg-block .components-placeholder {
+	min-height: 180px;
+	border: 1px dashed #cbd5e1;
+	background-color: #f8fafc;
+	border-radius: 8px;
+	pointer-events: auto;
+}

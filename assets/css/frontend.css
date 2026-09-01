@@ -1,0 +1,654 @@
+/**
+ * Frontend Stylesheet für BS WP ICS Feed Reader
+ * Reines Vanilla CSS mit modernem CSS Grid, Flexbox, Accordion, Single View, Presets & a11y.
+ */
+
+:root {
+	--bs-ics-cols: 3;
+	--bs-ics-accent: #0073aa;
+	--bs-ics-radius: 8px;
+	--bs-ics-bg: #ffffff;
+	--bs-ics-border-w: 1px;
+	--bs-ics-border-c: #e2e8f0;
+}
+
+/* Screenreader Utility (a11y) */
+.bs-ics-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Wrapper */
+.bs-ics-wrapper {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 24px 0;
+	font-family: inherit;
+}
+
+.bs-ics-wrapper *,
+.bs-ics-wrapper *::before,
+.bs-ics-wrapper *::after {
+	box-sizing: inherit;
+}
+
+/* Schnellfilter & Suche */
+.bs-ics-filter-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-bottom: 20px;
+	padding: 12px 16px;
+	background-color: #f8fafc;
+	border: 1px solid #e2e8f0;
+	border-radius: var(--bs-ics-radius, 8px);
+}
+
+.bs-ics-search-wrap {
+	display: inline-flex;
+	align-items: center;
+	position: relative;
+	min-width: 220px;
+	flex-grow: 1;
+	max-width: 380px;
+}
+
+.bs-ics-search-icon {
+	position: absolute;
+	left: 10px;
+	font-size: 0.9em;
+	color: #64748b;
+	pointer-events: none;
+}
+
+.bs-ics-search-input {
+	width: 100%;
+	padding: 7px 10px 7px 32px;
+	font-size: 0.88em;
+	font-family: inherit;
+	border: 1px solid #cbd5e1;
+	border-radius: 6px;
+	background: #ffffff;
+	color: #1e293b;
+	outline: none;
+	transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.bs-ics-search-input:focus {
+	border-color: var(--bs-ics-accent, #0073aa);
+	box-shadow: 0 0 0 2px rgba(0, 115, 170, 0.15);
+}
+
+.bs-ics-category-filters {
+	display: inline-flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.bs-ics-cat-btn {
+	background: #ffffff;
+	border: 1px solid #cbd5e1;
+	border-radius: 9999px;
+	padding: 4px 12px;
+	font-size: 0.8em;
+	font-weight: 500;
+	color: #475569;
+	cursor: pointer;
+	transition: all 0.15s ease-out;
+}
+
+.bs-ics-cat-btn:hover {
+	border-color: var(--bs-ics-accent, #0073aa);
+	color: var(--bs-ics-accent, #0073aa);
+}
+
+.bs-ics-cat-btn.is-active {
+	background: var(--bs-ics-accent, #0073aa);
+	border-color: var(--bs-ics-accent, #0073aa);
+	color: #ffffff;
+}
+
+.bs-ics-cat-btn:focus-visible {
+	outline: 2px solid var(--bs-ics-accent, #0073aa);
+	outline-offset: 2px;
+}
+
+/* Container & Grid-Layout */
+.bs-ics-container {
+	width: 100%;
+}
+
+.bs-ics-layout-grid {
+	display: grid;
+	grid-template-columns: repeat(var(--bs-ics-cols, 3), minmax(0, 1fr));
+	gap: 24px;
+}
+
+/* Listenansicht */
+.bs-ics-layout-list {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+/* Event-Karte */
+.bs-ics-card {
+	background-color: var(--bs-ics-bg, #ffffff);
+	border: var(--bs-ics-border-w, 1px) solid var(--bs-ics-border-c, #e2e8f0);
+	border-radius: var(--bs-ics-radius, 8px);
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+	position: relative;
+	overflow: visible;
+}
+
+/* Schatten-Varianten */
+.bs-ics-shadow-none .bs-ics-card {
+	box-shadow: none !important;
+}
+
+.bs-ics-shadow-subtle .bs-ics-card {
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.bs-ics-shadow-subtle .bs-ics-card:hover {
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+	transform: translateY(-2px);
+}
+
+.bs-ics-shadow-prominent .bs-ics-card {
+	box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+.bs-ics-shadow-prominent .bs-ics-card:hover {
+	box-shadow: 0 16px 30px -5px rgba(0, 0, 0, 0.12), 0 10px 12px -5px rgba(0, 0, 0, 0.06);
+	transform: translateY(-3px);
+}
+
+/* Padding-Dichte Varianten */
+.bs-ics-pad-compact .bs-ics-card {
+	padding: 12px;
+	gap: 8px;
+}
+
+.bs-ics-pad-normal .bs-ics-card {
+	padding: 20px;
+	gap: 12px;
+}
+
+.bs-ics-pad-spacious .bs-ics-card {
+	padding: 28px;
+	gap: 16px;
+}
+
+/* Design-Preset 1: Klassisch (Card mit oberer Akzentlinie) */
+.bs-ics-style-card .bs-ics-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 4px;
+	background-color: var(--bs-ics-accent, #0073aa);
+	border-radius: var(--bs-ics-radius, 8px) var(--bs-ics-radius, 8px) 0 0;
+}
+
+/* Design-Preset 2: Minimal / Flat (Keine Extralinie, flaches Design) */
+.bs-ics-style-flat .bs-ics-card {
+	box-shadow: none !important;
+}
+
+.bs-ics-style-flat .bs-ics-card::before {
+	display: none;
+}
+
+/* Design-Preset 3: Accent Header (Farbiger Kartenkopf) */
+.bs-ics-style-accent_header .bs-ics-card {
+	padding-top: 0 !important;
+	overflow: hidden;
+}
+
+.bs-ics-style-accent_header .bs-ics-card::before {
+	display: none;
+}
+
+.bs-ics-style-accent_header .bs-ics-card-header {
+	background-color: var(--bs-ics-accent, #0073aa);
+	margin-left: -28px;
+	margin-right: -28px;
+	padding: 12px 20px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.bs-ics-pad-compact.bs-ics-style-accent_header .bs-ics-card-header {
+	margin-left: -12px;
+	margin-right: -12px;
+	padding: 8px 12px;
+}
+
+.bs-ics-pad-normal.bs-ics-style-accent_header .bs-ics-card-header {
+	margin-left: -20px;
+	margin-right: -20px;
+	padding: 10px 18px;
+}
+
+.bs-ics-style-accent_header .bs-ics-date {
+	color: #ffffff !important;
+}
+
+.bs-ics-style-accent_header .bs-ics-badge-allday {
+	background-color: rgba(255, 255, 255, 0.25);
+	color: #ffffff;
+}
+
+/* Theme-Farbvererbung */
+.bs-ics-inherit-colors .bs-ics-title,
+.bs-ics-inherit-colors .bs-ics-description,
+.bs-ics-inherit-colors .bs-ics-meta {
+	color: inherit !important;
+}
+
+.bs-ics-inherit-colors .bs-ics-link-btn,
+.bs-ics-inherit-colors .bs-ics-read-more-btn {
+	color: currentColor !important;
+}
+
+/* Header & Datum */
+.bs-ics-card-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.bs-ics-date {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 0.9em;
+	font-weight: 600;
+	color: var(--bs-ics-accent, #0073aa);
+}
+
+.bs-ics-date-icon {
+	font-size: 1.1em;
+	line-height: 1;
+}
+
+/* Badges */
+.bs-ics-badge {
+	display: inline-block;
+	font-size: 0.75em;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	padding: 2px 8px;
+	border-radius: 9999px;
+	background-color: #f1f5f9;
+	color: #475569;
+}
+
+.bs-ics-badge-allday {
+	background-color: #e0f2fe;
+	color: #0369a1;
+}
+
+/* Titel */
+.bs-ics-title {
+	margin: 0;
+	font-size: 1.15em;
+	font-weight: 700;
+	line-height: 1.35;
+	color: #0f172a;
+}
+
+/* Meta-Informationen */
+.bs-ics-meta {
+	display: flex;
+	align-items: flex-start;
+	gap: 6px;
+	font-size: 0.9em;
+	color: #64748b;
+	line-height: 1.4;
+}
+
+.bs-ics-meta:empty {
+	display: none;
+}
+
+.bs-ics-meta-icon {
+	font-size: 1em;
+	flex-shrink: 0;
+}
+
+.bs-ics-meta-label {
+	font-weight: 600;
+	color: #475569;
+}
+
+/* Beschreibung */
+.bs-ics-description {
+	font-size: 0.92em;
+	color: #334155;
+	line-height: 1.6;
+	word-break: break-word;
+}
+
+.bs-ics-description:empty {
+	display: none;
+}
+
+.bs-ics-description a {
+	color: var(--bs-ics-accent, #0073aa);
+	text-decoration: underline;
+}
+
+.bs-ics-description a:hover,
+.bs-ics-description a:focus-visible {
+	text-decoration: none;
+	outline: 2px solid var(--bs-ics-accent, #0073aa);
+	outline-offset: 2px;
+}
+
+/* Detail-Container für Aufklapp-Modus */
+.bs-ics-card-details {
+	display: none;
+	padding-top: 14px;
+	margin-top: 4px;
+	border-top: 1px dashed #e2e8f0;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.bs-ics-card-details.is-open {
+	display: flex;
+	animation: bsIcsFadeIn 0.2s ease-out;
+}
+
+@keyframes bsIcsFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-4px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Card Footer & Aktionen */
+.bs-ics-card-footer {
+	margin-top: auto;
+	padding-top: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.bs-ics-toggle-btn {
+	background: transparent;
+	border: 1px solid var(--bs-ics-accent, #0073aa);
+	color: var(--bs-ics-accent, #0073aa);
+	padding: 6px 14px;
+	border-radius: var(--bs-ics-radius, 8px);
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 0.88em;
+	font-weight: 600;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	transition: background-color 0.15s ease-out, color 0.15s ease-out, transform 0.15s ease-out;
+}
+
+.bs-ics-toggle-btn:hover {
+	background-color: var(--bs-ics-accent, #0073aa);
+	color: #ffffff;
+}
+
+.bs-ics-toggle-btn:focus-visible {
+	outline: 2px solid var(--bs-ics-accent, #0073aa);
+	outline-offset: 2px;
+}
+
+.bs-ics-link-btn,
+.bs-ics-read-more-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 0.88em;
+	font-weight: 600;
+	color: var(--bs-ics-accent, #0073aa);
+	text-decoration: none;
+	transition: color 0.15s ease, transform 0.15s ease;
+	border-radius: 4px;
+}
+
+.bs-ics-link-btn:hover,
+.bs-ics-read-more-btn:hover {
+	text-decoration: underline;
+	transform: translateX(2px);
+}
+
+.bs-ics-link-btn:focus-visible,
+.bs-ics-read-more-btn:focus-visible {
+	outline: 2px solid var(--bs-ics-accent, #0073aa);
+	outline-offset: 2px;
+}
+
+/* „In Kalender eintragen“-Dropdown */
+.bs-ics-cal-export {
+	position: relative;
+	display: inline-block;
+}
+
+.bs-ics-cal-btn {
+	background: #f8fafc;
+	border: 1px solid #cbd5e1;
+	border-radius: 6px;
+	padding: 5px 10px;
+	font-size: 0.8em;
+	font-weight: 600;
+	color: #475569;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	transition: all 0.15s ease-out;
+}
+
+.bs-ics-cal-btn:hover {
+	background: #ffffff;
+	border-color: var(--bs-ics-accent, #0073aa);
+	color: var(--bs-ics-accent, #0073aa);
+}
+
+.bs-ics-cal-btn:focus-visible {
+	outline: 2px solid var(--bs-ics-accent, #0073aa);
+	outline-offset: 2px;
+}
+
+.bs-ics-cal-menu {
+	position: absolute;
+	bottom: 100%;
+	right: 0;
+	margin-bottom: 6px;
+	background: #ffffff;
+	border: 1px solid #cbd5e1;
+	border-radius: 6px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+	display: flex;
+	flex-direction: column;
+	min-width: 170px;
+	z-index: 100;
+	overflow: hidden;
+	padding: 4px 0;
+}
+
+.bs-ics-cal-menu[hidden] {
+	display: none !important;
+}
+
+.bs-ics-cal-menu a,
+.bs-ics-cal-menu button {
+	display: block;
+	width: 100%;
+	padding: 8px 12px;
+	text-align: left;
+	font-size: 0.82em;
+	color: #334155;
+	text-decoration: none;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	font-family: inherit;
+	transition: background-color 0.1s ease-out, color 0.1s ease-out;
+}
+
+.bs-ics-cal-menu a:hover,
+.bs-ics-cal-menu button:hover,
+.bs-ics-cal-menu a:focus-visible,
+.bs-ics-cal-menu button:focus-visible {
+	background-color: #f1f5f9;
+	color: var(--bs-ics-accent, #0073aa);
+	outline: none;
+}
+
+/* Einzelansicht (Single View) */
+.bs-ics-single-view {
+	max-width: 800px;
+	margin: 24px auto;
+}
+
+.bs-ics-back-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 0.9em;
+	font-weight: 600;
+	color: var(--bs-ics-accent, #0073aa);
+	text-decoration: none;
+	margin-bottom: 16px;
+	padding: 4px 8px;
+	border-radius: 4px;
+	transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.bs-ics-back-btn:hover {
+	text-decoration: underline;
+	transform: translateX(-2px);
+}
+
+.bs-ics-single-card {
+	padding: 28px;
+	gap: 18px;
+}
+
+.bs-ics-single-card .bs-ics-title {
+	font-size: 1.5em;
+}
+
+.bs-ics-single-card .bs-ics-description {
+	font-size: 1em;
+	line-height: 1.7;
+}
+
+.bs-ics-single-footer {
+	border-top: 1px solid #e2e8f0;
+	padding-top: 16px;
+	margin-top: 8px;
+}
+
+/* Empty State */
+.bs-ics-empty-container {
+	padding: 30px;
+	text-align: center;
+	background-color: #f8fafc;
+	border: 1px dashed #cbd5e1;
+	border-radius: var(--bs-ics-radius, 8px);
+}
+
+.bs-ics-empty-state p {
+	margin: 0;
+	color: #64748b;
+	font-size: 0.95em;
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 1024px) {
+	.bs-ics-layout-grid {
+		grid-template-columns: repeat(min(var(--bs-ics-cols, 2), 2), minmax(0, 1fr));
+		gap: 18px;
+	}
+}
+
+@media (max-width: 640px) {
+	.bs-ics-filter-bar {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.bs-ics-search-wrap {
+		max-width: 100%;
+	}
+
+	.bs-ics-layout-grid {
+		grid-template-columns: 1fr;
+		gap: 14px;
+	}
+
+	.bs-ics-card {
+		padding: 16px;
+	}
+
+	.bs-ics-single-card {
+		padding: 20px;
+	}
+}
+
+/* Druckansicht */
+@media print {
+	.bs-ics-filter-bar,
+	.bs-ics-card-footer,
+	.bs-ics-back-btn,
+	.bs-ics-toggle-btn,
+	.bs-ics-cal-export {
+		display: none !important;
+	}
+
+	.bs-ics-layout-grid {
+		display: block;
+	}
+
+	.bs-ics-card {
+		break-inside: avoid;
+		page-break-inside: avoid;
+		border: 1px solid #94a3b8;
+		box-shadow: none !important;
+		margin-bottom: 16px;
+	}
+
+	.bs-ics-card::before {
+		display: none;
+	}
+
+	.bs-ics-card-details {
+		display: flex !important;
+	}
+}

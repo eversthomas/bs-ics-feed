@@ -1,0 +1,233 @@
+<?php
+/**
+ * Plugin Name:       BS WP ICS Feed Reader
+ * Plugin URI:        https://example.com/bs-wp-ics-feed-reader
+ * Description:       Modulares, performantes und sicheres WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von ICS-Kalender-Feeds.
+ * Version:           1.1.0
+ * Author:            BS
+ * Text Domain:       bs-wp-ics-feed-reader
+ * Domain Path:       /languages
+ * Requires at least: 5.8
+ * Requires PHP:      7.4
+ *
+ * @package BS_WP_ICS_Feed_Reader
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// Plugin-Konstanten definieren.
+define( 'BS_ICS_VERSION', '1.1.0' );
+define( 'BS_ICS_PATH', plugin_dir_path( __FILE__ ) );
+define( 'BS_ICS_URL', plugin_dir_url( __FILE__ ) );
+define( 'BS_ICS_BASENAME', plugin_basename( __FILE__ ) );
+
+/**
+ * Hauptklasse des Plugins (Bootstrap).
+ */
+final class BS_ICS_Feed_Reader {
+
+	/**
+	 * Singleton-Instanz.
+	 *
+	 * @var BS_ICS_Feed_Reader|null
+	 */
+	private static $instance = null;
+
+	/**
+	 * CPT-Manager-Instanz.
+	 *
+	 * @var BS_ICS_CPT|null
+	 */
+	public $cpt = null;
+
+	/**
+	 * Admin-Manager-Instanz.
+	 *
+	 * @var BS_ICS_Admin|null
+	 */
+	public $admin = null;
+
+	/**
+	 * Frontend-Renderer-Instanz.
+	 *
+	 * @var BS_ICS_Renderer|null
+	 */
+	public $renderer = null;
+
+	/**
+	 * Gutenberg-Block-Instanz.
+	 *
+	 * @var BS_ICS_Block|null
+	 */
+	public $block = null;
+
+	/**
+	 * Gibt die Singleton-Instanz zurück.
+	 *
+	 * @return BS_ICS_Feed_Reader
+	 */
+	public static function get_instance() {
+		if ( null === self::$instance ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	/**
+	 * Konstruktor.
+	 */
+	private function __construct() {
+		$this->load_dependencies();
+		$this->init_hooks();
+	}
+
+	/**
+	 * Bindet alle benötigten Klassen-Dateien ein.
+	 */
+	private function load_dependencies() {
+		require_once BS_ICS_PATH . 'includes/class-bs-ics-cpt.php';
+		require_once BS_ICS_PATH . 'includes/class-bs-ics-admin.php';
+
+		if ( file_exists( BS_ICS_PATH . 'includes/class-bs-ics-parser.php' ) ) {
+			require_once BS_ICS_PATH . 'includes/class-bs-ics-parser.php';
+		}
+		if ( file_exists( BS_ICS_PATH . 'includes/class-bs-ics-renderer.php' ) ) {
+			require_once BS_ICS_PATH . 'includes/class-bs-ics-renderer.php';
+		}
+		if ( file_exists( BS_ICS_PATH . 'includes/class-bs-ics-block.php' ) ) {
+			require_once BS_ICS_PATH . 'includes/class-bs-ics-block.php';
+		}
+	}
+
+	/**
+	 * Initialisiert die Hooks und Komponenten.
+	 */
+	private function init_hooks() {
+		add_action( 'init', [ $this, 'load_textdomain' ] );
+		add_action( 'bs_ics_cron_sync_event', [ $this, 'cron_sync_all_feeds' ] );
+
+		// Komponenten initialisieren.
+		$this->cpt      = new BS_ICS_CPT();
+		$this->admin    = new BS_ICS_Admin();
+		$this->renderer = new BS_ICS_Renderer();
+
+		if ( class_exists( 'BS_ICS_Block' ) ) {
+			$this->block = new BS_ICS_Block();
+		}
+	}
+
+	/**
+	 * Lädt die Textdomain für Übersetzungen.
+	 */
+	public function load_textdomain() {
+		load_plugin_textdomain(
+			'bs-wp-ics-feed-reader',
+			false,
+			dirname( BS_ICS_BASENAME ) . '/languages'
+		);
+	}
+
+	/**
+	 * Führt den geplanten Hintergrund-Sync für alle Feeds via WP-Cron aus.
+	 */
+	public function cron_sync_all_feeds() {
+		$feeds = get_posts(
+			[
+				'post_type'      => BS_ICS_CPT::POST_TYPE,
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+			]
+		);
+
+		if ( empty( $feeds ) ) {
+			return;
+		}
+
+		if ( ! class_exists( 'BS_ICS_Parser' ) ) {
+			require_once BS_ICS_PATH . 'includes/class-bs-ics-parser.php';
+		}
+
+		$parser = new BS_ICS_Parser();
+
+		foreach ( $feeds as $post_id ) {
+			$sync_interval = get_post_meta( $post_id, '_bs_ics_sync_interval', true );
+			if ( empty( $sync_interval ) || 'manual' === $sync_interval ) {
+				continue;
+			}
+
+			$feed_url = get_post_meta( $post_id, '_bs_ics_feed_url', true );
+			if ( empty( $feed_url ) ) {
+				continue;
+			}
+
+			$feed_url = preg_replace( '/^webcal:\/\//i', 'https://', $feed_url );
+			$response = wp_safe_remote_get(
+				$feed_url,
+				[
+					'timeout'   => 15,
+					'sslverify' => true,
+				]
+			);
+
+			if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+				continue;
+			}
+
+			$body = wp_remote_retrieve_body( $response );
+			if ( empty( $body ) || false === stripos( $body, 'BEGIN:VCALENDAR' ) ) {
+				continue;
+			}
+
+			$parsed = $parser->parse( $body );
+			if ( ! empty( $parsed['events'] ) ) {
+				update_post_meta( $post_id, '_bs_ics_cached_events', $parsed['events'] );
+				update_post_meta( $post_id, '_bs_ics_available_fields', $parsed['available_fields'] );
+				update_post_meta( $post_id, '_bs_ics_last_synced', time() );
+			}
+		}
+	}
+
+	/**
+	 * Plugin-Aktivierungshook.
+	 */
+	public static function activate() {
+		require_once BS_ICS_PATH . 'includes/class-bs-ics-cpt.php';
+		$cpt = new BS_ICS_CPT();
+		$cpt->register_cpt();
+
+		// WP-Cron Intervall registrieren falls nicht vorhanden
+		if ( ! wp_next_scheduled( 'bs_ics_cron_sync_event' ) ) {
+			wp_schedule_event( time(), 'hourly', 'bs_ics_cron_sync_event' );
+		}
+
+		flush_rewrite_rules();
+	}
+
+	/**
+	 * Plugin-Deaktivierungshook.
+	 */
+	public static function deactivate() {
+		$timestamp = wp_next_scheduled( 'bs_ics_cron_sync_event' );
+		if ( $timestamp ) {
+			wp_unschedule_event( $timestamp, 'bs_ics_cron_sync_event' );
+		}
+		flush_rewrite_rules();
+	}
+}
+
+// Lifecycle Hooks registrieren.
+register_activation_hook( __FILE__, [ 'BS_ICS_Feed_Reader', 'activate' ] );
+register_deactivation_hook( __FILE__, [ 'BS_ICS_Feed_Reader', 'deactivate' ] );
+
+/**
+ * Startet das Plugin.
+ */
+function bs_ics_init() {
+	return BS_ICS_Feed_Reader::get_instance();
+}
+
+// Plugin starten.
+bs_ics_init();

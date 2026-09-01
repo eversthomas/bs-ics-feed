@@ -1,0 +1,587 @@
+# Copyright (C) 2026 BS
+# This file is distributed under the same license as the BS WP ICS Feed Reader plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: BS WP ICS Feed Reader 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bs-wp-ics-feed-reader\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-01T12:12:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: Antigravity\n"
+"X-Domain: bs-wp-ics-feed-reader\n"
+
+#. Plugin Name of the plugin
+msgid "BS WP ICS Feed Reader"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://example.com/bs-wp-ics-feed-reader"
+msgstr ""
+
+#. Description of the plugin
+msgid "Modulares, performantes und sicheres WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von ICS-Kalender-Feeds."
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:32
+msgctxt "Post Type General Name"
+msgid "ICS Feeds"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:33
+msgctxt "Post Type Singular Name"
+msgid "ICS Feed"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:34
+msgid "ICS Feeds"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:35
+msgid "ICS Feed"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:36
+msgid "Feed-Archive"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:37
+msgid "Feed-Attribute"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:38
+msgid "Alle Feeds"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:39
+msgid "Neuen Feed anlegen"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:40
+msgid "Neu hinzufügen"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:41
+msgid "Neuer Feed"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:42
+msgid "Feed bearbeiten"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:43
+msgid "Feed aktualisieren"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:44
+msgid "Feed ansehen"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:45
+msgid "Feeds ansehen"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:46
+msgid "Feed suchen"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:47
+msgid "Keine Feeds gefunden"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:48
+msgid "Keine Feeds im Papierkorb"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:52
+msgid "ICS Kalender-Feed Konfigurationen"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:87
+msgid "Shortcode"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:88
+msgid "Quell-URL"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:89
+msgid "Letzter Sync"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:116
+msgid "Keine URL hinterlegt"
+msgstr ""
+
+#: includes/class-bs-ics-cpt.php:126
+#: includes/class-bs-ics-admin.php:218
+msgid "Noch nicht synchronisiert"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:31
+msgid "ICS Feed Einstellungen"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:40
+msgid "Shortcode-Integration"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:79
+msgid "Kopiert!"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:80
+#: includes/class-bs-ics-admin.php:107
+msgid "Shortcode kopieren"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:97
+msgid "Synchronisiere Feed..."
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:98
+msgid "Feed erfolgreich synchronisiert!"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:99
+msgid "Fehler bei der Synchronisation:"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:100
+msgid "Verbindungsfehler. Bitte Feed-URL und Internetverbindung prüfen."
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:101
+msgid "Bitte gib zuerst eine gültige Feed-URL ein."
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:102
+#: includes/class-bs-ics-admin.php:258
+msgid "Aktiv"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:103
+#: includes/class-bs-ics-admin.php:259
+msgid "Inaktiv"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:115
+msgid "Binde diesen Kalender-Feed an beliebiger Stelle im Frontend über folgenden Shortcode ein:"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:137
+#: includes/class-bs-ics-admin.php:336
+#: includes/class-bs-ics-renderer.php:103
+msgid "Titel"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:138
+#: includes/class-bs-ics-admin.php:337
+#: includes/class-bs-ics-renderer.php:104
+msgid "Datum & Uhrzeit"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:139
+#: includes/class-bs-ics-admin.php:338
+#: includes/class-bs-ics-renderer.php:105
+msgid "Ort"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:140
+#: includes/class-bs-ics-admin.php:339
+#: includes/class-bs-ics-renderer.php:106
+msgid "Beschreibung"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:141
+msgid "Kategorie"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:146
+#: includes/class-bs-ics-renderer.php:73
+msgid "Weiterlesen"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:147
+#: includes/class-bs-ics-renderer.php:74
+msgid "Weniger anzeigen"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:148
+#: includes/class-bs-ics-renderer.php:75
+msgid "← Zurück zur Übersicht"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:164
+msgid "Quelle & Synchronisation"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:167
+msgid "Felder & Inhalt"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:170
+msgid "Darstellung & Weiterlesen"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:173
+msgid "Kachel-Design"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:183
+msgid "ICS Feed URL"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:193
+msgid "Automatischer Hintergrund-Sync"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:197
+msgid "Nur manuell (Kein automatischer Sync)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:198
+msgid "Stündlich (WP-Cron)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:199
+msgid "Zweimal täglich"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:200
+msgid "Einmal täglich"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:208
+msgid "Manuelle Synchronisation"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:212
+msgid "Feed analysieren & synchronisieren"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:219
+msgid "Status & Cache"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:223
+msgid "Letzter Sync:"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:239
+msgid "Gecachte Termine:"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:248
+msgid "Was macht's"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:252
+msgid "Nutzen"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:257
+msgid "Bricht es was"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:271
+msgid "Feld-Zuweisung: Übersicht vs. Detailansicht"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:272
+msgid "Steuere granular, welche Informationen sofort in der Termin-Kachel (Teaser) angezeigt werden und welche erst beim Klick auf „Weiterlesen“ sichtbar sind."
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:276
+msgid "In Übersicht (Teaser)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:277
+msgid "In Detailansicht"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:278
+msgid "RFC 5545 Feld"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:279
+msgid "Frontend Label / Beschriftung"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:291
+msgid "Layout-Modus"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:297
+msgid "Kachel-Raster (Grid)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:301
+msgid "Listenansicht (List)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:308
+msgid "Weiterlesen-Verhalten"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:312
+msgid "Aufklappen (Accordion / Details direkt in Kachel einblenden)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:315
+msgid "Einzelansicht (Detail-Seite mit URL-Parameter öffnen)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:318
+msgid "Kein Weiterlesen-Button (Alles direkt in Kachel)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:322
+msgid "Definiert, wie zusätzliche Detailfelder beim Klick auf den Weiterlesen-Button geöffnet werden."
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:328
+msgid "Button-Text „Weiterlesen“"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:335
+msgid "Button-Text „Einklappen“"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:339
+msgid "Wird verwendet, wenn der Modus „Aufklappen“ aktiv ist."
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:344
+msgid "Button-Text „Zurück“"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:348
+msgid "Wird verwendet, wenn der Modus „Einzelansicht“ aktiv ist."
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:353
+msgid "Frontend-Suchleiste & Filter"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:364
+msgid "„In Kalender eintragen“-Buttons"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:375
+msgid "Maximale Anzahl Termine"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:379
+msgid "0 eingeben für keine Begrenzung."
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:384
+msgid "Sortierung"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:388
+msgid "Chronologisch aufsteigend (nächste zuerst)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:389
+msgid "Absteigend (späteste zuerst)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:394
+msgid "Filter"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:398
+msgid "Nur zukünftige / anstehende Termine anzeigen (vergangene ausblenden)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:404
+msgid "Benutzerdefiniertes Datumsformat"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:420
+msgid "Design-Stil / Preset"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:424
+msgid "Klassisch (Karte mit dezentem Schatten & Akzentlinie)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:425
+msgid "Minimal / Flat (Flach, rahmenbetont, ideal für Block-Themes)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:426
+msgid "Accent Header (Farbige Kopfzeile für Datum & Titel)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:432
+msgid "Theme-Farbvererbung"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:446
+msgid "Grid-Spalten (Desktop)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:450
+msgid "Spalte"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:451
+#: includes/class-bs-ics-admin.php:452
+#: includes/class-bs-ics-admin.php:453
+msgid "Spalten"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:460
+msgid "Akzentfarbe"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:468
+msgid "Kachel-Hintergrundfarbe"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:475
+msgid "Schatten-Stärke"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:479
+msgid "Kein Schatten"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:480
+msgid "Dezent (Standard)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:481
+msgid "Ausgeprägt"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:486
+msgid "Kachel-Innenabstand"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:490
+msgid "Kompakt (12px)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:491
+msgid "Standard (20px)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:492
+msgid "Großzügig (28px)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:497
+msgid "Rahmenradius (px)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:504
+msgid "Rahmenbreite (px)"
+msgstr ""
+
+#: includes/class-bs-ics-admin.php:511
+msgid "Rahmenfarbe"
+msgstr ""
+
+#: includes/class-bs-ics-block.php:30
+msgid "BS Plugins"
+msgstr ""
+
+#: includes/class-bs-ics-block.php:70
+msgid "Kachel-Design & Farben"
+msgstr ""
+
+#: includes/class-bs-ics-block.php:32
+msgid "ICS Kalender-Feed"
+msgstr ""
+
+#: includes/class-bs-ics-block.php:33
+msgid "Zeigt Termine aus einem konfigurierten ICS-Kalender-Feed an."
+msgstr ""
+
+#: includes/class-bs-ics-block.php:84
+msgid "Bitte wähle in den Block-Einstellungen einen Kalender-Feed aus."
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:54
+msgid "[BS ICS Calendar] Bitte gib eine gültige Feed-ID an."
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:175
+msgid "Termine durchsuchen..."
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:175
+msgid "Termine filtern"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:179
+msgid "Kategorien filtern"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:180
+msgid "Alle"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:200
+msgid "Ganztägig"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:218
+msgid "Datum:"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:229
+msgid "Ort:"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:236
+msgid "Kategorie:"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:248
+msgid "Mehr erfahren"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:258
+msgid "Zusätzliche Termindetails"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:280
+#: includes/class-bs-ics-renderer.php:358
+msgid "Termin-Link öffnen"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:382
+msgid "Termin"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:414
+msgid "In eigenen Kalender eintragen"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:415
+msgid "Kalender"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:418
+msgid "Google Kalender"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:421
+msgid "Outlook Online"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:424
+msgid "Apple / .ics Download"
+msgstr ""
+
+#: includes/class-bs-ics-renderer.php:470
+msgid "Keine anstehenden Termine vorhanden."
+msgstr ""

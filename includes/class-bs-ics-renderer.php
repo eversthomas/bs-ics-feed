@@ -1,0 +1,723 @@
+<?php
+/**
+ * Frontend Shortcode-Renderer für BS WP ICS Feed Reader.
+ * Unterstützt Teaser/Detail-Trennung, fließendes Accordion-Aufklappen, Einzelansicht,
+ * Design-Presets (Klassisch, Flat, Accent-Header), Theme-Farbvererbung, Schema.org JSON-LD, Filterleiste und Add-to-Calendar.
+ *
+ * @package BS_WP_ICS_Feed_Reader
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Klasse BS_ICS_Renderer
+ */
+class BS_ICS_Renderer {
+
+	/**
+	 * Konstruktor.
+	 */
+	public function __construct() {
+		add_shortcode( 'bs_ics_calendar', [ $this, 'render_shortcode' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'register_frontend_assets' ] );
+	}
+
+	/**
+	 * Registriert Frontend-Assets vorab.
+	 */
+	public function register_frontend_assets() {
+		wp_register_style(
+			'bs-ics-frontend-css',
+			BS_ICS_URL . 'assets/css/frontend.css',
+			[],
+			BS_ICS_VERSION
+		);
+
+		wp_register_script(
+			'bs-ics-frontend-js',
+			BS_ICS_URL . 'assets/js/frontend.js',
+			[],
+			BS_ICS_VERSION,
+			true
+		);
+	}
+
+	/**
+	 * Rendert den Shortcode [bs_ics_calendar id="..." layout="..." limit="..."].
+	 *
+	 * @param array|string $atts Shortcode-Attribute.
+	 * @return string HTML-Ausgabe.
+	 */
+	public function render_shortcode( $atts ) {
+		$atts = shortcode_atts(
+			[
+				'id'                   => 0,
+				'layout'               => '',
+				'limit'                => '',
+				'columns'              => '',
+				'sort'                 => '',
+				'only_future'          => '',
+				'accent'               => '',
+				'bg_color'             => '',
+				'border_radius'        => '',
+				'border_width'         => '',
+				'border_color'         => '',
+				'shadow_style'         => '',
+				'card_padding'         => '',
+				'inherit_theme_colors' => '',
+				'style'                => '',
+				'mode'                 => '',
+				'filter'               => '',
+				'export'               => '',
+			],
+			$atts,
+			'bs_ics_calendar'
+		);
+
+		$post_id = absint( $atts['id'] );
+		if ( ! $post_id || get_post_type( $post_id ) !== BS_ICS_CPT::POST_TYPE ) {
+			if ( current_user_can( 'edit_posts' ) ) {
+				return '<div class="bs-ics-empty-state"><p>' . esc_html__( '[BS ICS Calendar] Bitte gib eine gültige Feed-ID an.', 'bs-wp-ics-feed-reader' ) . '</p></div>';
+			}
+			return '';
+		}
+
+		// Frontend-Assets laden.
+		wp_enqueue_style( 'bs-ics-frontend-css' );
+		wp_enqueue_script( 'bs-ics-frontend-js' );
+
+		// Metadaten aus dem Post laden.
+		$cached_events    = get_post_meta( $post_id, '_bs_ics_cached_events', true );
+		$field_config     = get_post_meta( $post_id, '_bs_ics_field_config', true );
+		$display_settings = get_post_meta( $post_id, '_bs_ics_display_settings', true );
+		$design_settings  = get_post_meta( $post_id, '_bs_ics_design_settings', true );
+
+		// Standardwerte & Attribute-Overrides zusammenführen.
+		$display_defaults = [
+			'layout'               => 'grid',
+			'limit'                => 0,
+			'sort'                 => 'asc',
+			'only_future'          => true,
+			'date_format'          => '',
+			'read_more_mode'       => 'expand',
+			'read_more_text'       => __( 'Weiterlesen', 'bs-wp-ics-feed-reader' ),
+			'read_less_text'       => __( 'Weniger anzeigen', 'bs-wp-ics-feed-reader' ),
+			'back_text'            => __( '← Zurück zur Übersicht', 'bs-wp-ics-feed-reader' ),
+			'enable_search_filter' => true,
+			'enable_add_to_cal'    => true,
+		];
+		$display = wp_parse_args( is_array( $display_settings ) ? $display_settings : [], $display_defaults );
+
+		if ( in_array( $atts['layout'], [ 'grid', 'list' ], true ) ) {
+			$display['layout'] = $atts['layout'];
+		}
+		if ( '' !== $atts['limit'] && is_numeric( $atts['limit'] ) ) {
+			$display['limit'] = absint( $atts['limit'] );
+		}
+		if ( in_array( strtolower( $atts['sort'] ), [ 'asc', 'desc' ], true ) ) {
+			$display['sort'] = strtolower( $atts['sort'] );
+		}
+		if ( '' !== $atts['only_future'] ) {
+			$display['only_future'] = filter_var( $atts['only_future'], FILTER_VALIDATE_BOOLEAN );
+		}
+		if ( in_array( $atts['mode'], [ 'expand', 'single', 'none' ], true ) ) {
+			$display['read_more_mode'] = $atts['mode'];
+		}
+		if ( '' !== $atts['filter'] ) {
+			$display['enable_search_filter'] = filter_var( $atts['filter'], FILTER_VALIDATE_BOOLEAN );
+		}
+		if ( '' !== $atts['export'] ) {
+			$display['enable_add_to_cal'] = filter_var( $atts['export'], FILTER_VALIDATE_BOOLEAN );
+		}
+
+		$design_defaults = [
+			'columns'              => 3,
+			'accent_color'         => '#0073aa',
+			'bg_color'             => '#ffffff',
+			'border_radius'        => 8,
+			'card_style'           => 'card',
+			'inherit_theme_colors' => false,
+			'shadow_style'         => 'subtle',
+			'card_padding'         => 'normal',
+			'border_width'         => 1,
+			'border_color'         => '#e2e8f0',
+		];
+		$design = wp_parse_args( is_array( $design_settings ) ? $design_settings : [], $design_defaults );
+
+		if ( '' !== $atts['columns'] ) {
+			$cols = absint( $atts['columns'] );
+			if ( $cols >= 1 && $cols <= 4 ) {
+				$design['columns'] = $cols;
+			}
+		}
+		if ( ! empty( $atts['accent'] ) ) {
+			$clean_accent = sanitize_hex_color( $atts['accent'] );
+			if ( $clean_accent ) {
+				$design['accent_color'] = $clean_accent;
+			}
+		}
+		if ( ! empty( $atts['bg_color'] ) ) {
+			$clean_bg = sanitize_hex_color( $atts['bg_color'] );
+			if ( $clean_bg ) {
+				$design['bg_color'] = $clean_bg;
+			}
+		}
+		if ( in_array( $atts['style'], [ 'card', 'flat', 'accent_header' ], true ) ) {
+			$design['card_style'] = $atts['style'];
+		}
+		if ( in_array( $atts['shadow_style'], [ 'none', 'subtle', 'prominent' ], true ) ) {
+			$design['shadow_style'] = $atts['shadow_style'];
+		}
+		if ( in_array( $atts['card_padding'], [ 'compact', 'normal', 'spacious' ], true ) ) {
+			$design['card_padding'] = $atts['card_padding'];
+		}
+		if ( '' !== $atts['border_radius'] && (int) $atts['border_radius'] >= 0 ) {
+			$design['border_radius'] = min( 50, absint( $atts['border_radius'] ) );
+		}
+		if ( '' !== $atts['border_width'] && (int) $atts['border_width'] >= 0 ) {
+			$design['border_width'] = min( 10, absint( $atts['border_width'] ) );
+		}
+		if ( ! empty( $atts['border_color'] ) ) {
+			$clean_border = sanitize_hex_color( $atts['border_color'] );
+			if ( $clean_border ) {
+				$design['border_color'] = $clean_border;
+			}
+		}
+		if ( '' !== $atts['inherit_theme_colors'] ) {
+			$design['inherit_theme_colors'] = filter_var( $atts['inherit_theme_colors'], FILTER_VALIDATE_BOOLEAN );
+		}
+
+		// Feld-Konfiguration normalisieren.
+		if ( class_exists( 'BS_ICS_Admin' ) ) {
+			$admin_instance = new BS_ICS_Admin();
+			$field_config   = $admin_instance->normalize_field_config( $field_config );
+		} else {
+			$field_config = is_array( $field_config ) ? $field_config : [];
+		}
+
+		if ( ! is_array( $cached_events ) || empty( $cached_events ) ) {
+			return $this->render_empty_state();
+		}
+
+		// CSS Custom Properties generieren.
+		$style_vars = sprintf(
+			'--bs-ics-cols: %d; --bs-ics-accent: %s; --bs-ics-radius: %dpx; --bs-ics-bg: %s; --bs-ics-border-w: %dpx; --bs-ics-border-c: %s;',
+			absint( $design['columns'] ),
+			esc_attr( $design['accent_color'] ),
+			absint( $design['border_radius'] ),
+			esc_attr( $design['bg_color'] ),
+			absint( $design['border_width'] ),
+			esc_attr( $design['border_color'] )
+		);
+
+		// Wrapper-Klassen zusammenstellen.
+		$wrapper_classes = [
+			'bs-ics-wrapper',
+			'bs-ics-style-' . sanitize_html_class( $design['card_style'] ),
+			'bs-ics-shadow-' . sanitize_html_class( $design['shadow_style'] ),
+			'bs-ics-pad-' . sanitize_html_class( $design['card_padding'] ),
+		];
+		if ( ! empty( $design['inherit_theme_colors'] ) ) {
+			$wrapper_classes[] = 'bs-ics-inherit-colors';
+		}
+		$wrapper_class_attr = implode( ' ', $wrapper_classes );
+
+		// 1. EINZELANSICHT-CHECK: Prüfen, ob ein einzelner Termin aufgerufen wird
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( 'single' === $display['read_more_mode'] && isset( $_GET['bs_event'] ) && '' !== trim( (string) $_GET['bs_event'] ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$target_uid = sanitize_text_field( wp_unslash( $_GET['bs_event'] ) );
+
+			foreach ( $cached_events as $event_item ) {
+				if ( (string) $event_item['uid'] === $target_uid ) {
+					return $this->render_single_event( $event_item, $field_config, $display, $style_vars, $wrapper_class_attr );
+				}
+			}
+		}
+
+		// 2. ÜBERSICHTS-ANSICHT: Filterung vergangener Termine
+		$events = $cached_events;
+		if ( ! empty( $display['only_future'] ) ) {
+			$wp_tz       = wp_timezone();
+			$today_start = ( new DateTimeImmutable( 'today 00:00:00', $wp_tz ) )->getTimestamp();
+			$now         = ( new DateTimeImmutable( 'now', $wp_tz ) )->getTimestamp();
+
+			$events = array_filter(
+				$events,
+				function ( $event ) use ( $today_start, $now ) {
+					if ( ! empty( $event['all_day'] ) ) {
+						return ( (int) $event['start_timestamp'] + 86399 ) >= $today_start;
+					}
+					$end = ! empty( $event['end_timestamp'] ) ? (int) $event['end_timestamp'] : (int) $event['start_timestamp'];
+					return $end >= $now;
+				}
+			);
+		}
+
+		if ( empty( $events ) ) {
+			return $this->render_empty_state();
+		}
+
+		// Sortierung.
+		$is_desc = ( 'desc' === $display['sort'] );
+		usort(
+			$events,
+			function ( $a, $b ) use ( $is_desc ) {
+				if ( $is_desc ) {
+					return ( (int) $b['start_timestamp'] <=> (int) $a['start_timestamp'] );
+				}
+				return ( (int) $a['start_timestamp'] <=> (int) $b['start_timestamp'] );
+			}
+		);
+
+		// Limitierung.
+		if ( $display['limit'] > 0 ) {
+			$events = array_slice( $events, 0, $display['limit'] );
+		}
+
+		// Kategorien für den Schnellfilter sammeln.
+		$categories = [];
+		foreach ( $events as $ev ) {
+			if ( ! empty( $ev['categories'] ) ) {
+				$cat_list = array_map( 'trim', explode( ',', $ev['categories'] ) );
+				foreach ( $cat_list as $c_name ) {
+					if ( '' !== $c_name && ! in_array( $c_name, $categories, true ) ) {
+						$categories[] = $c_name;
+					}
+				}
+			}
+		}
+
+		$layout_class = 'grid' === $display['layout'] ? 'bs-ics-layout-grid' : 'bs-ics-layout-list';
+		$date_format  = ! empty( $display['date_format'] ) ? $display['date_format'] : ( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) );
+
+		ob_start();
+		?>
+		<div class="<?php echo esc_attr( $wrapper_class_attr ); ?>" style="<?php echo esc_attr( $style_vars ); ?>">
+			<!-- Schema.org JSON-LD Structured Data (Rein im Body gerendert) -->
+			<script type="application/ld+json">
+			<?php echo wp_json_encode( $this->generate_schema_org_data( $events ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ); ?>
+			</script>
+
+			<!-- Schnellfilter & Suche (Optional) -->
+			<?php if ( ! empty( $display['enable_search_filter'] ) && count( $events ) > 1 ) : ?>
+				<div class="bs-ics-filter-bar">
+					<div class="bs-ics-search-wrap">
+						<span class="bs-ics-search-icon" aria-hidden="true">&#128269;</span>
+						<input type="search" class="bs-ics-search-input" placeholder="<?php esc_attr_e( 'Termine durchsuchen...', 'bs-wp-ics-feed-reader' ); ?>" aria-label="<?php esc_attr_e( 'Termine filtern', 'bs-wp-ics-feed-reader' ); ?>" />
+					</div>
+					<?php if ( ! empty( $categories ) ) : ?>
+						<div class="bs-ics-category-filters" role="group" aria-label="<?php esc_attr_e( 'Kategorien filtern', 'bs-wp-ics-feed-reader' ); ?>">
+							<button type="button" class="bs-ics-cat-btn is-active" data-cat="all"><?php esc_html_e( 'Alle', 'bs-wp-ics-feed-reader' ); ?></button>
+							<?php foreach ( $categories as $cat_item ) : ?>
+								<button type="button" class="bs-ics-cat-btn" data-cat="<?php echo esc_attr( $cat_item ); ?>">
+									<?php echo esc_html( $cat_item ); ?>
+								</button>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+
+			<!-- Terminliste / Raster -->
+			<div class="bs-ics-container <?php echo esc_attr( $layout_class ); ?>">
+				<?php
+				foreach ( $events as $event_index => $event ) :
+					$is_all_day   = ! empty( $event['all_day'] );
+					$timestamp    = (int) $event['start_timestamp'];
+					$datetime_iso = ! empty( $event['start_iso'] ) ? $event['start_iso'] : wp_date( 'c', $timestamp );
+					$details_id   = 'bs-ics-details-' . absint( $post_id ) . '-' . absint( $event_index );
+
+					// Datums- und Uhrzeitspanne formatieren
+					$formatted_date = $this->format_event_time_range( $event, $date_format );
+
+					// Prüfen, ob zusätzliche Detail-Felder vorhanden sind
+					$has_extra_details = false;
+					if ( 'none' !== $display['read_more_mode'] ) {
+						foreach ( $field_config as $f_key => $f_cfg ) {
+							if ( ! empty( $f_cfg['detail'] ) && empty( $f_cfg['teaser'] ) ) {
+								if ( 'DESCRIPTION' === $f_key && ! empty( $event['description'] ) ) {
+									$has_extra_details = true;
+									break;
+								}
+								if ( 'LOCATION' === $f_key && ! empty( $event['location'] ) ) {
+									$has_extra_details = true;
+									break;
+								}
+								if ( 'CATEGORIES' === $f_key && ! empty( $event['categories'] ) ) {
+									$has_extra_details = true;
+									break;
+								}
+								if ( 'URL' === $f_key && ! empty( $event['url'] ) ) {
+									$has_extra_details = true;
+									break;
+								}
+								if ( ! empty( $event['raw_fields'][ $f_key ] ) ) {
+									$has_extra_details = true;
+									break;
+								}
+							}
+						}
+					}
+					?>
+					<article class="bs-ics-card" data-uid="<?php echo esc_attr( isset( $event['uid'] ) ? $event['uid'] : '' ); ?>" data-category="<?php echo esc_attr( isset( $event['categories'] ) ? $event['categories'] : '' ); ?>">
+						<!-- TEASER-BEREICH -->
+						<?php if ( ! empty( $field_config['DTSTART']['teaser'] ) ) : ?>
+							<div class="bs-ics-card-header">
+								<time class="bs-ics-date" datetime="<?php echo esc_attr( $datetime_iso ); ?>">
+									<span class="bs-ics-date-icon" aria-hidden="true">&#128197;</span>
+									<span class="bs-ics-sr-only"><?php esc_html_e( 'Datum:', 'bs-wp-ics-feed-reader' ); ?> </span>
+									<span class="bs-ics-date-text"><?php echo esc_html( $formatted_date ); ?></span>
+								</time>
+								<?php if ( $is_all_day ) : ?>
+									<span class="bs-ics-badge bs-ics-badge-allday"><?php esc_html_e( 'Ganztägig', 'bs-wp-ics-feed-reader' ); ?></span>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $field_config['SUMMARY']['teaser'] ) && ! empty( $event['summary'] ) ) : ?>
+							<h3 class="bs-ics-title"><?php echo esc_html( $event['summary'] ); ?></h3>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $field_config['LOCATION']['teaser'] ) && ! empty( $event['location'] ) ) : ?>
+							<div class="bs-ics-meta bs-ics-location">
+								<span class="bs-ics-meta-icon" aria-hidden="true">&#128205;</span>
+								<span class="bs-ics-sr-only"><?php esc_html_e( 'Ort:', 'bs-wp-ics-feed-reader' ); ?> </span>
+								<span class="bs-ics-meta-text"><?php echo esc_html( $event['location'] ); ?></span>
+							</div>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $field_config['CATEGORIES']['teaser'] ) && ! empty( $event['categories'] ) ) : ?>
+							<div class="bs-ics-meta bs-ics-category">
+								<span class="bs-ics-sr-only"><?php esc_html_e( 'Kategorie:', 'bs-wp-ics-feed-reader' ); ?> </span>
+								<span class="bs-ics-badge"><?php echo esc_html( $event['categories'] ); ?></span>
+							</div>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $field_config['DESCRIPTION']['teaser'] ) && ! empty( $event['description'] ) ) : ?>
+							<div class="bs-ics-description">
+								<?php echo nl2br( wp_kses_post( $event['description'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</div>
+						<?php endif; ?>
+
+						<?php if ( ! empty( $field_config['URL']['teaser'] ) && ! empty( $event['url'] ) ) : ?>
+							<div class="bs-ics-action">
+								<a href="<?php echo esc_url( $event['url'] ); ?>" class="bs-ics-link-btn" target="_blank" rel="noopener noreferrer">
+									<?php echo esc_html( ! empty( $field_config['URL']['label'] ) ? $field_config['URL']['label'] : __( 'Mehr erfahren', 'bs-wp-ics-feed-reader' ) ); ?> &rarr;
+								</a>
+							</div>
+						<?php endif; ?>
+
+						<!-- DETAIL-BEREICH (Accordion) -->
+						<?php if ( 'expand' === $display['read_more_mode'] && $has_extra_details ) : ?>
+							<div class="bs-ics-card-details" id="<?php echo esc_attr( $details_id ); ?>" role="region" aria-label="<?php esc_attr_e( 'Zusätzliche Termindetails', 'bs-wp-ics-feed-reader' ); ?>">
+								<?php if ( ! empty( $field_config['LOCATION']['detail'] ) && empty( $field_config['LOCATION']['teaser'] ) && ! empty( $event['location'] ) ) : ?>
+									<div class="bs-ics-meta bs-ics-location">
+										<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['LOCATION']['label'] ) ? $field_config['LOCATION']['label'] : __( 'Ort', 'bs-wp-ics-feed-reader' ) ); ?>:</strong>
+										<span class="bs-ics-meta-text"><?php echo esc_html( $event['location'] ); ?></span>
+									</div>
+								<?php endif; ?>
+
+								<?php if ( ! empty( $field_config['CATEGORIES']['detail'] ) && empty( $field_config['CATEGORIES']['teaser'] ) && ! empty( $event['categories'] ) ) : ?>
+									<div class="bs-ics-meta bs-ics-category">
+										<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['CATEGORIES']['label'] ) ? $field_config['CATEGORIES']['label'] : __( 'Kategorie', 'bs-wp-ics-feed-reader' ) ); ?>:</strong>
+										<span class="bs-ics-meta-text"><?php echo esc_html( $event['categories'] ); ?></span>
+									</div>
+								<?php endif; ?>
+
+								<?php if ( ! empty( $field_config['DESCRIPTION']['detail'] ) && empty( $field_config['DESCRIPTION']['teaser'] ) && ! empty( $event['description'] ) ) : ?>
+									<div class="bs-ics-description">
+										<?php echo nl2br( wp_kses_post( $event['description'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+									</div>
+								<?php endif; ?>
+
+								<?php if ( ! empty( $field_config['URL']['detail'] ) && empty( $field_config['URL']['teaser'] ) && ! empty( $event['url'] ) ) : ?>
+									<div class="bs-ics-action">
+										<a href="<?php echo esc_url( $event['url'] ); ?>" class="bs-ics-link-btn" target="_blank" rel="noopener noreferrer">
+											<?php echo esc_html( ! empty( $field_config['URL']['label'] ) ? $field_config['URL']['label'] : __( 'Termin-Link öffnen', 'bs-wp-ics-feed-reader' ) ); ?> &rarr;
+										</a>
+									</div>
+								<?php endif; ?>
+
+								<?php
+								if ( isset( $event['raw_fields'] ) && is_array( $event['raw_fields'] ) ) {
+									foreach ( $field_config as $f_key => $f_cfg ) {
+										if ( in_array( $f_key, [ 'SUMMARY', 'DTSTART', 'DTEND', 'LOCATION', 'DESCRIPTION', 'URL', 'CATEGORIES' ], true ) ) {
+											continue;
+										}
+										if ( ! empty( $f_cfg['detail'] ) && ! empty( $event['raw_fields'][ $f_key ] ) ) {
+											$f_label = ! empty( $f_cfg['label'] ) ? $f_cfg['label'] : $f_key;
+											?>
+											<div class="bs-ics-meta bs-ics-custom-meta">
+												<strong class="bs-ics-meta-label"><?php echo esc_html( $f_label ); ?>:</strong>
+												<span class="bs-ics-meta-val"><?php echo esc_html( $event['raw_fields'][ $f_key ] ); ?></span>
+											</div>
+											<?php
+										}
+									}
+								}
+								?>
+							</div>
+						<?php endif; ?>
+
+						<!-- BUTTONS / AKTIONEN -->
+						<div class="bs-ics-card-footer">
+							<?php if ( 'expand' === $display['read_more_mode'] && $has_extra_details ) : ?>
+								<button type="button" class="bs-ics-toggle-btn" aria-expanded="false" aria-controls="<?php echo esc_attr( $details_id ); ?>" data-more-text="<?php echo esc_attr( $display['read_more_text'] ); ?>" data-less-text="<?php echo esc_attr( $display['read_less_text'] ); ?>">
+									<span class="bs-ics-btn-text"><?php echo esc_html( $display['read_more_text'] ); ?></span>
+								</button>
+							<?php elseif ( 'single' === $display['read_more_mode'] && $has_extra_details ) : ?>
+								<a href="<?php echo esc_url( add_query_arg( 'bs_event', rawurlencode( $event['uid'] ) ) ); ?>" class="bs-ics-read-more-btn">
+									<?php echo esc_html( $display['read_more_text'] ); ?> &rarr;
+								</a>
+							<?php endif; ?>
+
+							<?php if ( ! empty( $display['enable_add_to_cal'] ) ) : ?>
+								<?php echo $this->render_add_to_calendar_button( $event ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php endif; ?>
+						</div>
+					</article>
+				<?php endforeach; ?>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Rendert die vollständige Einzelansicht eines einzelnen Termins.
+	 *
+	 * @param array  $event              Event-Array.
+	 * @param array  $field_config       Feldkonfiguration.
+	 * @param array  $display            Display-Einstellungen.
+	 * @param string $style_vars         CSS-Variablen.
+	 * @param string $wrapper_class_attr Wrapper-Klassen.
+	 * @return string HTML-Ausgabe.
+	 */
+	private function render_single_event( $event, $field_config, $display, $style_vars, $wrapper_class_attr = 'bs-ics-wrapper' ) {
+		$is_all_day     = ! empty( $event['all_day'] );
+		$timestamp      = (int) $event['start_timestamp'];
+		$datetime_iso   = ! empty( $event['start_iso'] ) ? $event['start_iso'] : wp_date( 'c', $timestamp );
+		$date_format    = ! empty( $display['date_format'] ) ? $display['date_format'] : ( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) );
+		$formatted_date = $this->format_event_time_range( $event, $date_format );
+		$back_url       = remove_query_arg( 'bs_event' );
+
+		ob_start();
+		?>
+		<div class="<?php echo esc_attr( $wrapper_class_attr ); ?> bs-ics-single-view" style="<?php echo esc_attr( $style_vars ); ?>">
+			<!-- Schema.org JSON-LD für Einzelevent -->
+			<script type="application/ld+json">
+			<?php echo wp_json_encode( $this->generate_single_schema_org_data( $event ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ); ?>
+			</script>
+
+			<a href="<?php echo esc_url( $back_url ); ?>" class="bs-ics-back-btn">
+				<?php echo esc_html( $display['back_text'] ); ?>
+			</a>
+
+			<article class="bs-ics-card bs-ics-single-card" data-uid="<?php echo esc_attr( isset( $event['uid'] ) ? $event['uid'] : '' ); ?>">
+				<div class="bs-ics-card-header">
+					<time class="bs-ics-date" datetime="<?php echo esc_attr( $datetime_iso ); ?>">
+						<span class="bs-ics-date-icon" aria-hidden="true">&#128197;</span>
+						<span class="bs-ics-sr-only"><?php esc_html_e( 'Datum:', 'bs-wp-ics-feed-reader' ); ?> </span>
+						<span class="bs-ics-date-text"><?php echo esc_html( $formatted_date ); ?></span>
+					</time>
+					<?php if ( $is_all_day ) : ?>
+						<span class="bs-ics-badge bs-ics-badge-allday"><?php esc_html_e( 'Ganztägig', 'bs-wp-ics-feed-reader' ); ?></span>
+					<?php endif; ?>
+				</div>
+
+				<?php if ( ! empty( $event['summary'] ) ) : ?>
+					<h2 class="bs-ics-title"><?php echo esc_html( $event['summary'] ); ?></h2>
+				<?php endif; ?>
+
+				<?php if ( ( ! empty( $field_config['LOCATION']['detail'] ) || ! empty( $field_config['LOCATION']['teaser'] ) ) && ! empty( $event['location'] ) ) : ?>
+					<div class="bs-ics-meta bs-ics-location">
+						<span class="bs-ics-meta-icon" aria-hidden="true">&#128205;</span>
+						<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['LOCATION']['label'] ) ? $field_config['LOCATION']['label'] : __( 'Ort', 'bs-wp-ics-feed-reader' ) ); ?>:</strong>
+						<span class="bs-ics-meta-text"><?php echo esc_html( $event['location'] ); ?></span>
+					</div>
+				<?php endif; ?>
+
+				<?php if ( ( ! empty( $field_config['CATEGORIES']['detail'] ) || ! empty( $field_config['CATEGORIES']['teaser'] ) ) && ! empty( $event['categories'] ) ) : ?>
+					<div class="bs-ics-meta bs-ics-category">
+						<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['CATEGORIES']['label'] ) ? $field_config['CATEGORIES']['label'] : __( 'Kategorie', 'bs-wp-ics-feed-reader' ) ); ?>:</strong>
+						<span class="bs-ics-badge"><?php echo esc_html( $event['categories'] ); ?></span>
+					</div>
+				<?php endif; ?>
+
+				<?php if ( ( ! empty( $field_config['DESCRIPTION']['detail'] ) || ! empty( $field_config['DESCRIPTION']['teaser'] ) ) && ! empty( $event['description'] ) ) : ?>
+					<div class="bs-ics-description">
+						<?php echo nl2br( wp_kses_post( $event['description'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					</div>
+				<?php endif; ?>
+
+				<div class="bs-ics-card-footer bs-ics-single-footer">
+					<?php if ( ( ! empty( $field_config['URL']['detail'] ) || ! empty( $field_config['URL']['teaser'] ) ) && ! empty( $event['url'] ) ) : ?>
+						<a href="<?php echo esc_url( $event['url'] ); ?>" class="bs-ics-link-btn" target="_blank" rel="noopener noreferrer">
+							<?php echo esc_html( ! empty( $field_config['URL']['label'] ) ? $field_config['URL']['label'] : __( 'Termin-Link öffnen', 'bs-wp-ics-feed-reader' ) ); ?> &rarr;
+						</a>
+					<?php endif; ?>
+
+					<?php if ( ! empty( $display['enable_add_to_cal'] ) ) : ?>
+						<?php echo $this->render_add_to_calendar_button( $event ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php endif; ?>
+				</div>
+			</article>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Formatiert die Datums- und Uhrzeitspanne (z. B. "01.09.2026 13:00 – 17:00 Uhr").
+	 *
+	 * @param array  $event       Termin-Objekt.
+	 * @param string $date_format Format-String.
+	 * @return string
+	 */
+	private function format_event_time_range( $event, $date_format ) {
+		$start_ts   = (int) $event['start_timestamp'];
+		$is_all_day = ! empty( $event['all_day'] );
+
+		if ( $is_all_day ) {
+			return wp_date( get_option( 'date_format' ), $start_ts );
+		}
+
+		$start_formatted = wp_date( $date_format, $start_ts );
+
+		if ( ! empty( $event['end_timestamp'] ) ) {
+			$end_ts = (int) $event['end_timestamp'];
+			if ( wp_date( 'Ymd', $start_ts ) === wp_date( 'Ymd', $end_ts ) ) {
+				$time_only = wp_date( get_option( 'time_format' ), $end_ts );
+				return $start_formatted . ' – ' . $time_only;
+			}
+			return $start_formatted . ' – ' . wp_date( $date_format, $end_ts );
+		}
+
+		return $start_formatted;
+	}
+
+	/**
+	 * Rendert ein barrierefreies Add-to-Calendar Export-Menü (Google, Outlook, iCal Download).
+	 *
+	 * @param array $event Termin-Objekt.
+	 * @return string HTML-Ausgabe.
+	 */
+	private function render_add_to_calendar_button( $event ) {
+		$title       = ! empty( $event['summary'] ) ? $event['summary'] : __( 'Termin', 'bs-wp-ics-feed-reader' );
+		$location    = ! empty( $event['location'] ) ? $event['location'] : '';
+		$description = ! empty( $event['description'] ) ? wp_strip_all_tags( $event['description'] ) : '';
+		$start_iso   = ! empty( $event['start_iso'] ) ? $event['start_iso'] : gmdate( 'Ymd\THis\Z', (int) $event['start_timestamp'] );
+
+		$start_utc = gmdate( 'Ymd\THis\Z', (int) $event['start_timestamp'] );
+		$end_ts    = ! empty( $event['end_timestamp'] ) ? (int) $event['end_timestamp'] : (int) $event['start_timestamp'] + 3600;
+		$end_utc   = gmdate( 'Ymd\THis\Z', $end_ts );
+
+		$google_url = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+			. '&text=' . rawurlencode( $title )
+			. '&dates=' . $start_utc . '/' . $end_utc
+			. '&details=' . rawurlencode( $description )
+			. '&location=' . rawurlencode( $location );
+
+		$outlook_url = 'https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent'
+			. '&subject=' . rawurlencode( $title )
+			. '&startdt=' . rawurlencode( $start_iso )
+			. '&enddt=' . rawurlencode( gmdate( 'c', $end_ts ) )
+			. '&body=' . rawurlencode( $description )
+			. '&location=' . rawurlencode( $location );
+
+		$ics_payload = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//BS ICS Feed Reader//DE\r\nBEGIN:VEVENT\r\n"
+			. 'UID:' . ( ! empty( $event['uid'] ) ? $event['uid'] : uniqid() ) . "\r\n"
+			. 'SUMMARY:' . addcslashes( $title, ",;" ) . "\r\n"
+			. 'DESCRIPTION:' . addcslashes( $description, ",;" ) . "\r\n"
+			. 'LOCATION:' . addcslashes( $location, ",;" ) . "\r\n"
+			. 'DTSTART:' . $start_utc . "\r\n"
+			. 'DTEND:' . $end_utc . "\r\n"
+			. "END:VEVENT\r\nEND:VCALENDAR";
+
+		ob_start();
+		?>
+		<div class="bs-ics-cal-export">
+			<button type="button" class="bs-ics-cal-btn" aria-haspopup="true" aria-expanded="false" title="<?php esc_attr_e( 'In eigenen Kalender eintragen', 'bs-wp-ics-feed-reader' ); ?>">
+				<span aria-hidden="true">&#43;</span> <?php esc_html_e( 'Kalender', 'bs-wp-ics-feed-reader' ); ?>
+			</button>
+			<div class="bs-ics-cal-menu" role="menu" hidden>
+				<a href="<?php echo esc_url( $google_url ); ?>" target="_blank" rel="noopener noreferrer" role="menuitem">
+					<?php esc_html_e( 'Google Kalender', 'bs-wp-ics-feed-reader' ); ?>
+				</a>
+				<a href="<?php echo esc_url( $outlook_url ); ?>" target="_blank" rel="noopener noreferrer" role="menuitem">
+					<?php esc_html_e( 'Outlook Online', 'bs-wp-ics-feed-reader' ); ?>
+				</a>
+				<button type="button" class="bs-ics-download-ics" data-ics="<?php echo esc_attr( base64_encode( $ics_payload ) ); ?>" data-filename="<?php echo esc_attr( sanitize_title( $title ) . '.ics' ); ?>" role="menuitem">
+					<?php esc_html_e( 'Apple / .ics Download', 'bs-wp-ics-feed-reader' ); ?>
+				</button>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Generiert Schema.org Event JSON-LD für alle Events.
+	 *
+	 * @param array $events Termin-Array.
+	 * @return array
+	 */
+	private function generate_schema_org_data( $events ) {
+		$items = [];
+		foreach ( $events as $ev ) {
+			$items[] = $this->generate_single_schema_org_data( $ev );
+		}
+		return $items;
+	}
+
+	/**
+	 * Generiert Schema.org Event JSON-LD für ein Einzelevent.
+	 *
+	 * @param array $ev Termin-Objekt.
+	 * @return array
+	 */
+	private function generate_single_schema_org_data( $ev ) {
+		$start_iso = ! empty( $ev['start_iso'] ) ? $ev['start_iso'] : wp_date( 'c', (int) $ev['start_timestamp'] );
+		$end_iso   = ! empty( $ev['end_iso'] ) ? $ev['end_iso'] : $start_iso;
+
+		$data = [
+			'@context'            => 'https://schema.org',
+			'@type'               => 'Event',
+			'name'                => ! empty( $ev['summary'] ) ? $ev['summary'] : __( 'Termin', 'bs-wp-ics-feed-reader' ),
+			'startDate'           => $start_iso,
+			'endDate'             => $end_iso,
+			'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+			'eventStatus'         => 'https://schema.org/EventScheduled',
+		];
+
+		if ( ! empty( $ev['description'] ) ) {
+			$data['description'] = wp_strip_all_tags( $ev['description'] );
+		}
+
+		if ( ! empty( $ev['location'] ) ) {
+			$data['location'] = [
+				'@type'   => 'Place',
+				'name'    => $ev['location'],
+				'address' => $ev['location'],
+			];
+		}
+
+		if ( ! empty( $ev['url'] ) ) {
+			$data['url'] = esc_url_raw( $ev['url'] );
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Rendert einen barrierefreien Empty-State-Hinweis.
+	 *
+	 * @return string HTML-Ausgabe.
+	 */
+	private function render_empty_state() {
+		return '<div class="bs-ics-wrapper"><div class="bs-ics-container bs-ics-empty-container"><div class="bs-ics-empty-state"><p>' . esc_html__( 'Keine anstehenden Termine vorhanden.', 'bs-wp-ics-feed-reader' ) . '</p></div></div></div>';
+	}
+}
