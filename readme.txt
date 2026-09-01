@@ -1,5 +1,5 @@
 === BS ICS Feed ===
-Contributors: (add your WordPress.org username here)
+Contributors: tomevers
 Tags: calendar, ics, ical, events, gutenberg
 Requires at least: 5.8
 Tested up to: 7.1

@@ -10,6 +10,8 @@
 [![Design System](https://img.shields.io/badge/Design%20System-BS--PluginDesignSystem-teal.svg)]()
 [![Gutenberg Ready](https://img.shields.io/badge/Gutenberg-Block%20Ready-black.svg)]()
 
+**Quellcode:** [github.com/eversthomas/bs-ics-feed](https://github.com/eversthomas/bs-ics-feed)
+
 ---
 
 ## 📖 Übersicht
