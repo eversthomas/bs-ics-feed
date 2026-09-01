@@ -59,17 +59,34 @@
 /* Wrapper */
 .bs-ics-admin-wrapper {
 	margin-top: 10px;
+	max-width: 100%;
+	box-sizing: border-box;
 	font-family: var(--bs-font-ui);
 	color: var(--bs-neutral-700);
 }
 
-/* Tab Navigation */
+.bs-ics-admin-wrapper *,
+.bs-ics-admin-wrapper *::before,
+.bs-ics-admin-wrapper *::after {
+	box-sizing: inherit;
+}
+
+/*
+ * Tab Navigation
+ *
+ * flex-wrap: wrap ist hier entscheidend: Ohne Umbruch überschreiten die vier Tabs
+ * (inkl. Icon + mehrzeiligem Label wie "Darstellung & Weiterlesen") bei schmalerer
+ * Fensterbreite die Breite der Haupt-Spalte und ragen sichtbar in die rechte
+ * Seitenleiste (Shortcode-Box) hinein, statt in eine zweite Zeile umzubrechen.
+ */
 .bs-ics-nav-tab-wrapper {
 	margin-bottom: var(--bs-space-4);
 	border-bottom: 2px solid var(--bs-neutral-100);
 	padding-bottom: 0;
 	display: flex;
+	flex-wrap: wrap;
 	gap: var(--bs-space-1);
+	max-width: 100%;
 }
 
 .bs-ics-nav-tab-wrapper .nav-tab {
@@ -291,10 +308,16 @@
 	color: var(--bs-neutral-900);
 }
 
-/* Fields Table */
+/* Fields Table: scrollt horizontal statt die Spalte zu sprengen (feste th-Breiten). */
+.bs-ics-table-scroll {
+	max-width: 100%;
+	overflow-x: auto;
+}
+
 .bs-ics-fields-table {
 	border-collapse: collapse;
 	width: 100%;
+	min-width: 620px;
 	border: var(--bs-border);
 	border-radius: var(--bs-radius-sm);
 	overflow: hidden;

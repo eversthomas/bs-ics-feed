@@ -2,7 +2,7 @@
 
 > **Modulares, performantes und barrierefreies WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von iCalendar/ICS-Kalender-Feeds mit Shortcode & Gutenberg-Block.**
 
-[![Version](https://img.shields.io/badge/Version-1.1.0-blue.svg)](https://wordpress.org/)
+[![Version](https://img.shields.io/badge/Version-1.2.0-blue.svg)](https://wordpress.org/)
 [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -115,10 +115,10 @@ Kopiere den Shortcode aus der Sidebar der Feed-Bearbeitung:
 
 ## 🔒 Sicherheit & Datenschutz
 
-* **SSRF-Schutz:** Abruf externer Feeds über `wp_safe_remote_get()` mit Validierung und Timeout.
-* **CSRF-Schutz:** Alle AJAX-Endpunkte und Formularaktionen sind mit Nonces abgesichert (`check_ajax_referer`, `check_admin_referer`).
-* **Rechtekontrolle:** Zugriff nur für autorisierte Nutzer (`current_user_can('edit_post')`).
-* **Late Escaping:** Alle Ausgaben werden vor der Anzeige im Browser konsequent mit `esc_html()`, `esc_attr()`, `esc_url()` und `nl2br(wp_kses_post())` gesichert.
+* **SSRF-Schutz:** Abruf externer Feeds über `wp_safe_remote_get()` mit Validierung und Timeout (blockiert interne/private IP-Bereiche bereits auf WordPress-Kernebene).
+* **CSRF-Schutz:** Alle AJAX-Endpunkte und Formularaktionen sind mit Nonces abgesichert (`check_ajax_referer`, `wp_verify_nonce`).
+* **Rechtekontrolle:** Feed-Verwaltung ist auf Administratoren und Redakteure beschränkt (eigene Capability statt Autoren-Standardrecht); alle schreibenden Aktionen prüfen zusätzlich `current_user_can('edit_post', ...)` auf den konkreten Feed.
+* **Late Escaping:** Alle Ausgaben werden vor der Anzeige im Browser konsequent mit `esc_html()`, `esc_attr()` und `esc_url()` gesichert. Termin-Beschreibungen aus dem Feed werden bewusst als Klartext (`esc_html()` + `nl2br()`) statt als HTML gerendert.
 * **Updatesicherheit:** Bei Updates via ZIP-Upload bleiben alle Feed-Einstellungen, CPT-Einträge und gecachten Termine in der Datenbank zu 100 % erhalten.
 
 ---
@@ -158,6 +158,30 @@ bs-wp-ics-feed-reader/
 
 ## 📝 Changelog
 
+### Version 1.2.0 (2026-09-01)
+
+**Sicherheit**
+* **Fix:** Termin-Beschreibungen aus externen Feeds werden als Klartext statt als HTML gerendert (`esc_html()` statt `wp_kses_post()`) – reduziert die Angriffsfläche bei nicht vollständig vertrauenswürdigen Kalenderquellen.
+* **Fix:** Der „In Kalender eintragen“-Export escaped Sonderzeichen (Backslash, Komma, Semikolon, Zeilenumbrüche) jetzt korrekt nach RFC 5545.
+* **Neu:** Feed-Verwaltung ist jetzt auf Administratoren und Redakteure beschränkt (eigene `capability_type`-Rechte statt geerbter Standard-Post-Rechte).
+
+**Zuverlässigkeit**
+* **Fix:** Der automatische WP-Cron-Sync respektiert jetzt tatsächlich das pro Feed gewählte Intervall (stündlich / 2× täglich / täglich), statt bei jedem stündlichen Tick jeden nicht-manuellen Feed abzurufen.
+* **Fix:** Die Fallback-UID für Termine ohne eigene UID im Quell-Feed ist jetzt deterministisch – Einzelansicht-Links (`?bs_event=uid`) überleben künftig automatische Syncs.
+* **Neu:** Automatische Selbstheilungs-Routine bei Versionswechsel (`maybe_upgrade()`).
+
+**UX & Barrierefreiheit**
+* **Neu:** WP-Cron-Statusbox im Backend inkl. Anleitung für einen echten Server-Cronjob (auch für Entwickler).
+* **Neu:** Live-Vorschau der Kachel-Design-Einstellungen direkt im Backend, ganz ohne Speichern.
+* **Neu:** Zuletzt aktiver Einstellungs-Tab bleibt nach dem Speichern erhalten.
+* **Neu:** Vollständiges WAI-ARIA-Tabs-Pattern im Backend (Rollen, `aria-selected`, Pfeiltasten-Navigation).
+* **Fix:** Responsive Darstellung im Backend – die Einstellungs-Tabs überlappten bei schmalem Fenster die rechte Seitenleiste.
+* **Neu:** Grundlegende Dark-Mode-Unterstützung (`prefers-color-scheme`) für Filterleiste, Kategorie-Chips und Kalender-Export-Menü im Frontend.
+* **Fix:** Der Kategorie-Schnellfilter matcht jetzt exakte Kategorie-Tokens statt Teilstrings.
+
+**Performance**
+* **Fix:** Die Feed-Liste für den Block-Editor wird nicht mehr bei jedem einzelnen Seitenaufruf aus der Datenbank geladen, sondern nur noch im Editor-Kontext.
+
 ### Version 1.1.0
 * **Neu:** Nativer Gutenberg-Block (`bs-wp-ics/calendar`) mit echter Server-Side Live-Vorschau und InspectorControls.
 * **Neu:** Erweiterte Kachel-Design-Presets (*Klassisch*, *Minimal / Flat*, *Accent Header*).
@@ -172,6 +196,16 @@ bs-wp-ics-feed-reader/
 
 ### Version 1.0.0
 * Erstveröffentlichung mit CPT-Verwaltung, RFC 5545 Parser, AJAX-Sync, Shortcode-Renderer und responsivem Grid/List-Layout.
+
+---
+
+## 🤝 Entstehung & Transparenz
+
+Dieses Plugin wurde mit KI-gestützten Entwicklungswerkzeugen erstellt: Die erste Version entstand mit **Google Antigravity**, die anschließende Sicherheits-, Codequalitäts- und UX-Überarbeitung (inkl. der in obigem Changelog aufgeführten Fixes) mit **Claude Code**. Der gesamte Code wurde dabei durchgehend von einem Menschen geprüft, getestet und freigegeben.
+
+## 👤 Autor
+
+Entwickelt von **Tom Evers** — [bezugssysteme.de](https://bezugssysteme.de)
 
 ---
 

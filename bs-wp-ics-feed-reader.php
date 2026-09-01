@@ -1,14 +1,18 @@
 <?php
 /**
  * Plugin Name:       BS WP ICS Feed Reader
- * Plugin URI:        https://example.com/bs-wp-ics-feed-reader
+ * Plugin URI:        https://bezugssysteme.de
  * Description:       Modulares, performantes und sicheres WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von ICS-Kalender-Feeds.
- * Version:           1.1.0
- * Author:            BS
+ * Version:           1.2.0
+ * Author:            Tom Evers
+ * Author URI:        https://bezugssysteme.de
  * Text Domain:       bs-wp-ics-feed-reader
  * Domain Path:       /languages
  * Requires at least: 5.8
  * Requires PHP:      7.4
+ *
+ * Entstanden in Zusammenarbeit mit Google Antigravity (Erstversion) und
+ * Claude Code (Sicherheits-, Qualitäts- und UX-Überarbeitung).
  *
  * @package BS_WP_ICS_Feed_Reader
  */
@@ -18,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin-Konstanten definieren.
-define( 'BS_ICS_VERSION', '1.1.0' );
+define( 'BS_ICS_VERSION', '1.2.0' );
 define( 'BS_ICS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BS_ICS_URL', plugin_dir_url( __FILE__ ) );
 define( 'BS_ICS_BASENAME', plugin_basename( __FILE__ ) );
@@ -106,6 +110,7 @@ final class BS_ICS_Feed_Reader {
 	 */
 	private function init_hooks() {
 		add_action( 'init', [ $this, 'load_textdomain' ] );
+		add_action( 'admin_init', [ $this, 'maybe_upgrade' ] );
 		add_action( 'bs_ics_cron_sync_event', [ $this, 'cron_sync_all_feeds' ] );
 
 		// Komponenten initialisieren.
@@ -116,6 +121,23 @@ final class BS_ICS_Feed_Reader {
 		if ( class_exists( 'BS_ICS_Block' ) ) {
 			$this->block = new BS_ICS_Block();
 		}
+	}
+
+	/**
+	 * Führt bei Versionswechsel automatisch fällige Upgrade-Routinen aus.
+	 *
+	 * Greift auch dann, wenn das Plugin bereits aktiv war und lediglich per Datei-
+	 * Update auf eine neue Version gebracht wurde (kein erneuter Aktivierungshook).
+	 * Aktuell: stellt sicher, dass Administrator-/Redakteur-Rollen die aktuell
+	 * korrekten Feed-Verwaltungs-Capabilities besitzen (siehe grant_capability_to_roles()).
+	 */
+	public function maybe_upgrade() {
+		if ( get_option( 'bs_ics_version' ) === BS_ICS_VERSION ) {
+			return;
+		}
+
+		self::grant_capability_to_roles();
+		update_option( 'bs_ics_version', BS_ICS_VERSION );
 	}
 
 	/**
@@ -236,16 +258,29 @@ final class BS_ICS_Feed_Reader {
 	}
 
 	/**
-	 * Vergibt die Feed-Verwaltungs-Capability an Administrator- und Redakteur-Rollen.
+	 * Vergibt die Feed-Verwaltungs-Capabilities an Administrator- und Redakteur-Rollen.
 	 *
-	 * Ohne diesen Schritt hätte niemand die Capability und der Post-Type wäre
-	 * für alle Rollen unsichtbar, da 'manage_ics_feeds' kein WordPress-Standardrecht ist.
+	 * Ohne diesen Schritt hätte niemand diese Capabilities und der Post-Type wäre
+	 * für alle Rollen unsichtbar, da sie keine WordPress-Standardrechte sind.
+	 * Bereinigt zusätzlich die alte, fehlerhafte Einzel-Capability aus einem
+	 * Zwischenstand, die zu einem WordPress-internen Meta-Cap-Konflikt führte.
 	 */
 	private static function grant_capability_to_roles() {
 		foreach ( [ 'administrator', 'editor' ] as $role_name ) {
 			$role = get_role( $role_name );
-			if ( $role && ! $role->has_cap( BS_ICS_CPT::CAPABILITY ) ) {
-				$role->add_cap( BS_ICS_CPT::CAPABILITY );
+			if ( ! $role ) {
+				continue;
+			}
+
+			foreach ( BS_ICS_CPT::get_grantable_capabilities() as $capability ) {
+				if ( ! $role->has_cap( $capability ) ) {
+					$role->add_cap( $capability );
+				}
+			}
+
+			// Migrations-Bereinigung: alte fehlerhafte Capability entfernen, falls vorhanden.
+			if ( $role->has_cap( BS_ICS_CPT::LEGACY_CAPABILITY ) ) {
+				$role->remove_cap( BS_ICS_CPT::LEGACY_CAPABILITY );
 			}
 		}
 	}

@@ -32,14 +32,35 @@ if ( ! empty( $bs_ics_posts ) ) {
 // Transients oder Optionen bereinigen (falls vorhanden).
 delete_option( 'bs_ics_version' );
 
-// Bei Aktivierung vergebene Feed-Verwaltungs-Capability von allen Rollen entfernen.
-// Hinweis: Muss mit BS_ICS_CPT::CAPABILITY übereinstimmen (Klasse ist hier nicht geladen).
+// Bei Aktivierung vergebene Feed-Verwaltungs-Capabilities von allen Rollen entfernen.
+// Hinweis: Muss mit BS_ICS_CPT::get_grantable_capabilities() / ::LEGACY_CAPABILITY
+// übereinstimmen (Klasse ist hier nicht geladen, daher hartkodierte Liste).
+$bs_ics_capabilities = [
+	'manage_ics_feeds', // Alte, fehlerhafte Einzel-Capability aus einem Zwischenstand.
+	'edit_ics_feeds',
+	'edit_others_ics_feeds',
+	'edit_private_ics_feeds',
+	'edit_published_ics_feeds',
+	'publish_ics_feeds',
+	'read_private_ics_feeds',
+	'delete_ics_feeds',
+	'delete_others_ics_feeds',
+	'delete_private_ics_feeds',
+	'delete_published_ics_feeds',
+	'create_ics_feeds',
+];
+
 $bs_ics_roles = wp_roles();
 if ( $bs_ics_roles ) {
 	foreach ( array_keys( $bs_ics_roles->roles ) as $bs_ics_role_name ) {
 		$bs_ics_role = get_role( $bs_ics_role_name );
-		if ( $bs_ics_role && $bs_ics_role->has_cap( 'manage_ics_feeds' ) ) {
-			$bs_ics_role->remove_cap( 'manage_ics_feeds' );
+		if ( ! $bs_ics_role ) {
+			continue;
+		}
+		foreach ( $bs_ics_capabilities as $bs_ics_capability ) {
+			if ( $bs_ics_role->has_cap( $bs_ics_capability ) ) {
+				$bs_ics_role->remove_cap( $bs_ics_capability );
+			}
 		}
 	}
 }

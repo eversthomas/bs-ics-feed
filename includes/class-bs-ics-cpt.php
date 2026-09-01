@@ -20,12 +20,27 @@ class BS_ICS_CPT {
 	const POST_TYPE = 'bs_ics_feed';
 
 	/**
-	 * Eigene Capability für die Verwaltung von ICS-Feeds.
+	 * Alte, fehlerhafte Einzel-Capability (bis v1.1.0-Zwischenstand).
 	 *
-	 * Wird bei Aktivierung nur an Administrator- und Redakteur-Rollen vergeben,
-	 * damit Feed-Konfiguration (inkl. externem URL-Abruf) kein Autoren-Recht ist.
+	 * WICHTIG: NICHT als Wert für mehrere Capability-Schlüssel gleichzeitig verwenden!
+	 * Wenn 'edit_post'/'delete_post' (objektbezogene Meta-Caps) und 'edit_posts' (Listen-
+	 * Capability) auf denselben String gemappt werden, verwechselt WordPress intern eine
+	 * kontextlose Prüfung (z. B. für die Menü-Sichtbarkeit) mit einer objektbezogenen
+	 * 'delete_post'-Prüfung und liefert fälschlich false zurück — genau das hat zuvor dazu
+	 * geführt, dass Administratoren/Redakteure plötzlich keinen Zugriff mehr hatten.
+	 * Nur noch für die Migrations-Bereinigung alter Rollen-Einträge referenziert.
 	 */
-	const CAPABILITY = 'manage_ics_feeds';
+	const LEGACY_CAPABILITY = 'manage_ics_feeds';
+
+	/**
+	 * Singular-/Plural-Basis für die Feed-Verwaltungs-Capabilities.
+	 *
+	 * WordPress leitet daraus automatisch getrennte objektbezogene Meta-Caps
+	 * (z. B. edit_ics_feed) und listenbezogene Primitiv-Caps (z. B. edit_ics_feeds,
+	 * edit_others_ics_feeds) ab — das ist der von WordPress selbst empfohlene Weg,
+	 * einen Post-Type auf bestimmte Rollen zu beschränken.
+	 */
+	const CAPABILITY_TYPE = [ 'ics_feed', 'ics_feeds' ];
 
 	/**
 	 * Konstruktor.
@@ -78,27 +93,40 @@ class BS_ICS_CPT {
 			'exclude_from_search'   => true,
 			'publicly_queryable'    => false,
 			'rewrite'               => false,
-			'capabilities'          => [
-				'edit_post'               => self::CAPABILITY,
-				'read_post'               => self::CAPABILITY,
-				'delete_post'             => self::CAPABILITY,
-				'edit_posts'              => self::CAPABILITY,
-				'edit_others_posts'       => self::CAPABILITY,
-				'publish_posts'           => self::CAPABILITY,
-				'read_private_posts'      => self::CAPABILITY,
-				'delete_posts'            => self::CAPABILITY,
-				'delete_private_posts'    => self::CAPABILITY,
-				'delete_published_posts'  => self::CAPABILITY,
-				'delete_others_posts'     => self::CAPABILITY,
-				'edit_private_posts'      => self::CAPABILITY,
-				'edit_published_posts'    => self::CAPABILITY,
-				'create_posts'            => self::CAPABILITY,
-			],
+			'capability_type'       => self::CAPABILITY_TYPE,
 			'map_meta_cap'          => true,
 			'show_in_rest'          => false,
 		];
 
 		register_post_type( self::POST_TYPE, $args );
+	}
+
+	/**
+	 * Listen-/Primitiv-Capabilities, die Rollen tatsächlich erhalten müssen.
+	 *
+	 * Die objektbezogenen Meta-Caps (edit_ics_feed, read_ics_feed, delete_ics_feed)
+	 * werden von WordPress zur Laufzeit automatisch aus diesen Primitiv-Caps plus
+	 * Post-Eigentümerschaft abgeleitet (map_meta_cap) — sie dürfen NICHT zusätzlich
+	 * direkt an Rollen vergeben werden.
+	 *
+	 * @return string[]
+	 */
+	public static function get_grantable_capabilities() {
+		list( , $plural ) = self::CAPABILITY_TYPE;
+
+		return [
+			'edit_' . $plural,
+			'edit_others_' . $plural,
+			'edit_private_' . $plural,
+			'edit_published_' . $plural,
+			'publish_' . $plural,
+			'read_private_' . $plural,
+			'delete_' . $plural,
+			'delete_others_' . $plural,
+			'delete_private_' . $plural,
+			'delete_published_' . $plural,
+			'create_' . $plural,
+		];
 	}
 
 	/**

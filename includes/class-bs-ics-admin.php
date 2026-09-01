@@ -23,6 +23,7 @@ class BS_ICS_Admin {
 		add_action( 'save_post_' . BS_ICS_CPT::POST_TYPE, [ $this, 'save_meta_data' ], 10, 2 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_assets' ] );
 		add_action( 'wp_ajax_bs_ics_sync_feed', [ $this, 'ajax_sync_feed' ] );
+		add_filter( 'admin_footer_text', [ $this, 'render_admin_footer_text' ] );
 	}
 
 	/**
@@ -119,6 +120,30 @@ class BS_ICS_Admin {
 					'inactive'     => __( 'Inaktiv', 'bs-wp-ics-feed-reader' ),
 				],
 			]
+		);
+	}
+
+	/**
+	 * Ergänzt den WordPress-Admin-Footer auf den eigenen Plugin-Bildschirmen um
+	 * Autoren- und Transparenz-Hinweis (KI-gestützte Entstehung offengelegt).
+	 *
+	 * Bewusst nur auf den ICS-Feed-Bildschirmen aktiv, nicht sitewide.
+	 *
+	 * @param string $text Ursprünglicher Footer-Text.
+	 * @return string
+	 */
+	public function render_admin_footer_text( $text ) {
+		$screen = get_current_screen();
+		if ( ! $screen || BS_ICS_CPT::POST_TYPE !== $screen->post_type ) {
+			return $text;
+		}
+
+		return sprintf(
+			/* translators: 1: Plugin-Name inkl. Version, 2: verlinkter Autoren-Name, 3: Namen der KI-Werkzeuge */
+			__( '%1$s &middot; entwickelt von %2$s &middot; entstanden in Zusammenarbeit mit %3$s', 'bs-wp-ics-feed-reader' ),
+			'BS WP ICS Feed Reader v' . esc_html( BS_ICS_VERSION ),
+			'<a href="' . esc_url( 'https://bezugssysteme.de' ) . '" target="_blank" rel="noopener noreferrer">Tom Evers</a>',
+			'Google Antigravity &amp; Claude Code'
 		);
 	}
 
@@ -291,19 +316,21 @@ class BS_ICS_Admin {
 					<p class="bs-ics-panel-desc">
 						<?php esc_html_e( 'Steuere granular, welche Informationen sofort in der Termin-Kachel (Teaser) angezeigt werden und welche erst beim Klick auf „Weiterlesen“ sichtbar sind.', 'bs-wp-ics-feed-reader' ); ?>
 					</p>
-					<table class="widefat bs-ics-fields-table">
-						<thead>
-							<tr>
-								<th style="width: 170px; text-align: center;"><?php esc_html_e( 'In Übersicht (Teaser)', 'bs-wp-ics-feed-reader' ); ?></th>
-								<th style="width: 170px; text-align: center;"><?php esc_html_e( 'In Detailansicht', 'bs-wp-ics-feed-reader' ); ?></th>
-								<th style="width: 160px;"><?php esc_html_e( 'RFC 5545 Feld', 'bs-wp-ics-feed-reader' ); ?></th>
-								<th><?php esc_html_e( 'Frontend Label / Beschriftung', 'bs-wp-ics-feed-reader' ); ?></th>
-							</tr>
-						</thead>
-						<tbody id="bs-ics-fields-tbody">
-							<?php echo $this->render_field_config_rows( $available_fields, $field_config ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						</tbody>
-					</table>
+					<div class="bs-ics-table-scroll">
+						<table class="widefat bs-ics-fields-table">
+							<thead>
+								<tr>
+									<th style="width: 170px; text-align: center;"><?php esc_html_e( 'In Übersicht (Teaser)', 'bs-wp-ics-feed-reader' ); ?></th>
+									<th style="width: 170px; text-align: center;"><?php esc_html_e( 'In Detailansicht', 'bs-wp-ics-feed-reader' ); ?></th>
+									<th style="width: 160px;"><?php esc_html_e( 'RFC 5545 Feld', 'bs-wp-ics-feed-reader' ); ?></th>
+									<th><?php esc_html_e( 'Frontend Label / Beschriftung', 'bs-wp-ics-feed-reader' ); ?></th>
+								</tr>
+							</thead>
+							<tbody id="bs-ics-fields-tbody">
+								<?php echo $this->render_field_config_rows( $available_fields, $field_config ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 
