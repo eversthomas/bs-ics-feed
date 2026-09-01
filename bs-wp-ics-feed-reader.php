@@ -3,7 +3,7 @@
  * Plugin Name:       BS WP ICS Feed Reader
  * Plugin URI:        https://bezugssysteme.de
  * Description:       Modulares, performantes und sicheres WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von ICS-Kalender-Feeds.
- * Version:           1.4.0
+ * Version:           1.5.0
  * Author:            Tom Evers
  * Author URI:        https://bezugssysteme.de
  * Text Domain:       bs-wp-ics-feed-reader
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin-Konstanten definieren.
-define( 'BS_ICS_VERSION', '1.4.0' );
+define( 'BS_ICS_VERSION', '1.5.0' );
 define( 'BS_ICS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BS_ICS_URL', plugin_dir_url( __FILE__ ) );
 define( 'BS_ICS_BASENAME', plugin_basename( __FILE__ ) );
@@ -103,6 +103,9 @@ final class BS_ICS_Feed_Reader {
 		if ( file_exists( BS_ICS_PATH . 'includes/class-bs-ics-block.php' ) ) {
 			require_once BS_ICS_PATH . 'includes/class-bs-ics-block.php';
 		}
+		if ( file_exists( BS_ICS_PATH . 'includes/class-bs-ics-widget.php' ) ) {
+			require_once BS_ICS_PATH . 'includes/class-bs-ics-widget.php';
+		}
 	}
 
 	/**
@@ -112,6 +115,7 @@ final class BS_ICS_Feed_Reader {
 		add_action( 'init', [ $this, 'load_textdomain' ] );
 		add_action( 'admin_init', [ $this, 'maybe_upgrade' ] );
 		add_action( 'bs_ics_cron_sync_event', [ $this, 'cron_sync_all_feeds' ] );
+		add_action( 'widgets_init', [ $this, 'register_widget' ] );
 
 		// Komponenten initialisieren.
 		$this->cpt      = new BS_ICS_CPT();
@@ -120,6 +124,16 @@ final class BS_ICS_Feed_Reader {
 
 		if ( class_exists( 'BS_ICS_Block' ) ) {
 			$this->block = new BS_ICS_Block();
+		}
+	}
+
+	/**
+	 * Registriert das klassische Sidebar-Widget für Themes/Widget-Bereiche ohne
+	 * Block-Widgets-Unterstützung (der Gutenberg-Block funktioniert dort bereits nativ).
+	 */
+	public function register_widget() {
+		if ( class_exists( 'BS_ICS_Widget' ) ) {
+			register_widget( 'BS_ICS_Widget' );
 		}
 	}
 

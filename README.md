@@ -2,7 +2,7 @@
 
 > **Modulares, performantes und barrierefreies WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von iCalendar/ICS-Kalender-Feeds mit Shortcode & Gutenberg-Block.**
 
-[![Version](https://img.shields.io/badge/Version-1.4.0-blue.svg)](https://wordpress.org/)
+[![Version](https://img.shields.io/badge/Version-1.5.0-blue.svg)](https://wordpress.org/)
 [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -16,7 +16,7 @@
 
 **BS WP ICS Feed Reader** ermöglicht das einfache Einbinden und stilvolle Ausgeben externer Kalender-Feeds (z. B. aus Google Calendar, Apple iCloud, Outlook, REDAXO forCal, Nextcloud oder Vereinssoftware) in WordPress-Websites. 
 
-Feeds werden als eigener Inhaltstyp verwaltet, per Klick synchronisiert, im lokalen Cache gespeichert und wahlweise über den **Gutenberg-Block (`ICS Kalender-Feed`)** oder den flexiblen Shortcode `[bs_ics_calendar id="..."]` im Frontend angezeigt.
+Feeds werden als eigener Inhaltstyp verwaltet, per Klick synchronisiert, im lokalen Cache gespeichert und wahlweise über den **Gutenberg-Block (`ICS Kalender-Feed`)**, den flexiblen Shortcode `[bs_ics_calendar id="..."]` oder ein klassisches **Sidebar-Widget** im Frontend angezeigt.
 
 ---
 
@@ -120,6 +120,12 @@ Layout, Design und Feldkonfiguration der zusammengeführten Ansicht richten sich
 | `filter` | `true`, `false` | *aus Feed* | Such- & Kategoriefilterleiste aktivieren/deaktivieren |
 | `export` | `true`, `false` | *aus Feed* | „In Kalender eintragen“-Buttons anzeigen |
 
+### 4. Als Sidebar-Widget einbinden
+
+Für Themes/Widget-Bereiche ohne Block-Widgets-Unterstützung oder für Redakteure, die lieber über die klassische Oberfläche arbeiten, steht zusätzlich ein natives Widget **„ICS Kalender-Feed“** unter **Design → Widgets** zur Verfügung. Es bietet eine kompakte, sidebar-taugliche Auswahl der wichtigsten Optionen (Feed, Layout, Anzahl Termine, nur anstehende Termine, Filterleiste, Kalender-Export) und nutzt intern denselben Renderer wie Shortcode und Block. Weitergehende Design-Einstellungen (Farben, Kachel-Stil …) werden dabei aus den Feed-Einstellungen übernommen.
+
+> Hinweis: Themes mit Block-Widgets-Unterstützung (Standard seit WordPress 5.8) können alternativ direkt den Gutenberg-Block **ICS Kalender-Feed** in jeden Widget-Bereich ziehen.
+
 ---
 
 ## 🔒 Sicherheit & Datenschutz
@@ -150,7 +156,8 @@ bs-wp-ics-feed-reader/
 │   ├── class-bs-ics-parser.php       # RFC 5545 Parser (Zeitzonen, Unfolding, ReDoS-Schutz)
 │   ├── class-bs-ics-admin.php        # Tabbed Meta-Boxes, Pill-Switches, Dreier-Schema, AJAX-Sync
 │   ├── class-bs-ics-renderer.php     # Shortcode-Renderer, Schema.org JSON-LD, Filter, Export
-│   └── class-bs-ics-block.php        # Server-Side Rendered Gutenberg-Block (bs-wp-ics/calendar)
+│   ├── class-bs-ics-block.php        # Server-Side Rendered Gutenberg-Block (bs-wp-ics/calendar)
+│   └── class-bs-ics-widget.php       # Klassisches WP_Widget für Sidebar-/Widget-Bereiche
 └── assets/
     ├── css/
     │   ├── admin.css                 # BS Design System (OKLCH, Pill-Switches, Dreier-Schema)
@@ -166,6 +173,14 @@ bs-wp-ics-feed-reader/
 ---
 
 ## 📝 Changelog
+
+### Version 1.5.0 (2026-09-01)
+
+**Neu: Sidebar-Widget**
+* Natives WP_Widget „ICS Kalender-Feed“ unter Design → Widgets, für Themes/Widget-Bereiche ohne Block-Widgets-Unterstützung und für Redakteure, die lieber über die klassische Widget-Oberfläche arbeiten.
+* Kompaktes, sidebar-taugliches Konfigurationsformular (Feed, Layout, Anzahl Termine, nur anstehende Termine, Filterleiste, Kalender-Export).
+* Nutzt intern denselben `BS_ICS_Renderer` wie Shortcode und Block – keine doppelte Render-Logik, keine abweichende Ausgabe.
+* Zeigt bei fehlender Feed-Auswahl bewusst gar nichts an (kein leeres Widget-Gerüst im Frontend).
 
 ### Version 1.4.0 (2026-09-01)
 
