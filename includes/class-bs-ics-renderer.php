@@ -22,6 +22,8 @@ class BS_ICS_Renderer {
 	public function __construct() {
 		add_shortcode( 'bs_ics_calendar', [ $this, 'render_shortcode' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'register_frontend_assets' ] );
+		add_action( 'wp_ajax_bs_ics_export_csv', [ $this, 'ajax_export_csv' ] );
+		add_action( 'wp_ajax_nopriv_bs_ics_export_csv', [ $this, 'ajax_export_csv' ] );
 	}
 
 	/**
@@ -81,6 +83,7 @@ class BS_ICS_Renderer {
 				'mode'                 => '',
 				'filter'               => '',
 				'export'               => '',
+				'csv'                  => '',
 			],
 			$atts,
 			'bs_ics_calendar'
@@ -116,32 +119,9 @@ class BS_ICS_Renderer {
 		$display_settings = get_post_meta( $post_id, '_bs_ics_display_settings', true );
 		$design_settings  = get_post_meta( $post_id, '_bs_ics_design_settings', true );
 
-		// Termine aller angegebenen Feeds laden und zusammenführen. Bei mehr als einem Feed
-		// wird jedes Event mit seiner Quelle (Titel + eigener Akzentfarbe) markiert, um es im
-		// Frontend farblich zuordenbar zu machen (Quellen-Badge + Quellen-Filter).
-		$cached_events = [];
-		foreach ( $valid_feed_ids as $feed_id ) {
-			$feed_events = get_post_meta( $feed_id, '_bs_ics_cached_events', true );
-			if ( ! is_array( $feed_events ) || empty( $feed_events ) ) {
-				continue;
-			}
-
-			if ( ! $is_merged ) {
-				$cached_events = $feed_events;
-				break;
-			}
-
-			$feed_design_settings = get_post_meta( $feed_id, '_bs_ics_design_settings', true );
-			$feed_design_settings = wp_parse_args( is_array( $feed_design_settings ) ? $feed_design_settings : [], BS_ICS_CPT::get_design_defaults() );
-			$feed_title            = get_the_title( $feed_id );
-
-			foreach ( $feed_events as $feed_event ) {
-				$feed_event['_feed_id']     = $feed_id;
-				$feed_event['_feed_title']  = $feed_title ? $feed_title : sprintf( __( 'Feed #%d', 'bs-wp-ics-feed-reader' ), $feed_id );
-				$feed_event['_feed_accent'] = $feed_design_settings['accent_color'];
-				$cached_events[]            = $feed_event;
-			}
-		}
+		// Termine aller angegebenen Feeds laden und zusammenführen (siehe load_and_merge_events()
+		// für Details zur Quellen-Markierung bei zusammengeführten Ansichten).
+		$cached_events = $this->load_and_merge_events( $valid_feed_ids, $is_merged );
 
 		// Standardwerte & Attribute-Overrides zusammenführen.
 		$display = wp_parse_args( is_array( $display_settings ) ? $display_settings : [], BS_ICS_CPT::get_display_defaults() );
@@ -166,6 +146,9 @@ class BS_ICS_Renderer {
 		}
 		if ( '' !== $atts['export'] ) {
 			$display['enable_add_to_cal'] = filter_var( $atts['export'], FILTER_VALIDATE_BOOLEAN );
+		}
+		if ( '' !== $atts['csv'] ) {
+			$display['enable_csv_export'] = filter_var( $atts['csv'], FILTER_VALIDATE_BOOLEAN );
 		}
 
 		$design = wp_parse_args( is_array( $design_settings ) ? $design_settings : [], BS_ICS_CPT::get_design_defaults() );
@@ -261,44 +244,11 @@ class BS_ICS_Renderer {
 			}
 		}
 
-		// 2. ÜBERSICHTS-ANSICHT: Filterung vergangener Termine
-		$events = $cached_events;
-		if ( ! empty( $display['only_future'] ) ) {
-			$wp_tz       = wp_timezone();
-			$today_start = ( new DateTimeImmutable( 'today 00:00:00', $wp_tz ) )->getTimestamp();
-			$now         = ( new DateTimeImmutable( 'now', $wp_tz ) )->getTimestamp();
-
-			$events = array_filter(
-				$events,
-				function ( $event ) use ( $today_start, $now ) {
-					if ( ! empty( $event['all_day'] ) ) {
-						return ( (int) $event['start_timestamp'] + 86399 ) >= $today_start;
-					}
-					$end = ! empty( $event['end_timestamp'] ) ? (int) $event['end_timestamp'] : (int) $event['start_timestamp'];
-					return $end >= $now;
-				}
-			);
-		}
+		// 2. ÜBERSICHTS-ANSICHT: Filterung vergangener Termine, Sortierung, Limitierung.
+		$events = $this->filter_sort_limit_events( $cached_events, $display );
 
 		if ( empty( $events ) ) {
 			return $this->render_empty_state();
-		}
-
-		// Sortierung.
-		$is_desc = ( 'desc' === $display['sort'] );
-		usort(
-			$events,
-			function ( $a, $b ) use ( $is_desc ) {
-				if ( $is_desc ) {
-					return ( (int) $b['start_timestamp'] <=> (int) $a['start_timestamp'] );
-				}
-				return ( (int) $a['start_timestamp'] <=> (int) $b['start_timestamp'] );
-			}
-		);
-
-		// Limitierung.
-		if ( $display['limit'] > 0 ) {
-			$events = array_slice( $events, 0, $display['limit'] );
 		}
 
 		// Kategorien für den Schnellfilter sammeln.
@@ -338,33 +288,44 @@ class BS_ICS_Renderer {
 			<?php echo wp_json_encode( $this->generate_schema_org_data( $events ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ); ?>
 			</script>
 
-			<!-- Schnellfilter & Suche (Optional) -->
-			<?php if ( ! empty( $display['enable_search_filter'] ) && count( $events ) > 1 ) : ?>
+			<!-- Schnellfilter, Suche & CSV-Export (jeweils optional) -->
+			<?php
+			$show_filter_row = ! empty( $display['enable_search_filter'] ) && count( $events ) > 1;
+			$show_csv_export = ! empty( $display['enable_csv_export'] );
+			?>
+			<?php if ( $show_filter_row || $show_csv_export ) : ?>
 				<div class="bs-ics-filter-bar">
-					<div class="bs-ics-search-wrap">
-						<span class="bs-ics-search-icon" aria-hidden="true">&#128269;</span>
-						<input type="search" class="bs-ics-search-input" placeholder="<?php esc_attr_e( 'Termine durchsuchen...', 'bs-wp-ics-feed-reader' ); ?>" aria-label="<?php esc_attr_e( 'Termine filtern', 'bs-wp-ics-feed-reader' ); ?>" />
-					</div>
-					<?php if ( ! empty( $categories ) ) : ?>
-						<div class="bs-ics-category-filters" role="group" aria-label="<?php esc_attr_e( 'Kategorien filtern', 'bs-wp-ics-feed-reader' ); ?>">
-							<button type="button" class="bs-ics-cat-btn is-active" data-cat="all"><?php esc_html_e( 'Alle', 'bs-wp-ics-feed-reader' ); ?></button>
-							<?php foreach ( $categories as $cat_item ) : ?>
-								<button type="button" class="bs-ics-cat-btn" data-cat="<?php echo esc_attr( $cat_item ); ?>">
-									<?php echo esc_html( $cat_item ); ?>
-								</button>
-							<?php endforeach; ?>
+					<?php if ( $show_filter_row ) : ?>
+						<div class="bs-ics-search-wrap">
+							<span class="bs-ics-search-icon" aria-hidden="true">&#128269;</span>
+							<input type="search" class="bs-ics-search-input" placeholder="<?php esc_attr_e( 'Termine durchsuchen...', 'bs-wp-ics-feed-reader' ); ?>" aria-label="<?php esc_attr_e( 'Termine filtern', 'bs-wp-ics-feed-reader' ); ?>" />
 						</div>
+						<?php if ( ! empty( $categories ) ) : ?>
+							<div class="bs-ics-category-filters" role="group" aria-label="<?php esc_attr_e( 'Kategorien filtern', 'bs-wp-ics-feed-reader' ); ?>">
+								<button type="button" class="bs-ics-cat-btn is-active" data-cat="all"><?php esc_html_e( 'Alle', 'bs-wp-ics-feed-reader' ); ?></button>
+								<?php foreach ( $categories as $cat_item ) : ?>
+									<button type="button" class="bs-ics-cat-btn" data-cat="<?php echo esc_attr( $cat_item ); ?>">
+										<?php echo esc_html( $cat_item ); ?>
+									</button>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
+						<?php if ( ! empty( $feed_sources ) ) : ?>
+							<div class="bs-ics-category-filters bs-ics-source-filters" role="group" aria-label="<?php esc_attr_e( 'Nach Kalender filtern', 'bs-wp-ics-feed-reader' ); ?>">
+								<button type="button" class="bs-ics-cat-btn is-active" data-feed="all"><?php esc_html_e( 'Alle Kalender', 'bs-wp-ics-feed-reader' ); ?></button>
+								<?php foreach ( $feed_sources as $source_feed_id => $source ) : ?>
+									<button type="button" class="bs-ics-cat-btn bs-ics-source-btn" data-feed="<?php echo esc_attr( $source_feed_id ); ?>" style="--bs-ics-source-color: <?php echo esc_attr( $source['accent'] ); ?>;">
+										<span class="bs-ics-source-dot" aria-hidden="true"></span>
+										<?php echo esc_html( $source['title'] ); ?>
+									</button>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
 					<?php endif; ?>
-					<?php if ( ! empty( $feed_sources ) ) : ?>
-						<div class="bs-ics-category-filters bs-ics-source-filters" role="group" aria-label="<?php esc_attr_e( 'Nach Kalender filtern', 'bs-wp-ics-feed-reader' ); ?>">
-							<button type="button" class="bs-ics-cat-btn is-active" data-feed="all"><?php esc_html_e( 'Alle Kalender', 'bs-wp-ics-feed-reader' ); ?></button>
-							<?php foreach ( $feed_sources as $source_feed_id => $source ) : ?>
-								<button type="button" class="bs-ics-cat-btn bs-ics-source-btn" data-feed="<?php echo esc_attr( $source_feed_id ); ?>" style="--bs-ics-source-color: <?php echo esc_attr( $source['accent'] ); ?>;">
-									<span class="bs-ics-source-dot" aria-hidden="true"></span>
-									<?php echo esc_html( $source['title'] ); ?>
-								</button>
-							<?php endforeach; ?>
-						</div>
+					<?php if ( $show_csv_export ) : ?>
+						<a href="<?php echo esc_url( $this->get_csv_export_url( $valid_feed_ids, $display ) ); ?>" class="bs-ics-csv-export-btn" download>
+							<span aria-hidden="true">&#128190;</span> <?php esc_html_e( 'CSV exportieren', 'bs-wp-ics-feed-reader' ); ?>
+						</a>
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>
@@ -541,6 +502,212 @@ class BS_ICS_Renderer {
 		</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	/**
+	 * Lädt und führt (bei mehreren Feed-IDs) die gecachten Termine zusammen.
+	 *
+	 * Bei mehr als einer Feed-ID wird jedes Event mit seiner Quelle (Feed-ID, -Titel
+	 * und -Akzentfarbe) markiert, um es im Frontend farblich zuordenbar zu machen
+	 * (Quellen-Badge + Quellen-Filter). Wird sowohl von render_shortcode() (HTML) als
+	 * auch von ajax_export_csv() (CSV-Download) gemeinsam genutzt.
+	 *
+	 * @param int[] $valid_feed_ids Validierte Feed-Post-IDs (erste = primär).
+	 * @param bool  $is_merged      Ob mehr als ein Feed zusammengeführt wird.
+	 * @return array Zusammengeführte (noch ungefilterte) Termine.
+	 */
+	private function load_and_merge_events( $valid_feed_ids, $is_merged ) {
+		$cached_events = [];
+		foreach ( $valid_feed_ids as $feed_id ) {
+			$feed_events = get_post_meta( $feed_id, '_bs_ics_cached_events', true );
+			if ( ! is_array( $feed_events ) || empty( $feed_events ) ) {
+				continue;
+			}
+
+			if ( ! $is_merged ) {
+				$cached_events = $feed_events;
+				break;
+			}
+
+			$feed_design_settings = get_post_meta( $feed_id, '_bs_ics_design_settings', true );
+			$feed_design_settings = wp_parse_args( is_array( $feed_design_settings ) ? $feed_design_settings : [], BS_ICS_CPT::get_design_defaults() );
+			$feed_title            = get_the_title( $feed_id );
+
+			foreach ( $feed_events as $feed_event ) {
+				$feed_event['_feed_id']     = $feed_id;
+				$feed_event['_feed_title']  = $feed_title ? $feed_title : sprintf( __( 'Feed #%d', 'bs-wp-ics-feed-reader' ), $feed_id );
+				$feed_event['_feed_accent'] = $feed_design_settings['accent_color'];
+				$cached_events[]            = $feed_event;
+			}
+		}
+
+		return $cached_events;
+	}
+
+	/**
+	 * Filtert (nur Zukunft), sortiert und limitiert eine Terminliste gemäß Display-Einstellungen.
+	 *
+	 * Gemeinsam genutzt von render_shortcode() (HTML) und ajax_export_csv() (CSV-Download),
+	 * damit beide exakt dieselbe Teilmenge an Terminen zugrunde legen.
+	 *
+	 * @param array $events  Zu verarbeitende Termine.
+	 * @param array $display Aufgelöste Display-Einstellungen (only_future/sort/limit relevant).
+	 * @return array
+	 */
+	private function filter_sort_limit_events( $events, $display ) {
+		if ( ! empty( $display['only_future'] ) ) {
+			$wp_tz       = wp_timezone();
+			$today_start = ( new DateTimeImmutable( 'today 00:00:00', $wp_tz ) )->getTimestamp();
+			$now         = ( new DateTimeImmutable( 'now', $wp_tz ) )->getTimestamp();
+
+			$events = array_filter(
+				$events,
+				function ( $event ) use ( $today_start, $now ) {
+					if ( ! empty( $event['all_day'] ) ) {
+						return ( (int) $event['start_timestamp'] + 86399 ) >= $today_start;
+					}
+					$end = ! empty( $event['end_timestamp'] ) ? (int) $event['end_timestamp'] : (int) $event['start_timestamp'];
+					return $end >= $now;
+				}
+			);
+		}
+
+		if ( empty( $events ) ) {
+			return [];
+		}
+
+		$is_desc = ( 'desc' === $display['sort'] );
+		usort(
+			$events,
+			function ( $a, $b ) use ( $is_desc ) {
+				if ( $is_desc ) {
+					return ( (int) $b['start_timestamp'] <=> (int) $a['start_timestamp'] );
+				}
+				return ( (int) $a['start_timestamp'] <=> (int) $b['start_timestamp'] );
+			}
+		);
+
+		if ( $display['limit'] > 0 ) {
+			$events = array_slice( $events, 0, $display['limit'] );
+		}
+
+		return $events;
+	}
+
+	/**
+	 * Baut die nonce-gesicherte Download-URL für den CSV-Export einer Terminliste.
+	 *
+	 * Die Nonce ist an die konkrete Feed-ID-Kombination gebunden (nicht generisch), damit
+	 * niemand blind fremde, nirgends eingebundene Feed-IDs über den Endpunkt abgreifen kann.
+	 *
+	 * @param int[] $valid_feed_ids Feed-IDs dieser Ansicht.
+	 * @param array $display        Aufgelöste Display-Einstellungen (only_future/sort/limit relevant).
+	 * @return string
+	 */
+	private function get_csv_export_url( $valid_feed_ids, $display ) {
+		$feed_ids_str = implode( ',', $valid_feed_ids );
+
+		return add_query_arg(
+			[
+				'action'      => 'bs_ics_export_csv',
+				'feed_ids'    => $feed_ids_str,
+				'only_future' => ! empty( $display['only_future'] ) ? '1' : '0',
+				'sort'        => ( 'desc' === $display['sort'] ) ? 'desc' : 'asc',
+				'limit'       => absint( $display['limit'] ),
+				'_wpnonce'    => wp_create_nonce( 'bs_ics_export_csv_' . $feed_ids_str ),
+			],
+			admin_url( 'admin-ajax.php' )
+		);
+	}
+
+	/**
+	 * AJAX-Endpunkt: liefert die aktuell konfigurierten Termine als CSV-Download aus.
+	 *
+	 * Rein lesende, öffentliche Aktion (kein Login nötig — die Termindaten sind ohnehin
+	 * über die zugehörige Shortcode-/Block-Einbindung öffentlich sichtbar), daher als
+	 * wp_ajax_nopriv_-Variante registriert. Die Nonce dient hier nicht dem klassischen
+	 * CSRF-Schutz (unkritisch bei einer reinen Leseaktion ohne Seiteneffekt), sondern
+	 * verhindert das blinde Durchprobieren fremder Feed-IDs, die nirgends eingebunden sind.
+	 */
+	public function ajax_export_csv() {
+		$feed_ids_str = isset( $_GET['feed_ids'] ) ? sanitize_text_field( wp_unslash( $_GET['feed_ids'] ) ) : '';
+		$nonce        = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
+
+		if ( empty( $feed_ids_str ) || ! wp_verify_nonce( $nonce, 'bs_ics_export_csv_' . $feed_ids_str ) ) {
+			wp_die( esc_html__( 'Ungültige oder abgelaufene Export-Anfrage.', 'bs-wp-ics-feed-reader' ), '', [ 'response' => 403 ] );
+		}
+
+		$requested_ids  = array_filter( array_map( 'absint', explode( ',', $feed_ids_str ) ) );
+		$valid_feed_ids = [];
+		foreach ( $requested_ids as $requested_id ) {
+			if ( BS_ICS_CPT::POST_TYPE === get_post_type( $requested_id ) && ! in_array( $requested_id, $valid_feed_ids, true ) ) {
+				$valid_feed_ids[] = $requested_id;
+			}
+		}
+
+		if ( empty( $valid_feed_ids ) ) {
+			wp_die( esc_html__( 'Keine gültigen Feeds gefunden.', 'bs-wp-ics-feed-reader' ), '', [ 'response' => 404 ] );
+		}
+
+		$is_merged = count( $valid_feed_ids ) > 1;
+
+		$display = [
+			'only_future' => ! empty( $_GET['only_future'] ) && '1' === $_GET['only_future'], // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+			'sort'        => ( isset( $_GET['sort'] ) && 'desc' === $_GET['sort'] ) ? 'desc' : 'asc', // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+			'limit'       => isset( $_GET['limit'] ) ? absint( $_GET['limit'] ) : 0, // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		];
+
+		$cached_events = $this->load_and_merge_events( $valid_feed_ids, $is_merged );
+		$events        = $this->filter_sort_limit_events( $cached_events, $display );
+
+		$filename = $is_merged
+			? 'termine-export-' . gmdate( 'Y-m-d' ) . '.csv'
+			: sanitize_title( get_the_title( $valid_feed_ids[0] ) ) . '-termine-' . gmdate( 'Y-m-d' ) . '.csv';
+
+		nocache_headers();
+		header( 'Content-Type: text/csv; charset=UTF-8' );
+		header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
+
+		$output = fopen( 'php://output', 'w' );
+		// UTF-8 BOM voranstellen, damit deutsches Excel Umlaute korrekt erkennt (statt Mojibake).
+		fwrite( $output, "\xEF\xBB\xBF" );
+
+		$header_row = [
+			__( 'Titel', 'bs-wp-ics-feed-reader' ),
+			__( 'Start', 'bs-wp-ics-feed-reader' ),
+			__( 'Ende', 'bs-wp-ics-feed-reader' ),
+			__( 'Ganztägig', 'bs-wp-ics-feed-reader' ),
+			__( 'Ort', 'bs-wp-ics-feed-reader' ),
+			__( 'Kategorie', 'bs-wp-ics-feed-reader' ),
+			__( 'Beschreibung', 'bs-wp-ics-feed-reader' ),
+			__( 'Link', 'bs-wp-ics-feed-reader' ),
+		];
+		if ( $is_merged ) {
+			$header_row[] = __( 'Kalender', 'bs-wp-ics-feed-reader' );
+		}
+		// Deutsches Excel erwartet bei CSV-Dateien standardmäßig Semikolon statt Komma als Trenner.
+		fputcsv( $output, $header_row, ';' );
+
+		$date_format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
+		foreach ( $events as $event ) {
+			$row = [
+				isset( $event['summary'] ) ? $event['summary'] : '',
+				wp_date( $date_format, (int) $event['start_timestamp'] ),
+				wp_date( $date_format, (int) $event['end_timestamp'] ),
+				! empty( $event['all_day'] ) ? __( 'Ja', 'bs-wp-ics-feed-reader' ) : __( 'Nein', 'bs-wp-ics-feed-reader' ),
+				isset( $event['location'] ) ? $event['location'] : '',
+				isset( $event['categories'] ) ? $event['categories'] : '',
+				isset( $event['description'] ) ? wp_strip_all_tags( $event['description'] ) : '',
+				isset( $event['url'] ) ? $event['url'] : '',
+			];
+			if ( $is_merged ) {
+				$row[] = isset( $event['_feed_title'] ) ? $event['_feed_title'] : '';
+			}
+			fputcsv( $output, $row, ';' );
+		}
+
+		fclose( $output );
+		exit;
 	}
 
 	/**

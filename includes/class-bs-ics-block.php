@@ -160,6 +160,10 @@ class BS_ICS_Block {
 						'type'    => 'boolean',
 						'default' => true,
 					],
+					'csv'                  => [
+						'type'    => 'boolean',
+						'default' => true,
+					],
 				],
 				'render_callback' => [ $this, 'render_block' ],
 			]
@@ -245,6 +249,7 @@ class BS_ICS_Block {
 					'borderColor'         => __( 'Rahmenfarbe', 'bs-wp-ics-feed-reader' ),
 					'filter'              => __( 'Such- & Kategoriefilter anzeigen', 'bs-wp-ics-feed-reader' ),
 					'export'              => __( '„In Kalender eintragen“-Buttons', 'bs-wp-ics-feed-reader' ),
+					'csvExport'           => __( 'CSV-Export-Button anzeigen', 'bs-wp-ics-feed-reader' ),
 					'placeholder'         => __( 'Bitte wähle in der rechten Seitenleiste einen Kalender-Feed aus, um die Vorschau zu laden.', 'bs-wp-ics-feed-reader' ),
 				],
 			]

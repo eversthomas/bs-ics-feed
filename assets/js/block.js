@@ -134,6 +134,10 @@
 			export: {
 				type: 'boolean',
 				default: true
+			},
+			csv: {
+				type: 'boolean',
+				default: true
 			}
 		},
 
@@ -240,6 +244,11 @@
 						label: i18n.export || '„In Kalender eintragen“-Buttons',
 						checked: attributes.export,
 						onChange: function (val) { setAttributes({ export: val }); }
+					}),
+					el(ToggleControl, {
+						label: i18n.csvExport || 'CSV-Export-Button anzeigen',
+						checked: attributes.csv,
+						onChange: function (val) { setAttributes({ csv: val }); }
 					})
 				),
 				// Panel 3: Kachel-Design & Farben

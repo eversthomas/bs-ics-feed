@@ -152,6 +152,36 @@
 	outline-offset: 2px;
 }
 
+/* CSV-Export-Button (Filterleiste) */
+.bs-ics-csv-export-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: var(--bs-ics-chrome-surface);
+	border: 1px solid var(--bs-ics-chrome-border-strong);
+	border-radius: 6px;
+	padding: 6px 12px;
+	font-size: 0.82em;
+	font-weight: 600;
+	color: var(--bs-ics-chrome-text-subtle);
+	text-decoration: none;
+	cursor: pointer;
+	transition: all 0.15s ease-out;
+	flex-shrink: 0;
+}
+
+.bs-ics-csv-export-btn:hover {
+	background: var(--bs-ics-chrome-bg);
+	border-color: var(--bs-ics-accent, #0073aa);
+	color: var(--bs-ics-accent, #0073aa);
+	text-decoration: none;
+}
+
+.bs-ics-csv-export-btn:focus-visible {
+	outline: 2px solid var(--bs-ics-accent, #0073aa);
+	outline-offset: 2px;
+}
+
 /* Container & Grid-Layout */
 .bs-ics-container {
 	width: 100%;

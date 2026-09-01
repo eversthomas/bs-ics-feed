@@ -151,6 +151,7 @@ class BS_ICS_CPT {
 			'back_text'            => __( '← Zurück zur Übersicht', 'bs-wp-ics-feed-reader' ),
 			'enable_search_filter' => true,
 			'enable_add_to_cal'    => true,
+			'enable_csv_export'    => true,
 		];
 	}
 

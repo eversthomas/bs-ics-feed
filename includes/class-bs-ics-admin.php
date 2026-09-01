@@ -423,6 +423,17 @@ class BS_ICS_Admin {
 							</td>
 						</tr>
 						<tr>
+							<th scope="row"><?php esc_html_e( 'CSV-Export-Button', 'bs-wp-ics-feed-reader' ); ?></th>
+							<td>
+								<label class="bs-toggle-switch">
+									<input type="checkbox" name="bs_ics_display_settings[enable_csv_export]" value="1" <?php checked( ! empty( $display_settings['enable_csv_export'] ) ); ?> />
+									<span class="bs-toggle-slider"></span>
+									<span class="bs-toggle-status"><?php echo ! empty( $display_settings['enable_csv_export'] ) ? esc_html__( 'Aktiv', 'bs-wp-ics-feed-reader' ) : esc_html__( 'Inaktiv', 'bs-wp-ics-feed-reader' ); ?></span>
+								</label>
+								<p class="description"><?php esc_html_e( 'Zeigt in der Filterleiste einen Button, mit dem Besucher die angezeigten Termine als CSV-Datei (Excel-kompatibel) herunterladen können.', 'bs-wp-ics-feed-reader' ); ?></p>
+							</td>
+						</tr>
+						<tr>
 							<th scope="row">
 								<label for="bs_ics_limit"><?php esc_html_e( 'Maximale Anzahl Termine', 'bs-wp-ics-feed-reader' ); ?></label>
 							</th>
@@ -989,6 +1000,7 @@ class BS_ICS_Admin {
 				'back_text'            => isset( $raw_display['back_text'] ) && '' !== trim( $raw_display['back_text'] ) ? sanitize_text_field( $raw_display['back_text'] ) : __( '← Zurück zur Übersicht', 'bs-wp-ics-feed-reader' ),
 				'enable_search_filter' => ! empty( $raw_display['enable_search_filter'] ),
 				'enable_add_to_cal'    => ! empty( $raw_display['enable_add_to_cal'] ),
+				'enable_csv_export'    => ! empty( $raw_display['enable_csv_export'] ),
 			];
 			update_post_meta( $post_id, '_bs_ics_display_settings', $clean_display );
 		}

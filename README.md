@@ -2,7 +2,7 @@
 
 > **Modulares, performantes und barrierefreies WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von iCalendar/ICS-Kalender-Feeds mit Shortcode & Gutenberg-Block.**
 
-[![Version](https://img.shields.io/badge/Version-1.5.0-blue.svg)](https://wordpress.org/)
+[![Version](https://img.shields.io/badge/Version-1.6.0-blue.svg)](https://wordpress.org/)
 [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -58,6 +58,7 @@ Feeds werden als eigener Inhaltstyp verwaltet, per Klick synchronisiert, im loka
 
 ### 🚀 Zusatzfunktionen
 * **„In Kalender eintragen“ (Add to Calendar):** Ein-Klick-Export zu Google Calendar, Outlook Web oder als Apple/ICS-Download.
+* **CSV-Export:** Ein-Klick-Download der angezeigten Termine als Excel-kompatible CSV-Datei (Semikolon-getrennt, UTF-8-BOM für korrekte Umlaute) – ideal für Vereine/Kommunen, die Termine weiterverarbeiten wollen.
 * **Clientseitiger Schnellfilter:** Live-Suchfeld und Kategorie-Filter-Badges direkt im Frontend.
 * **Automatischer Hintergrund-Sync (`WP-Cron`):** Stündlich, 2x täglich oder täglich im Hintergrund aktualisierbar.
 
@@ -119,6 +120,7 @@ Layout, Design und Feldkonfiguration der zusammengeführten Ansicht richten sich
 | `mode` | `expand`, `single`, `none` | *aus Feed* | Weiterlesen-Modus (Aufklappen, Einzelansicht, Deaktiviert) |
 | `filter` | `true`, `false` | *aus Feed* | Such- & Kategoriefilterleiste aktivieren/deaktivieren |
 | `export` | `true`, `false` | *aus Feed* | „In Kalender eintragen“-Buttons anzeigen |
+| `csv` | `true`, `false` | *aus Feed* | CSV-Export-Button in der Filterleiste anzeigen |
 
 ### 4. Als Sidebar-Widget einbinden
 
@@ -173,6 +175,15 @@ bs-wp-ics-feed-reader/
 ---
 
 ## 📝 Changelog
+
+### Version 1.6.0 (2026-09-01)
+
+**Neu: CSV-Export**
+* Neuer „CSV exportieren“-Button in der Filterleiste lädt die aktuell konfigurierten Termine als Excel-kompatible CSV-Datei herunter (Semikolon-getrennt und mit UTF-8-BOM, damit deutsches Excel Umlaute korrekt darstellt statt sie zu verstümmeln).
+* Läuft über einen eigenen, dedizierten `admin-ajax.php`-Endpunkt (nicht mitten aus dem Seiten-Rendering heraus) – sauber getrennt, ohne Risiko für „Header bereits gesendet“-Fehler oder abgebrochene Seiten.
+* Nonce ist an die konkrete Feed-ID-Kombination gebunden: verhindert blindes Durchprobieren fremder, nirgends eingebundener Feed-IDs, ohne eine echte Anmeldung zu verlangen (der Export ist wie die HTML-Ausgabe selbst eine rein lesende, öffentliche Aktion).
+* Eigener Ein-/Aus-Schalter „CSV-Export-Button“ pro Feed (Tab „Darstellung & Weiterlesen“), plus Shortcode-Attribut `csv` und Block-Toggle „CSV-Export-Button anzeigen“ zum Überschreiben.
+* Funktioniert transparent auch bei zusammengeführten Kalendern (Spalte „Kalender“ zeigt dann die Quelle jedes Termins).
 
 ### Version 1.5.0 (2026-09-01)
 
