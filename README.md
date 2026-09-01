@@ -2,7 +2,7 @@
 
 > **Modulares, performantes und barrierefreies WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von iCalendar/ICS-Kalender-Feeds mit Shortcode & Gutenberg-Block.**
 
-[![Version](https://img.shields.io/badge/Version-1.2.0-blue.svg)](https://wordpress.org/)
+[![Version](https://img.shields.io/badge/Version-1.3.0-blue.svg)](https://wordpress.org/)
 [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -43,6 +43,7 @@ Feeds werden als eigener Inhaltstyp verwaltet, per Klick synchronisiert, im loka
 * **Line-Unfolding:** Zuverlässiges Zusammenführen mehrzeiliger Kalendereinträge nach RFC 5545.
 * **Ganztagstermine (`VALUE=DATE`):** Werden automatisch erkannt und ohne Zeitzonen-Offsets dargestellt (verhindert das Verschieben auf 23:00 Uhr des Vortags).
 * **Zeitzonen-Normalisierung:** Automatische Umrechnung von UTC-Zeiten (`Z`) und Zeitzonen-Kennungen (`TZID`) in die WordPress-Zeitzone (`wp_timezone()`).
+* **Wiederkehrende Termine (`RRULE`):** Löst wiederkehrende Termine (täglich/wöchentlich/monatlich/jährlich, inkl. `BYDAY`, `BYMONTHDAY`, `BYMONTH`, `EXDATE`) automatisch in einzelne Vorkommen auf – DST-sicher und mit deterministischen, sync-stabilen IDs je Vorkommen. Nicht unterstützt: `BYSETPOS`, `BYWEEKNO`, `BYYEARDAY`, `RDATE`.
 
 ### 🔍 Granulare Feldsteuerung & Weiterlesen-System
 * **Teaser- vs. Detail-Trennung:** Lege für jedes RFC-Feld separat fest, ob es sofort in der Übersicht (Teaser) oder erst in den Details sichtbar ist.
@@ -157,6 +158,15 @@ bs-wp-ics-feed-reader/
 ---
 
 ## 📝 Changelog
+
+### Version 1.3.0 (2026-09-01)
+
+**Neu: Wiederkehrende Termine (RRULE)**
+* Der Parser löst `RRULE`-Wiederholungsregeln jetzt automatisch in einzelne Termin-Vorkommen auf, statt sie zu ignorieren. Unterstützt: `FREQ` (täglich/wöchentlich/monatlich/jährlich), `INTERVAL`, `COUNT`, `UNTIL`, `BYDAY` (inkl. „2. Donnerstag“/„letzter Freitag“), `BYMONTHDAY` (inkl. negativer Werte wie „letzter Tag des Monats“), `BYMONTH` und `EXDATE`.
+* Auflösung ist DST-sicher (Zeitumstellung verschiebt wiederkehrende Termine nicht) und erzeugt pro Vorkommen eine deterministische, über wiederholte Syncs stabile ID.
+* Zwei konfigurierbare Sicherheitsgrenzen (`bs_ics_rrule_max_occurrences`-Filter, Standard 366; `bs_ics_rrule_horizon_months`-Filter, Standard 18 Monate) verhindern unbegrenztes Wachstum bei Regeln ohne `COUNT`/`UNTIL`.
+* Neue „Wiederholt sich“-Badge auf jeder Kachel eines wiederkehrenden Termins (Übersicht & Einzelansicht).
+* Bekannte Einschränkungen: `BYSETPOS`, `BYWEEKNO`, `BYYEARDAY`, `BYHOUR`/`BYMINUTE`/`BYSECOND`, `WKST`-abhängige Wochenzählung sowie `RDATE` werden nicht unterstützt.
 
 ### Version 1.2.0 (2026-09-01)
 

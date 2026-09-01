@@ -278,7 +278,8 @@
 	color: #ffffff !important;
 }
 
-.bs-ics-style-accent_header .bs-ics-badge-allday {
+.bs-ics-style-accent_header .bs-ics-badge-allday,
+.bs-ics-style-accent_header .bs-ics-badge-recurring {
 	background-color: rgba(255, 255, 255, 0.25);
 	color: #ffffff;
 }
@@ -334,6 +335,11 @@
 .bs-ics-badge-allday {
 	background-color: #e0f2fe;
 	color: #0369a1;
+}
+
+.bs-ics-badge-recurring {
+	background-color: #ede9fe;
+	color: #6d28d9;
 }
 
 /* Titel */

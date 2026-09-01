@@ -359,6 +359,9 @@ class BS_ICS_Renderer {
 								<?php if ( $is_all_day ) : ?>
 									<span class="bs-ics-badge bs-ics-badge-allday"><?php esc_html_e( 'Ganztägig', 'bs-wp-ics-feed-reader' ); ?></span>
 								<?php endif; ?>
+								<?php if ( ! empty( $event['is_recurring'] ) ) : ?>
+									<span class="bs-ics-badge bs-ics-badge-recurring"><span aria-hidden="true">&#8635;</span> <?php esc_html_e( 'Wiederholt sich', 'bs-wp-ics-feed-reader' ); ?></span>
+								<?php endif; ?>
 							</div>
 						<?php endif; ?>
 
@@ -510,6 +513,9 @@ class BS_ICS_Renderer {
 					</time>
 					<?php if ( $is_all_day ) : ?>
 						<span class="bs-ics-badge bs-ics-badge-allday"><?php esc_html_e( 'Ganztägig', 'bs-wp-ics-feed-reader' ); ?></span>
+					<?php endif; ?>
+					<?php if ( ! empty( $event['is_recurring'] ) ) : ?>
+						<span class="bs-ics-badge bs-ics-badge-recurring"><span aria-hidden="true">&#8635;</span> <?php esc_html_e( 'Wiederholt sich', 'bs-wp-ics-feed-reader' ); ?></span>
 					<?php endif; ?>
 				</div>
 
