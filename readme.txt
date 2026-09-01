@@ -4,7 +4,7 @@ Tags: calendar, ics, ical, events, gutenberg
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,9 @@ Calendar data returned by that feed (event titles, dates, locations, description
 4. Tile design presets and color customization.
 
 == Changelog ==
+
+= 1.6.2 =
+* Fixed: Plugin URI and Author URI header fields were identical, which the WordPress.org plugin submission check rejects. Plugin URI now points to the project's GitHub repository; Author URI continues to point to the author's website.
 
 = 1.6.1 =
 * Renamed the plugin from "BS WP ICS Feed Reader" to "BS ICS Feed" (name, slug, text domain, main file, translation template, block namespace) to comply with the WordPress.org trademark policy on the term "WP".

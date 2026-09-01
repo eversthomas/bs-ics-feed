@@ -2,7 +2,7 @@
 
 > **Modulares, performantes und barrierefreies WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von iCalendar/ICS-Kalender-Feeds mit Shortcode & Gutenberg-Block.**
 
-[![Version](https://img.shields.io/badge/Version-1.6.1-blue.svg)](https://wordpress.org/)
+[![Version](https://img.shields.io/badge/Version-1.6.2-blue.svg)](https://wordpress.org/)
 [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -177,6 +177,11 @@ bs-ics-feed/
 ---
 
 ## 📝 Changelog
+
+### Version 1.6.2 (2026-09-01)
+
+**Fix für die WordPress.org-Einreichung**
+* **Behoben:** `Plugin URI` und `Author URI` im Plugin-Header waren identisch (beide `https://bezugssysteme.de`) – das lehnt der wp.org-Upload-Check ab, da beide URIs unterschiedliche Zwecke haben müssen. `Plugin URI` zeigt jetzt auf das GitHub-Repository des Plugins, `Author URI` bleibt bei der Autoren-Website.
 
 ### Version 1.6.1 (2026-09-01)
 
