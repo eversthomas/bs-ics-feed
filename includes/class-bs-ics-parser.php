@@ -161,9 +161,13 @@ class BS_ICS_Parser {
 				}
 			}
 
-			// Fallback für fehlende UID.
+			// Fallback für fehlende UID: rein deterministisch aus stabilen Feldern gebildet,
+			// damit ein Termin ohne eigene UID bei jedem Sync dieselbe ID behält
+			// (sonst brechen Einzelansicht-Links nach jedem automatischen Sync).
 			if ( empty( $event_data['uid'] ) ) {
-				$event_data['uid'] = md5( (string) $event_data['start_timestamp'] . $event_data['summary'] . $event_data['location'] . uniqid( '', true ) );
+				$event_data['uid'] = md5(
+					$event_data['start_timestamp'] . '|' . $event_data['end_timestamp'] . '|' . $event_data['summary'] . '|' . $event_data['location']
+				);
 			}
 
 			// Fallback für fehlenden oder unplausiblen End-Timestamp.

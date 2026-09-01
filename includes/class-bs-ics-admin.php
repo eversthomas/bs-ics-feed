@@ -293,6 +293,12 @@ class BS_ICS_Admin {
 								</div>
 							</td>
 						</tr>
+						<tr>
+							<th scope="row"><?php esc_html_e( 'Automatischer Sync (WP-Cron)', 'bs-wp-ics-feed-reader' ); ?></th>
+							<td>
+								<?php echo $this->render_cron_status_box(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -566,6 +572,86 @@ class BS_ICS_Admin {
 			</div>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Rendert die Status-Box für den automatischen WP-Cron-Hintergrund-Sync.
+	 *
+	 * Zeigt den Cron-Status verständlich für Redakteure UND liefert einen
+	 * technischen Abschnitt für Entwickler, um bei Bedarf einen echten
+	 * Server-Cronjob statt des besuchsgetriggerten WP-Pseudo-Crons einzurichten.
+	 *
+	 * @return string HTML-Ausgabe.
+	 */
+	private function render_cron_status_box() {
+		$next_run      = wp_next_scheduled( 'bs_ics_cron_sync_event' );
+		$cron_disabled = defined( 'DISABLE_WP_CRON' ) && DISABLE_WP_CRON;
+		$cron_url      = home_url( '/wp-cron.php' );
+
+		ob_start();
+		?>
+		<div class="bs-ics-status-info" style="max-width: none;">
+			<p>
+				<strong><?php esc_html_e( 'WP-Cron Status:', 'bs-wp-ics-feed-reader' ); ?></strong>
+				<?php if ( $cron_disabled ) : ?>
+					<span class="bs-ics-cron-pill is-disabled"><span class="dot"></span><?php esc_html_e( 'Deaktiviert (DISABLE_WP_CRON)', 'bs-wp-ics-feed-reader' ); ?></span>
+				<?php else : ?>
+					<span class="bs-ics-cron-pill is-active"><span class="dot"></span><?php esc_html_e( 'Aktiv', 'bs-wp-ics-feed-reader' ); ?></span>
+				<?php endif; ?>
+			</p>
+			<p>
+				<strong><?php esc_html_e( 'Nächster geplanter Lauf:', 'bs-wp-ics-feed-reader' ); ?></strong>
+				<?php
+				if ( $next_run ) {
+					echo esc_html( wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $next_run ) );
+				} else {
+					esc_html_e( 'Nicht geplant', 'bs-wp-ics-feed-reader' );
+				}
+				?>
+			</p>
+			<p class="description">
+				<?php esc_html_e( 'Feeds mit automatischem Sync werden im Hintergrund aktualisiert, sobald ihr gewähltes Intervall (stündlich / zweimal täglich / täglich) seit dem letzten Sync erreicht ist. WP-Cron wird dabei durch Aufrufe deiner Website ausgelöst, nicht durch einen festen Server-Zeitplan — auf sehr besucherarmen Seiten kann sich der tatsächliche Sync-Zeitpunkt daher etwas verschieben.', 'bs-wp-ics-feed-reader' ); ?>
+			</p>
+
+			<?php if ( $cron_disabled ) : ?>
+				<div class="bs-explain-warning">
+					<div class="bs-explain-label">
+						<span class="dashicons dashicons-warning" style="font-size: 16px; width: 16px; height: 16px;"></span>
+						<?php esc_html_e( 'WP-Cron ist deaktiviert', 'bs-wp-ics-feed-reader' ); ?>
+					</div>
+					<div class="bs-explain-content">
+						<?php esc_html_e( 'DISABLE_WP_CRON ist in der wp-config.php gesetzt. Der automatische Sync läuft dadurch nur noch, wenn ein echter Server-Cronjob wp-cron.php aufruft (siehe „Für Entwickler" unten).', 'bs-wp-ics-feed-reader' ); ?>
+					</div>
+				</div>
+			<?php endif; ?>
+
+			<details class="bs-ics-dev-details">
+				<summary><?php esc_html_e( 'Für Entwickler: eigenen Server-Cronjob einrichten', 'bs-wp-ics-feed-reader' ); ?></summary>
+				<div class="bs-ics-dev-body">
+					<p>
+						<?php esc_html_e( 'WordPress löst WP-Cron standardmäßig als Pseudo-Cron bei Seitenaufrufen aus (wp-cron.php wird per Request im Hintergrund mitgestartet). Auf Seiten mit wenig Traffic führt das zu unregelmäßigem Timing. Für zuverlässiges, exaktes Timing empfiehlt sich ein echter Server-Cronjob:', 'bs-wp-ics-feed-reader' ); ?>
+					</p>
+					<p><strong>1. <?php esc_html_e( 'Pseudo-Cron in der wp-config.php deaktivieren:', 'bs-wp-ics-feed-reader' ); ?></strong></p>
+					<pre><code>define( 'DISABLE_WP_CRON', true );</code></pre>
+					<p><strong>2. <?php esc_html_e( 'Echten Cronjob auf Server-/Hosting-Ebene anlegen (Beispiel: alle 15 Minuten):', 'bs-wp-ics-feed-reader' ); ?></strong></p>
+					<pre><code>*/15 * * * * curl -s "<?php echo esc_html( $cron_url ); ?>" >/dev/null 2>&1</code></pre>
+					<p><?php esc_html_e( 'Alternativ per WP-CLI (falls auf dem Server verfügbar):', 'bs-wp-ics-feed-reader' ); ?></p>
+					<pre><code>*/15 * * * * cd /pfad/zur/wordpress-installation && wp cron event run --due-now >/dev/null 2>&1</code></pre>
+					<p>
+						<?php
+						printf(
+							/* translators: %s: Cron-Event-Name in <code> */
+							esc_html__( 'Das von diesem Plugin genutzte Event heißt %s — damit lässt es sich gezielt manuell auslösen oder debuggen:', 'bs-wp-ics-feed-reader' ),
+							'<code>bs_ics_cron_sync_event</code>'
+						);
+						?>
+					</p>
+					<pre><code>wp cron event run bs_ics_cron_sync_event</code></pre>
+				</div>
+			</details>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 
 	/**

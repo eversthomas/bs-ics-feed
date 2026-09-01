@@ -20,6 +20,7 @@
 
 	/* Semantische Farben */
 	--bs-success-500: oklch(62% 0.13 152);
+	--bs-success-100: oklch(95% 0.03 152);
 	--bs-warning-500: oklch(74% 0.15 75);
 	--bs-warning-100: oklch(96% 0.03 75);
 	--bs-danger-500:  oklch(56% 0.19 25);
@@ -399,6 +400,103 @@
 	background-color: var(--bs-success-500) !important;
 	border-color: var(--bs-success-500) !important;
 	color: #ffffff !important;
+}
+
+/* WP-Cron Status Pill */
+.bs-ics-cron-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: var(--bs-text-xs);
+	font-weight: var(--bs-weight-semibold);
+	padding: 3px 10px;
+	border-radius: 9999px;
+	vertical-align: middle;
+}
+
+.bs-ics-cron-pill .dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: currentColor;
+	flex-shrink: 0;
+}
+
+.bs-ics-cron-pill.is-active {
+	background: var(--bs-success-100);
+	color: var(--bs-success-500);
+}
+
+.bs-ics-cron-pill.is-disabled {
+	background: var(--bs-warning-100);
+	color: oklch(45% 0.15 75);
+}
+
+/* Entwickler-Aufklappbereich (WP-Cron Setup) */
+.bs-ics-dev-details {
+	margin-top: var(--bs-space-3);
+	border: var(--bs-border);
+	border-radius: var(--bs-radius-sm);
+	background: #ffffff;
+}
+
+.bs-ics-dev-details summary {
+	cursor: pointer;
+	padding: var(--bs-space-3) var(--bs-space-4);
+	font-size: var(--bs-text-sm);
+	font-weight: var(--bs-weight-semibold);
+	color: var(--bs-neutral-900);
+	list-style: none;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.bs-ics-dev-details summary::-webkit-details-marker {
+	display: none;
+}
+
+.bs-ics-dev-details summary::before {
+	content: '▸';
+	color: var(--bs-accent-500);
+	transition: transform 0.15s ease-out;
+	display: inline-block;
+}
+
+.bs-ics-dev-details[open] summary::before {
+	transform: rotate(90deg);
+}
+
+.bs-ics-dev-details .bs-ics-dev-body {
+	padding: 0 var(--bs-space-4) var(--bs-space-4);
+	font-size: var(--bs-text-sm);
+	color: var(--bs-neutral-700);
+	line-height: var(--bs-leading-normal);
+	border-top: 1px solid var(--bs-neutral-100);
+	padding-top: var(--bs-space-3);
+}
+
+.bs-ics-dev-details pre {
+	background: var(--bs-neutral-900);
+	color: var(--bs-neutral-0);
+	font-family: var(--bs-font-mono);
+	font-size: var(--bs-text-xs);
+	padding: var(--bs-space-3);
+	border-radius: var(--bs-radius-sm);
+	overflow-x: auto;
+	margin: var(--bs-space-2) 0;
+}
+
+.bs-ics-dev-details code {
+	font-family: var(--bs-font-mono);
+}
+
+.bs-ics-dev-details p code {
+	background: var(--bs-neutral-100);
+	padding: 2px 5px;
+	border-radius: 3px;
+	font-size: var(--bs-text-xs);
+	color: var(--bs-neutral-900);
 }
 
 /* Reduced Motion */

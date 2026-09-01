@@ -158,6 +158,11 @@ final class BS_ICS_Feed_Reader {
 				continue;
 			}
 
+			$last_synced = (int) get_post_meta( $post_id, '_bs_ics_last_synced', true );
+			if ( $last_synced > 0 && ! $this->is_sync_due( $sync_interval, $last_synced ) ) {
+				continue;
+			}
+
 			$feed_url = get_post_meta( $post_id, '_bs_ics_feed_url', true );
 			if ( empty( $feed_url ) ) {
 				continue;
@@ -188,6 +193,28 @@ final class BS_ICS_Feed_Reader {
 				update_post_meta( $post_id, '_bs_ics_last_synced', time() );
 			}
 		}
+	}
+
+	/**
+	 * Prüft, ob ein Feed anhand seines gewählten Intervalls fällig für einen Sync ist.
+	 *
+	 * Das WP-Cron-Event 'bs_ics_cron_sync_event' feuert fix stündlich; einzelne Feeds
+	 * können aber ein selteneres Intervall (zweimal täglich / täglich) gewählt haben.
+	 * Diese Prüfung verhindert, dass sie trotzdem bei jedem stündlichen Tick abgerufen werden.
+	 *
+	 * @param string $interval    Gewähltes Intervall ('hourly', 'twicedaily', 'daily').
+	 * @param int    $last_synced Unix-Timestamp des letzten erfolgreichen Syncs.
+	 * @return bool
+	 */
+	private function is_sync_due( $interval, $last_synced ) {
+		$schedules        = wp_get_schedules();
+		$interval_seconds = isset( $schedules[ $interval ]['interval'] ) ? (int) $schedules[ $interval ]['interval'] : 0;
+
+		if ( $interval_seconds <= 0 ) {
+			return true;
+		}
+
+		return ( time() - $last_synced ) >= $interval_seconds;
 	}
 
 	/**
