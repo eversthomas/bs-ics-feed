@@ -4,7 +4,7 @@ Tags: calendar, ics, ical, events, gutenberg
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.2
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,14 @@ Calendar data returned by that feed (event titles, dates, locations, description
 4. Tile design presets and color customization.
 
 == Changelog ==
+
+= 1.7.0 =
+* New: month navigation (`month_view` display setting / shortcode attribute / block control) shows a month picker above the event list and only the events of the selected month; the current month automatically hides days that have already passed, and months that are fully in the past are never offered as a navigation target.
+* New: tile inner padding and the gap between tiles are now freely configurable in pixels (previously fixed compact/normal/spacious presets); existing feeds are migrated transparently to their previous pixel equivalent.
+* New: the "+ Calendar" export button's label is now configurable (display setting, shortcode attribute `cal_text`, block control) instead of being hard-coded to "Kalender".
+* Fixed: card headers within the same visual grid row are now equalized to the same height client-side, preventing a jagged look when individual events have longer date ranges or extra badges (e.g. multi-day or recurring events).
+* Fixed: feeds whose source occasionally emits the same recurring occurrence multiple times (observed with some third-party ICS exporters) are now deduplicated by their computed occurrence ID during parsing, preventing the same event from being listed dozens of times.
+* Fixed: the release build no longer bundles `.github/` or the GitHub-facing `README.md` into the distributed plugin ZIP; the release workflow now aborts instead of publishing a broken release if the version number can't be read from the plugin header.
 
 = 1.6.2 =
 * Fixed: Plugin URI and Author URI header fields were identical, which the WordPress.org plugin submission check rejects. Plugin URI now points to the project's GitHub repository; Author URI continues to point to the author's website.

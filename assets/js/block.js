@@ -108,12 +108,12 @@
 				default: ''
 			},
 			card_padding: {
-				type: 'string',
-				default: ''
+				type: 'number',
+				default: -1
 			},
 			gap: {
-				type: 'string',
-				default: ''
+				type: 'number',
+				default: -1
 			},
 			month_view: {
 				type: 'boolean',
@@ -142,6 +142,10 @@
 			export: {
 				type: 'boolean',
 				default: true
+			},
+			cal_text: {
+				type: 'string',
+				default: ''
 			},
 			csv: {
 				type: 'boolean',
@@ -259,6 +263,12 @@
 						checked: attributes.export,
 						onChange: function (val) { setAttributes({ export: val }); }
 					}),
+					attributes.export ? el(TextControl, {
+						label: i18n.calText || 'Button-Text „+ Kalender“',
+						value: attributes.cal_text,
+						placeholder: 'Kalender',
+						onChange: function (val) { setAttributes({ cal_text: val }); }
+					}) : null,
 					el(ToggleControl, {
 						label: i18n.csvExport || 'CSV-Export-Button anzeigen',
 						checked: attributes.csv,
@@ -308,27 +318,21 @@
 						],
 						onChange: function (val) { setAttributes({ shadow_style: val }); }
 					}),
-					el(SelectControl, {
-						label: i18n.cardPadding || 'Kachel-Innenabstand',
-						value: attributes.card_padding,
-						options: [
-							{ value: '', label: i18n.padDefault || 'Standard aus Feed' },
-							{ value: 'compact', label: i18n.padCompact || 'Kompakt (12px)' },
-							{ value: 'normal', label: i18n.padNormal || 'Standard (20px)' },
-							{ value: 'spacious', label: i18n.padSpacious || 'Großzügig (28px)' }
-						],
-						onChange: function (val) { setAttributes({ card_padding: val }); }
+					el(RangeControl, {
+						label: i18n.cardPadding || 'Kachel-Innenabstand (px)',
+						value: attributes.card_padding !== undefined ? attributes.card_padding : -1,
+						min: -1,
+						max: 80,
+						help: '-1 = Standard aus Feed',
+						onChange: function (val) { setAttributes({ card_padding: parseInt(val, 10) }); }
 					}),
-					el(SelectControl, {
-						label: i18n.gap || 'Abstand zwischen Kacheln (Gap)',
-						value: attributes.gap,
-						options: [
-							{ value: '', label: i18n.padDefault || 'Standard aus Feed' },
-							{ value: 'compact', label: i18n.gapCompact || 'Kompakt (12px)' },
-							{ value: 'normal', label: i18n.gapNormal || 'Standard (24px)' },
-							{ value: 'spacious', label: i18n.gapSpacious || 'Großzügig (36px)' }
-						],
-						onChange: function (val) { setAttributes({ gap: val }); }
+					el(RangeControl, {
+						label: i18n.gap || 'Abstand zwischen Kacheln (Gap, px)',
+						value: attributes.gap !== undefined ? attributes.gap : -1,
+						min: -1,
+						max: 80,
+						help: '-1 = Standard aus Feed',
+						onChange: function (val) { setAttributes({ gap: parseInt(val, 10) }); }
 					}),
 					el(RangeControl, {
 						label: i18n.borderRadius || 'Rahmenradius (px)',

@@ -195,31 +195,14 @@
 .bs-ics-layout-grid {
 	display: grid;
 	grid-template-columns: repeat(var(--bs-ics-cols, 3), minmax(0, 1fr));
-	gap: 24px;
+	gap: var(--bs-ics-gap, 24px);
 }
 
 /* Listenansicht */
 .bs-ics-layout-list {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
-}
-
-/* Kachel-Abstand (Gap) — unabhängig vom Innenabstand einer einzelnen Kachel */
-.bs-ics-gap-compact .bs-ics-layout-grid {
-	gap: 12px;
-}
-
-.bs-ics-gap-compact .bs-ics-layout-list {
-	gap: 10px;
-}
-
-.bs-ics-gap-spacious .bs-ics-layout-grid {
-	gap: 36px;
-}
-
-.bs-ics-gap-spacious .bs-ics-layout-list {
-	gap: 24px;
+	gap: var(--bs-ics-gap, 24px);
 }
 
 /* Event-Karte */
@@ -227,7 +210,7 @@
 	background-color: var(--bs-ics-bg, #ffffff);
 	border: var(--bs-ics-border-w, 1px) solid var(--bs-ics-border-c, #e2e8f0);
 	border-radius: var(--bs-ics-radius, 8px);
-	padding: 20px;
+	padding: var(--bs-ics-pad, 20px);
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
@@ -257,22 +240,6 @@
 .bs-ics-shadow-prominent .bs-ics-card:hover {
 	box-shadow: 0 16px 30px -5px rgba(0, 0, 0, 0.12), 0 10px 12px -5px rgba(0, 0, 0, 0.06);
 	transform: translateY(-3px);
-}
-
-/* Padding-Dichte Varianten */
-.bs-ics-pad-compact .bs-ics-card {
-	padding: 12px;
-	gap: 8px;
-}
-
-.bs-ics-pad-normal .bs-ics-card {
-	padding: 20px;
-	gap: 12px;
-}
-
-.bs-ics-pad-spacious .bs-ics-card {
-	padding: 28px;
-	gap: 16px;
 }
 
 /* Design-Preset 1: Klassisch (Card mit oberer Akzentlinie) */
@@ -308,22 +275,10 @@
 
 .bs-ics-style-accent_header .bs-ics-card-header {
 	background-color: var(--bs-ics-accent, #0073aa);
-	margin-left: -28px;
-	margin-right: -28px;
-	padding: 12px 20px;
+	margin-left: calc(var(--bs-ics-pad, 20px) * -1);
+	margin-right: calc(var(--bs-ics-pad, 20px) * -1);
+	padding: 10px var(--bs-ics-pad, 20px);
 	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.bs-ics-pad-compact.bs-ics-style-accent_header .bs-ics-card-header {
-	margin-left: -12px;
-	margin-right: -12px;
-	padding: 8px 12px;
-}
-
-.bs-ics-pad-normal.bs-ics-style-accent_header .bs-ics-card-header {
-	margin-left: -20px;
-	margin-right: -20px;
-	padding: 10px 18px;
 }
 
 .bs-ics-style-accent_header .bs-ics-date {
@@ -721,15 +676,6 @@
 @media (max-width: 1024px) {
 	.bs-ics-layout-grid {
 		grid-template-columns: repeat(min(var(--bs-ics-cols, 2), 2), minmax(0, 1fr));
-		gap: 18px;
-	}
-
-	.bs-ics-gap-compact .bs-ics-layout-grid {
-		gap: 10px;
-	}
-
-	.bs-ics-gap-spacious .bs-ics-layout-grid {
-		gap: 26px;
 	}
 }
 
@@ -745,19 +691,6 @@
 
 	.bs-ics-layout-grid {
 		grid-template-columns: 1fr;
-		gap: 14px;
-	}
-
-	.bs-ics-gap-compact .bs-ics-layout-grid {
-		gap: 8px;
-	}
-
-	.bs-ics-gap-spacious .bs-ics-layout-grid {
-		gap: 20px;
-	}
-
-	.bs-ics-card {
-		padding: 16px;
 	}
 
 	.bs-ics-single-card {

@@ -99,14 +99,14 @@
 			function updateDesignPreview() {
 				setPreviewModifierClass('bs-ics-style-', $cardStyle.val() || 'card');
 				setPreviewModifierClass('bs-ics-shadow-', $shadowStyle.val() || 'subtle');
-				setPreviewModifierClass('bs-ics-pad-', $cardPadding.val() || 'normal');
 				$designPreview.toggleClass('bs-ics-inherit-colors', $inheritColors.is(':checked'));
 
 				var vars = '--bs-ics-accent: ' + ($accentColor.val() || '#0073aa') + '; '
 					+ '--bs-ics-bg: ' + ($bgColor.val() || '#ffffff') + '; '
 					+ '--bs-ics-radius: ' + ($borderRadius.val() || 8) + 'px; '
 					+ '--bs-ics-border-w: ' + ($borderWidth.val() || 1) + 'px; '
-					+ '--bs-ics-border-c: ' + ($borderColor.val() || '#e2e8f0') + ';';
+					+ '--bs-ics-border-c: ' + ($borderColor.val() || '#e2e8f0') + '; '
+					+ '--bs-ics-pad: ' + ($cardPadding.val() || 20) + 'px;';
 
 				$designPreview.attr('style', 'margin: 0; max-width: 340px; ' + vars);
 			}

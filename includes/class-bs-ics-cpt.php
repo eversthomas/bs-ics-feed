@@ -151,6 +151,7 @@ class BS_ICS_CPT {
 			'back_text'            => __( '← Zurück zur Übersicht', 'bs-ics-feed' ),
 			'enable_search_filter' => true,
 			'enable_add_to_cal'    => true,
+			'add_to_cal_text'      => __( 'Kalender', 'bs-ics-feed' ),
 			'enable_csv_export'    => true,
 			'month_view'           => false,
 		];
@@ -170,11 +171,44 @@ class BS_ICS_CPT {
 			'card_style'           => 'card',
 			'inherit_theme_colors' => false,
 			'shadow_style'         => 'subtle',
-			'card_padding'         => 'normal',
-			'card_gap'             => 'normal',
+			'card_padding'         => 20,
+			'card_gap'             => 24,
 			'border_width'         => 1,
 			'border_color'         => '#e2e8f0',
 		];
+	}
+
+	/**
+	 * Migriert Design-Einstellungen aus älteren Plugin-Versionen auf das aktuelle Format.
+	 *
+	 * `card_padding`/`card_gap` waren bis Version 1.6.x feste Presets ("compact"/"normal"/
+	 * "spacious"); seit 1.7.0 sind es freie Pixel-Werte. Bereits gespeicherte Presets werden
+	 * hier transparent auf ihren bisherigen Pixel-Gegenwert abgebildet, damit bestehende
+	 * Feeds nach dem Update nicht plötzlich mit 0px Abstand dargestellt werden.
+	 *
+	 * @param array $design Design-Einstellungs-Array (bereits mit wp_parse_args() befüllt).
+	 * @return array
+	 */
+	public static function normalize_design_settings( $design ) {
+		$legacy_padding_map = [
+			'compact'  => 12,
+			'normal'   => 20,
+			'spacious' => 28,
+		];
+		$legacy_gap_map     = [
+			'compact'  => 12,
+			'normal'   => 24,
+			'spacious' => 36,
+		];
+
+		if ( isset( $design['card_padding'], $legacy_padding_map[ $design['card_padding'] ] ) ) {
+			$design['card_padding'] = $legacy_padding_map[ $design['card_padding'] ];
+		}
+		if ( isset( $design['card_gap'], $legacy_gap_map[ $design['card_gap'] ] ) ) {
+			$design['card_gap'] = $legacy_gap_map[ $design['card_gap'] ];
+		}
+
+		return $design;
 	}
 
 	/**

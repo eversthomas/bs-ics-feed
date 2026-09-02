@@ -84,6 +84,7 @@ class BS_ICS_Renderer {
 				'mode'                 => '',
 				'filter'               => '',
 				'export'               => '',
+				'cal_text'             => '',
 				'csv'                  => '',
 				'month_view'           => '',
 			],
@@ -149,6 +150,9 @@ class BS_ICS_Renderer {
 		if ( '' !== $atts['export'] ) {
 			$display['enable_add_to_cal'] = filter_var( $atts['export'], FILTER_VALIDATE_BOOLEAN );
 		}
+		if ( '' !== trim( (string) $atts['cal_text'] ) ) {
+			$display['add_to_cal_text'] = sanitize_text_field( $atts['cal_text'] );
+		}
 		if ( '' !== $atts['csv'] ) {
 			$display['enable_csv_export'] = filter_var( $atts['csv'], FILTER_VALIDATE_BOOLEAN );
 		}
@@ -157,6 +161,7 @@ class BS_ICS_Renderer {
 		}
 
 		$design = wp_parse_args( is_array( $design_settings ) ? $design_settings : [], BS_ICS_CPT::get_design_defaults() );
+		$design = BS_ICS_CPT::normalize_design_settings( $design );
 
 		if ( '' !== $atts['columns'] ) {
 			$cols = absint( $atts['columns'] );
@@ -182,11 +187,11 @@ class BS_ICS_Renderer {
 		if ( in_array( $atts['shadow_style'], [ 'none', 'subtle', 'prominent' ], true ) ) {
 			$design['shadow_style'] = $atts['shadow_style'];
 		}
-		if ( in_array( $atts['card_padding'], [ 'compact', 'normal', 'spacious' ], true ) ) {
-			$design['card_padding'] = $atts['card_padding'];
+		if ( '' !== $atts['card_padding'] && (int) $atts['card_padding'] >= 0 ) {
+			$design['card_padding'] = min( 80, absint( $atts['card_padding'] ) );
 		}
-		if ( in_array( $atts['gap'], [ 'compact', 'normal', 'spacious' ], true ) ) {
-			$design['card_gap'] = $atts['gap'];
+		if ( '' !== $atts['gap'] && (int) $atts['gap'] >= 0 ) {
+			$design['card_gap'] = min( 80, absint( $atts['gap'] ) );
 		}
 		if ( '' !== $atts['border_radius'] && (int) $atts['border_radius'] >= 0 ) {
 			$design['border_radius'] = min( 50, absint( $atts['border_radius'] ) );
@@ -218,13 +223,15 @@ class BS_ICS_Renderer {
 
 		// CSS Custom Properties generieren.
 		$style_vars = sprintf(
-			'--bs-ics-cols: %d; --bs-ics-accent: %s; --bs-ics-radius: %dpx; --bs-ics-bg: %s; --bs-ics-border-w: %dpx; --bs-ics-border-c: %s;',
+			'--bs-ics-cols: %d; --bs-ics-accent: %s; --bs-ics-radius: %dpx; --bs-ics-bg: %s; --bs-ics-border-w: %dpx; --bs-ics-border-c: %s; --bs-ics-pad: %dpx; --bs-ics-gap: %dpx;',
 			absint( $design['columns'] ),
 			esc_attr( $design['accent_color'] ),
 			absint( $design['border_radius'] ),
 			esc_attr( $design['bg_color'] ),
 			absint( $design['border_width'] ),
-			esc_attr( $design['border_color'] )
+			esc_attr( $design['border_color'] ),
+			absint( $design['card_padding'] ),
+			absint( $design['card_gap'] )
 		);
 
 		// Wrapper-Klassen zusammenstellen.
@@ -232,8 +239,6 @@ class BS_ICS_Renderer {
 			'bs-ics-wrapper',
 			'bs-ics-style-' . sanitize_html_class( $design['card_style'] ),
 			'bs-ics-shadow-' . sanitize_html_class( $design['shadow_style'] ),
-			'bs-ics-pad-' . sanitize_html_class( $design['card_padding'] ),
-			'bs-ics-gap-' . sanitize_html_class( isset( $design['card_gap'] ) ? $design['card_gap'] : 'normal' ),
 		];
 		if ( ! empty( $design['inherit_theme_colors'] ) ) {
 			$wrapper_classes[] = 'bs-ics-inherit-colors';
@@ -273,14 +278,23 @@ class BS_ICS_Renderer {
 		// Monate für die Monats-Navigation sammeln (chronologisch, ohne Duplikate).
 		$months = [];
 		if ( $is_month_view ) {
+			$current_month_key = wp_date( 'Y-m' );
 			foreach ( $events as $ev ) {
 				$month_key = wp_date( 'Y-m', (int) $ev['start_timestamp'] );
+				// Bei aktivem "nur zukünftige Termine"-Filter wird ein bereits abgelaufener
+				// Monat nie als Navigationsziel angeboten — auch wenn ein einzelner Termin
+				// (z. B. wegen eines fehlerhaften Enddatums in der Quelle) den Filter
+				// unerwartet übersteht, bleibt der Kalendermonat selbst maßgeblich dafür, ob
+				// er noch "aktuell" ist. Ist der Filter deaktiviert, sind vergangene Monate
+				// gewollt durchsuchbar (z. B. für ein Archiv) und bleiben erhalten.
+				if ( ! empty( $display['only_future'] ) && $month_key < $current_month_key ) {
+					continue;
+				}
 				if ( ! isset( $months[ $month_key ] ) ) {
 					$months[ $month_key ] = wp_date( 'F Y', (int) $ev['start_timestamp'] );
 				}
 			}
 			ksort( $months );
-			$current_month_key = wp_date( 'Y-m' );
 			$default_month_key = isset( $months[ $current_month_key ] ) ? $current_month_key : ( ! empty( $months ) ? array_key_first( $months ) : '' );
 		}
 
@@ -539,7 +553,7 @@ class BS_ICS_Renderer {
 							<?php endif; ?>
 
 							<?php if ( ! empty( $display['enable_add_to_cal'] ) ) : ?>
-								<?php echo $this->render_add_to_calendar_button( $event ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php echo $this->render_add_to_calendar_button( $event, $display['add_to_cal_text'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							<?php endif; ?>
 						</div>
 					</article>
@@ -843,7 +857,7 @@ class BS_ICS_Renderer {
 					<?php endif; ?>
 
 					<?php if ( ! empty( $display['enable_add_to_cal'] ) ) : ?>
-						<?php echo $this->render_add_to_calendar_button( $event ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php echo $this->render_add_to_calendar_button( $event, $display['add_to_cal_text'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					<?php endif; ?>
 				</div>
 			</article>
@@ -884,10 +898,12 @@ class BS_ICS_Renderer {
 	/**
 	 * Rendert ein barrierefreies Add-to-Calendar Export-Menü (Google, Outlook, iCal Download).
 	 *
-	 * @param array $event Termin-Objekt.
+	 * @param array  $event      Termin-Objekt.
+	 * @param string $button_text Konfigurierbare Beschriftung des Buttons (Standard: "Kalender").
 	 * @return string HTML-Ausgabe.
 	 */
-	private function render_add_to_calendar_button( $event ) {
+	private function render_add_to_calendar_button( $event, $button_text = '' ) {
+		$button_text = '' !== $button_text ? $button_text : __( 'Kalender', 'bs-ics-feed' );
 		$title       = ! empty( $event['summary'] ) ? $event['summary'] : __( 'Termin', 'bs-ics-feed' );
 		$location    = ! empty( $event['location'] ) ? $event['location'] : '';
 		$description = ! empty( $event['description'] ) ? wp_strip_all_tags( $event['description'] ) : '';
@@ -923,7 +939,7 @@ class BS_ICS_Renderer {
 		?>
 		<div class="bs-ics-cal-export">
 			<button type="button" class="bs-ics-cal-btn" aria-haspopup="true" aria-expanded="false" title="<?php esc_attr_e( 'In eigenen Kalender eintragen', 'bs-ics-feed' ); ?>">
-				<span aria-hidden="true">&#43;</span> <?php esc_html_e( 'Kalender', 'bs-ics-feed' ); ?>
+				<span aria-hidden="true">&#43;</span> <?php echo esc_html( $button_text ); ?>
 			</button>
 			<div class="bs-ics-cal-menu" role="menu" hidden>
 				<a href="<?php echo esc_url( $google_url ); ?>" target="_blank" rel="noopener noreferrer" role="menuitem">

@@ -197,6 +197,7 @@ class BS_ICS_Admin {
 
 		$display_settings = wp_parse_args( is_array( $display_settings ) ? $display_settings : [], BS_ICS_CPT::get_display_defaults() );
 		$design_settings  = wp_parse_args( is_array( $design_settings ) ? $design_settings : [], BS_ICS_CPT::get_design_defaults() );
+		$design_settings  = BS_ICS_CPT::normalize_design_settings( $design_settings );
 		?>
 		<div class="bs-ics-admin-wrapper">
 			<!-- Tab Navigation -->
@@ -423,6 +424,15 @@ class BS_ICS_Admin {
 							</td>
 						</tr>
 						<tr>
+							<th scope="row">
+								<label for="bs_ics_add_to_cal_text"><?php esc_html_e( 'Button-Text „+ Kalender“', 'bs-ics-feed' ); ?></label>
+							</th>
+							<td>
+								<input type="text" name="bs_ics_display_settings[add_to_cal_text]" id="bs_ics_add_to_cal_text" value="<?php echo esc_attr( $display_settings['add_to_cal_text'] ); ?>" class="regular-text" placeholder="Kalender" />
+								<p class="description"><?php esc_html_e( 'Beschriftung des Buttons, über den Besucher einen Termin in Google Kalender, Outlook oder Apple/iCal eintragen können.', 'bs-ics-feed' ); ?></p>
+							</td>
+						</tr>
+						<tr>
 							<th scope="row"><?php esc_html_e( 'CSV-Export-Button', 'bs-ics-feed' ); ?></th>
 							<td>
 								<label class="bs-toggle-switch">
@@ -495,7 +505,7 @@ class BS_ICS_Admin {
 				<div class="bs-ics-panel-card bs-ics-design-preview-panel">
 					<h4 class="bs-ics-panel-title"><?php esc_html_e( 'Live-Vorschau', 'bs-ics-feed' ); ?></h4>
 					<p class="bs-ics-panel-desc"><?php esc_html_e( 'Zeigt sofort, wie eine Terminkachel mit den aktuell gewählten (noch ungespeicherten) Einstellungen aussieht.', 'bs-ics-feed' ); ?></p>
-					<div id="bs-ics-design-preview-wrapper" class="bs-ics-wrapper bs-ics-style-card bs-ics-shadow-subtle bs-ics-pad-normal" style="margin: 0; max-width: 340px;">
+					<div id="bs-ics-design-preview-wrapper" class="bs-ics-wrapper bs-ics-style-card bs-ics-shadow-subtle" style="margin: 0; max-width: 340px; --bs-ics-pad: 20px;">
 						<div class="bs-ics-container">
 							<article class="bs-ics-card">
 								<div class="bs-ics-card-header">
@@ -587,26 +597,18 @@ class BS_ICS_Admin {
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_card_padding"><?php esc_html_e( 'Kachel-Innenabstand', 'bs-ics-feed' ); ?></label>
+								<label for="bs_ics_card_padding"><?php esc_html_e( 'Kachel-Innenabstand (px)', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
-								<select name="bs_ics_design_settings[card_padding]" id="bs_ics_card_padding">
-									<option value="compact" <?php selected( $design_settings['card_padding'], 'compact' ); ?>><?php esc_html_e( 'Kompakt (12px)', 'bs-ics-feed' ); ?></option>
-									<option value="normal" <?php selected( $design_settings['card_padding'], 'normal' ); ?>><?php esc_html_e( 'Standard (20px)', 'bs-ics-feed' ); ?></option>
-									<option value="spacious" <?php selected( $design_settings['card_padding'], 'spacious' ); ?>><?php esc_html_e( 'Großzügig (28px)', 'bs-ics-feed' ); ?></option>
-								</select>
+								<input type="number" name="bs_ics_design_settings[card_padding]" id="bs_ics_card_padding" min="0" max="80" value="<?php echo esc_attr( $design_settings['card_padding'] ); ?>" class="small-text" /> px
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">
-								<label for="bs_ics_card_gap"><?php esc_html_e( 'Abstand zwischen Kacheln (Gap)', 'bs-ics-feed' ); ?></label>
+								<label for="bs_ics_card_gap"><?php esc_html_e( 'Abstand zwischen Kacheln (Gap, px)', 'bs-ics-feed' ); ?></label>
 							</th>
 							<td>
-								<select name="bs_ics_design_settings[card_gap]" id="bs_ics_card_gap">
-									<option value="compact" <?php selected( $design_settings['card_gap'], 'compact' ); ?>><?php esc_html_e( 'Kompakt (12px)', 'bs-ics-feed' ); ?></option>
-									<option value="normal" <?php selected( $design_settings['card_gap'], 'normal' ); ?>><?php esc_html_e( 'Standard (24px)', 'bs-ics-feed' ); ?></option>
-									<option value="spacious" <?php selected( $design_settings['card_gap'], 'spacious' ); ?>><?php esc_html_e( 'Großzügig (36px)', 'bs-ics-feed' ); ?></option>
-								</select>
+								<input type="number" name="bs_ics_design_settings[card_gap]" id="bs_ics_card_gap" min="0" max="80" value="<?php echo esc_attr( $design_settings['card_gap'] ); ?>" class="small-text" /> px
 								<p class="description"><?php esc_html_e( 'Steuert den Zwischenraum zwischen den Terminkacheln im Grid- und Listen-Layout (unabhängig vom Innenabstand einer einzelnen Kachel).', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
@@ -1022,6 +1024,7 @@ class BS_ICS_Admin {
 				'read_more_text'       => isset( $raw_display['read_more_text'] ) && '' !== trim( $raw_display['read_more_text'] ) ? sanitize_text_field( $raw_display['read_more_text'] ) : __( 'Weiterlesen', 'bs-ics-feed' ),
 				'read_less_text'       => isset( $raw_display['read_less_text'] ) && '' !== trim( $raw_display['read_less_text'] ) ? sanitize_text_field( $raw_display['read_less_text'] ) : __( 'Weniger anzeigen', 'bs-ics-feed' ),
 				'back_text'            => isset( $raw_display['back_text'] ) && '' !== trim( $raw_display['back_text'] ) ? sanitize_text_field( $raw_display['back_text'] ) : __( '← Zurück zur Übersicht', 'bs-ics-feed' ),
+				'add_to_cal_text'      => isset( $raw_display['add_to_cal_text'] ) && '' !== trim( $raw_display['add_to_cal_text'] ) ? sanitize_text_field( $raw_display['add_to_cal_text'] ) : __( 'Kalender', 'bs-ics-feed' ),
 				'enable_search_filter' => ! empty( $raw_display['enable_search_filter'] ),
 				'enable_add_to_cal'    => ! empty( $raw_display['enable_add_to_cal'] ),
 				'enable_csv_export'    => ! empty( $raw_display['enable_csv_export'] ),
@@ -1046,13 +1049,8 @@ class BS_ICS_Admin {
 				? $raw_design['shadow_style']
 				: 'subtle';
 
-			$card_padding = isset( $raw_design['card_padding'] ) && in_array( $raw_design['card_padding'], [ 'compact', 'normal', 'spacious' ], true )
-				? $raw_design['card_padding']
-				: 'normal';
-
-			$card_gap = isset( $raw_design['card_gap'] ) && in_array( $raw_design['card_gap'], [ 'compact', 'normal', 'spacious' ], true )
-				? $raw_design['card_gap']
-				: 'normal';
+			$card_padding = isset( $raw_design['card_padding'] ) ? min( 80, absint( $raw_design['card_padding'] ) ) : 20;
+			$card_gap     = isset( $raw_design['card_gap'] ) ? min( 80, absint( $raw_design['card_gap'] ) ) : 24;
 
 			$border_width = isset( $raw_design['border_width'] ) ? min( 10, absint( $raw_design['border_width'] ) ) : 1;
 
