@@ -220,6 +220,22 @@ class BS_ICS_Parser {
 			}
 		}
 
+		// Deduplizieren nach berechneter Termin-ID: manche Feed-Generatoren (beobachtet z. B.
+		// bei Redaxo-Exporten) legen für wiederkehrende Termine pro Woche einen eigenen, vollen
+		// VEVENT-Block mit eigener RRULE bis zum selben Serienende an, statt einer einzigen
+		// VEVENT+RRULE-Kombination. Beim Auflösen entstehen dadurch für dieselbe Terminausprägung
+		// mehrfach identische UIDs (Basis-UID + Vorkommens-Zeitstempel) — zwei Vorkommen können
+		// nur dann dieselbe UID tragen, wenn sie exakt dasselbe Vorkommen beschreiben, daher ist
+		// ein Behalten des jeweils ersten Treffers hier unbedenklich.
+		$deduped_events = [];
+		foreach ( $events as $event_item ) {
+			$dedup_key = isset( $event_item['uid'] ) ? $event_item['uid'] : '';
+			if ( '' === $dedup_key || ! isset( $deduped_events[ $dedup_key ] ) ) {
+				$deduped_events[ $dedup_key ] = $event_item;
+			}
+		}
+		$events = array_values( $deduped_events );
+
 		// Standardmäßig chronologisch aufsteigend sortieren.
 		usort(
 			$events,

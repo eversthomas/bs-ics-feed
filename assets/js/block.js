@@ -111,6 +111,14 @@
 				type: 'string',
 				default: ''
 			},
+			gap: {
+				type: 'string',
+				default: ''
+			},
+			month_view: {
+				type: 'boolean',
+				default: false
+			},
 			border_radius: {
 				type: 'number',
 				default: -1
@@ -236,6 +244,12 @@
 						onChange: function (val) { setAttributes({ only_future: val }); }
 					}),
 					el(ToggleControl, {
+						label: i18n.monthView || 'Monats-Navigation anzeigen',
+						checked: attributes.month_view,
+						help: i18n.monthViewDesc || 'Zeigt eine Monatsauswahl; die max. Terminanzahl wird dabei ignoriert.',
+						onChange: function (val) { setAttributes({ month_view: val }); }
+					}),
+					el(ToggleControl, {
 						label: i18n.filter || 'Such- & Kategoriefilter anzeigen',
 						checked: attributes.filter,
 						onChange: function (val) { setAttributes({ filter: val }); }
@@ -304,6 +318,17 @@
 							{ value: 'spacious', label: i18n.padSpacious || 'Großzügig (28px)' }
 						],
 						onChange: function (val) { setAttributes({ card_padding: val }); }
+					}),
+					el(SelectControl, {
+						label: i18n.gap || 'Abstand zwischen Kacheln (Gap)',
+						value: attributes.gap,
+						options: [
+							{ value: '', label: i18n.padDefault || 'Standard aus Feed' },
+							{ value: 'compact', label: i18n.gapCompact || 'Kompakt (12px)' },
+							{ value: 'normal', label: i18n.gapNormal || 'Standard (24px)' },
+							{ value: 'spacious', label: i18n.gapSpacious || 'Großzügig (36px)' }
+						],
+						onChange: function (val) { setAttributes({ gap: val }); }
 					}),
 					el(RangeControl, {
 						label: i18n.borderRadius || 'Rahmenradius (px)',

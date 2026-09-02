@@ -152,6 +152,7 @@ class BS_ICS_CPT {
 			'enable_search_filter' => true,
 			'enable_add_to_cal'    => true,
 			'enable_csv_export'    => true,
+			'month_view'           => false,
 		];
 	}
 
@@ -170,6 +171,7 @@ class BS_ICS_CPT {
 			'inherit_theme_colors' => false,
 			'shadow_style'         => 'subtle',
 			'card_padding'         => 'normal',
+			'card_gap'             => 'normal',
 			'border_width'         => 1,
 			'border_color'         => '#e2e8f0',
 		];

@@ -78,12 +78,14 @@ class BS_ICS_Renderer {
 				'border_color'         => '',
 				'shadow_style'         => '',
 				'card_padding'         => '',
+				'gap'                  => '',
 				'inherit_theme_colors' => '',
 				'style'                => '',
 				'mode'                 => '',
 				'filter'               => '',
 				'export'               => '',
 				'csv'                  => '',
+				'month_view'           => '',
 			],
 			$atts,
 			'bs_ics_calendar'
@@ -150,6 +152,9 @@ class BS_ICS_Renderer {
 		if ( '' !== $atts['csv'] ) {
 			$display['enable_csv_export'] = filter_var( $atts['csv'], FILTER_VALIDATE_BOOLEAN );
 		}
+		if ( '' !== $atts['month_view'] ) {
+			$display['month_view'] = filter_var( $atts['month_view'], FILTER_VALIDATE_BOOLEAN );
+		}
 
 		$design = wp_parse_args( is_array( $design_settings ) ? $design_settings : [], BS_ICS_CPT::get_design_defaults() );
 
@@ -179,6 +184,9 @@ class BS_ICS_Renderer {
 		}
 		if ( in_array( $atts['card_padding'], [ 'compact', 'normal', 'spacious' ], true ) ) {
 			$design['card_padding'] = $atts['card_padding'];
+		}
+		if ( in_array( $atts['gap'], [ 'compact', 'normal', 'spacious' ], true ) ) {
+			$design['card_gap'] = $atts['gap'];
 		}
 		if ( '' !== $atts['border_radius'] && (int) $atts['border_radius'] >= 0 ) {
 			$design['border_radius'] = min( 50, absint( $atts['border_radius'] ) );
@@ -225,6 +233,7 @@ class BS_ICS_Renderer {
 			'bs-ics-style-' . sanitize_html_class( $design['card_style'] ),
 			'bs-ics-shadow-' . sanitize_html_class( $design['shadow_style'] ),
 			'bs-ics-pad-' . sanitize_html_class( $design['card_padding'] ),
+			'bs-ics-gap-' . sanitize_html_class( isset( $design['card_gap'] ) ? $design['card_gap'] : 'normal' ),
 		];
 		if ( ! empty( $design['inherit_theme_colors'] ) ) {
 			$wrapper_classes[] = 'bs-ics-inherit-colors';
@@ -247,10 +256,32 @@ class BS_ICS_Renderer {
 		}
 
 		// 2. ÜBERSICHTS-ANSICHT: Filterung vergangener Termine, Sortierung, Limitierung.
-		$events = $this->filter_sort_limit_events( $cached_events, $display );
+		// Bei aktiver Monats-Navigation übernimmt die Monatsauswahl selbst die Eingrenzung
+		// der Trefferzahl; ein zusätzliches numerisches Limit würde sonst Monate mit vielen
+		// Terminen willkürlich am Monatsende abschneiden, statt vollständig anzuzeigen.
+		$is_month_view    = ! empty( $display['month_view'] );
+		$limit_aware_disp = $display;
+		if ( $is_month_view ) {
+			$limit_aware_disp['limit'] = 0;
+		}
+		$events = $this->filter_sort_limit_events( $cached_events, $limit_aware_disp );
 
 		if ( empty( $events ) ) {
 			return $this->render_empty_state();
+		}
+
+		// Monate für die Monats-Navigation sammeln (chronologisch, ohne Duplikate).
+		$months = [];
+		if ( $is_month_view ) {
+			foreach ( $events as $ev ) {
+				$month_key = wp_date( 'Y-m', (int) $ev['start_timestamp'] );
+				if ( ! isset( $months[ $month_key ] ) ) {
+					$months[ $month_key ] = wp_date( 'F Y', (int) $ev['start_timestamp'] );
+				}
+			}
+			ksort( $months );
+			$current_month_key = wp_date( 'Y-m' );
+			$default_month_key = isset( $months[ $current_month_key ] ) ? $current_month_key : ( ! empty( $months ) ? array_key_first( $months ) : '' );
 		}
 
 		// Kategorien für den Schnellfilter sammeln.
@@ -289,6 +320,17 @@ class BS_ICS_Renderer {
 			<script type="application/ld+json">
 			<?php echo wp_json_encode( $this->generate_schema_org_data( $events ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ); ?>
 			</script>
+
+			<!-- Monats-Navigation (optional) -->
+			<?php if ( $is_month_view && count( $months ) > 1 ) : ?>
+				<div class="bs-ics-category-filters bs-ics-month-filters" role="group" aria-label="<?php esc_attr_e( 'Nach Monat filtern', 'bs-ics-feed' ); ?>">
+					<?php foreach ( $months as $month_key => $month_label ) : ?>
+						<button type="button" class="bs-ics-cat-btn bs-ics-month-btn<?php echo ( $month_key === $default_month_key ) ? ' is-active' : ''; ?>" data-month="<?php echo esc_attr( $month_key ); ?>">
+							<?php echo esc_html( $month_label ); ?>
+						</button>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
 
 			<!-- Schnellfilter, Suche & CSV-Export (jeweils optional) -->
 			<?php
@@ -340,6 +382,8 @@ class BS_ICS_Renderer {
 					$timestamp    = (int) $event['start_timestamp'];
 					$datetime_iso = ! empty( $event['start_iso'] ) ? $event['start_iso'] : wp_date( 'c', $timestamp );
 					$details_id   = 'bs-ics-details-' . absint( isset( $event['_feed_id'] ) ? $event['_feed_id'] : $post_id ) . '-' . absint( $event_index );
+					$month_key    = $is_month_view ? wp_date( 'Y-m', $timestamp ) : '';
+					$hide_by_month = $is_month_view && $month_key !== $default_month_key;
 
 					// Datums- und Uhrzeitspanne formatieren
 					$formatted_date = $this->format_event_time_range( $event, $date_format );
@@ -373,7 +417,7 @@ class BS_ICS_Renderer {
 						}
 					}
 					?>
-					<article class="bs-ics-card" data-uid="<?php echo esc_attr( isset( $event['uid'] ) ? $event['uid'] : '' ); ?>" data-category="<?php echo esc_attr( isset( $event['categories'] ) ? $event['categories'] : '' ); ?>" data-feed-id="<?php echo esc_attr( isset( $event['_feed_id'] ) ? $event['_feed_id'] : '' ); ?>">
+					<article class="bs-ics-card" data-uid="<?php echo esc_attr( isset( $event['uid'] ) ? $event['uid'] : '' ); ?>" data-category="<?php echo esc_attr( isset( $event['categories'] ) ? $event['categories'] : '' ); ?>" data-feed-id="<?php echo esc_attr( isset( $event['_feed_id'] ) ? $event['_feed_id'] : '' ); ?>" data-month="<?php echo esc_attr( $month_key ); ?>"<?php echo $hide_by_month ? ' style="display:none;"' : ''; ?>>
 						<?php if ( ! empty( $event['_feed_title'] ) ) : ?>
 							<div class="bs-ics-source-badge" style="--bs-ics-source-color: <?php echo esc_attr( $event['_feed_accent'] ); ?>;">
 								<span class="bs-ics-source-dot" aria-hidden="true"></span>

@@ -1,0 +1,51 @@
+name: Auto Release on Version Bump
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Version aus Plugin-Header lesen
+        id: version
+        run: |
+          VERSION=$(grep -m1 "^ \* Version:" bs-ics-feed.php | sed -E 's/.*Version:\s*//' | tr -d '\r' | xargs)
+          if [ -z "$VERSION" ]; then
+            echo "::error::Konnte keine Version aus dem Plugin-Header (bs-ics-feed.php) auslesen. Abbruch, um kein Release mit leerem Tag zu erzeugen."
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Gefundene Version: $VERSION"
+
+      - name: Prüfen ob Tag schon existiert
+        id: check_tag
+        run: |
+          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bereinigtes ZIP bauen (via .distignore)
+        if: steps.check_tag.outputs.exists == 'false'
+        run: |
+          mkdir -p build/bs-ics-feed
+          rsync -av --exclude-from='.distignore' --exclude='build' ./ build/bs-ics-feed/
+          cd build && zip -r ../bs-ics-feed.zip bs-ics-feed
+
+      - name: Release erstellen
+        if: steps.check_tag.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: Version ${{ steps.version.outputs.version }}
+          body: Automatisch erstelltes Release. Details siehe README.md-Changelog.
+          files: bs-ics-feed.zip

@@ -4,6 +4,7 @@
 # versioniert werden, nur eben nicht an Endnutzer ausgeliefert.
 
 .git
+.github
 .gitignore
 .gitattributes
 .distignore
@@ -20,6 +21,9 @@ composer.lock
 vendor
 
 # Interne Entwicklungsdokumentation (kein Nutzer-Feature, nicht Teil des Plugins).
+# README.md ist die GitHub-Ansicht des Repos, readme.txt (bleibt erhalten) ist die für
+# WordPress relevante Fassung (Plugin-Verzeichnis/SVN) — daher hier ausgeschlossen.
+README.md
 ROADMAP.md
 SPEC.md
 PROMPTS.md

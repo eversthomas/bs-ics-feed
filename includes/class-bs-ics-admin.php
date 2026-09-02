@@ -465,6 +465,17 @@ class BS_ICS_Admin {
 							</td>
 						</tr>
 						<tr>
+							<th scope="row"><?php esc_html_e( 'Monats-Navigation', 'bs-ics-feed' ); ?></th>
+							<td>
+								<label class="bs-toggle-switch">
+									<input type="checkbox" name="bs_ics_display_settings[month_view]" value="1" <?php checked( ! empty( $display_settings['month_view'] ) ); ?> />
+									<span class="bs-toggle-slider"></span>
+									<span class="bs-toggle-status"><?php echo ! empty( $display_settings['month_view'] ) ? esc_html__( 'Aktiv', 'bs-ics-feed' ) : esc_html__( 'Inaktiv', 'bs-ics-feed' ); ?></span>
+								</label>
+								<p class="description"><?php esc_html_e( 'Zeigt eine Monatsauswahl über der Terminliste. Es werden nur Termine des jeweils gewählten Monats angezeigt (im aktuellen Monat automatisch ohne bereits vergangene Tage). Die „Maximale Anzahl Termine“ wird bei aktiver Monats-Navigation ignoriert.', 'bs-ics-feed' ); ?></p>
+							</td>
+						</tr>
+						<tr>
 							<th scope="row">
 								<label for="bs_ics_date_format"><?php esc_html_e( 'Benutzerdefiniertes Datumsformat', 'bs-ics-feed' ); ?></label>
 							</th>
@@ -584,6 +595,19 @@ class BS_ICS_Admin {
 									<option value="normal" <?php selected( $design_settings['card_padding'], 'normal' ); ?>><?php esc_html_e( 'Standard (20px)', 'bs-ics-feed' ); ?></option>
 									<option value="spacious" <?php selected( $design_settings['card_padding'], 'spacious' ); ?>><?php esc_html_e( 'Großzügig (28px)', 'bs-ics-feed' ); ?></option>
 								</select>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">
+								<label for="bs_ics_card_gap"><?php esc_html_e( 'Abstand zwischen Kacheln (Gap)', 'bs-ics-feed' ); ?></label>
+							</th>
+							<td>
+								<select name="bs_ics_design_settings[card_gap]" id="bs_ics_card_gap">
+									<option value="compact" <?php selected( $design_settings['card_gap'], 'compact' ); ?>><?php esc_html_e( 'Kompakt (12px)', 'bs-ics-feed' ); ?></option>
+									<option value="normal" <?php selected( $design_settings['card_gap'], 'normal' ); ?>><?php esc_html_e( 'Standard (24px)', 'bs-ics-feed' ); ?></option>
+									<option value="spacious" <?php selected( $design_settings['card_gap'], 'spacious' ); ?>><?php esc_html_e( 'Großzügig (36px)', 'bs-ics-feed' ); ?></option>
+								</select>
+								<p class="description"><?php esc_html_e( 'Steuert den Zwischenraum zwischen den Terminkacheln im Grid- und Listen-Layout (unabhängig vom Innenabstand einer einzelnen Kachel).', 'bs-ics-feed' ); ?></p>
 							</td>
 						</tr>
 						<tr>
@@ -1001,6 +1025,7 @@ class BS_ICS_Admin {
 				'enable_search_filter' => ! empty( $raw_display['enable_search_filter'] ),
 				'enable_add_to_cal'    => ! empty( $raw_display['enable_add_to_cal'] ),
 				'enable_csv_export'    => ! empty( $raw_display['enable_csv_export'] ),
+				'month_view'           => ! empty( $raw_display['month_view'] ),
 			];
 			update_post_meta( $post_id, '_bs_ics_display_settings', $clean_display );
 		}
@@ -1025,6 +1050,10 @@ class BS_ICS_Admin {
 				? $raw_design['card_padding']
 				: 'normal';
 
+			$card_gap = isset( $raw_design['card_gap'] ) && in_array( $raw_design['card_gap'], [ 'compact', 'normal', 'spacious' ], true )
+				? $raw_design['card_gap']
+				: 'normal';
+
 			$border_width = isset( $raw_design['border_width'] ) ? min( 10, absint( $raw_design['border_width'] ) ) : 1;
 
 			$clean_design = [
@@ -1035,6 +1064,7 @@ class BS_ICS_Admin {
 				'bg_color'             => isset( $raw_design['bg_color'] ) ? sanitize_hex_color( $raw_design['bg_color'] ) : '#ffffff',
 				'shadow_style'         => $shadow_style,
 				'card_padding'         => $card_padding,
+				'card_gap'             => $card_gap,
 				'border_radius'        => isset( $raw_design['border_radius'] ) ? absint( $raw_design['border_radius'] ) : 8,
 				'border_width'         => $border_width,
 				'border_color'         => isset( $raw_design['border_color'] ) ? sanitize_hex_color( $raw_design['border_color'] ) : '#e2e8f0',

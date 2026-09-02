@@ -1,0 +1,3100 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//REDAXO CMS//forCal Calendar//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:forCal Termine
+X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VTIMEZONE
+TZID:Europe/Berlin
+X-LIC-LOCATION:Europe/Berlin
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:20270328T030000
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:20261025T020000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260309T170000
+DTEND;TZID=Europe/Berlin:20260309T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260311T090000
+DTEND;TZID=Europe/Berlin:20260311T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260316T170000
+DTEND;TZID=Europe/Berlin:20260316T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260323T170000
+DTEND;TZID=Europe/Berlin:20260323T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260325T090000
+DTEND;TZID=Europe/Berlin:20260325T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:278@https://www.awo-kv-wesel.de/
+SUMMARY:Jahreshauptversammlung des OV für seine Mitglieder
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260327T160000
+DTEND;TZID=Europe/Berlin:20260327T180000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260330T170000
+DTEND;TZID=Europe/Berlin:20260330T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:288@https://www.awo-kv-wesel.de/
+SUMMARY:Sozialberatung 10 Uhr im MJH - kostenloses Angebot jeden ersten Donnerstag
+ im Monat des OV für allen Fragen des Sozialrechts
+DESCRIPTION:An jedem ersten Donnerstag im Monat bietet der Verband von 10.00 – 12.00
+ Uhr zusätzlich eine „Allgemeine Sozialberatung“ an. Mit Marion Fritsch
+ und Karin Fetzer bieten zwei gelernte Sozialpädagoginnen in lockerer
+ Atmosphäre Hilfe und Unterstützung in schwierigen Lebenssituationen und
+ allen Fragen zu sozialhilferechtlichen Themen an. Wenn sich herausstellt\,
+ dass weiterführende Beratung notwendig ist\, wird an
+ Fachberatungsstellen\, Behörden etc. verwiesen. Beide Beratungsangebote
+ sind kostenlos\, es muss vorab kein Termin vereinbart werden. Marion
+ Fritsch 0170-8315686 und Karin Fetzer - 0171 1235023
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260402T100000
+DTEND;TZID=Europe/Berlin:20260402T120000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260406T170000
+DTEND;TZID=Europe/Berlin:20260406T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260408T090000
+DTEND;TZID=Europe/Berlin:20260408T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260408T130000
+DTEND;TZID=Europe/Berlin:20260408T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:279@https://www.awo-kv-wesel.de/
+SUMMARY:Bunter Nachmittag
+DESCRIPTION:Offenes Angebot für Senioren im Rentenalter - musikalische Begleitung\,
+ Kaffee\, Kuchen und Gespräche mit Moni Kampa und Erika Ingenbleek
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260409T140000
+DTEND;TZID=Europe/Berlin:20260409T170000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260409T180000
+DTEND;TZID=Europe/Berlin:20260409T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260413T170000
+DTEND;TZID=Europe/Berlin:20260413T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260414T090000
+DTEND;TZID=Europe/Berlin:20260414T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260414T110000
+DTEND;TZID=Europe/Berlin:20260414T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260415T130000
+DTEND;TZID=Europe/Berlin:20260415T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:281@https://www.awo-kv-wesel.de/
+SUMMARY:Ortsvereins-Vorstandssitzung
+DESCRIPTION:Der gewählte Vorstand trifft sich i.d.R. einmal monatlich zu seiner
+ Sitzung im Marie-Juchacz-Haus.
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260415T180000
+DTEND;TZID=Europe/Berlin:20260415T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260416T180000
+DTEND;TZID=Europe/Berlin:20260416T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260420T170000
+DTEND;TZID=Europe/Berlin:20260420T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260421T090000
+DTEND;TZID=Europe/Berlin:20260421T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260421T110000
+DTEND;TZID=Europe/Berlin:20260421T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260422T090000
+DTEND;TZID=Europe/Berlin:20260422T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260422T130000
+DTEND;TZID=Europe/Berlin:20260422T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260423T180000
+DTEND;TZID=Europe/Berlin:20260423T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260427T170000
+DTEND;TZID=Europe/Berlin:20260427T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260428T090000
+DTEND;TZID=Europe/Berlin:20260428T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260428T110000
+DTEND;TZID=Europe/Berlin:20260428T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260429T130000
+DTEND;TZID=Europe/Berlin:20260429T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260430T180000
+DTEND;TZID=Europe/Berlin:20260430T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:274@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Traditionelles Spargelessen mit Gerd und Jochen
+DESCRIPTION:Spargelessen mit Gerd
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260503T120000
+DTEND;TZID=Europe/Berlin:20260503T140000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260504T170000
+DTEND;TZID=Europe/Berlin:20260504T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260505T090000
+DTEND;TZID=Europe/Berlin:20260505T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260505T110000
+DTEND;TZID=Europe/Berlin:20260505T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260506T090000
+DTEND;TZID=Europe/Berlin:20260506T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260506T130000
+DTEND;TZID=Europe/Berlin:20260506T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:289@https://www.awo-kv-wesel.de/
+SUMMARY:Sozialberatung 10 Uhr im MJH - kostenloses Angebot jeden ersten Donnerstag
+ im Monat des OV für allen Fragen des Sozialrechts Kopie
+DESCRIPTION:An jedem ersten Donnerstag im Monat bietet der Verband von 10.00 – 12.00
+ Uhr zusätzlich eine „Allgemeine Sozialberatung“ an. Mit Marion Fritsch
+ und Karin Fetzer bieten zwei gelernte Sozialpädagoginnen in lockerer
+ Atmosphäre Hilfe und Unterstützung in schwierigen Lebenssituationen und
+ allen Fragen zu sozialhilferechtlichen Themen an. Wenn sich herausstellt\,
+ dass weiterführende Beratung notwendig ist\, wird an
+ Fachberatungsstellen\, Behörden etc. verwiesen. Beide Beratungsangebote
+ sind kostenlos\, es muss vorab kein Termin vereinbart werden. Marion
+ Fritsch 0170-8315686 und Karin Fetzer - 0171 1235023
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260507T100000
+DTEND;TZID=Europe/Berlin:20260507T120000
+END:VEVENT
+BEGIN:VEVENT
+UID:280@https://www.awo-kv-wesel.de/
+SUMMARY:Bunter Nachmittag im Marie-Juchacz-Haus
+DESCRIPTION:Offenes Angebot für Senioren im Rentenalter - musikalische Begleitung\,
+ Kaffee\, Kuchen und Gespräche mit Moni Kampa und Erika Ingenbleek
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260507T140000
+DTEND;TZID=Europe/Berlin:20260507T170000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260507T180000
+DTEND;TZID=Europe/Berlin:20260507T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260511T170000
+DTEND;TZID=Europe/Berlin:20260511T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260512T090000
+DTEND;TZID=Europe/Berlin:20260512T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260512T110000
+DTEND;TZID=Europe/Berlin:20260512T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260513T130000
+DTEND;TZID=Europe/Berlin:20260513T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:282@https://www.awo-kv-wesel.de/
+SUMMARY:Ortsvereins-Vorstandssitzung im Marie-Juchacz-haus
+DESCRIPTION:Der gewählte Vorstand trifft sich i.d.R. einmal monatlich zu seiner
+ Sitzung im Marie-Juchacz-Haus.
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260513T180000
+DTEND;TZID=Europe/Berlin:20260513T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260514T180000
+DTEND;TZID=Europe/Berlin:20260514T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260518T170000
+DTEND;TZID=Europe/Berlin:20260518T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260519T090000
+DTEND;TZID=Europe/Berlin:20260519T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260519T110000
+DTEND;TZID=Europe/Berlin:20260519T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260520T090000
+DTEND;TZID=Europe/Berlin:20260520T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260520T130000
+DTEND;TZID=Europe/Berlin:20260520T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260521T180000
+DTEND;TZID=Europe/Berlin:20260521T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260525T170000
+DTEND;TZID=Europe/Berlin:20260525T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260526T090000
+DTEND;TZID=Europe/Berlin:20260526T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260526T110000
+DTEND;TZID=Europe/Berlin:20260526T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260527T130000
+DTEND;TZID=Europe/Berlin:20260527T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260528T180000
+DTEND;TZID=Europe/Berlin:20260528T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260601T170000
+DTEND;TZID=Europe/Berlin:20260601T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260602T090000
+DTEND;TZID=Europe/Berlin:20260602T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260602T110000
+DTEND;TZID=Europe/Berlin:20260602T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260603T090000
+DTEND;TZID=Europe/Berlin:20260603T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260603T130000
+DTEND;TZID=Europe/Berlin:20260603T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:290@https://www.awo-kv-wesel.de/
+SUMMARY:Sozialberatung 10 Uhr im MJH - kostenloses Angebot jeden ersten Donnerstag
+ im Monat des OV für allen Fragen des Sozialrechts Kopie Kopie
+DESCRIPTION:An jedem ersten Donnerstag im Monat bietet der Verband von 10.00 – 12.00
+ Uhr zusätzlich eine „Allgemeine Sozialberatung“ an. Mit Marion Fritsch
+ und Karin Fetzer bieten zwei gelernte Sozialpädagoginnen in lockerer
+ Atmosphäre Hilfe und Unterstützung in schwierigen Lebenssituationen und
+ allen Fragen zu sozialhilferechtlichen Themen an. Wenn sich herausstellt\,
+ dass weiterführende Beratung notwendig ist\, wird an
+ Fachberatungsstellen\, Behörden etc. verwiesen. Beide Beratungsangebote
+ sind kostenlos\, es muss vorab kein Termin vereinbart werden. Marion
+ Fritsch 0170-8315686 und Karin Fetzer - 0171 1235023
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260604T100000
+DTEND;TZID=Europe/Berlin:20260604T120000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260604T180000
+DTEND;TZID=Europe/Berlin:20260604T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260608T170000
+DTEND;TZID=Europe/Berlin:20260608T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260609T090000
+DTEND;TZID=Europe/Berlin:20260609T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260609T110000
+DTEND;TZID=Europe/Berlin:20260609T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260610T130000
+DTEND;TZID=Europe/Berlin:20260610T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:286@https://www.awo-kv-wesel.de/
+SUMMARY:Bunter Nachmittag im Marie-Juchacz-Haus einmal monatlich mit Moni Kampa und
+ Erika Ingenbleek
+DESCRIPTION:Offenes Angebot im MJH für Senioren im Rentenalter - musikalische
+ Begleitung\, Kaffee\, Kuchen und Gespräche mit Moni Kampa und Erika
+ Ingenbleek
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260611T140000
+DTEND;TZID=Europe/Berlin:20260611T170000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260611T180000
+DTEND;TZID=Europe/Berlin:20260611T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260615T170000
+DTEND;TZID=Europe/Berlin:20260615T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260616T090000
+DTEND;TZID=Europe/Berlin:20260616T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260616T110000
+DTEND;TZID=Europe/Berlin:20260616T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260617T090000
+DTEND;TZID=Europe/Berlin:20260617T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260617T130000
+DTEND;TZID=Europe/Berlin:20260617T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260618T180000
+DTEND;TZID=Europe/Berlin:20260618T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260622T170000
+DTEND;TZID=Europe/Berlin:20260622T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260623T090000
+DTEND;TZID=Europe/Berlin:20260623T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260623T110000
+DTEND;TZID=Europe/Berlin:20260623T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260624T130000
+DTEND;TZID=Europe/Berlin:20260624T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:296@https://www.awo-kv-wesel.de/
+SUMMARY:OV Vorstandssitzung
+DESCRIPTION:Sitzung des OV-Vorstandes nicht öffentlich
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260624T180000
+DTEND;TZID=Europe/Berlin:20260624T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260625T180000
+DTEND;TZID=Europe/Berlin:20260625T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260629T170000
+DTEND;TZID=Europe/Berlin:20260629T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260630T090000
+DTEND;TZID=Europe/Berlin:20260630T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260630T110000
+DTEND;TZID=Europe/Berlin:20260630T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260701T090000
+DTEND;TZID=Europe/Berlin:20260701T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260701T130000
+DTEND;TZID=Europe/Berlin:20260701T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260702T180000
+DTEND;TZID=Europe/Berlin:20260702T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260706T170000
+DTEND;TZID=Europe/Berlin:20260706T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260707T090000
+DTEND;TZID=Europe/Berlin:20260707T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260707T110000
+DTEND;TZID=Europe/Berlin:20260707T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260708T130000
+DTEND;TZID=Europe/Berlin:20260708T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:297@https://www.awo-kv-wesel.de/
+SUMMARY:OV Vorstandssitzung
+DESCRIPTION:Sitzung des OV-Vorstandes nicht öffentlich
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260708T180000
+DTEND;TZID=Europe/Berlin:20260708T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260709T180000
+DTEND;TZID=Europe/Berlin:20260709T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:298@https://www.awo-kv-wesel.de/
+SUMMARY:Sommerparty bei der AWO Neukirchen-Vluyn
+DESCRIPTION:Am 11. Juli 2026 ab 12.00 Uhr lädt der AWO Ortsverein dich und deine
+ Familie herzlich zur Sommerparty in die Max-von-Schenkendorf-Straße 9
+ ein. Freu dich auf ein buntes Programm mit Fotobox\, Kinderschminken\,
+ Kreativangeboten von MAKI – Malen und Machen\, Stockbrotgrillen am Feuer
+ sowie Musik von DJ Patty. Dazu gibt es Kaffee und Kuchen\, Leckeres vom
+ Grill und kühle Getränke. Der Eintritt ist frei – komm vorbei und
+ verbringe mit uns einen fröhlichen Sommertag für Groß und Klein! Eine
+ Anmeldung ist nicht notwendig.
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260711T120000
+DTEND;TZID=Europe/Berlin:20260711T190000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260713T170000
+DTEND;TZID=Europe/Berlin:20260713T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260714T090000
+DTEND;TZID=Europe/Berlin:20260714T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260714T110000
+DTEND;TZID=Europe/Berlin:20260714T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260715T090000
+DTEND;TZID=Europe/Berlin:20260715T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260715T130000
+DTEND;TZID=Europe/Berlin:20260715T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260716T180000
+DTEND;TZID=Europe/Berlin:20260716T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260720T170000
+DTEND;TZID=Europe/Berlin:20260720T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260721T090000
+DTEND;TZID=Europe/Berlin:20260721T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260721T110000
+DTEND;TZID=Europe/Berlin:20260721T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260722T130000
+DTEND;TZID=Europe/Berlin:20260722T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260723T180000
+DTEND;TZID=Europe/Berlin:20260723T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260727T170000
+DTEND;TZID=Europe/Berlin:20260727T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260728T090000
+DTEND;TZID=Europe/Berlin:20260728T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260728T110000
+DTEND;TZID=Europe/Berlin:20260728T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260729T090000
+DTEND;TZID=Europe/Berlin:20260729T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260729T130000
+DTEND;TZID=Europe/Berlin:20260729T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260730T180000
+DTEND;TZID=Europe/Berlin:20260730T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260803T170000
+DTEND;TZID=Europe/Berlin:20260803T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260804T090000
+DTEND;TZID=Europe/Berlin:20260804T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260804T110000
+DTEND;TZID=Europe/Berlin:20260804T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260805T130000
+DTEND;TZID=Europe/Berlin:20260805T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260806T180000
+DTEND;TZID=Europe/Berlin:20260806T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260810T170000
+DTEND;TZID=Europe/Berlin:20260810T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260811T090000
+DTEND;TZID=Europe/Berlin:20260811T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260811T110000
+DTEND;TZID=Europe/Berlin:20260811T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260812T090000
+DTEND;TZID=Europe/Berlin:20260812T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260812T130000
+DTEND;TZID=Europe/Berlin:20260812T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260813T180000
+DTEND;TZID=Europe/Berlin:20260813T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260817T170000
+DTEND;TZID=Europe/Berlin:20260817T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260818T090000
+DTEND;TZID=Europe/Berlin:20260818T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260818T110000
+DTEND;TZID=Europe/Berlin:20260818T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260819T130000
+DTEND;TZID=Europe/Berlin:20260819T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260820T180000
+DTEND;TZID=Europe/Berlin:20260820T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260824T170000
+DTEND;TZID=Europe/Berlin:20260824T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260825T090000
+DTEND;TZID=Europe/Berlin:20260825T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260825T110000
+DTEND;TZID=Europe/Berlin:20260825T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260826T090000
+DTEND;TZID=Europe/Berlin:20260826T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260826T130000
+DTEND;TZID=Europe/Berlin:20260826T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260827T180000
+DTEND;TZID=Europe/Berlin:20260827T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:301@https://www.awo-kv-wesel.de/
+SUMMARY:Teilnahme an der CSD Demo in NV
+DESCRIPTION:Der 5. Christopher Street Day (NeuQUEERchen-Vluyn) findet am 29. August
+ 2026 in Neukirchen-Vluyn statt.
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260829T120000
+DTEND;TZID=Europe/Berlin:20260829T154400
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20260831T130000
+DTEND;TZID=Europe/Berlin:20261214T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260831T170000
+DTEND;TZID=Europe/Berlin:20260831T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260901T090000
+DTEND;TZID=Europe/Berlin:20260901T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260901T110000
+DTEND;TZID=Europe/Berlin:20260901T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260902T130000
+DTEND;TZID=Europe/Berlin:20260902T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260903T180000
+DTEND;TZID=Europe/Berlin:20260903T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20260907T130000
+DTEND;TZID=Europe/Berlin:20261221T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260907T170000
+DTEND;TZID=Europe/Berlin:20260907T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260908T090000
+DTEND;TZID=Europe/Berlin:20260908T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260908T110000
+DTEND;TZID=Europe/Berlin:20260908T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260909T090000
+DTEND;TZID=Europe/Berlin:20260909T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260909T130000
+DTEND;TZID=Europe/Berlin:20260909T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260910T180000
+DTEND;TZID=Europe/Berlin:20260910T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:302@https://www.awo-kv-wesel.de/
+SUMMARY:Feierstunde 80 Jahre AWO-Ortsverein Neukirchen-Vluyn
+DESCRIPTION:Unter der Schirmherrschaft des Stiftungsratsvorsitzenden Bernhard Uppenkamp
+ findet im MJH eine Feierstunde mit anschließendem Imbiss statt.
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260912T110000
+DTEND;TZID=Europe/Berlin:20260912T120000
+END:VEVENT
+BEGIN:VEVENT
+UID:293@https://www.awo-kv-wesel.de/
+SUMMARY:AWO-Herbstfest
+DESCRIPTION:Im Anschluss an die Feierstunde 80-Jahr-AWO findet ab 13 Uhr das
+ traditionelle AWO-Herbstfest statt\, mit Tanz\, Speisen\, Getränken und
+ vielen Gesprächen. Unser neuer Gas-Grill kommt zum Einsatz.
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+DTSTART;TZID=Europe/Berlin:20260912T140000
+DTEND;TZID=Europe/Berlin:20260912T170000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20260914T130000
+DTEND;TZID=Europe/Berlin:20261228T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260914T170000
+DTEND;TZID=Europe/Berlin:20260914T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260915T090000
+DTEND;TZID=Europe/Berlin:20260915T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260915T110000
+DTEND;TZID=Europe/Berlin:20260915T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260916T130000
+DTEND;TZID=Europe/Berlin:20260916T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260917T180000
+DTEND;TZID=Europe/Berlin:20260917T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20260921T130000
+DTEND;TZID=Europe/Berlin:20270104T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260921T170000
+DTEND;TZID=Europe/Berlin:20260921T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260922T090000
+DTEND;TZID=Europe/Berlin:20260922T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260922T110000
+DTEND;TZID=Europe/Berlin:20260922T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260923T090000
+DTEND;TZID=Europe/Berlin:20260923T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260923T130000
+DTEND;TZID=Europe/Berlin:20260923T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20260924T180000
+DTEND;TZID=Europe/Berlin:20260924T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20260928T130000
+DTEND;TZID=Europe/Berlin:20270111T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20260928T170000
+DTEND;TZID=Europe/Berlin:20260928T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260929T090000
+DTEND;TZID=Europe/Berlin:20260929T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20260929T110000
+DTEND;TZID=Europe/Berlin:20260929T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20260930T130000
+DTEND;TZID=Europe/Berlin:20260930T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261001T180000
+DTEND;TZID=Europe/Berlin:20261001T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20261005T130000
+DTEND;TZID=Europe/Berlin:20270118T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20261005T170000
+DTEND;TZID=Europe/Berlin:20261005T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261006T090000
+DTEND;TZID=Europe/Berlin:20261006T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261006T110000
+DTEND;TZID=Europe/Berlin:20261006T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261007T090000
+DTEND;TZID=Europe/Berlin:20261007T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261007T130000
+DTEND;TZID=Europe/Berlin:20261007T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261008T180000
+DTEND;TZID=Europe/Berlin:20261008T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20261012T130000
+DTEND;TZID=Europe/Berlin:20270125T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20261012T170000
+DTEND;TZID=Europe/Berlin:20261012T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261013T090000
+DTEND;TZID=Europe/Berlin:20261013T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261013T110000
+DTEND;TZID=Europe/Berlin:20261013T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261014T130000
+DTEND;TZID=Europe/Berlin:20261014T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261015T180000
+DTEND;TZID=Europe/Berlin:20261015T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20261019T130000
+DTEND;TZID=Europe/Berlin:20270201T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20261019T170000
+DTEND;TZID=Europe/Berlin:20261019T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261020T090000
+DTEND;TZID=Europe/Berlin:20261020T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261020T110000
+DTEND;TZID=Europe/Berlin:20261020T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261021T090000
+DTEND;TZID=Europe/Berlin:20261021T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261021T130000
+DTEND;TZID=Europe/Berlin:20261021T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261022T180000
+DTEND;TZID=Europe/Berlin:20261022T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20261026T130000
+DTEND;TZID=Europe/Berlin:20270208T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:275@https://www.awo-kv-wesel.de/
+SUMMARY:Neukirchen-Vluyn: Skat-Runde mit Gerd Pscherer und Holger Lenz Montags von
+ 17:00 -20:00 Uhr
+DESCRIPTION:Marie-Juchacz-Haus auf der Max-von-Schenkendorf-Str. 9 Leitung Gerd
+ Pscherer und Holger Lenz
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261026T225959Z
+DTSTART;TZID=Europe/Berlin:20261026T170000
+DTEND;TZID=Europe/Berlin:20261026T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261027T090000
+DTEND;TZID=Europe/Berlin:20261027T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261027T110000
+DTEND;TZID=Europe/Berlin:20261027T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261028T130000
+DTEND;TZID=Europe/Berlin:20261028T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261029T180000
+DTEND;TZID=Europe/Berlin:20261029T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20261102T130000
+DTEND;TZID=Europe/Berlin:20270215T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261103T090000
+DTEND;TZID=Europe/Berlin:20261103T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261103T110000
+DTEND;TZID=Europe/Berlin:20261103T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261104T090000
+DTEND;TZID=Europe/Berlin:20261104T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261104T130000
+DTEND;TZID=Europe/Berlin:20261104T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261105T180000
+DTEND;TZID=Europe/Berlin:20261105T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20261109T130000
+DTEND;TZID=Europe/Berlin:20270222T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261110T090000
+DTEND;TZID=Europe/Berlin:20261110T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261110T110000
+DTEND;TZID=Europe/Berlin:20261110T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261111T130000
+DTEND;TZID=Europe/Berlin:20261111T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261112T180000
+DTEND;TZID=Europe/Berlin:20261112T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20261116T130000
+DTEND;TZID=Europe/Berlin:20270301T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261117T090000
+DTEND;TZID=Europe/Berlin:20261117T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261117T110000
+DTEND;TZID=Europe/Berlin:20261117T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261118T090000
+DTEND;TZID=Europe/Berlin:20261118T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261118T130000
+DTEND;TZID=Europe/Berlin:20261118T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261119T180000
+DTEND;TZID=Europe/Berlin:20261119T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20261123T130000
+DTEND;TZID=Europe/Berlin:20270308T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261124T090000
+DTEND;TZID=Europe/Berlin:20261124T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261124T110000
+DTEND;TZID=Europe/Berlin:20261124T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261125T130000
+DTEND;TZID=Europe/Berlin:20261125T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261126T180000
+DTEND;TZID=Europe/Berlin:20261126T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20261130T130000
+DTEND;TZID=Europe/Berlin:20270315T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261201T090000
+DTEND;TZID=Europe/Berlin:20261201T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261201T110000
+DTEND;TZID=Europe/Berlin:20261201T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261202T090000
+DTEND;TZID=Europe/Berlin:20261202T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261202T130000
+DTEND;TZID=Europe/Berlin:20261202T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261203T180000
+DTEND;TZID=Europe/Berlin:20261203T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20261207T130000
+DTEND;TZID=Europe/Berlin:20270322T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261208T090000
+DTEND;TZID=Europe/Berlin:20261208T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261208T110000
+DTEND;TZID=Europe/Berlin:20261208T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261209T130000
+DTEND;TZID=Europe/Berlin:20261209T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261210T180000
+DTEND;TZID=Europe/Berlin:20261210T200000
+END:VEVENT
+BEGIN:VEVENT
+UID:277@https://www.awo-kv-wesel.de/
+SUMMARY:Stuhlgymnastik I um 13:45 Uhr und Stuhlgymnastik II um 15:00 Uhr jeden 
+ Montag je 1 Std.
+DESCRIPTION:Bewegung\, Spiel und jede Menge Spaß - mit Claudia Falss 02841 56985 -
+ nicht an Feiertagen & in den NRW-Schulferien
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261214T225959Z
+DTSTART;TZID=Europe/Berlin:20261214T130000
+DTEND;TZID=Europe/Berlin:20270329T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:283@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und 
+ NRW-Ferientagen
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261215T090000
+DTEND;TZID=Europe/Berlin:20261215T103000
+END:VEVENT
+BEGIN:VEVENT
+UID:284@https://www.awo-kv-wesel.de/
+SUMMARY:Englisch-Kurs für Senioren und Junggebliebene -  nicht an Feiertagen und
+ NRW-Ferientagen Kopie
+DESCRIPTION:Englischunterricht im MJH für den privaten Gebrauch - leicht verständlich
+ in toller Atmosphäre mit Susann Lingnau - 0157 37242172 - nicht an
+ Feiertagen und NRW-Ferientagen
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261215T225959Z
+DTSTART;TZID=Europe/Berlin:20261215T110000
+DTEND;TZID=Europe/Berlin:20261215T123000
+END:VEVENT
+BEGIN:VEVENT
+UID:276@https://www.awo-kv-wesel.de/
+SUMMARY:Neukichen-Vluyn: Marktfrühstück alle 2 Wochen mit Moni Kampa
+DESCRIPTION:09:00 Uhr bis 11:00Uhr bitte anmelden bei Moni Kampa (0157 53416828)\, mit
+ Elisabeth und Annemarie - Kosten 8 Euro
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;INTERVAL=2;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261216T090000
+DTEND;TZID=Europe/Berlin:20261216T110000
+END:VEVENT
+BEGIN:VEVENT
+UID:285@https://www.awo-kv-wesel.de/
+SUMMARY:Spielenachmittag im MJH  jeden Mittwoch 13 Uhr mit Moni Kampa
+DESCRIPTION:Ein offenes Spielangebot im MJH mit Moni Kampa - zur Disposition bitte
+ vorher anrufen oder Bescheid geben. 0157 53416828
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261216T225959Z
+DTSTART;TZID=Europe/Berlin:20261216T130000
+DTEND;TZID=Europe/Berlin:20261216T160000
+END:VEVENT
+BEGIN:VEVENT
+UID:287@https://www.awo-kv-wesel.de/
+SUMMARY:Fitness I jeden Donnerstag von 18:00 Uhr und Fitness II 19:30 Uhr je rund 
+ 90 Minuten mit Marion Fritsch
+DESCRIPTION:jeden Donnerstag um 18 Uhr findet im MJH der erste von zwei Fitness-Kursen
+ statt - Achtung Urlaub oder Krankheit der Kursleiterinnen können
+ dazwischen kommen - Info unter Marion Fritsch — 0170-8315686 
+CATEGORIES:Ortsverein Neukirchen-Vluyn
+DTSTAMP:20260902T170612Z
+CREATED:20260902T170612Z
+RRULE:FREQ=WEEKLY;UNTIL=20261217T225959Z
+DTSTART;TZID=Europe/Berlin:20261217T180000
+DTEND;TZID=Europe/Berlin:20261217T200000
+END:VEVENT
+END:VCALENDAR

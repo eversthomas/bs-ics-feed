@@ -141,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		// getrennt per data-cat / data-feed unterschieden.
 		var catButtons = wrapper.querySelectorAll('.bs-ics-cat-btn[data-cat]');
 		var sourceButtons = wrapper.querySelectorAll('.bs-ics-cat-btn[data-feed]');
+		var monthButtons = wrapper.querySelectorAll('.bs-ics-cat-btn[data-month]');
 		var cards = wrapper.querySelectorAll('.bs-ics-card');
 
 		if (!cards.length) {
@@ -150,6 +151,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		var activeCategory = 'all';
 		var activeFeed = 'all';
 		var searchTerm = '';
+		// Bei aktiver Monats-Navigation markiert der Server bereits den Standard-Monat
+		// (aktueller Monat, sonst der früheste vorhandene) mit "is-active" — dieser Zustand
+		// wird hier nur übernommen, nicht neu entschieden.
+		var activeMonth = 'all';
+		var activeMonthBtn = wrapper.querySelector('.bs-ics-month-btn.is-active');
+		if (activeMonthBtn) {
+			activeMonth = activeMonthBtn.getAttribute('data-month') || 'all';
+		}
 
 		function applyFilters() {
 			var visibleCount = 0;
@@ -160,18 +169,22 @@ document.addEventListener('DOMContentLoaded', function () {
 					.split(',')
 					.map(function (token) { return token.trim().toLowerCase(); });
 				var cardFeedId = card.getAttribute('data-feed-id') || '';
+				var cardMonth = card.getAttribute('data-month') || '';
 
 				var matchesSearch = !searchTerm || cardText.indexOf(searchTerm) !== -1;
 				var matchesCat = (activeCategory === 'all') || (cardCatTokens.indexOf(activeCategory.toLowerCase()) !== -1);
 				var matchesFeed = (activeFeed === 'all') || (cardFeedId === activeFeed);
+				var matchesMonth = (activeMonth === 'all') || (cardMonth === activeMonth);
 
-				if (matchesSearch && matchesCat && matchesFeed) {
+				if (matchesSearch && matchesCat && matchesFeed && matchesMonth) {
 					card.style.display = '';
 					visibleCount++;
 				} else {
 					card.style.display = 'none';
 				}
 			});
+
+			equalizeCardHeaders(wrapper);
 
 			// Optionaler Hinweis wenn keine Termine zum Filter passen
 			var emptyNote = wrapper.querySelector('.bs-ics-filter-empty');
@@ -217,5 +230,79 @@ document.addEventListener('DOMContentLoaded', function () {
 				applyFilters();
 			});
 		});
+
+		monthButtons.forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				monthButtons.forEach(function (b) { b.classList.remove('is-active'); });
+				this.classList.add('is-active');
+				activeMonth = this.getAttribute('data-month') || 'all';
+				applyFilters();
+			});
+		});
+
+		// Initiale Höhen-Angleichung (siehe equalizeCardHeaders weiter unten): direkt beim
+		// Laden nötig, da applyFilters() bislang nur bei einer Nutzerinteraktion feuert.
+		equalizeCardHeaders(wrapper);
+	});
+
+	// 5. EINHEITLICHE KACHEL-HEADER-HÖHE INNERHALB EINER GRID-ZEILE
+	//
+	// Der farbige Kachel-Header (Design "Accent Header") passt seine Höhe an den eigenen
+	// Inhalt an (z. B. ein- vs. mehrzeiliger Datumsbereich bei mehrtägigen/wiederkehrenden
+	// Terminen). CSS Grid streckt zwar die äußeren Kacheln einer Zeile auf gleiche Höhe,
+	// nicht aber deren innere Header-Box — dadurch wirken nebeneinanderliegende farbige
+	// Header optisch uneinheitlich hoch. Da die Zeilenzugehörigkeit vom responsiven
+	// Spaltenumbruch abhängt, lässt sich das nicht zuverlässig rein per CSS lösen; daher
+	// werden Header mit gleichem offsetTop (= gleiche visuelle Zeile) hier auf die
+	// jeweils größte vorkommende Höhe angeglichen.
+	function equalizeCardHeaders(wrapper) {
+		var headers = wrapper.querySelectorAll('.bs-ics-layout-grid > .bs-ics-card .bs-ics-card-header');
+		if (!headers.length) {
+			return;
+		}
+
+		var visibleHeaders = [];
+		headers.forEach(function (header) {
+			header.style.minHeight = '';
+			var card = header.closest('.bs-ics-card');
+			if (card && card.style.display !== 'none') {
+				visibleHeaders.push(header);
+			}
+		});
+
+		var rows = {};
+		visibleHeaders.forEach(function (header) {
+			var rowKey = header.offsetTop;
+			if (!rows[rowKey]) {
+				rows[rowKey] = [];
+			}
+			rows[rowKey].push(header);
+		});
+
+		Object.keys(rows).forEach(function (rowKey) {
+			var rowHeaders = rows[rowKey];
+			if (rowHeaders.length < 2) {
+				return;
+			}
+			var maxHeight = 0;
+			rowHeaders.forEach(function (header) {
+				maxHeight = Math.max(maxHeight, header.offsetHeight);
+			});
+			rowHeaders.forEach(function (header) {
+				header.style.minHeight = maxHeight + 'px';
+			});
+		});
+	}
+
+	window.addEventListener('load', function () {
+		document.querySelectorAll('.bs-ics-wrapper').forEach(equalizeCardHeaders);
+	});
+
+	var resizeTimer;
+	window.addEventListener('resize', function () {
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(function () {
+			document.querySelectorAll('.bs-ics-wrapper').forEach(equalizeCardHeaders);
+		}, 150);
 	});
 });
