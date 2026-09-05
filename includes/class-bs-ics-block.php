@@ -1,6 +1,6 @@
 <?php
 /**
- * Server-Side Rendered Gutenberg-Block für BS WP ICS Feed Reader.
+ * Server-Side Rendered Gutenberg-Block für Bezugssysteme ICS Feed.
  *
  * @package BS_ICS_Feed
  */
@@ -34,7 +34,7 @@ class BS_ICS_Block {
 		if ( ! in_array( 'bs-plugins', $category_slugs, true ) ) {
 			$categories[] = [
 				'slug'  => 'bs-plugins',
-				'title' => __( 'BS Plugins', 'bs-ics-feed' ),
+				'title' => __( 'BS Plugins', 'bezugssysteme-ics-feed' ),
 				'icon'  => 'calendar-alt',
 			];
 		}
@@ -76,8 +76,8 @@ class BS_ICS_Block {
 			'bs-ics/calendar',
 			[
 				'api_version'     => 2,
-				'title'           => __( 'ICS Kalender-Feed', 'bs-ics-feed' ),
-				'description'     => __( 'Zeigt Termine aus einem konfigurierten ICS-Kalender-Feed an.', 'bs-ics-feed' ),
+				'title'           => __( 'ICS Kalender-Feed', 'bezugssysteme-ics-feed' ),
+				'description'     => __( 'Zeigt Termine aus einem konfigurierten ICS-Kalender-Feed an.', 'bezugssysteme-ics-feed' ),
 				'category'        => 'bs-plugins',
 				'icon'            => 'calendar-alt',
 				'editor_script'   => 'bs-ics-block-js',
@@ -204,7 +204,7 @@ class BS_ICS_Block {
 		$feeds_options = [
 			[
 				'value' => 0,
-				'label' => __( '– Kalender-Feed auswählen –', 'bs-ics-feed' ),
+				'label' => __( '– Kalender-Feed auswählen –', 'bezugssysteme-ics-feed' ),
 			],
 		];
 
@@ -212,7 +212,7 @@ class BS_ICS_Block {
 			$feeds_options[] = [
 				'value' => $fp->ID,
 				/* translators: %d: Feed post ID, used as a fallback label when the feed has no title. */
-				'label' => $fp->post_title ? $fp->post_title : sprintf( __( 'Feed #%d', 'bs-ics-feed' ), $fp->ID ),
+				'label' => $fp->post_title ? $fp->post_title : sprintf( __( 'Feed #%d', 'bezugssysteme-ics-feed' ), $fp->ID ),
 			];
 		}
 
@@ -222,48 +222,48 @@ class BS_ICS_Block {
 			[
 				'feeds' => $feeds_options,
 				'i18n'  => [
-					'title'               => __( 'ICS Kalender-Feed', 'bs-ics-feed' ),
-					'description'         => __( 'Zeigt Termine aus einem konfigurierten ICS-Feed an.', 'bs-ics-feed' ),
-					'feedSelect'          => __( 'Kalender-Feed', 'bs-ics-feed' ),
-					'feedSelectDesc'      => __( 'Wähle den anzuzeigenden Feed aus.', 'bs-ics-feed' ),
-					'additionalFeeds'     => __( 'Weitere Kalender kombinieren (optional)', 'bs-ics-feed' ),
-					'additionalFeedsDesc' => __( 'Termine aus zusätzlich ausgewählten Kalendern werden mit dem oben gewählten Kalender zusammengeführt und farblich unterschieden angezeigt.', 'bs-ics-feed' ),
-					'displaySettings'     => __( 'Darstellungs-Optionen', 'bs-ics-feed' ),
-					'designSettings'      => __( 'Kachel-Design & Farben', 'bs-ics-feed' ),
-					'layout'              => __( 'Layout', 'bs-ics-feed' ),
-					'layoutDefault'       => __( 'Standard aus Feed', 'bs-ics-feed' ),
-					'grid'                => __( 'Kachel-Raster (Grid)', 'bs-ics-feed' ),
-					'list'                => __( 'Listenansicht (List)', 'bs-ics-feed' ),
-					'columns'             => __( 'Spalten (Desktop Grid)', 'bs-ics-feed' ),
-					'limit'               => __( 'Maximale Anzahl Termine (0 = alle)', 'bs-ics-feed' ),
-					'sort'                => __( 'Sortierung', 'bs-ics-feed' ),
-					'sortAsc'             => __( 'Chronologisch aufsteigend', 'bs-ics-feed' ),
-					'sortDesc'            => __( 'Absteigend (späteste zuerst)', 'bs-ics-feed' ),
-					'onlyFuture'          => __( 'Nur anstehende Termine', 'bs-ics-feed' ),
-					'monthView'           => __( 'Monats-Navigation anzeigen', 'bs-ics-feed' ),
-					'monthViewDesc'       => __( 'Zeigt eine Monatsauswahl; die max. Terminanzahl wird dabei ignoriert.', 'bs-ics-feed' ),
-					'style'               => __( 'Design-Stil / Preset', 'bs-ics-feed' ),
-					'styleCard'           => __( 'Klassisch (Card)', 'bs-ics-feed' ),
-					'styleFlat'           => __( 'Minimal / Flat', 'bs-ics-feed' ),
-					'styleHeader'         => __( 'Accent Header', 'bs-ics-feed' ),
-					'inheritThemeColors'  => __( 'Theme-Farben erben (Text & Links)', 'bs-ics-feed' ),
-					'accentColor'         => __( 'Akzentfarbe', 'bs-ics-feed' ),
-					'bgColor'             => __( 'Kachel-Hintergrundfarbe', 'bs-ics-feed' ),
-					'shadowStyle'         => __( 'Schatten-Stärke', 'bs-ics-feed' ),
-					'shadowDefault'       => __( 'Standard aus Feed', 'bs-ics-feed' ),
-					'shadowNone'          => __( 'Kein Schatten', 'bs-ics-feed' ),
-					'shadowSubtle'        => __( 'Dezent', 'bs-ics-feed' ),
-					'shadowProminent'     => __( 'Ausgeprägt', 'bs-ics-feed' ),
-					'cardPadding'         => __( 'Kachel-Innenabstand (px)', 'bs-ics-feed' ),
-					'gap'                 => __( 'Abstand zwischen Kacheln (Gap, px)', 'bs-ics-feed' ),
-					'borderRadius'        => __( 'Rahmenradius (px)', 'bs-ics-feed' ),
-					'borderWidth'         => __( 'Rahmenbreite (px)', 'bs-ics-feed' ),
-					'borderColor'         => __( 'Rahmenfarbe', 'bs-ics-feed' ),
-					'filter'              => __( 'Such- & Kategoriefilter anzeigen', 'bs-ics-feed' ),
-					'export'              => __( '„In Kalender eintragen“-Buttons', 'bs-ics-feed' ),
-					'calText'             => __( 'Button-Text „+ Kalender“', 'bs-ics-feed' ),
-					'csvExport'           => __( 'CSV-Export-Button anzeigen', 'bs-ics-feed' ),
-					'placeholder'         => __( 'Bitte wähle in der rechten Seitenleiste einen Kalender-Feed aus, um die Vorschau zu laden.', 'bs-ics-feed' ),
+					'title'               => __( 'ICS Kalender-Feed', 'bezugssysteme-ics-feed' ),
+					'description'         => __( 'Zeigt Termine aus einem konfigurierten ICS-Feed an.', 'bezugssysteme-ics-feed' ),
+					'feedSelect'          => __( 'Kalender-Feed', 'bezugssysteme-ics-feed' ),
+					'feedSelectDesc'      => __( 'Wähle den anzuzeigenden Feed aus.', 'bezugssysteme-ics-feed' ),
+					'additionalFeeds'     => __( 'Weitere Kalender kombinieren (optional)', 'bezugssysteme-ics-feed' ),
+					'additionalFeedsDesc' => __( 'Termine aus zusätzlich ausgewählten Kalendern werden mit dem oben gewählten Kalender zusammengeführt und farblich unterschieden angezeigt.', 'bezugssysteme-ics-feed' ),
+					'displaySettings'     => __( 'Darstellungs-Optionen', 'bezugssysteme-ics-feed' ),
+					'designSettings'      => __( 'Kachel-Design & Farben', 'bezugssysteme-ics-feed' ),
+					'layout'              => __( 'Layout', 'bezugssysteme-ics-feed' ),
+					'layoutDefault'       => __( 'Standard aus Feed', 'bezugssysteme-ics-feed' ),
+					'grid'                => __( 'Kachel-Raster (Grid)', 'bezugssysteme-ics-feed' ),
+					'list'                => __( 'Listenansicht (List)', 'bezugssysteme-ics-feed' ),
+					'columns'             => __( 'Spalten (Desktop Grid)', 'bezugssysteme-ics-feed' ),
+					'limit'               => __( 'Maximale Anzahl Termine (0 = alle)', 'bezugssysteme-ics-feed' ),
+					'sort'                => __( 'Sortierung', 'bezugssysteme-ics-feed' ),
+					'sortAsc'             => __( 'Chronologisch aufsteigend', 'bezugssysteme-ics-feed' ),
+					'sortDesc'            => __( 'Absteigend (späteste zuerst)', 'bezugssysteme-ics-feed' ),
+					'onlyFuture'          => __( 'Nur anstehende Termine', 'bezugssysteme-ics-feed' ),
+					'monthView'           => __( 'Monats-Navigation anzeigen', 'bezugssysteme-ics-feed' ),
+					'monthViewDesc'       => __( 'Zeigt eine Monatsauswahl; die max. Terminanzahl wird dabei ignoriert.', 'bezugssysteme-ics-feed' ),
+					'style'               => __( 'Design-Stil / Preset', 'bezugssysteme-ics-feed' ),
+					'styleCard'           => __( 'Klassisch (Card)', 'bezugssysteme-ics-feed' ),
+					'styleFlat'           => __( 'Minimal / Flat', 'bezugssysteme-ics-feed' ),
+					'styleHeader'         => __( 'Accent Header', 'bezugssysteme-ics-feed' ),
+					'inheritThemeColors'  => __( 'Theme-Farben erben (Text & Links)', 'bezugssysteme-ics-feed' ),
+					'accentColor'         => __( 'Akzentfarbe', 'bezugssysteme-ics-feed' ),
+					'bgColor'             => __( 'Kachel-Hintergrundfarbe', 'bezugssysteme-ics-feed' ),
+					'shadowStyle'         => __( 'Schatten-Stärke', 'bezugssysteme-ics-feed' ),
+					'shadowDefault'       => __( 'Standard aus Feed', 'bezugssysteme-ics-feed' ),
+					'shadowNone'          => __( 'Kein Schatten', 'bezugssysteme-ics-feed' ),
+					'shadowSubtle'        => __( 'Dezent', 'bezugssysteme-ics-feed' ),
+					'shadowProminent'     => __( 'Ausgeprägt', 'bezugssysteme-ics-feed' ),
+					'cardPadding'         => __( 'Kachel-Innenabstand (px)', 'bezugssysteme-ics-feed' ),
+					'gap'                 => __( 'Abstand zwischen Kacheln (Gap, px)', 'bezugssysteme-ics-feed' ),
+					'borderRadius'        => __( 'Rahmenradius (px)', 'bezugssysteme-ics-feed' ),
+					'borderWidth'         => __( 'Rahmenbreite (px)', 'bezugssysteme-ics-feed' ),
+					'borderColor'         => __( 'Rahmenfarbe', 'bezugssysteme-ics-feed' ),
+					'filter'              => __( 'Such- & Kategoriefilter anzeigen', 'bezugssysteme-ics-feed' ),
+					'export'              => __( '„In Kalender eintragen“-Buttons', 'bezugssysteme-ics-feed' ),
+					'calText'             => __( 'Button-Text „+ Kalender“', 'bezugssysteme-ics-feed' ),
+					'csvExport'           => __( 'CSV-Export-Button anzeigen', 'bezugssysteme-ics-feed' ),
+					'placeholder'         => __( 'Bitte wähle in der rechten Seitenleiste einen Kalender-Feed aus, um die Vorschau zu laden.', 'bezugssysteme-ics-feed' ),
 				],
 			]
 		);
@@ -277,7 +277,7 @@ class BS_ICS_Block {
 	 */
 	public function render_block( $attributes ) {
 		if ( empty( $attributes['id'] ) ) {
-			return '<div class="bs-ics-empty-state"><p>' . esc_html__( 'Bitte wähle in den Block-Einstellungen einen Kalender-Feed aus.', 'bs-ics-feed' ) . '</p></div>';
+			return '<div class="bs-ics-empty-state"><p>' . esc_html__( 'Bitte wähle in den Block-Einstellungen einen Kalender-Feed aus.', 'bezugssysteme-ics-feed' ) . '</p></div>';
 		}
 
 		// Primäre Feed-ID mit optional zusätzlich ausgewählten Feeds ("ids") zu einer

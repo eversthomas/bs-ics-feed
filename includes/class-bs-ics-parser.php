@@ -1,6 +1,6 @@
 <?php
 /**
- * RFC 5545 ICS Feed Parser für BS WP ICS Feed Reader.
+ * RFC 5545 ICS Feed Parser für Bezugssysteme ICS Feed.
  *
  * @package BS_ICS_Feed
  */

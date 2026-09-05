@@ -1,6 +1,6 @@
 <?php
 /**
- * Deinstallations-Routine für BS WP ICS Feed Reader.
+ * Deinstallations-Routine für Bezugssysteme ICS Feed.
  *
  * Löscht alle Daten, Custom Post Types und Post-Metas restlos bei Plugin-Löschung.
  *

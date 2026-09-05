@@ -1,6 +1,6 @@
 {
-	"name": "bezugssysteme/bs-ics-feed",
-	"description": "Dev-Abhängigkeiten für die PHPUnit-Testsuite von BS ICS Feed (nicht Teil der Plugin-Laufzeit).",
+	"name": "bezugssysteme/bezugssysteme-ics-feed",
+	"description": "Dev-Abhängigkeiten für die PHPUnit-Testsuite von Bezugssysteme ICS Feed (nicht Teil der Plugin-Laufzeit).",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
 	"require-dev": {

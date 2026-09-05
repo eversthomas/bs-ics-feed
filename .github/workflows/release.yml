@@ -17,9 +17,9 @@ jobs:
       - name: Version aus Plugin-Header lesen
         id: version
         run: |
-          VERSION=$(grep -m1 "^ \* Version:" bs-ics-feed.php | sed -E 's/.*Version:\s*//' | tr -d '\r' | xargs)
+          VERSION=$(grep -m1 "^ \* Version:" bezugssysteme-ics-feed.php | sed -E 's/.*Version:\s*//' | tr -d '\r' | xargs)
           if [ -z "$VERSION" ]; then
-            echo "::error::Konnte keine Version aus dem Plugin-Header (bs-ics-feed.php) auslesen. Abbruch, um kein Release mit leerem Tag zu erzeugen."
+            echo "::error::Konnte keine Version aus dem Plugin-Header (bezugssysteme-ics-feed.php) auslesen. Abbruch, um kein Release mit leerem Tag zu erzeugen."
             exit 1
           fi
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
@@ -37,9 +37,9 @@ jobs:
       - name: Bereinigtes ZIP bauen (via .distignore)
         if: steps.check_tag.outputs.exists == 'false'
         run: |
-          mkdir -p build/bs-ics-feed
-          rsync -av --exclude-from='.distignore' --exclude='build' ./ build/bs-ics-feed/
-          cd build && zip -r ../bs-ics-feed.zip bs-ics-feed
+          mkdir -p build/bezugssysteme-ics-feed
+          rsync -av --exclude-from='.distignore' --exclude='build' ./ build/bezugssysteme-ics-feed/
+          cd build && zip -r ../bezugssysteme-ics-feed.zip bezugssysteme-ics-feed
 
       - name: Release erstellen
         if: steps.check_tag.outputs.exists == 'false'
@@ -47,5 +47,5 @@ jobs:
         with:
           tag_name: v${{ steps.version.outputs.version }}
           name: Version ${{ steps.version.outputs.version }}
-          body: Automatisch erstelltes Release. Details siehe README.md-Changelog.
-          files: bs-ics-feed.zip
+          body: Automatisch erstelltes Release. Details siehe readme.txt-Changelog.
+          files: bezugssysteme-ics-feed.zip

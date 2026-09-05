@@ -1,8 +1,8 @@
-# BS ICS Feed
+# Bezugssysteme ICS Feed
 
 > **Modulares, performantes und barrierefreies WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von iCalendar/ICS-Kalender-Feeds mit Shortcode & Gutenberg-Block.**
 
-[![Version](https://img.shields.io/badge/Version-1.6.2-blue.svg)](https://wordpress.org/)
+[![Version](https://img.shields.io/badge/Version-1.7.0-blue.svg)](https://wordpress.org/)
 [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue.svg)](https://wordpress.org/)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://www.php.net/)
 [![License](https://img.shields.io/badge/License-GPLv2%2B-green.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -16,7 +16,7 @@
 
 ## 📖 Übersicht
 
-**BS ICS Feed** ermöglicht das einfache Einbinden und stilvolle Ausgeben externer Kalender-Feeds (z. B. aus Google Calendar, Apple iCloud, Outlook, REDAXO forCal, Nextcloud oder Vereinssoftware) in WordPress-Websites. 
+**Bezugssysteme ICS Feed** ermöglicht das einfache Einbinden und stilvolle Ausgeben externer Kalender-Feeds (z. B. aus Google Calendar, Apple iCloud, Outlook, REDAXO forCal, Nextcloud oder Vereinssoftware) in WordPress-Websites. 
 
 Feeds werden als eigener Inhaltstyp verwaltet, per Klick synchronisiert, im lokalen Cache gespeichert und wahlweise über den **Gutenberg-Block (`ICS Kalender-Feed`)**, den flexiblen Shortcode `[bs_ics_calendar id="..."]` oder ein klassisches **Sidebar-Widget** im Frontend angezeigt.
 
@@ -68,7 +68,7 @@ Feeds werden als eigener Inhaltstyp verwaltet, per Klick synchronisiert, im loka
 
 ## 📥 Installation
 
-1. Lade das Plugin-Verzeichnis `bs-ics-feed` in den Ordner `/wp-content/plugins/` hoch (oder lade die ZIP-Datei unter **Plugins $\rightarrow$ Installieren $\rightarrow$ Plugin hochladen** hoch).
+1. Lade das Plugin-Verzeichnis `bezugssysteme-ics-feed` in den Ordner `/wp-content/plugins/` hoch (oder lade die ZIP-Datei unter **Plugins $\rightarrow$ Installieren $\rightarrow$ Plugin hochladen** hoch).
 2. Aktiviere das Plugin im WordPress-Menü **Plugins**.
 3. Navigiere zum neuen Menüpunkt **ICS Feeds $\rightarrow$ Neu hinzufügen**.
 
@@ -145,8 +145,8 @@ Für Themes/Widget-Bereiche ohne Block-Widgets-Unterstützung oder für Redakteu
 ## 📂 Architektur
 
 ```text
-bs-ics-feed/
-├── bs-ics-feed.php                    # Plugin-Bootstrap, Lifecycle, Autoloading & WP-Cron
+bezugssysteme-ics-feed/
+├── bezugssysteme-ics-feed.php         # Plugin-Bootstrap, Lifecycle, Autoloading & WP-Cron
 ├── uninstall.php                     # Vollständige Bereinigung bei Plugin-Löschung
 ├── README.md                         # Diese Dokumentation
 ├── BS-PluginDesignSystem.md          # Designsystem für BS-Plugin-Backends
@@ -154,7 +154,7 @@ bs-ics-feed/
 ├── ROADMAP.md                        # Projektplan & Phasen
 ├── PROMPTS.md                        # Entwicklungs-Prompts
 ├── languages/
-│   └── bs-ics-feed.pot                # GNU gettext Übersetzungsvorlage
+│   └── bezugssysteme-ics-feed.pot     # GNU gettext Übersetzungsvorlage
 ├── includes/
 │   ├── class-bs-ics-cpt.php          # CPT 'bs_ics_feed' & Spaltenverwaltung
 │   ├── class-bs-ics-parser.php       # RFC 5545 Parser (Zeitzonen, Unfolding, ReDoS-Schutz)

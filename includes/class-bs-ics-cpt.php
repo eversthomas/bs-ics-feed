@@ -56,28 +56,28 @@ class BS_ICS_CPT {
 	 */
 	public function register_cpt() {
 		$labels = [
-			'name'                  => _x( 'ICS Feeds', 'Post Type General Name', 'bs-ics-feed' ),
-			'singular_name'         => _x( 'ICS Feed', 'Post Type Singular Name', 'bs-ics-feed' ),
-			'menu_name'             => __( 'ICS Feeds', 'bs-ics-feed' ),
-			'name_admin_bar'        => __( 'ICS Feed', 'bs-ics-feed' ),
-			'archives'              => __( 'Feed-Archive', 'bs-ics-feed' ),
-			'attributes'            => __( 'Feed-Attribute', 'bs-ics-feed' ),
-			'all_items'             => __( 'Alle Feeds', 'bs-ics-feed' ),
-			'add_new_item'          => __( 'Neuen Feed anlegen', 'bs-ics-feed' ),
-			'add_new'               => __( 'Neu hinzufügen', 'bs-ics-feed' ),
-			'new_item'              => __( 'Neuer Feed', 'bs-ics-feed' ),
-			'edit_item'             => __( 'Feed bearbeiten', 'bs-ics-feed' ),
-			'update_item'           => __( 'Feed aktualisieren', 'bs-ics-feed' ),
-			'view_item'             => __( 'Feed ansehen', 'bs-ics-feed' ),
-			'view_items'            => __( 'Feeds ansehen', 'bs-ics-feed' ),
-			'search_items'          => __( 'Feed suchen', 'bs-ics-feed' ),
-			'not_found'             => __( 'Keine Feeds gefunden', 'bs-ics-feed' ),
-			'not_found_in_trash'    => __( 'Keine Feeds im Papierkorb', 'bs-ics-feed' ),
+			'name'                  => _x( 'ICS Feeds', 'Post Type General Name', 'bezugssysteme-ics-feed' ),
+			'singular_name'         => _x( 'ICS Feed', 'Post Type Singular Name', 'bezugssysteme-ics-feed' ),
+			'menu_name'             => __( 'ICS Feeds', 'bezugssysteme-ics-feed' ),
+			'name_admin_bar'        => __( 'ICS Feed', 'bezugssysteme-ics-feed' ),
+			'archives'              => __( 'Feed-Archive', 'bezugssysteme-ics-feed' ),
+			'attributes'            => __( 'Feed-Attribute', 'bezugssysteme-ics-feed' ),
+			'all_items'             => __( 'Alle Feeds', 'bezugssysteme-ics-feed' ),
+			'add_new_item'          => __( 'Neuen Feed anlegen', 'bezugssysteme-ics-feed' ),
+			'add_new'               => __( 'Neu hinzufügen', 'bezugssysteme-ics-feed' ),
+			'new_item'              => __( 'Neuer Feed', 'bezugssysteme-ics-feed' ),
+			'edit_item'             => __( 'Feed bearbeiten', 'bezugssysteme-ics-feed' ),
+			'update_item'           => __( 'Feed aktualisieren', 'bezugssysteme-ics-feed' ),
+			'view_item'             => __( 'Feed ansehen', 'bezugssysteme-ics-feed' ),
+			'view_items'            => __( 'Feeds ansehen', 'bezugssysteme-ics-feed' ),
+			'search_items'          => __( 'Feed suchen', 'bezugssysteme-ics-feed' ),
+			'not_found'             => __( 'Keine Feeds gefunden', 'bezugssysteme-ics-feed' ),
+			'not_found_in_trash'    => __( 'Keine Feeds im Papierkorb', 'bezugssysteme-ics-feed' ),
 		];
 
 		$args = [
-			'label'                 => __( 'ICS Feed', 'bs-ics-feed' ),
-			'description'           => __( 'ICS Kalender-Feed Konfigurationen', 'bs-ics-feed' ),
+			'label'                 => __( 'ICS Feed', 'bezugssysteme-ics-feed' ),
+			'description'           => __( 'ICS Kalender-Feed Konfigurationen', 'bezugssysteme-ics-feed' ),
 			'labels'                => $labels,
 			'supports'              => [ 'title' ],
 			'hierarchical'          => false,
@@ -146,12 +146,12 @@ class BS_ICS_CPT {
 			'only_future'          => true,
 			'date_format'          => '',
 			'read_more_mode'       => 'expand',
-			'read_more_text'       => __( 'Weiterlesen', 'bs-ics-feed' ),
-			'read_less_text'       => __( 'Weniger anzeigen', 'bs-ics-feed' ),
-			'back_text'            => __( '← Zurück zur Übersicht', 'bs-ics-feed' ),
+			'read_more_text'       => __( 'Weiterlesen', 'bezugssysteme-ics-feed' ),
+			'read_less_text'       => __( 'Weniger anzeigen', 'bezugssysteme-ics-feed' ),
+			'back_text'            => __( '← Zurück zur Übersicht', 'bezugssysteme-ics-feed' ),
 			'enable_search_filter' => true,
 			'enable_add_to_cal'    => true,
-			'add_to_cal_text'      => __( 'Kalender', 'bs-ics-feed' ),
+			'add_to_cal_text'      => __( 'Kalender', 'bezugssysteme-ics-feed' ),
 			'enable_csv_export'    => true,
 			'month_view'           => false,
 		];
@@ -223,9 +223,9 @@ class BS_ICS_CPT {
 		foreach ( $columns as $key => $value ) {
 			$new_columns[ $key ] = $value;
 			if ( 'title' === $key ) {
-				$new_columns['bs_ics_shortcode']   = __( 'Shortcode', 'bs-ics-feed' );
-				$new_columns['bs_ics_feed_url']    = __( 'Quell-URL', 'bs-ics-feed' );
-				$new_columns['bs_ics_last_synced'] = __( 'Letzter Sync', 'bs-ics-feed' );
+				$new_columns['bs_ics_shortcode']   = __( 'Shortcode', 'bezugssysteme-ics-feed' );
+				$new_columns['bs_ics_feed_url']    = __( 'Quell-URL', 'bezugssysteme-ics-feed' );
+				$new_columns['bs_ics_last_synced'] = __( 'Letzter Sync', 'bezugssysteme-ics-feed' );
 			}
 		}
 
@@ -249,7 +249,7 @@ class BS_ICS_CPT {
 				if ( ! empty( $url ) ) {
 					echo '<a href="' . esc_url( $url ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( wp_trim_words( $url, 6, '...' ) ) . '</a>';
 				} else {
-					echo '<span class="description">' . esc_html__( 'Keine URL hinterlegt', 'bs-ics-feed' ) . '</span>';
+					echo '<span class="description">' . esc_html__( 'Keine URL hinterlegt', 'bezugssysteme-ics-feed' ) . '</span>';
 				}
 				break;
 
@@ -259,7 +259,7 @@ class BS_ICS_CPT {
 					$formatted = wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), (int) $last_synced );
 					echo esc_html( $formatted );
 				} else {
-					echo '<span class="description">' . esc_html__( 'Noch nicht synchronisiert', 'bs-ics-feed' ) . '</span>';
+					echo '<span class="description">' . esc_html__( 'Noch nicht synchronisiert', 'bezugssysteme-ics-feed' ) . '</span>';
 				}
 				break;
 		}

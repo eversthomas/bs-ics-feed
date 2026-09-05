@@ -1,6 +1,6 @@
 <?php
 /**
- * Frontend Shortcode-Renderer für BS WP ICS Feed Reader.
+ * Frontend Shortcode-Renderer für Bezugssysteme ICS Feed.
  * Unterstützt Teaser/Detail-Trennung, fließendes Accordion-Aufklappen, Einzelansicht,
  * Design-Presets (Klassisch, Flat, Accent-Header), Theme-Farbvererbung, Schema.org JSON-LD, Filterleiste und Add-to-Calendar.
  *
@@ -50,7 +50,7 @@ class BS_ICS_Renderer {
 			'bsIcsFrontend',
 			[
 				'i18n' => [
-					'noResults' => __( 'Keine Termine für diesen Filter gefunden.', 'bs-ics-feed' ),
+					'noResults' => __( 'Keine Termine für diesen Filter gefunden.', 'bezugssysteme-ics-feed' ),
 				],
 			]
 		);
@@ -104,7 +104,7 @@ class BS_ICS_Renderer {
 
 		if ( empty( $valid_feed_ids ) ) {
 			if ( current_user_can( 'edit_posts' ) ) {
-				return '<div class="bs-ics-empty-state"><p>' . esc_html__( '[BS ICS Calendar] Bitte gib eine gültige Feed-ID an.', 'bs-ics-feed' ) . '</p></div>';
+				return '<div class="bs-ics-empty-state"><p>' . esc_html__( '[BS ICS Calendar] Bitte gib eine gültige Feed-ID an.', 'bezugssysteme-ics-feed' ) . '</p></div>';
 			}
 			return '';
 		}
@@ -332,12 +332,16 @@ class BS_ICS_Renderer {
 		<div class="<?php echo esc_attr( $wrapper_class_attr ); ?>" style="<?php echo esc_attr( $style_vars ); ?>">
 			<!-- Schema.org JSON-LD Structured Data (Rein im Body gerendert) -->
 			<script type="application/ld+json">
-			<?php echo wp_json_encode( $this->generate_schema_org_data( $events ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ); ?>
+			<?php
+			// JSON_HEX_TAG kodiert < und > als Unicode-Escapes, damit ein Feed-Wert mit einem
+			// wörtlichen "</script>" (z. B. in SUMMARY/DESCRIPTION) nicht aus dem Skript-Tag ausbrechen kann.
+			echo wp_json_encode( $this->generate_schema_org_data( $events ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_HEX_TAG );
+			?>
 			</script>
 
 			<!-- Monats-Navigation (optional) -->
 			<?php if ( $is_month_view && count( $months ) > 1 ) : ?>
-				<div class="bs-ics-category-filters bs-ics-month-filters" role="group" aria-label="<?php esc_attr_e( 'Nach Monat filtern', 'bs-ics-feed' ); ?>">
+				<div class="bs-ics-category-filters bs-ics-month-filters" role="group" aria-label="<?php esc_attr_e( 'Nach Monat filtern', 'bezugssysteme-ics-feed' ); ?>">
 					<?php foreach ( $months as $month_key => $month_label ) : ?>
 						<button type="button" class="bs-ics-cat-btn bs-ics-month-btn<?php echo ( $month_key === $default_month_key ) ? ' is-active' : ''; ?>" data-month="<?php echo esc_attr( $month_key ); ?>">
 							<?php echo esc_html( $month_label ); ?>
@@ -356,11 +360,11 @@ class BS_ICS_Renderer {
 					<?php if ( $show_filter_row ) : ?>
 						<div class="bs-ics-search-wrap">
 							<span class="bs-ics-search-icon" aria-hidden="true">&#128269;</span>
-							<input type="search" class="bs-ics-search-input" placeholder="<?php esc_attr_e( 'Termine durchsuchen...', 'bs-ics-feed' ); ?>" aria-label="<?php esc_attr_e( 'Termine filtern', 'bs-ics-feed' ); ?>" />
+							<input type="search" class="bs-ics-search-input" placeholder="<?php esc_attr_e( 'Termine durchsuchen...', 'bezugssysteme-ics-feed' ); ?>" aria-label="<?php esc_attr_e( 'Termine filtern', 'bezugssysteme-ics-feed' ); ?>" />
 						</div>
 						<?php if ( ! empty( $categories ) ) : ?>
-							<div class="bs-ics-category-filters" role="group" aria-label="<?php esc_attr_e( 'Kategorien filtern', 'bs-ics-feed' ); ?>">
-								<button type="button" class="bs-ics-cat-btn is-active" data-cat="all"><?php esc_html_e( 'Alle', 'bs-ics-feed' ); ?></button>
+							<div class="bs-ics-category-filters" role="group" aria-label="<?php esc_attr_e( 'Kategorien filtern', 'bezugssysteme-ics-feed' ); ?>">
+								<button type="button" class="bs-ics-cat-btn is-active" data-cat="all"><?php esc_html_e( 'Alle', 'bezugssysteme-ics-feed' ); ?></button>
 								<?php foreach ( $categories as $cat_item ) : ?>
 									<button type="button" class="bs-ics-cat-btn" data-cat="<?php echo esc_attr( $cat_item ); ?>">
 										<?php echo esc_html( $cat_item ); ?>
@@ -369,8 +373,8 @@ class BS_ICS_Renderer {
 							</div>
 						<?php endif; ?>
 						<?php if ( ! empty( $feed_sources ) ) : ?>
-							<div class="bs-ics-category-filters bs-ics-source-filters" role="group" aria-label="<?php esc_attr_e( 'Nach Kalender filtern', 'bs-ics-feed' ); ?>">
-								<button type="button" class="bs-ics-cat-btn is-active" data-feed="all"><?php esc_html_e( 'Alle Kalender', 'bs-ics-feed' ); ?></button>
+							<div class="bs-ics-category-filters bs-ics-source-filters" role="group" aria-label="<?php esc_attr_e( 'Nach Kalender filtern', 'bezugssysteme-ics-feed' ); ?>">
+								<button type="button" class="bs-ics-cat-btn is-active" data-feed="all"><?php esc_html_e( 'Alle Kalender', 'bezugssysteme-ics-feed' ); ?></button>
 								<?php foreach ( $feed_sources as $source_feed_id => $source ) : ?>
 									<button type="button" class="bs-ics-cat-btn bs-ics-source-btn" data-feed="<?php echo esc_attr( $source_feed_id ); ?>" style="--bs-ics-source-color: <?php echo esc_attr( $source['accent'] ); ?>;">
 										<span class="bs-ics-source-dot" aria-hidden="true"></span>
@@ -382,7 +386,7 @@ class BS_ICS_Renderer {
 					<?php endif; ?>
 					<?php if ( $show_csv_export ) : ?>
 						<a href="<?php echo esc_url( $this->get_csv_export_url( $valid_feed_ids, $display ) ); ?>" class="bs-ics-csv-export-btn" download>
-							<span aria-hidden="true">&#128190;</span> <?php esc_html_e( 'CSV exportieren', 'bs-ics-feed' ); ?>
+							<span aria-hidden="true">&#128190;</span> <?php esc_html_e( 'CSV exportieren', 'bezugssysteme-ics-feed' ); ?>
 						</a>
 					<?php endif; ?>
 				</div>
@@ -443,14 +447,14 @@ class BS_ICS_Renderer {
 							<div class="bs-ics-card-header">
 								<time class="bs-ics-date" datetime="<?php echo esc_attr( $datetime_iso ); ?>">
 									<span class="bs-ics-date-icon" aria-hidden="true">&#128197;</span>
-									<span class="bs-ics-sr-only"><?php esc_html_e( 'Datum:', 'bs-ics-feed' ); ?> </span>
+									<span class="bs-ics-sr-only"><?php esc_html_e( 'Datum:', 'bezugssysteme-ics-feed' ); ?> </span>
 									<span class="bs-ics-date-text"><?php echo esc_html( $formatted_date ); ?></span>
 								</time>
 								<?php if ( $is_all_day ) : ?>
-									<span class="bs-ics-badge bs-ics-badge-allday"><?php esc_html_e( 'Ganztägig', 'bs-ics-feed' ); ?></span>
+									<span class="bs-ics-badge bs-ics-badge-allday"><?php esc_html_e( 'Ganztägig', 'bezugssysteme-ics-feed' ); ?></span>
 								<?php endif; ?>
 								<?php if ( ! empty( $event['is_recurring'] ) ) : ?>
-									<span class="bs-ics-badge bs-ics-badge-recurring"><span aria-hidden="true">&#8635;</span> <?php esc_html_e( 'Wiederholt sich', 'bs-ics-feed' ); ?></span>
+									<span class="bs-ics-badge bs-ics-badge-recurring"><span aria-hidden="true">&#8635;</span> <?php esc_html_e( 'Wiederholt sich', 'bezugssysteme-ics-feed' ); ?></span>
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
@@ -462,14 +466,14 @@ class BS_ICS_Renderer {
 						<?php if ( ! empty( $field_config['LOCATION']['teaser'] ) && ! empty( $event['location'] ) ) : ?>
 							<div class="bs-ics-meta bs-ics-location">
 								<span class="bs-ics-meta-icon" aria-hidden="true">&#128205;</span>
-								<span class="bs-ics-sr-only"><?php esc_html_e( 'Ort:', 'bs-ics-feed' ); ?> </span>
+								<span class="bs-ics-sr-only"><?php esc_html_e( 'Ort:', 'bezugssysteme-ics-feed' ); ?> </span>
 								<span class="bs-ics-meta-text"><?php echo esc_html( $event['location'] ); ?></span>
 							</div>
 						<?php endif; ?>
 
 						<?php if ( ! empty( $field_config['CATEGORIES']['teaser'] ) && ! empty( $event['categories'] ) ) : ?>
 							<div class="bs-ics-meta bs-ics-category">
-								<span class="bs-ics-sr-only"><?php esc_html_e( 'Kategorie:', 'bs-ics-feed' ); ?> </span>
+								<span class="bs-ics-sr-only"><?php esc_html_e( 'Kategorie:', 'bezugssysteme-ics-feed' ); ?> </span>
 								<span class="bs-ics-badge"><?php echo esc_html( $event['categories'] ); ?></span>
 							</div>
 						<?php endif; ?>
@@ -483,24 +487,24 @@ class BS_ICS_Renderer {
 						<?php if ( ! empty( $field_config['URL']['teaser'] ) && ! empty( $event['url'] ) ) : ?>
 							<div class="bs-ics-action">
 								<a href="<?php echo esc_url( $event['url'] ); ?>" class="bs-ics-link-btn" target="_blank" rel="noopener noreferrer">
-									<?php echo esc_html( ! empty( $field_config['URL']['label'] ) ? $field_config['URL']['label'] : __( 'Mehr erfahren', 'bs-ics-feed' ) ); ?> &rarr;
+									<?php echo esc_html( ! empty( $field_config['URL']['label'] ) ? $field_config['URL']['label'] : __( 'Mehr erfahren', 'bezugssysteme-ics-feed' ) ); ?> &rarr;
 								</a>
 							</div>
 						<?php endif; ?>
 
 						<!-- DETAIL-BEREICH (Accordion) -->
 						<?php if ( 'expand' === $display['read_more_mode'] && $has_extra_details ) : ?>
-							<div class="bs-ics-card-details" id="<?php echo esc_attr( $details_id ); ?>" role="region" aria-label="<?php esc_attr_e( 'Zusätzliche Termindetails', 'bs-ics-feed' ); ?>">
+							<div class="bs-ics-card-details" id="<?php echo esc_attr( $details_id ); ?>" role="region" aria-label="<?php esc_attr_e( 'Zusätzliche Termindetails', 'bezugssysteme-ics-feed' ); ?>">
 								<?php if ( ! empty( $field_config['LOCATION']['detail'] ) && empty( $field_config['LOCATION']['teaser'] ) && ! empty( $event['location'] ) ) : ?>
 									<div class="bs-ics-meta bs-ics-location">
-										<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['LOCATION']['label'] ) ? $field_config['LOCATION']['label'] : __( 'Ort', 'bs-ics-feed' ) ); ?>:</strong>
+										<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['LOCATION']['label'] ) ? $field_config['LOCATION']['label'] : __( 'Ort', 'bezugssysteme-ics-feed' ) ); ?>:</strong>
 										<span class="bs-ics-meta-text"><?php echo esc_html( $event['location'] ); ?></span>
 									</div>
 								<?php endif; ?>
 
 								<?php if ( ! empty( $field_config['CATEGORIES']['detail'] ) && empty( $field_config['CATEGORIES']['teaser'] ) && ! empty( $event['categories'] ) ) : ?>
 									<div class="bs-ics-meta bs-ics-category">
-										<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['CATEGORIES']['label'] ) ? $field_config['CATEGORIES']['label'] : __( 'Kategorie', 'bs-ics-feed' ) ); ?>:</strong>
+										<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['CATEGORIES']['label'] ) ? $field_config['CATEGORIES']['label'] : __( 'Kategorie', 'bezugssysteme-ics-feed' ) ); ?>:</strong>
 										<span class="bs-ics-meta-text"><?php echo esc_html( $event['categories'] ); ?></span>
 									</div>
 								<?php endif; ?>
@@ -514,7 +518,7 @@ class BS_ICS_Renderer {
 								<?php if ( ! empty( $field_config['URL']['detail'] ) && empty( $field_config['URL']['teaser'] ) && ! empty( $event['url'] ) ) : ?>
 									<div class="bs-ics-action">
 										<a href="<?php echo esc_url( $event['url'] ); ?>" class="bs-ics-link-btn" target="_blank" rel="noopener noreferrer">
-											<?php echo esc_html( ! empty( $field_config['URL']['label'] ) ? $field_config['URL']['label'] : __( 'Termin-Link öffnen', 'bs-ics-feed' ) ); ?> &rarr;
+											<?php echo esc_html( ! empty( $field_config['URL']['label'] ) ? $field_config['URL']['label'] : __( 'Termin-Link öffnen', 'bezugssysteme-ics-feed' ) ); ?> &rarr;
 										</a>
 									</div>
 								<?php endif; ?>
@@ -596,7 +600,7 @@ class BS_ICS_Renderer {
 			foreach ( $feed_events as $feed_event ) {
 				$feed_event['_feed_id'] = $feed_id;
 				/* translators: %d: Feed post ID, used as a fallback label when the feed has no title. */
-				$feed_event['_feed_title']  = $feed_title ? $feed_title : sprintf( __( 'Feed #%d', 'bs-ics-feed' ), $feed_id );
+				$feed_event['_feed_title']  = $feed_title ? $feed_title : sprintf( __( 'Feed #%d', 'bezugssysteme-ics-feed' ), $feed_id );
 				$feed_event['_feed_accent'] = $feed_design_settings['accent_color'];
 				$cached_events[]            = $feed_event;
 			}
@@ -695,7 +699,7 @@ class BS_ICS_Renderer {
 		$nonce        = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
 
 		if ( empty( $feed_ids_str ) || ! wp_verify_nonce( $nonce, 'bs_ics_export_csv_' . $feed_ids_str ) ) {
-			wp_die( esc_html__( 'Ungültige oder abgelaufene Export-Anfrage.', 'bs-ics-feed' ), '', [ 'response' => 403 ] );
+			wp_die( esc_html__( 'Ungültige oder abgelaufene Export-Anfrage.', 'bezugssysteme-ics-feed' ), '', [ 'response' => 403 ] );
 		}
 
 		$requested_ids  = array_filter( array_map( 'absint', explode( ',', $feed_ids_str ) ) );
@@ -707,7 +711,7 @@ class BS_ICS_Renderer {
 		}
 
 		if ( empty( $valid_feed_ids ) ) {
-			wp_die( esc_html__( 'Keine gültigen Feeds gefunden.', 'bs-ics-feed' ), '', [ 'response' => 404 ] );
+			wp_die( esc_html__( 'Keine gültigen Feeds gefunden.', 'bezugssysteme-ics-feed' ), '', [ 'response' => 404 ] );
 		}
 
 		$is_merged = count( $valid_feed_ids ) > 1;
@@ -736,17 +740,17 @@ class BS_ICS_Renderer {
 		fwrite( $output, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fwrite
 
 		$header_row = [
-			__( 'Titel', 'bs-ics-feed' ),
-			__( 'Start', 'bs-ics-feed' ),
-			__( 'Ende', 'bs-ics-feed' ),
-			__( 'Ganztägig', 'bs-ics-feed' ),
-			__( 'Ort', 'bs-ics-feed' ),
-			__( 'Kategorie', 'bs-ics-feed' ),
-			__( 'Beschreibung', 'bs-ics-feed' ),
-			__( 'Link', 'bs-ics-feed' ),
+			__( 'Titel', 'bezugssysteme-ics-feed' ),
+			__( 'Start', 'bezugssysteme-ics-feed' ),
+			__( 'Ende', 'bezugssysteme-ics-feed' ),
+			__( 'Ganztägig', 'bezugssysteme-ics-feed' ),
+			__( 'Ort', 'bezugssysteme-ics-feed' ),
+			__( 'Kategorie', 'bezugssysteme-ics-feed' ),
+			__( 'Beschreibung', 'bezugssysteme-ics-feed' ),
+			__( 'Link', 'bezugssysteme-ics-feed' ),
 		];
 		if ( $is_merged ) {
-			$header_row[] = __( 'Kalender', 'bs-ics-feed' );
+			$header_row[] = __( 'Kalender', 'bezugssysteme-ics-feed' );
 		}
 		// Deutsches Excel erwartet bei CSV-Dateien standardmäßig Semikolon statt Komma als Trenner.
 		fputcsv( $output, $header_row, ';' );
@@ -757,7 +761,7 @@ class BS_ICS_Renderer {
 				isset( $event['summary'] ) ? $event['summary'] : '',
 				wp_date( $date_format, (int) $event['start_timestamp'] ),
 				wp_date( $date_format, (int) $event['end_timestamp'] ),
-				! empty( $event['all_day'] ) ? __( 'Ja', 'bs-ics-feed' ) : __( 'Nein', 'bs-ics-feed' ),
+				! empty( $event['all_day'] ) ? __( 'Ja', 'bezugssysteme-ics-feed' ) : __( 'Nein', 'bezugssysteme-ics-feed' ),
 				isset( $event['location'] ) ? $event['location'] : '',
 				isset( $event['categories'] ) ? $event['categories'] : '',
 				isset( $event['description'] ) ? wp_strip_all_tags( $event['description'] ) : '',
@@ -796,7 +800,7 @@ class BS_ICS_Renderer {
 		<div class="<?php echo esc_attr( $wrapper_class_attr ); ?> bs-ics-single-view" style="<?php echo esc_attr( $style_vars ); ?>">
 			<!-- Schema.org JSON-LD für Einzelevent -->
 			<script type="application/ld+json">
-			<?php echo wp_json_encode( $this->generate_single_schema_org_data( $event ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ); ?>
+			<?php echo wp_json_encode( $this->generate_single_schema_org_data( $event ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_HEX_TAG ); ?>
 			</script>
 
 			<a href="<?php echo esc_url( $back_url ); ?>" class="bs-ics-back-btn">
@@ -813,14 +817,14 @@ class BS_ICS_Renderer {
 				<div class="bs-ics-card-header">
 					<time class="bs-ics-date" datetime="<?php echo esc_attr( $datetime_iso ); ?>">
 						<span class="bs-ics-date-icon" aria-hidden="true">&#128197;</span>
-						<span class="bs-ics-sr-only"><?php esc_html_e( 'Datum:', 'bs-ics-feed' ); ?> </span>
+						<span class="bs-ics-sr-only"><?php esc_html_e( 'Datum:', 'bezugssysteme-ics-feed' ); ?> </span>
 						<span class="bs-ics-date-text"><?php echo esc_html( $formatted_date ); ?></span>
 					</time>
 					<?php if ( $is_all_day ) : ?>
-						<span class="bs-ics-badge bs-ics-badge-allday"><?php esc_html_e( 'Ganztägig', 'bs-ics-feed' ); ?></span>
+						<span class="bs-ics-badge bs-ics-badge-allday"><?php esc_html_e( 'Ganztägig', 'bezugssysteme-ics-feed' ); ?></span>
 					<?php endif; ?>
 					<?php if ( ! empty( $event['is_recurring'] ) ) : ?>
-						<span class="bs-ics-badge bs-ics-badge-recurring"><span aria-hidden="true">&#8635;</span> <?php esc_html_e( 'Wiederholt sich', 'bs-ics-feed' ); ?></span>
+						<span class="bs-ics-badge bs-ics-badge-recurring"><span aria-hidden="true">&#8635;</span> <?php esc_html_e( 'Wiederholt sich', 'bezugssysteme-ics-feed' ); ?></span>
 					<?php endif; ?>
 				</div>
 
@@ -831,14 +835,14 @@ class BS_ICS_Renderer {
 				<?php if ( ( ! empty( $field_config['LOCATION']['detail'] ) || ! empty( $field_config['LOCATION']['teaser'] ) ) && ! empty( $event['location'] ) ) : ?>
 					<div class="bs-ics-meta bs-ics-location">
 						<span class="bs-ics-meta-icon" aria-hidden="true">&#128205;</span>
-						<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['LOCATION']['label'] ) ? $field_config['LOCATION']['label'] : __( 'Ort', 'bs-ics-feed' ) ); ?>:</strong>
+						<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['LOCATION']['label'] ) ? $field_config['LOCATION']['label'] : __( 'Ort', 'bezugssysteme-ics-feed' ) ); ?>:</strong>
 						<span class="bs-ics-meta-text"><?php echo esc_html( $event['location'] ); ?></span>
 					</div>
 				<?php endif; ?>
 
 				<?php if ( ( ! empty( $field_config['CATEGORIES']['detail'] ) || ! empty( $field_config['CATEGORIES']['teaser'] ) ) && ! empty( $event['categories'] ) ) : ?>
 					<div class="bs-ics-meta bs-ics-category">
-						<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['CATEGORIES']['label'] ) ? $field_config['CATEGORIES']['label'] : __( 'Kategorie', 'bs-ics-feed' ) ); ?>:</strong>
+						<strong class="bs-ics-meta-label"><?php echo esc_html( ! empty( $field_config['CATEGORIES']['label'] ) ? $field_config['CATEGORIES']['label'] : __( 'Kategorie', 'bezugssysteme-ics-feed' ) ); ?>:</strong>
 						<span class="bs-ics-badge"><?php echo esc_html( $event['categories'] ); ?></span>
 					</div>
 				<?php endif; ?>
@@ -852,7 +856,7 @@ class BS_ICS_Renderer {
 				<div class="bs-ics-card-footer bs-ics-single-footer">
 					<?php if ( ( ! empty( $field_config['URL']['detail'] ) || ! empty( $field_config['URL']['teaser'] ) ) && ! empty( $event['url'] ) ) : ?>
 						<a href="<?php echo esc_url( $event['url'] ); ?>" class="bs-ics-link-btn" target="_blank" rel="noopener noreferrer">
-							<?php echo esc_html( ! empty( $field_config['URL']['label'] ) ? $field_config['URL']['label'] : __( 'Termin-Link öffnen', 'bs-ics-feed' ) ); ?> &rarr;
+							<?php echo esc_html( ! empty( $field_config['URL']['label'] ) ? $field_config['URL']['label'] : __( 'Termin-Link öffnen', 'bezugssysteme-ics-feed' ) ); ?> &rarr;
 						</a>
 					<?php endif; ?>
 
@@ -903,8 +907,8 @@ class BS_ICS_Renderer {
 	 * @return string HTML-Ausgabe.
 	 */
 	private function render_add_to_calendar_button( $event, $button_text = '' ) {
-		$button_text = '' !== $button_text ? $button_text : __( 'Kalender', 'bs-ics-feed' );
-		$title       = ! empty( $event['summary'] ) ? $event['summary'] : __( 'Termin', 'bs-ics-feed' );
+		$button_text = '' !== $button_text ? $button_text : __( 'Kalender', 'bezugssysteme-ics-feed' );
+		$title       = ! empty( $event['summary'] ) ? $event['summary'] : __( 'Termin', 'bezugssysteme-ics-feed' );
 		$location    = ! empty( $event['location'] ) ? $event['location'] : '';
 		$description = ! empty( $event['description'] ) ? wp_strip_all_tags( $event['description'] ) : '';
 		$start_iso   = ! empty( $event['start_iso'] ) ? $event['start_iso'] : gmdate( 'Ymd\THis\Z', (int) $event['start_timestamp'] );
@@ -926,7 +930,7 @@ class BS_ICS_Renderer {
 			. '&body=' . rawurlencode( $description )
 			. '&location=' . rawurlencode( $location );
 
-		$ics_payload = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//BS ICS Feed Reader//DE\r\nBEGIN:VEVENT\r\n"
+		$ics_payload = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Bezugssysteme ICS Feed//DE\r\nBEGIN:VEVENT\r\n"
 			. 'UID:' . ( ! empty( $event['uid'] ) ? $event['uid'] : uniqid() ) . "\r\n"
 			. 'SUMMARY:' . $this->escape_ics_value( $title ) . "\r\n"
 			. 'DESCRIPTION:' . $this->escape_ics_value( $description ) . "\r\n"
@@ -938,18 +942,18 @@ class BS_ICS_Renderer {
 		ob_start();
 		?>
 		<div class="bs-ics-cal-export">
-			<button type="button" class="bs-ics-cal-btn" aria-haspopup="true" aria-expanded="false" title="<?php esc_attr_e( 'In eigenen Kalender eintragen', 'bs-ics-feed' ); ?>">
+			<button type="button" class="bs-ics-cal-btn" aria-haspopup="true" aria-expanded="false" title="<?php esc_attr_e( 'In eigenen Kalender eintragen', 'bezugssysteme-ics-feed' ); ?>">
 				<span aria-hidden="true">&#43;</span> <?php echo esc_html( $button_text ); ?>
 			</button>
 			<div class="bs-ics-cal-menu" role="menu" hidden>
 				<a href="<?php echo esc_url( $google_url ); ?>" target="_blank" rel="noopener noreferrer" role="menuitem">
-					<?php esc_html_e( 'Google Kalender', 'bs-ics-feed' ); ?>
+					<?php esc_html_e( 'Google Kalender', 'bezugssysteme-ics-feed' ); ?>
 				</a>
 				<a href="<?php echo esc_url( $outlook_url ); ?>" target="_blank" rel="noopener noreferrer" role="menuitem">
-					<?php esc_html_e( 'Outlook Online', 'bs-ics-feed' ); ?>
+					<?php esc_html_e( 'Outlook Online', 'bezugssysteme-ics-feed' ); ?>
 				</a>
 				<button type="button" class="bs-ics-download-ics" data-ics="<?php echo esc_attr( base64_encode( $ics_payload ) ); ?>" data-filename="<?php echo esc_attr( sanitize_title( $title ) . '.ics' ); ?>" role="menuitem">
-					<?php esc_html_e( 'Apple / .ics Download', 'bs-ics-feed' ); ?>
+					<?php esc_html_e( 'Apple / .ics Download', 'bezugssysteme-ics-feed' ); ?>
 				</button>
 			</div>
 		</div>
@@ -1002,7 +1006,7 @@ class BS_ICS_Renderer {
 		$data = [
 			'@context'            => 'https://schema.org',
 			'@type'               => 'Event',
-			'name'                => ! empty( $ev['summary'] ) ? $ev['summary'] : __( 'Termin', 'bs-ics-feed' ),
+			'name'                => ! empty( $ev['summary'] ) ? $ev['summary'] : __( 'Termin', 'bezugssysteme-ics-feed' ),
 			'startDate'           => $start_iso,
 			'endDate'             => $end_iso,
 			'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
@@ -1034,6 +1038,6 @@ class BS_ICS_Renderer {
 	 * @return string HTML-Ausgabe.
 	 */
 	private function render_empty_state() {
-		return '<div class="bs-ics-wrapper"><div class="bs-ics-container bs-ics-empty-container"><div class="bs-ics-empty-state"><p>' . esc_html__( 'Keine anstehenden Termine vorhanden.', 'bs-ics-feed' ) . '</p></div></div></div>';
+		return '<div class="bs-ics-wrapper"><div class="bs-ics-container bs-ics-empty-container"><div class="bs-ics-empty-state"><p>' . esc_html__( 'Keine anstehenden Termine vorhanden.', 'bezugssysteme-ics-feed' ) . '</p></div></div></div>';
 	}
 }

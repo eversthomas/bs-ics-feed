@@ -1,4 +1,4 @@
-=== BS ICS Feed ===
+=== Bezugssysteme ICS Feed ===
 Contributors: tomevers
 Tags: calendar, ics, ical, events, gutenberg
 Requires at least: 5.8
@@ -12,7 +12,7 @@ Display external ICS/iCalendar feeds as accessible calendar cards via shortcode,
 
 == Description ==
 
-**BS ICS Feed** lets you pull in external calendar feeds (Google Calendar, Apple iCloud, Outlook, Nextcloud, club/community software, and any other RFC 5545-compliant ICS source) and display them as clean, accessible, fully customizable event cards on your WordPress site.
+**Bezugssysteme ICS Feed** lets you pull in external calendar feeds (Google Calendar, Apple iCloud, Outlook, Nextcloud, club/community software, and any other RFC 5545-compliant ICS source) and display them as clean, accessible, fully customizable event cards on your WordPress site.
 
 Feeds are managed as their own content type, synced with one click, cached locally for fast page loads, and displayed wherever you need them: a native Gutenberg block, a flexible shortcode, or a classic sidebar widget.
 
@@ -42,7 +42,7 @@ Feeds are managed as their own content type, synced with one click, cached local
 
 == Installation ==
 
-1. Upload the `bs-ics-feed` folder to `/wp-content/plugins/`, or install the plugin ZIP directly via **Plugins → Add New → Upload Plugin**.
+1. Upload the `bezugssysteme-ics-feed` folder to `/wp-content/plugins/`, or install the plugin ZIP directly via **Plugins → Add New → Upload Plugin**.
 2. Activate the plugin through the **Plugins** menu in WordPress.
 3. Go to the new **ICS Feeds** menu item and add your first feed.
 4. Enter the feed's ICS/iCal URL and click **Analyze & Sync Feed**.
@@ -97,6 +97,8 @@ Calendar data returned by that feed (event titles, dates, locations, description
 == Changelog ==
 
 = 1.7.0 =
+* Renamed the plugin from "BS ICS Feed" to "Bezugssysteme ICS Feed" (name, text domain, translation template) following a WordPress.org Plugin Review naming/trademark request; slug is pending reservation as `bezugssysteme-ics-feed`.
+* Security: added `JSON_HEX_TAG` to the Schema.org JSON-LD output so a feed value containing a literal `</script>` cannot break out of the structured-data script tag.
 * New: month navigation (`month_view` display setting / shortcode attribute / block control) shows a month picker above the event list and only the events of the selected month; the current month automatically hides days that have already passed, and months that are fully in the past are never offered as a navigation target.
 * New: tile inner padding and the gap between tiles are now freely configurable in pixels (previously fixed compact/normal/spacious presets); existing feeds are migrated transparently to their previous pixel equivalent.
 * New: the "+ Calendar" export button's label is now configurable (display setting, shortcode attribute `cal_text`, block control) instead of being hard-coded to "Kalender".
