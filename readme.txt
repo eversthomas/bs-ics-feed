@@ -4,7 +4,7 @@ Tags: calendar, ics, ical, events, gutenberg
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,9 +96,11 @@ Calendar data returned by that feed (event titles, dates, locations, description
 
 == Changelog ==
 
-= 1.7.0 =
-* Renamed the plugin from "BS ICS Feed" to "Bezugssysteme ICS Feed" (name, text domain, translation template) following a WordPress.org Plugin Review naming/trademark request; slug is pending reservation as `bezugssysteme-ics-feed`.
+= 1.7.1 =
+* Renamed the plugin from "BS ICS Feed" to "Bezugssysteme ICS Feed" (name, slug, main file, text domain, translation template) following a WordPress.org Plugin Review naming/trademark request.
 * Security: added `JSON_HEX_TAG` to the Schema.org JSON-LD output so a feed value containing a literal `</script>` cannot break out of the structured-data script tag.
+
+= 1.7.0 =
 * New: month navigation (`month_view` display setting / shortcode attribute / block control) shows a month picker above the event list and only the events of the selected month; the current month automatically hides days that have already passed, and months that are fully in the past are never offered as a navigation target.
 * New: tile inner padding and the gap between tiles are now freely configurable in pixels (previously fixed compact/normal/spacious presets); existing feeds are migrated transparently to their previous pixel equivalent.
 * New: the "+ Calendar" export button's label is now configurable (display setting, shortcode attribute `cal_text`, block control) instead of being hard-coded to "Kalender".
@@ -154,6 +156,9 @@ Calendar data returned by that feed (event titles, dates, locations, description
 * Initial release: custom post type feed management, RFC 5545 parser, AJAX sync, shortcode renderer, responsive grid/list layout.
 
 == Upgrade Notice ==
+
+= 1.7.1 =
+Plugin renamed from "BS ICS Feed" to "Bezugssysteme ICS Feed" (new slug: bezugssysteme-ics-feed). If you installed a previous version, deactivate it and install this one fresh — your feed data is preserved as long as you don't delete the old plugin's data first.
 
 = 1.6.1 =
 Plugin renamed from "BS WP ICS Feed Reader" to "BS ICS Feed" (new slug: bs-ics-feed). If you installed a previous version, deactivate it and install this one fresh — your feed data is preserved as long as you don't delete the old plugin's data first.

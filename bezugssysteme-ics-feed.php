@@ -3,7 +3,7 @@
  * Plugin Name:       Bezugssysteme ICS Feed
  * Plugin URI:        https://github.com/eversthomas/bs-ics-feed
  * Description:       Modulares, performantes und sicheres WordPress-Plugin zur Verwaltung und strukturierten Ausgabe von ICS-Kalender-Feeds.
- * Version:           1.7.0
+ * Version:           1.7.1
  * Author:            Tom Evers
  * Author URI:        https://bezugssysteme.de
  * Text Domain:       bezugssysteme-ics-feed
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin-Konstanten definieren.
-define( 'BS_ICS_VERSION', '1.7.0' );
+define( 'BS_ICS_VERSION', '1.7.1' );
 define( 'BS_ICS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BS_ICS_URL', plugin_dir_url( __FILE__ ) );
 
